@@ -11,7 +11,8 @@ function OTP() {
             </h1>
             <p className="font-light text-gray-500 dark:text-gray-400">
               Your One Time Password or OTP has been sent to your mobile phone. Please retrive it and enter in the space below. 
-              <b> Note:</b> this token can be used only once and Would expire in 5 minutes. 
+              <b> Note:</b> this token can be used only once and Would expire in 5 minutes.
+              
             </p>
             <htmlForm
               className="mt-4 space-y-4 lg:mt-5 md:space-y-5"
