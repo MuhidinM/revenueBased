@@ -6,7 +6,7 @@ import Admin from "./Admin";
 import Sandbox from "./Sandbox";
 import Error from "./Error";
 import Users from "./Users";
-import OTP from "./components/OTP";
+import OTP from "./pages/auth/OTP";
 
 function App() {
   return (

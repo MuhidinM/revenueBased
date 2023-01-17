@@ -40,8 +40,8 @@ const region = [
 function UserInfo() {
   return (
     <>
-      <h2 className="sm:col-span-2 mb-4 text-xl font-bold text-gray-900 dark:text-white">
-        Pesonal InhtmlFormation
+      <h2 className="mb-4 text-xl font-bold text-gray-900 sm:col-span-2 dark:text-white">
+        Pesonal In Formation
       </h2>
       <div className="w-full">
         <Input

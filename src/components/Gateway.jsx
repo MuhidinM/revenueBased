@@ -34,7 +34,7 @@ function Gateway() {
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Card payment
               </h1>
-              <htmlForm className="space-y-4 md:space-y-6" action="/otp">
+              <htmlForm className="space-y-4 md:space-y-6" action="">
                 <div>
                   <input
                     type="text"
@@ -104,14 +104,18 @@ function Gateway() {
                       <option value="2025">2025</option>
                       <option value="2026">2026</option>
                     </select>
+                    <div className="w-full col-span-2">
+                      <h1 className="mt-2 text-lg font-bold text-center">$100</h1>
+                    </div>
                   </div>
                 </div>
-                <button
+                <a
+                  href="/otp"
                   type="submit"
                   className="w-full text-white bg-primary hover:bg-primary focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary dark:hover:bg-primary dark:focus:ring-primary"
                 >
                   Pay now
-                </button>
+                </a>
               </htmlForm>
             </div>
           </div>

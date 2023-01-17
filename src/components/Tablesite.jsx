@@ -26,7 +26,7 @@ function Tablesite() {
               <td>
                 <label htmlFor="my-modal-3" className="cursor-pointer">
                   <svg
-                    className="h-6 w-6 text-primary"
+                    className="w-6 h-6 text-primary"
                     viewBox="0 0 24 24"
                     strokeWidth="2"
                     stroke="currentColor"
@@ -55,7 +55,7 @@ function Tablesite() {
               <td>
                 <label htmlFor="my-modal-3" className="cursor-pointer">
                   <svg
-                    className="h-6 w-6 text-primary"
+                    className="w-6 h-6 text-primary"
                     viewBox="0 0 24 24"
                     strokeWidth="2"
                     stroke="currentColor"
@@ -84,7 +84,7 @@ function Tablesite() {
               <td>
                 <label htmlFor="my-modal-3" className="cursor-pointer">
                   <svg
-                    className="h-6 w-6 text-primary"
+                    className="w-6 h-6 text-primary"
                     viewBox="0 0 24 24"
                     strokeWidth="2"
                     stroke="currentColor"

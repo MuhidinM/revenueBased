@@ -67,7 +67,7 @@ function Login() {
                     href="/auth/recover"
                     className="text-sm font-medium text-primary hover:underline dark:text-primary"
                   >
-                    htmlForgot password?
+                    Forgot password?
                   </a>
                 </div>
                 <a

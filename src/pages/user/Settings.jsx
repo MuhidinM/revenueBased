@@ -1,17 +1,17 @@
 import React from "react";
-import Bussines from "./Business";
+import Business from "./Business";
 import UserInfo from "./UserInfo";
 
 function Settings() {
   return (
     <>
-      <section className="bg-white dark:bg-gray-900 m-8">
-        <div className="py-8 px-4 mx-auto max-w-2xl lg:py-16">
+      <section className="m-8 bg-white dark:bg-gray-900">
+        <div className="max-w-2xl px-4 py-8 mx-auto lg:py-16">
           <htmlForm action="#">
             <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
               <UserInfo />
               <div className="sm:col-span-2 divider"></div>
-              <Bussines />
+              <Business />
             </div>
             <button
               type="submit"

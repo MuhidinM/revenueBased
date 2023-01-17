@@ -32,7 +32,9 @@ function Uapi() {
                   <a href="/users/uapi">Copy</a>
                 </td>
                 <td>
-                  <a href="/users/uapi">Delete</a>
+                  <a className="link link-error" href="/users/uapi">
+                    Delete
+                  </a>
                 </td>
               </tr>
               <tr className="hover">
@@ -44,7 +46,9 @@ function Uapi() {
                   <a href="/users/uapi">Copy</a>
                 </td>
                 <td>
-                  <a href="/users/uapi">Delete</a>
+                  <a className="link link-error" href="/users/uapi">
+                    Delete
+                  </a>
                 </td>
               </tr>
               <tr>
@@ -56,7 +60,9 @@ function Uapi() {
                   <a href="/users/uapi">Copy</a>
                 </td>
                 <td>
-                  <a href="/users/uapi">Delete</a>
+                  <a className="link link-error" href="/users/uapi">
+                    Delete
+                  </a>
                 </td>
               </tr>
             </tbody>

@@ -11,10 +11,12 @@ import Banks from "./pages/admin/Banks";
 import Messages from "./pages/admin/Messages";
 import Modal from "./components/Modal";
 import Activate from "./pages/admin/Activate";
+import Modal2 from "./components/Modal2";
 function Admin() {
   return (
     <>
       <Modal />
+      <Modal2 />
       <div className="drawer drawer-mobile">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="flex flex-col items-center drawer-content bg-slate-100">

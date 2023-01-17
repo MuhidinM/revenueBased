@@ -45,8 +45,8 @@ const transaction = [
 function Business() {
   return (
     <>
-      <h2 className="sm:col-span-2 mb-4 text-xl font-bold text-gray-900 dark:text-white">
-        Business InhtmlFormation
+      <h2 className="mb-4 text-xl font-bold text-gray-900 sm:col-span-2 dark:text-white">
+        Business In Formation
       </h2>
       <div className="w-full">
         <Input
@@ -125,7 +125,7 @@ function Business() {
         <Textarea label="description" title="Description Of Company" />
       </div>
       <div className="divider sm:col-span-2"></div>
-      <h2 className="sm:col-span-2 mb-4 text-xl font-bold text-gray-900 dark:text-white">
+      <h2 className="mb-4 text-xl font-bold text-gray-900 sm:col-span-2 dark:text-white">
         Business Address
       </h2>
       <div>

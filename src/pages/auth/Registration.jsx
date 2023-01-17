@@ -19,6 +19,7 @@ function Registration() {
                     >
                       First Name
                     </label>
+                    <span className="hidden text-sm link-error">First Name is Required</span>
                     <input
                       type="fname"
                       name="fname"
@@ -35,6 +36,7 @@ function Registration() {
                     >
                       Middle Name
                     </label>
+                    <span className="hidden text-sm link-error">Middle Name is Required</span>
                     <input
                       type="mname"
                       name="mname"
@@ -52,6 +54,7 @@ function Registration() {
                   >
                     Business email
                   </label>
+                  <span className="hidden text-sm link-error">Business email is Required</span>
                   <input
                     type="email"
                     name="email"
@@ -68,13 +71,15 @@ function Registration() {
                   >
                     Business Phone
                   </label>
+                  <span className="hidden text-sm link-error">Business Phone is Required</span>
                   <input
-                    type="phone"
+                    type="number"
                     name="phone"
                     id="phone"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
                     placeholder="0900000000"
                     required=""
+                    maxlength="9"
                   />
                 </div>
                 <div>
@@ -84,6 +89,7 @@ function Registration() {
                   >
                     Password
                   </label>
+                  <span className="hidden text-sm link-error">Password is Required</span>
                   <input
                     type="password"
                     name="password"
@@ -100,8 +106,9 @@ function Registration() {
                   >
                     Confirm password
                   </label>
+                  <span className="hidden text-sm link-error">You need to confirm password</span>
                   <input
-                    type="confirm-password"
+                    type="password"
                     name="confirm-password"
                     id="confirm-password"
                     placeholder="••••••••"
