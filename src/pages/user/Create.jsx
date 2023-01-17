@@ -8,7 +8,7 @@ function Create() {
       <div className="modal">
         <div className="relative w-11/12 max-w-5xl modal-box">
           <label
-            htmlhtmlFor="my-modal-4"
+            htmlFor="my-modal-4"
             className="absolute btn btn-sm btn-circle right-2 top-2"
           >
             ✕

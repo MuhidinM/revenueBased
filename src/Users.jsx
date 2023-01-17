@@ -4,7 +4,7 @@ import E404 from "./pages/error/E404";
 import Nav from "./pages/user/Nav";
 import Home from "./pages/user/Home";
 import Uapi from "./pages/user/Uapi";
-import Create from "./pages/user/Create";
+import Modal from "./components/Modal";
 import Accounts from "./pages/user/Accounts";
 import Transactions from "./pages/user/Transactions";
 import Sidebar from "./pages/user/Sidebar";
@@ -14,7 +14,7 @@ import Settings from "./pages/user/Settings";
 function Users() {
   return (
     <>
-      <Create />
+      <Modal />
       <div className="drawer drawer-mobile">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="items-center drawer-content bg-slate-100">

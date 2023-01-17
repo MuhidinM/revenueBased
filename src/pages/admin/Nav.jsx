@@ -5,7 +5,7 @@ function Nav() {
     <>
       <div className="shadow-md navbar bg-base-100">
         <div className="flex-1">
-          <label htmlhtmlFor="my-drawer-2" className="ml-4 drawer-button">
+          <label htmlFor="my-drawer-2" className="ml-4 drawer-button">
             <svg
               className="w-6 h-6"
               fill="currentColor"

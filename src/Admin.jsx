@@ -9,14 +9,12 @@ import Footer from "./components/Footer";
 import Sites from "./pages/admin/Sites";
 import Banks from "./pages/admin/Banks";
 import Messages from "./pages/admin/Messages";
-import Edit from "./components/Edit";
-import Create from "./components/Create";
+import Modal from "./components/Modal";
 import Activate from "./pages/admin/Activate";
 function Admin() {
   return (
     <>
-      <Create />
-      <Edit />
+      <Modal />
       <div className="drawer drawer-mobile">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="flex flex-col items-center drawer-content bg-slate-100">

@@ -4,12 +4,12 @@ function Uapi() {
   return (
     <>
       <div className="w-5/6 m-4">
-        <button className="mb-4 btn btn-outline btn-primary">
-          <label htmlhtmlFor="my-modal-4" className="cursor-pointer">
-            {" "}
-            Add New
-          </label>
-        </button>
+        <label
+          htmlFor="my-modal-4"
+          className="mb-4 btn btn-outline btn-primary"
+        >
+          Add New
+        </label>
         <div className="mt-4 overflow-x-auto">
           <table className="table w-full">
             <thead>

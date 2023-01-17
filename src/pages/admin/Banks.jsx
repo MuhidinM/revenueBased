@@ -8,10 +8,10 @@ function Banks() {
       <div className="grid grid-cols-12 gap-4 mt-4 justify-self-auto">
         <div className="col-span-8 ">
           <label
-            htmlhtmlFor="my-modal-4"
-            className="mb-4 ml-8 btn btn-outline btn-primary"
+            htmlFor="my-modal-4"
+            className="mb-4 btn btn-outline btn-primary"
           >
-            <label className="cursor-pointer"> Add New</label>
+            Add New
           </label>
           <Tablesite />
         </div>

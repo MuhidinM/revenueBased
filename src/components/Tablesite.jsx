@@ -24,7 +24,7 @@ function Tablesite() {
               <td>Quality Control Specialist</td>
               <td>Blue</td>
               <td>
-                <label htmlhtmlFor="my-modal-3" className="cursor-pointer">
+                <label htmlFor="my-modal-3" className="cursor-pointer">
                   <svg
                     className="h-6 w-6 text-primary"
                     viewBox="0 0 24 24"
@@ -53,7 +53,7 @@ function Tablesite() {
               <td>Desktop Support Technician</td>
               <td>Purple</td>
               <td>
-                <label htmlhtmlFor="my-modal-3" className="cursor-pointer">
+                <label htmlFor="my-modal-3" className="cursor-pointer">
                   <svg
                     className="h-6 w-6 text-primary"
                     viewBox="0 0 24 24"
@@ -82,7 +82,7 @@ function Tablesite() {
               <td>Tax Accountant</td>
               <td>Red</td>
               <td>
-                <label htmlhtmlFor="my-modal-3" className="cursor-pointer">
+                <label htmlFor="my-modal-3" className="cursor-pointer">
                   <svg
                     className="h-6 w-6 text-primary"
                     viewBox="0 0 24 24"

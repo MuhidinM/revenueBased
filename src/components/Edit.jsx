@@ -8,7 +8,7 @@ function Edit() {
       <div className="modal">
         <div className="relative w-11/12 max-w-5xl modal-box">
           <label
-            htmlhtmlFor="my-modal-3"
+            htmlFor="my-modal-3"
             className="absolute btn btn-sm btn-circle right-2 top-2"
           >
             ✕

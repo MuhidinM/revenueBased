@@ -1,4 +1,5 @@
 import React from "react";
+import Icon from "../../components/Icon";
 
 function Nav() {
   return (
@@ -59,9 +60,7 @@ function Nav() {
               </li>
             </ul>
           </div>
-          <a href="/" className="text-xl normal-case btn btn-ghost">
-            <img src="./Payment Gateway3.png" alt="" className="w-24" />
-          </a>
+          <Icon re = "/" />
         </div>
         <div className="hidden navbar-center lg:flex">
           <ul className="px-1 menu menu-horizontal">

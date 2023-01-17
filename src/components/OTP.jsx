@@ -3,47 +3,90 @@ import React from "react";
 function OTP() {
   return (
     <>
-      <section className="bg-gray-50 dark:bg-gray-900">
-        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-          <div className="w-full p-6 bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md dark:bg-gray-800 dark:border-gray-700 sm:p-8">
-            <h1 className="mb-1 text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-              OTP 
-            </h1>
-            <p className="font-light text-gray-500 dark:text-gray-400">
-              Your One Time Password or OTP has been sent to your mobile phone. Please retrive it and enter in the space below. 
-              <b> Note:</b> this token can be used only once and Would expire in 5 minutes.
-              
-            </p>
-            <htmlForm
-              className="mt-4 space-y-4 lg:mt-5 md:space-y-5"
-              action="#"
-            >
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  OTP
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="••••••"
-                  required=""
-                />
+      <div class="relative flex min-h-screen flex-col justify-center overflow-hidden bg-gray-50 py-12">
+        <div class="relative bg-white px-6 pt-10 pb-9 shadow-xl mx-auto max-w-lg rounded-2xl">
+          <div class="mx-auto flex w-full max-w-md flex-col space-y-16">
+            <div class="flex flex-col items-center justify-center text-center space-y-2">
+              <div class="font-semibold text-2xl">
+                <p>OTP Verification</p>
               </div>
-              <button
-                type="submit"
-                className="w-full text-white bg-primary hover:bg-primary focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary dark:hover:bg-primary dark:focus:ring-primary"
-              >
-                Pay
-              </button>
-            </htmlForm>
+              <div class="flex flex-row text-sm font-medium text-gray-400">
+                <p>
+                  Your One Time Password or OTP has been sent to your mobile
+                  phone. Please retrive it and enter in the space below.
+                  <b> Note:</b> this token can be used only once and Would
+                  expire in 5 minutes.
+                </p>
+              </div>
+            </div>
+
+            <div>
+              <form action="" method="">
+                <div className="flex flex-col space-y-16">
+                  <div className="flex flex-row items-center justify-between w-full max-w-xs mx-auto">
+                    <div className="w-16 h-16 ">
+                      <input
+                        maxLength="1"
+                        className="flex flex-col items-center justify-center w-full h-full px-5 text-lg text-center bg-white border border-gray-200 outline-none rounded-xl focus:bg-gray-50 focus:ring-1 ring-primary"
+                        type="number"
+                        name=""
+                        id=""
+                      />
+                    </div>
+                    <div className="w-16 h-16 ">
+                      <input
+                        className="flex flex-col items-center justify-center w-full h-full px-5 text-lg text-center bg-white border border-gray-200 outline-none rounded-xl focus:bg-gray-50 focus:ring-1 ring-primary"
+                        type="number"
+                        name=""
+                        id=""
+                      />
+                    </div>
+                    <div className="w-16 h-16 ">
+                      <input
+                        className="flex flex-col items-center justify-center w-full h-full px-5 text-lg text-center bg-white border border-gray-200 outline-none rounded-xl focus:bg-gray-50 focus:ring-1 ring-primary"
+                        type="number"
+                        name=""
+                        id=""
+                      />
+                    </div>
+                    <div className="w-16 h-16 ">
+                      <input
+                        className="flex flex-col items-center justify-center w-full h-full px-5 text-lg text-center bg-white border border-gray-200 outline-none rounded-xl focus:bg-gray-50 focus:ring-1 ring-primary"
+                        type="number"
+                        name=""
+                        id=""
+                      />
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col space-y-5">
+                    <div>
+                      <button
+                        type="submit"
+                        className="w-full px-5 py-2.5 text-lg font-medium text-center text-white rounded-lg bg-primary hover:bg-primary focus:ring-4 focus:outline-none focus:ring-primary dark:bg-primary dark:hover:bg-primary dark:focus:ring-primary"
+                      >
+                        Confirm
+                      </button>
+                    </div>
+
+                    <div className="flex flex-row items-center justify-center space-x-1 text-sm font-medium text-center text-gray-500">
+                      <p>Didn't recieve code?</p>{" "}
+                      <a
+                        className="flex flex-row items-center text-primary"
+                        href="http://"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Resend
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
-      </section>
+      </div>
     </>
   );
 }

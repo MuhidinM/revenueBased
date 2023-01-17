@@ -1,20 +1,19 @@
 import React from "react";
+import Icon from "../../components/Icon";
 
 function Sidebar() {
   return (
     <>
       <div className="shadow-md drawer-side">
-        <label htmlhtmlFor="my-drawer-2" className="drawer-overlay"></label>
+        <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
         <ul className="p-4 menu w-80 bg-base-100 text-base-content">
           {/* <!-- Sidebar content here --> */}
-          <a href="/users" className="text-xl normal-case btn btn-ghost">
-            <img src="./Payment Gateway3.png" alt="" className="w-24" />
-          </a>
+          <Icon re = "/users/" />
           <div className=""></div>
           <li>
             <div>
               <svg
-                className="h-6 w-6 text-primary"
+                className="w-6 h-6 text-primary"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
@@ -36,7 +35,7 @@ function Sidebar() {
           <li>
             <div>
               <svg
-                className="h-6 w-6 text-primary"
+                className="w-6 h-6 text-primary"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
@@ -60,7 +59,7 @@ function Sidebar() {
           <li>
             <div>
               <svg
-                className="h-6 w-6 text-primary"
+                className="w-6 h-6 text-primary"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
@@ -81,7 +80,7 @@ function Sidebar() {
           <li>
             <div>
               <svg
-                className="h-6 w-6 text-primary"
+                className="w-6 h-6 text-primary"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
@@ -102,7 +101,7 @@ function Sidebar() {
           <li>
             <div>
               <svg
-                className="h-6 w-6 text-primary"
+                className="w-6 h-6 text-primary"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -120,7 +119,7 @@ function Sidebar() {
           <li>
             <div>
               <svg
-                className="h-6 w-6 text-primary"
+                className="w-6 h-6 text-primary"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -138,7 +137,7 @@ function Sidebar() {
           <li>
             <div>
               <svg
-                className="h-6 w-6 text-primary"
+                className="w-6 h-6 text-primary"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
