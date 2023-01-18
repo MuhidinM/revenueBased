@@ -29,7 +29,7 @@ function OTP() {
                 <div className="flex flex-row items-center justify-between w-full max-w-xs py-4 mx-auto">
                   <div className="w-16 h-16">
                     <input
-                      type="number"
+                      type="text"
                       name="email"
                       id="email"
                       className="bg-gray-50 border text-center border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -40,7 +40,7 @@ function OTP() {
                   </div>
                   <div className="w-16 h-16">
                     <input
-                      type="number"
+                      type="text"
                       name="email"
                       id="email"
                       className="bg-gray-50 border text-center border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -51,7 +51,7 @@ function OTP() {
                   </div>
                   <div className="w-16 h-16">
                     <input
-                      type="number"
+                      type="text"
                       name="email"
                       id="email"
                       className="bg-gray-50 border text-center border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"

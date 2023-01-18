@@ -4,10 +4,10 @@ function Landing() {
   return (
     <>
       <section className="bg-white dark:bg-gray-900">
-        <div className="py-8 px-4 mx-auto mt-32 max-w-screen-xl text-center lg:px-12">
+        <div className="max-w-screen-xl px-4 py-8 mx-auto mt-32 text-center lg:px-12">
           <a
             href="/"
-            className="inline-flex justify-between items-center py-1 px-1 pr-4 mb-7 text-sm text-gray-700 bg-gray-100 rounded-full dark:bg-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700"
+            className="inline-flex items-center justify-between px-1 py-1 pr-4 text-sm text-gray-700 bg-gray-100 rounded-full mb-7 dark:bg-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700"
             role="alert"
           >
             <span className="text-xs bg-primary rounded-full text-white px-4 py-1.5 mr-3">
@@ -17,7 +17,7 @@ function Landing() {
               E-gate is out! See what's new
             </span>
             <svg
-              className="ml-2 w-5 h-5"
+              className="w-5 h-5 ml-2"
               fill="currentColor"
               viewBox="0 0 20 20"
               xmlns="http://www.w3.org/2000/svg"
@@ -29,22 +29,22 @@ function Landing() {
               ></path>
             </svg>
           </a>
-          <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+          <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
             Smarter Payments. Smarter Business
           </h1>
           <p className="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
-            We're a payment gateway plathtmlForm htmlFor online ecommerce sites, and
+            We're a payment gateway platform for online ecommerce sites, and
             we've got the speed, security, and reliability you need to make sure
             your customers get what they want.
           </p>
           <div className="flex flex-col mb-8 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
             <a
               href="/developers"
-              className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-primary hover:bg-primary focus:ring-4 focus:ring-primary dark:focus:ring-primary"
+              className="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-white rounded-lg bg-primary hover:bg-primary focus:ring-4 focus:ring-primary dark:focus:ring-primary"
             >
               Learn more
               <svg
-                className="ml-2 -mr-1 w-5 h-5"
+                className="w-5 h-5 ml-2 -mr-1"
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
@@ -58,10 +58,10 @@ function Landing() {
             </a>
             <a
               href="/"
-              className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-gray-900 rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+              className="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
             >
               <svg
-                className="mr-2 -ml-1 w-5 h-5"
+                className="w-5 h-5 mr-2 -ml-1"
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
@@ -75,10 +75,10 @@ function Landing() {
       </section>
 
       <section className="bg-white px-36 dark:bg-gray-900">
-        <div className="py-8 px-4 mx-auto sm:py-16 lg:px-6">
+        <div className="px-4 py-8 mx-auto sm:py-16 lg:px-6">
           <div className="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0">
             <div>
-              <div className="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-primary lg:h-12 lg:w-12 dark:bg-primary">
+              <div className="flex items-center justify-center w-10 h-10 mb-4 rounded-full bg-primary lg:h-12 lg:w-12 dark:bg-primary">
                 <svg
                   className="w-5 h-5 text-base-100 lg:w-6 lg:h-6 dark:text-primary"
                   fill="currentColor"
@@ -100,7 +100,7 @@ function Landing() {
               </p>
             </div>
             <div>
-              <div className="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-primary lg:h-12 lg:w-12 dark:bg-primary">
+              <div className="flex items-center justify-center w-10 h-10 mb-4 rounded-full bg-primary lg:h-12 lg:w-12 dark:bg-primary">
                 <svg
                   className="w-5 h-5 text-base-100 lg:w-6 lg:h-6 dark:text-primary"
                   fill="currentColor"
@@ -120,7 +120,7 @@ function Landing() {
               </p>
             </div>
             <div>
-              <div className="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-primary lg:h-12 lg:w-12 dark:bg-primary">
+              <div className="flex items-center justify-center w-10 h-10 mb-4 rounded-full bg-primary lg:h-12 lg:w-12 dark:bg-primary">
                 <svg
                   className="w-5 h-5 text-base-100 lg:w-6 lg:h-6 dark:text-primary"
                   fill="currentColor"
@@ -142,7 +142,7 @@ function Landing() {
               </p>
             </div>
             <div>
-              <div className="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-primary lg:h-12 lg:w-12 dark:bg-primary">
+              <div className="flex items-center justify-center w-10 h-10 mb-4 rounded-full bg-primary lg:h-12 lg:w-12 dark:bg-primary">
                 <svg
                   className="w-5 h-5 text-base-100 lg:w-6 lg:h-6 dark:text-primary"
                   fill="currentColor"
@@ -167,7 +167,7 @@ function Landing() {
               </p>
             </div>
             <div>
-              <div className="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-primary lg:h-12 lg:w-12 dark:bg-primary">
+              <div className="flex items-center justify-center w-10 h-10 mb-4 rounded-full bg-primary lg:h-12 lg:w-12 dark:bg-primary">
                 <svg
                   className="w-5 h-5 text-base-100 lg:w-6 lg:h-6 dark:text-primary"
                   fill="currentColor"
@@ -184,7 +184,7 @@ function Landing() {
               </p>
             </div>
             <div>
-              <div className="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-primary lg:h-12 lg:w-12 dark:bg-primary">
+              <div className="flex items-center justify-center w-10 h-10 mb-4 rounded-full bg-primary lg:h-12 lg:w-12 dark:bg-primary">
                 <svg
                   className="w-5 h-5 text-base-100 lg:w-6 lg:h-6 dark:text-primary"
                   fill="currentColor"
@@ -210,24 +210,24 @@ function Landing() {
       </section>
 
       <section className="bg-white dark:bg-gray-900">
-        <div className="gap-8 items-center py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6">
+        <div className="items-center max-w-screen-xl gap-8 px-4 py-8 mx-auto xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6">
           <img
             className="w-full dark:hidden"
             src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/cta/cta-dashboard-mockup.svg"
             alt="dashboard image2"
           />
           <img
-            className="w-full hidden dark:block"
+            className="hidden w-full dark:block"
             src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/cta/cta-dashboard-mockup-dark.svg"
             alt="dashboard image3"
           />
           <div className="mt-4 md:mt-0">
-            <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
+            <h2 className="mb-4 text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white">
               Revolution Starts here.
             </h2>
             <p className="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">
               Since the globalization, business has changed dramatically. Fast
-              and easy Internet access is now a necessity htmlFor almost all sectors
+              and easy Internet access is now a necessity for almost all sectors
               of the economy and e-Business has become a reality. In today's
               online world, your company's ability to accept payments online can
               make or break your business success.
@@ -238,7 +238,7 @@ function Landing() {
             >
               Get started
               <svg
-                className="ml-2 -mr-1 w-5 h-5"
+                className="w-5 h-5 ml-2 -mr-1"
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"

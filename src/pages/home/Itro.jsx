@@ -3,11 +3,11 @@ import React from "react";
 function Itro() {
   return (
     <>
-      <div className="md:mx-24 mt-24">
+      <div className="mt-24 md:mx-24">
         <section className="bg-white dark:bg-gray-900">
-          <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+          <div className="max-w-screen-xl px-4 py-8 mx-auto lg:py-16 lg:px-6">
             <div className="max-w-screen-lg text-gray-500 sm:text-lg dark:text-gray-400">
-              <h2 className="mb-4 text-4xl tracking-tight font-bold text-gray-900 dark:text-white">
+              <h2 className="mb-4 text-4xl font-bold tracking-tight text-gray-900 dark:text-white">
                 Paying with <span className="font-extrabold">Epay</span> is fast,
                 secure and easy.
               </h2>
@@ -24,15 +24,15 @@ function Itro() {
           </div>
         </section>
         <section className="bg-white dark:bg-gray-900">
-          <div className="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-16 lg:px-6">
+          <div className="items-center max-w-screen-xl gap-16 px-4 py-8 mx-auto lg:grid lg:grid-cols-2 lg:py-16 lg:px-6">
             <div className="font-light text-gray-500 sm:text-lg dark:text-gray-400">
-              <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
+              <h2 className="mb-4 text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white">
                 We didn't reinvent the wheel
               </h2>
               <p className="mb-4">
                 we just took all of the best parts of other payment gateways and
-                made them better. We're constantly improving our plathtmlForm so
-                that it works better htmlFor you and your customers, while also
+                made them better. We're constantly improving our platform so
+                that it works better for you and your customers, while also
                 providing a great user experience.
               </p>
               <p>
@@ -47,7 +47,7 @@ function Itro() {
                 alt="office content 1"
               />
               <img
-                className="mt-4 w-full lg:mt-10 rounded-lg"
+                className="w-full mt-4 rounded-lg lg:mt-10"
                 src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/content/office-long-1.png"
                 alt="office content 2"
               />
@@ -55,14 +55,14 @@ function Itro() {
           </div>
         </section>
         <section className="text-gray-600 body-font">
-          <div className="container px-5 py-24 mx-auto flex flex-wrap">
+          <div className="container flex flex-wrap px-5 py-24 mx-auto">
             <div className="flex flex-wrap w-full">
               <div className="lg:w-2/5 md:w-1/2 md:pr-10 md:py-6">
-                <div className="flex relative pb-12">
-                  <div className="h-full w-10 absolute inset-0 flex items-center justify-center">
-                    <div className="h-full w-1 bg-gray-200 pointer-events-none"></div>
+                <div className="relative flex pb-12">
+                  <div className="absolute inset-0 flex items-center justify-center w-10 h-full">
+                    <div className="w-1 h-full bg-gray-200 pointer-events-none"></div>
                   </div>
-                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary inline-flex items-center justify-center text-white relative z-10">
+                  <div className="relative z-10 inline-flex items-center justify-center flex-shrink-0 w-10 h-10 text-white rounded-full bg-primary">
                     <svg
                       fill="none"
                       stroke="currentColor"
@@ -76,7 +76,7 @@ function Itro() {
                     </svg>
                   </div>
                   <div className="flex-grow pl-4">
-                    <h2 className="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">
+                    <h2 className="mb-1 text-sm font-medium tracking-wider text-gray-900 title-font">
                       STEP 1
                     </h2>
                     <p className="leading-relaxed">
@@ -85,11 +85,11 @@ function Itro() {
                     </p>
                   </div>
                 </div>
-                <div className="flex relative pb-12">
-                  <div className="h-full w-10 absolute inset-0 flex items-center justify-center">
-                    <div className="h-full w-1 bg-gray-200 pointer-events-none"></div>
+                <div className="relative flex pb-12">
+                  <div className="absolute inset-0 flex items-center justify-center w-10 h-full">
+                    <div className="w-1 h-full bg-gray-200 pointer-events-none"></div>
                   </div>
-                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary inline-flex items-center justify-center text-white relative z-10">
+                  <div className="relative z-10 inline-flex items-center justify-center flex-shrink-0 w-10 h-10 text-white rounded-full bg-primary">
                     <svg
                       fill="none"
                       stroke="currentColor"
@@ -103,7 +103,7 @@ function Itro() {
                     </svg>
                   </div>
                   <div className="flex-grow pl-4">
-                    <h2 className="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">
+                    <h2 className="mb-1 text-sm font-medium tracking-wider text-gray-900 title-font">
                       STEP 2
                     </h2>
                     <p className="leading-relaxed">
@@ -112,11 +112,11 @@ function Itro() {
                     </p>
                   </div>
                 </div>
-                <div className="flex relative pb-12">
-                  <div className="h-full w-10 absolute inset-0 flex items-center justify-center">
-                    <div className="h-full w-1 bg-gray-200 pointer-events-none"></div>
+                <div className="relative flex pb-12">
+                  <div className="absolute inset-0 flex items-center justify-center w-10 h-full">
+                    <div className="w-1 h-full bg-gray-200 pointer-events-none"></div>
                   </div>
-                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary inline-flex items-center justify-center text-white relative z-10">
+                  <div className="relative z-10 inline-flex items-center justify-center flex-shrink-0 w-10 h-10 text-white rounded-full bg-primary">
                     <svg
                       fill="none"
                       stroke="currentColor"
@@ -131,20 +131,20 @@ function Itro() {
                     </svg>
                   </div>
                   <div className="flex-grow pl-4">
-                    <h2 className="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">
+                    <h2 className="mb-1 text-sm font-medium tracking-wider text-gray-900 title-font">
                       STEP 3
                     </h2>
                     <p className="leading-relaxed">
-                      Our team will be checking htmlFor the validity in the
+                      Our team will be checking for the validity in the
                       background and will send you a link to your email.
                     </p>
                   </div>
                 </div>
-                <div className="flex relative pb-12">
-                  <div className="h-full w-10 absolute inset-0 flex items-center justify-center">
-                    <div className="h-full w-1 bg-gray-200 pointer-events-none"></div>
+                <div className="relative flex pb-12">
+                  <div className="absolute inset-0 flex items-center justify-center w-10 h-full">
+                    <div className="w-1 h-full bg-gray-200 pointer-events-none"></div>
                   </div>
-                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary inline-flex items-center justify-center text-white relative z-10">
+                  <div className="relative z-10 inline-flex items-center justify-center flex-shrink-0 w-10 h-10 text-white rounded-full bg-primary">
                     <svg
                       fill="none"
                       stroke="currentColor"
@@ -159,17 +159,17 @@ function Itro() {
                     </svg>
                   </div>
                   <div className="flex-grow pl-4">
-                    <h2 className="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">
+                    <h2 className="mb-1 text-sm font-medium tracking-wider text-gray-900 title-font">
                       STEP 4
                     </h2>
                     <p className="leading-relaxed">
                       Follow the link in the email and change your password when
-                      entering htmlFor the first time.
+                      entering for the first time.
                     </p>
                   </div>
                 </div>
-                <div className="flex relative">
-                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary inline-flex items-center justify-center text-white relative z-10">
+                <div className="relative flex">
+                  <div className="relative z-10 inline-flex items-center justify-center flex-shrink-0 w-10 h-10 text-white rounded-full bg-primary">
                     <svg
                       fill="none"
                       stroke="currentColor"
@@ -184,7 +184,7 @@ function Itro() {
                     </svg>
                   </div>
                   <div className="flex-grow pl-4">
-                    <h2 className="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">
+                    <h2 className="mb-1 text-sm font-medium tracking-wider text-gray-900 title-font">
                       FINISH
                     </h2>
                     <p className="leading-relaxed">
@@ -196,7 +196,7 @@ function Itro() {
                 </div>
               </div>
               <img
-                className="lg:w-3/5 md:w-1/2 object-cover object-center rounded-lg md:mt-0 mt-12"
+                className="object-cover object-center mt-12 rounded-lg lg:w-3/5 md:w-1/2 md:mt-0"
                 src="https://dummyimage.com/1200x500"
                 alt="step"
               />
@@ -204,28 +204,28 @@ function Itro() {
           </div>
         </section>
         <section className="text-gray-600 body-font">
-          <div className="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
-            <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 mb-10 md:mb-0">
+          <div className="container flex flex-col items-center px-5 py-24 mx-auto md:flex-row">
+            <div className="w-5/6 mb-10 lg:max-w-lg lg:w-full md:w-1/2 md:mb-0">
               <img
                 className="object-cover object-center rounded"
                 alt="hero"
                 src="https://dummyimage.com/720x600"
               />
             </div>
-            <div className="lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 flex flex-col md:items-start md:text-left items-center text-center">
-              <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">
+            <div className="flex flex-col items-center text-center lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 md:items-start md:text-left">
+              <h1 className="mb-4 text-3xl font-medium text-gray-900 title-font sm:text-4xl">
                 Try It Out!
               </h1>
               <p className="mb-8 leading-relaxed">
                 Ethiopian Pay is easy to use and has a user-friendly interface
-                that makes it simple htmlFor anyone to use. We are dedicated to
-                providing a safe and secure plathtmlForm htmlFor all users around the
+                that makes it simple for anyone to use. We are dedicated to
+                providing a safe and secure platform for all users around the
                 world, so you can feel confident about using our service.
               </p>
               <div className="flex justify-center">
                 <a
                   href="/registration"
-                  className="inline-flex text-white bg-primary border-0 py-2 px-6 focus:outline-none hover:bg-primary rounded text-lg"
+                  className="inline-flex px-6 py-2 text-lg text-white border-0 rounded bg-primary focus:outline-none hover:bg-primary"
                 >
                   Get started
                 </a>
