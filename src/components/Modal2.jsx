@@ -4,7 +4,7 @@ import M2settingView from "./M2settingView";
 function Modal2() {
   return (
     <>
-      <input type="checkbox" id="my-modal-3" className="modal-toggle" />
+      <input type="checkbox" id="" className="modal-toggle" />
       <div className="modal">
         <div className="relative w-11/12 max-w-5xl modal-box">
           <label
@@ -13,6 +13,7 @@ function Modal2() {
           >
             ✕
           </label>
+
           {window.location.pathname === "/admin/activate" ? (
             <M2settingView title="View Unactivated Account" />
           ) : (

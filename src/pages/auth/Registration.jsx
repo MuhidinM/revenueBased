@@ -46,7 +46,7 @@ function Registration() {
                   password: "",
                   // confirmPassword: "",
                   confirmPassword: "",
-                  acceptTerms: false,
+                  // acceptTerms: false,
                 }}
                 validationSchema={validationSchema}
                 onSubmit={(values) => {
@@ -212,8 +212,8 @@ function Registration() {
                             Confirm password
                           </label>
                           <span className="text-sm link-error">
-                            {props.errors.password && props.touched.password
-                              ? props.errors.password
+                            {props.errors.confirmPassword && props.touched.confirmPassword
+                              ? props.errors.confirmPassword
                               : null}
                           </span>
                           <input
