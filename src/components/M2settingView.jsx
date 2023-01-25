@@ -1,150 +1,109 @@
 import React from "react";
 
 function M2settingView(props) {
-  return (
-    <>
-      <h3 className="text-lg font-bold">{props.title}</h3>
-      <div className="">
-        <section className="bg-white dark:bg-gray-900">
-          <div className="grid gap-4 pt-8 sm:grid-cols-4 sm:gap-6">
-            <div className="divider sm:col-span-4">Presonal Information</div>
-            <div className="w-full">
-              {" "}
-              <b>First Name: </b> <br /> Lelisa
+  const m2SettingData = props.modal_data;
+  console.log(m2SettingData && m2SettingData.legalName);
+  if (m2SettingData) {
+    return (
+      <>
+        <h3 className="text-lg font-bold">{props.title}</h3>
+        <div className="">
+          <section className="bg-white dark:bg-gray-900">
+            <div className="grid gap-4 pt-8 sm:grid-cols-4 sm:gap-6">
+              <div className="divider sm:col-span-4">Business Information</div>
+              <div className="w-full">
+                <b>Legal Name:</b> <br />
+                {m2SettingData.legalName}
+              </div>
+              <div className="w-full">
+                <b>Type of Incorporation:</b> <br />
+                {m2SettingData.incorporationType}
+              </div>
+
+              <div className="w-full">
+                <b>Industry:</b> <br />
+                {m2SettingData.industry}
+              </div>
+              <div className="w-full">
+                <b>Category:</b> <br />
+                {m2SettingData.category}
+              </div>
+              <div className="w-full">
+                <b>Staff size:</b> <br />
+                {m2SettingData.staffSize}
+              </div>
+              <div className="w-full">
+                <b>Monthly Transaction Amount:</b> <br />
+                {m2SettingData.monthlyTransacionAmount}
+              </div>
+              <div className="w-full">
+                <b>Tin Number:</b> <br />
+                {m2SettingData.tinNumber}
+              </div>
+              <div className="w-full">
+                <b>Business Registration Number:</b> <br />
+                {m2SettingData.bussinessRegistrationNumber}
+              </div>
+              <div className="sm:col-span-3">
+                <b>Website Address:</b> <br />
+                {m2SettingData.websiteAddress}
+              </div>
+
+              <div className="sm:col-span-4">
+                <b>Business Registration:</b> <br />
+                <img className="" src="../card.png" alt="ID" />
+              </div>
+              <div className="sm:col-span-4">
+                <b>Description Of Company:</b> <br />
+                {m2SettingData.companyDescription}
+              </div>
+              <div className="divider sm:col-span-4">
+                <h1>Comapany Address</h1>
+              </div>
+              <div className="w-full">
+                <b>Region:</b> <br />
+                {m2SettingData.bussinessAddresses[0].region}
+              </div>
+              <div className="w-full">
+                <b>City:</b> <br />
+                {m2SettingData.bussinessAddresses[0].city}
+              </div>
+              <div className="w-full">
+                <b>Kifle Ketema:</b> <br />
+                {m2SettingData.bussinessAddresses[0].kifleKetema}
+              </div>
+              <div className="w-full">
+                <b>Woreda:</b> <br />
+                {m2SettingData.bussinessAddresses[0].woreda}
+              </div>
+              <div className="w-full">
+                <b>Kebele:</b> <br />
+                {m2SettingData.bussinessAddresses[0].kebele}
+              </div>
+              <div className="w-full">
+                <b>House Number:</b> <br />
+                {m2SettingData.bussinessAddresses[0].housNumber}
+              </div>
+              <div className="sm:col-span-2">
+                <b>Friendly Location:</b> <br />
+                {m2SettingData.bussinessAddresses[0].friendlyLocation}
+              </div>
+              <div className="sm:col-span-4">
+                <b>Proof of Address:</b> <br />
+                <img className="" src="../card.png" alt="ID" />
+              </div>
             </div>
-            <div className="w-full">
-              {" "}
-              <b>Middle Name:</b> <br />
-              Abdusemed
-            </div>
-            <div className="w-full">
-              <b>Last Name:</b> <br />
-              Chera
-            </div>
-            <div className="w-full">
-              <b>Gender:</b> <br />
-              Male
-            </div>
-            <div className="sm:col-span-4">
-              <b>Address:</b> <br />
-              Some where ...
-            </div>
-            <div className="w-full">
-              <b>Region:</b> <br />
-              Oromia
-            </div>
-            <div className="w-full">
-              <b>Birth date:</b> <br />
-              28/5/1997
-            </div>
-            <div className="w-full">
-              <b>Identification Card Number:</b> <br />
-              TG873/12
-            </div>
-            <div className="w-full">
-              <b>Identification Card Type:</b>
-              <br /> Kebele ID
-            </div>
-            <div className="sm:col-span-4">
-              <b>Identification Card:</b> <br />
-              <img className="" src="../card.png" alt="ID" />
-            </div>
-            <div className="divider sm:col-span-4">Business Information</div>
-            <div className="w-full">
-              <b>Legal Name:</b> <br />
-              Egate S.C
-            </div>
-            <div className="w-full">
-              <b>Type of Incorporation:</b> <br />A
-            </div>
-            <div className="w-full">
-              <b>Gender:</b> <br />
-              Male
-            </div>
-            <div className="w-full">
-              <b>Industry:</b> <br />A
-            </div>
-            <div className="w-full">
-              <b>Category:</b> <br />A
-            </div>
-            <div className="w-full">
-              <b>Staff size:</b> <br />
-              Up to 5
-            </div>
-            <div className="w-full">
-              <b>Monthly Transaction Amount:</b> <br />
-              Below 10,000
-            </div>
-            <div className="w-full">
-              <b>Tin Number:</b> <br />
-              FM48496469
-            </div>
-            <div className="w-full">
-              <b>Business Registration Number:</b> <br />
-              FM48496469
-            </div>
-            <div className="sm:col-span-3">
-              <b>Website Address:</b> <br />
-              egate.com
-            </div>
-            <div className="sm:col-span-4">
-              <b>Tin Number:</b> <br />
-              <img className="" src="../card.png" alt="ID" />
-            </div>
-            <div className="sm:col-span-4">
-              <b>Business Registration:</b> <br />
-              <img className="" src="../card.png" alt="ID" />
-            </div>
-            <div className="sm:col-span-4">
-              <b>Description Of Company:</b> <br />
-              Your description here
-            </div>
-            <div className="divider sm:col-span-4">
-              Business Address Information
-            </div>
-            <div className="w-full">
-              <b>Region:</b> <br />
-              Oromia
-            </div>
-            <div className="w-full">
-              <b>City:</b> <br />
-              Adama
-            </div>
-            <div className="w-full">
-              <b>Kifle Ketema:</b> <br />
-              Lugo
-            </div>
-            <div className="w-full">
-              <b>Woreda:</b> <br />
-              Adama
-            </div>
-            <div className="w-full">
-              <b>Kebele:</b> <br />
-              03
-            </div>
-            <div className="w-full">
-              <b>House Number:</b> <br />
-              G67-32
-            </div>
-            <div className="sm:col-span-2">
-              <b>Friendly Location:</b> <br />
-              Near Dembel City Mall
-            </div>
-            <div className="sm:col-span-4">
-              <b>Proof of Address:</b> <br />
-              <img className="" src="../card.png" alt="ID" />
-            </div>
-          </div>
-          <button
-            type="submit"
-            className="inline-flex items-center px-5 py-3.5 mt-4 text-sm font-medium text-center text-white rounded-lg sm:mt-6 bg-primary focus:ring-4 focus:ring-primary dark:focus:ring-primary hover:bg-primary"
-          >
-            Activate
-          </button>
-        </section>
-      </div>
-    </>
-  );
+            <button
+              type="submit"
+              className="inline-flex items-center px-5 py-3.5 mt-4 text-sm font-medium text-center text-white rounded-lg sm:mt-6 bg-primary focus:ring-4 focus:ring-primary dark:focus:ring-primary hover:bg-primary"
+            >
+              Activate
+            </button>
+          </section>
+        </div>
+      </>
+    );
+  }
 }
 
 export default M2settingView;

@@ -8,6 +8,7 @@ function Footer() {
         <div>
           <p>Copyright © 2023 - All right reserved by Egate</p>
         </div>
+        
       </footer>
     </>
   );

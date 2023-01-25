@@ -1,6 +1,20 @@
-import React from "react";
-
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import AuthService from "../../services/auth.service";
 function Nav() {
+  const [currentUser, setCurrentUser] = useState({});
+  useEffect(() => {
+    const user = AuthService.getCurrentUser();
+    if (user) {
+      setCurrentUser(user);
+      // setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
+      // setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
+    }
+  }, []);
+  console.log(currentUser.client_id);
+  const logOut = () => {
+    AuthService.logout();
+  };
   return (
     <>
       <div className="shadow-md navbar bg-base-100">
@@ -31,18 +45,32 @@ function Nav() {
               tabIndex={0}
               className="p-2 mt-3 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
             >
-              <span className="pt-4 pl-4">Merchant id: 77679399</span>
+              <span className="pt-2 pl-2">
+                client id: {currentUser.client_id}
+              </span>
+
               <div className="divider"></div>
               <li>
-                <a href="/users/profile" className="justify-between">
+                <Link
+                  to={"/users/profile"}
+                  // onClick={() => window.location.reload()}
+                  className="justify-between"
+                >
                   Profile{" "}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to={"/users/setting"}
+                  // onClick={() => window.location.reload()}
+                >
+                  Settings
+                </Link>
+              </li>
+              <li>
+                <a href="/" onClick={logOut}>
+                  Logout
                 </a>
-              </li>
-              <li>
-                <a href="/users/setting">Settings</a>
-              </li>
-              <li>
-                <a href="/">Logout</a>
               </li>
             </ul>
           </div>
