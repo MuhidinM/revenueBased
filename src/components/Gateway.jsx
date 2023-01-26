@@ -1,5 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
+const month = [];
+for (let i = 1; i < 13; i++) {
+  month.push({ label: i, value: i });
+}
+const year = [];
+const thisyear = new Date().getFullYear();
+const endyear = thisyear + 5;
+for (let i = thisyear; i < endyear; i++) {
+  year.push({ label: i, value: i });
+}
 
 function Gateway() {
   return (
@@ -73,21 +83,9 @@ function Gateway() {
                       className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       x-model="expired.month"
                     >
-                      <option value="" selected disabled>
-                        MM
-                      </option>
-                      <option value="01">01</option>
-                      <option value="02">02</option>
-                      <option value="03">03</option>
-                      <option value="04">04</option>
-                      <option value="05">05</option>
-                      <option value="06">06</option>
-                      <option value="07">07</option>
-                      <option value="08">08</option>
-                      <option value="09">09</option>
-                      <option value="10">10</option>
-                      <option value="11">11</option>
-                      <option value="12">12</option>
+                      {month.map((arr) => (
+                        <option value={arr.value}>{arr.label}</option>
+                      ))}
                     </select>
                     <select
                       name=""
@@ -95,18 +93,14 @@ function Gateway() {
                       className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       x-model="expired.year"
                     >
-                      <option value="" selected disabled>
-                        YY
-                      </option>
-                      <option value="2021">2021</option>
-                      <option value="2022">2022</option>
-                      <option value="2023">2023</option>
-                      <option value="2024">2024</option>
-                      <option value="2025">2025</option>
-                      <option value="2026">2026</option>
+                      {year.map((arr) => (
+                        <option value={arr.value}>{arr.label}</option>
+                      ))}
                     </select>
                     <div className="w-full col-span-2">
-                      <h1 className="mt-2 text-lg font-bold text-center">$100</h1>
+                      <h1 className="mt-2 text-lg font-bold text-center">
+                        $100
+                      </h1>
                     </div>
                   </div>
                 </div>
