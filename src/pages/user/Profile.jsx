@@ -3,6 +3,21 @@ import Fileinput from "../../components/Fileinput";
 import Input from "../../components/Input";
 import Selectinput from "../../components/Selectinput";
 
+const date = [];
+for (let i = 1; i < 13; i++) {
+  date.push({ label: i, value: i });
+}
+const month = [];
+for (let i = 1; i < 30; i++) {
+  month.push({ label: i, value: i });
+}
+const year = [];
+const thisyear = new Date().getFullYear();
+const startyear = thisyear - 100;
+for (let i = startyear; i < thisyear; i++) {
+  year.push({ label: i, value: i });
+}
+
 const idtype = [
   { label: "Kebele ID", value: "kebeleid" },
   { label: "Passport", value: "kebeleid" },
@@ -98,22 +113,25 @@ function Profile() {
                     id="date"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
                   >
-                    <option value="TV">Date</option>
-                    <option value="TV">01</option>
+                    {date.map((arr) => (
+                      <option value={arr.value}>{arr.label}</option>
+                    ))}
                   </select>
                   <select
                     id="month"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
                   >
-                    <option value="TV">Month</option>
-                    <option value="TV">01</option>
+                    {month.map((arr) => (
+                      <option value={arr.value}>{arr.label}</option>
+                    ))}
                   </select>
                   <select
                     id="year"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
                   >
-                    <option value="TV">Year</option>
-                    <option value="TV">2023</option>
+                    {year.map((arr) => (
+                      <option value={arr.value}>{arr.label}</option>
+                    ))}
                   </select>
                 </div>
               </div>
