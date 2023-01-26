@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Accounts() {
   return (
@@ -30,7 +31,7 @@ function Accounts() {
                 <td>CBO</td>
                 <td>Verified</td>
                 <td>
-                  <a href="/users/uapi">Delete</a>
+                  <Link to={"/users/uapi"}>Delete</Link>
                 </td>
               </tr>
               <tr className="hover">
@@ -40,7 +41,7 @@ function Accounts() {
                 <td>CBE</td>
                 <td>Verified</td>
                 <td>
-                  <a href="/users/uapi">Delete</a>
+                  <Link href={"/users/uapi"}>Delete</Link>
                 </td>
               </tr>
               <tr>
@@ -50,7 +51,7 @@ function Accounts() {
                 <td>BOA</td>
                 <td>Pending</td>
                 <td>
-                  <a href="/users/uapi">Delete</a>
+                  <Link href={"/users/uapi"}>Delete</Link>
                 </td>
               </tr>
             </tbody>

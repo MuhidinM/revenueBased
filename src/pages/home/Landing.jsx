@@ -1,12 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Landing() {
   return (
     <>
       <section className="bg-white dark:bg-gray-900">
         <div className="max-w-screen-xl px-4 py-8 mx-auto mt-32 text-center lg:px-12">
-          <a
-            href="/"
+          <Link
+            to={"/"}
             className="inline-flex items-center justify-between px-1 py-1 pr-4 text-sm text-gray-700 bg-gray-100 rounded-full mb-7 dark:bg-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700"
             role="alert"
           >
@@ -28,7 +29,7 @@ function Landing() {
                 clipRule="evenodd"
               ></path>
             </svg>
-          </a>
+          </Link>
           <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
             Smarter Payments. Smarter Business
           </h1>
@@ -38,8 +39,8 @@ function Landing() {
             your customers get what they want.
           </p>
           <div className="flex flex-col mb-8 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
-            <a
-              href="/developers"
+            <Link
+              to={"/developers"}
               className="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-white rounded-lg bg-primary hover:bg-primary focus:ring-4 focus:ring-primary dark:focus:ring-primary"
             >
               Learn more
@@ -55,9 +56,9 @@ function Landing() {
                   clipRule="evenodd"
                 ></path>
               </svg>
-            </a>
-            <a
-              href="/"
+            </Link>
+            <Link
+              to={"/"}
               className="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
             >
               <svg
@@ -69,12 +70,12 @@ function Landing() {
                 <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"></path>
               </svg>
               Watch video
-            </a>
+            </Link>
           </div>
         </div>
       </section>
 
-      <section className="bg-white px-36 dark:bg-gray-900">
+      <section className="bg-white md:px-36 dark:bg-gray-900">
         <div className="px-4 py-8 mx-auto sm:py-16 lg:px-6">
           <div className="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0">
             <div>
@@ -232,8 +233,8 @@ function Landing() {
               online world, your company's ability to accept payments online can
               make or break your business success.
             </p>
-            <a
-              href="/registration"
+            <Link
+              to={"/registration"}
               className="inline-flex items-center text-white bg-primary hover:bg-primary focus:ring-4 focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary"
             >
               Get started
@@ -249,7 +250,7 @@ function Landing() {
                   clipRule="evenodd"
                 ></path>
               </svg>
-            </a>
+            </Link>
           </div>
         </div>
       </section>

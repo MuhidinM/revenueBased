@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Icon from "../../components/Icon";
 
 function Sidebar() {
@@ -10,7 +11,7 @@ function Sidebar() {
           {/* <!-- Sidebar content here --> */}
           <Icon re="/admin/" />
           <li>
-            <a href="/admin">
+            <Link to={"/admin"}>
               <svg
                 className="w-6 h-6 text-primary"
                 width="24"
@@ -29,7 +30,7 @@ function Sidebar() {
                 <path d="M6.4 20a9 9 0 1 1 11.2 0Z" />
               </svg>
               Dashboard
-            </a>
+            </Link>
           </li>
           <li>
             <a href="/admin/sites">
@@ -103,7 +104,7 @@ function Sidebar() {
             </a>
           </li>
           <li>
-            <a href="/admin/messages">
+            <Link to={"/admin/messages"}>
               <svg
                 className="w-6 h-6 text-primary"
                 width="24"
@@ -122,7 +123,7 @@ function Sidebar() {
                 <line x1="8" y1="13" x2="14" y2="13" />
               </svg>{" "}
               Messages <div className="text-white badge badge-info">3</div>
-            </a>
+            </Link>
           </li>
         </ul>
       </div>

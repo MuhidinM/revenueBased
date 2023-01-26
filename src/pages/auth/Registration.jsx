@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import AuthService from "../../services/auth.service";
@@ -212,7 +213,8 @@ function Registration() {
                             Confirm password
                           </label>
                           <span className="text-sm link-error">
-                            {props.errors.confirmPassword && props.touched.confirmPassword
+                            {props.errors.confirmPassword &&
+                            props.touched.confirmPassword
                               ? props.errors.confirmPassword
                               : null}
                           </span>
@@ -245,12 +247,12 @@ function Registration() {
                               className="font-light text-gray-500 dark:text-gray-300"
                             >
                               I accept the{" "}
-                              <a
+                              <Link
                                 className="font-medium text-primary hover:underline dark:text-primary"
-                                href="/"
+                                to={"/"}
                               >
                                 Terms and Conditions
-                              </a>
+                              </Link>
                             </label>
                           </div>
                         </div>
@@ -263,12 +265,12 @@ function Registration() {
                         </button>
                         <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                           Already have an account?{" "}
-                          <a
-                            href="/auth"
+                          <Link
+                            to={"/auth"}
                             className="font-medium text-primary hover:underline dark:text-primary"
                           >
                             Login here
-                          </a>
+                          </Link>
                         </p>
                       </>
                     )}
@@ -283,6 +285,9 @@ function Registration() {
                           role="alert"
                         >
                           {message}
+                          <Link to={"/auth"} className="btn btn-primary">
+                            Login
+                          </Link>
                         </div>
                       </div>
                     )}

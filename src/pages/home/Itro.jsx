@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Itro() {
   return (
@@ -107,7 +108,7 @@ function Itro() {
                       STEP 2
                     </h2>
                     <p className="leading-relaxed">
-                      Go to <a href="/">epay.com/registration</a> and fill all
+                      Go to <Link to={"/"}>epay.com/registration</Link> and fill all
                       the required fields and submit your request.
                     </p>
                   </div>
@@ -223,12 +224,12 @@ function Itro() {
                 world, so you can feel confident about using our service.
               </p>
               <div className="flex justify-center">
-                <a
-                  href="/registration"
+                <Link
+                  to={"/registration"}
                   className="inline-flex px-6 py-2 text-lg text-white border-0 rounded bg-primary focus:outline-none hover:bg-primary"
                 >
                   Get started
-                </a>
+                </Link>
               </div>
             </div>
           </div>

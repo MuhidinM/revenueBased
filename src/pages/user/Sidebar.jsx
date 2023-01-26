@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Icon from "../../components/Icon";
 
 function Sidebar() {
@@ -11,7 +12,7 @@ function Sidebar() {
           <Icon re="/users/" />
           <div className=""></div>
           <li>
-            <a href="/users">
+            <Link to={"/users"}>
               <svg
                 className="w-6 h-6 text-primary"
                 width="24"
@@ -30,10 +31,10 @@ function Sidebar() {
                 <path d="M6.4 20a9 9 0 1 1 11.2 0Z" />
               </svg>
               Dashboard
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="/users/transactions">
+            <Link to={"/users/transactions"}>
               <svg
                 className="w-6 h-6 text-primary"
                 width="24"
@@ -54,7 +55,7 @@ function Sidebar() {
                 />
               </svg>
               Transaction
-            </a>
+            </Link>
           </li>
           <li>
             <a href="/users/uapi">
@@ -99,7 +100,7 @@ function Sidebar() {
           </li>
           <div className="divider"></div>
           <li>
-            <a href="/intro">
+            <Link to={"/intro"}>
               <svg
                 className="w-6 h-6 text-primary"
                 fill="none"
@@ -114,10 +115,10 @@ function Sidebar() {
                 />
               </svg>
               Docs
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="/apidocs">
+            <Link to={"/apidocs"}>
               <svg
                 className="w-6 h-6 text-primary"
                 fill="none"
@@ -132,10 +133,10 @@ function Sidebar() {
                 />
               </svg>
               API's
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="/contact">
+            <Link to={"/contact"}>
               <svg
                 className="w-6 h-6 text-primary"
                 width="24"
@@ -154,7 +155,7 @@ function Sidebar() {
                 <path d="M12 13.5a1.5 1.5 0 0 1 1 -1.5a2.6 2.6 0 1 0 -3 -4" />
               </svg>
               Help
-            </a>
+            </Link>
           </li>
         </ul>
       </div>

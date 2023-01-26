@@ -60,7 +60,7 @@ function Tablesite(props) {
                   </label>
                 </td>
                 <td>
-                  <a href="">view</a>
+                  <Link to={""}>view</Link>
                 </td>
               </tr>
             </tbody>
