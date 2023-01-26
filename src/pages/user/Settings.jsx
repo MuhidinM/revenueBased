@@ -192,7 +192,6 @@ function Settings() {
                 {!successful && (
                   <>
                     <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
-                      <div className="sm:col-span-2 divider"></div>
                       <h2 className="mb-4 text-xl font-bold text-gray-900 sm:col-span-2 dark:text-white">
                         Business In Formation
                       </h2>
