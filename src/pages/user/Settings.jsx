@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import Business from "./Business";
 import UserService from "../../services/user.service";
 import Fileinput from "../../components/Fileinput";
 import Input from "../../components/Input";
@@ -347,7 +346,7 @@ function Settings() {
                           required=""
                         />
                       </div>
-                      <div className="">
+                      <div className="sm:col-span-2">
                         <Fileinput
                           lable="trdlicence"
                           title="Trade Licence"
