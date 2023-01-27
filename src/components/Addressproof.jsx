@@ -21,7 +21,6 @@ function Addressproof(props) {
             {image ? (
               <>
                 <img src={image} className="h-24" alt={fileName} />
-                <p>{fileName}</p>
               </>
             ) : (
               <>
@@ -54,16 +53,19 @@ function Addressproof(props) {
           <input
             type="file"
             id="file"
-            // onChange={props.file1}
-            onChange={({ target: { files } }) => {
+           
+            onChange={props.file1}
+            onInput={({ target: { files } }) => {
               files[0] && setFilename(files[0].name);
               if (files) {
+                
                 setImage(URL.createObjectURL(files[0]));
               }
             }}
           />
         </label>
       </div>
+      <section>{fileName}</section>
     </>
   );
 }

@@ -21,8 +21,8 @@ function Fileinput(props) {
             type="file"
             id="dropzone-file"
             hidden
-            // onChange={props.fileInputTOForm}
-            onChange={({ target: { files } }) => {
+            onChange={props.fileInputTOForm}
+            onInput={({ target: { files } }) => {
               files[0] && setFilename(files[0].name);
               if (files) {
                 setImage(URL.createObjectURL(files[0]));
@@ -32,8 +32,7 @@ function Fileinput(props) {
           <div className="flex flex-col items-center justify-center pt-5 pb-6">
             {image ? (
               <>
-              <img src={image} className="h-24" alt={fileName} />
-              <p>{fileName}</p>
+                <img src={image} className="h-24" alt={fileName} />
               </>
             ) : (
               <>
@@ -63,10 +62,8 @@ function Fileinput(props) {
             )}
           </div>
         </label>
-        <section>
-          {/* {fileName} */}
-        </section>
       </div>
+      <section>{fileName}</section>
     </>
   );
 }
