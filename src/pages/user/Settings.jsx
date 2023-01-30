@@ -113,7 +113,7 @@ function Settings() {
     //     );
     //   }),
   });
-  const formData = new FormData();
+  let formData = new FormData();
   return (
     <>
       <section className="m-8 bg-white dark:bg-gray-900">
@@ -141,8 +141,6 @@ function Settings() {
             }}
             validationSchema={validationSchema}
             onSubmit={(values) => {
-              console.log(values);
-
               formData.append("lgname", values.lgname);
               formData.append("incorporation", "A");
               formData.append("industry", "A");
@@ -163,11 +161,7 @@ function Settings() {
               formData.append("hno", values.hno);
               formData.append("location", values.location);
               formData.append("proofOfAddress", proofOfAddress);
-              console.log(formData["lgname"]);
-              UserService.BussinessInfoRequest(
-                formData,
-                currentUser.email
-              ).then(
+              UserService.BussinessInfoRequest(formData).then(
                 (resp) => {
                   console.log(resp.message);
                   setMessage(resp.message);

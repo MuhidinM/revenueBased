@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API_URL = "http://localhost:5000/api/auth/";
-
+const user = JSON.parse(localStorage.getItem("user"));
 const register = (fname, lname, email, phone, password) => {
   return axios
     .post(API_URL + "signup", {
@@ -35,6 +35,10 @@ const login = (email, password) => {
 
 const logout = () => {
   localStorage.removeItem("user");
+};
+
+const checkToken = () => {
+  return localStorage.getItem(user.token);
 };
 
 const getCurrentUser = () => {

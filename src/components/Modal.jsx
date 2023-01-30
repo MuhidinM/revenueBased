@@ -1,10 +1,12 @@
 import React from "react";
+import { useState } from "react";
 import Maccounts from "./Maccounts";
 import Mapi from "./Mapi";
 import Mbank from "./Mbank";
 import Msite from "./Msite";
 
-function Modal() {
+function Modal(props, { handleIsOpen }) {
+  console.log(props.page);
   return (
     <>
       <input type="checkbox" id="my-modal-4" className="modal-toggle" />
@@ -13,20 +15,24 @@ function Modal() {
           <label
             htmlFor="my-modal-4"
             className="absolute btn btn-sm btn-circle right-2 top-2"
+            // onClick={reload}
+            onClick={() => handleIsOpen}
           >
             ✕
           </label>
-          {window.location.pathname === "/admin/sites" ? (
+
+          {props.page === "a" ? <Msite title="Add Site" /> : ""}
+          {/* {window.location.pathname === "/admin/sites" ? (
             <Msite title="Add Site" />
           ) : window.location.pathname === "/admin/banks" ? (
-            <Mbank title="Add Bank"/>
+            <Mbank title="Add Bank" />
           ) : window.location.pathname === "/users/uapi" ? (
-            <Mapi title="Generate API"/>
+            <Mapi title="Generate API" />
           ) : window.location.pathname === "/users/accounts" ? (
-            <Maccounts title="Add Account"/>
+            <Maccounts title="Add Account" />
           ) : (
             ""
-          )}
+          )} */}
         </div>
       </div>
     </>

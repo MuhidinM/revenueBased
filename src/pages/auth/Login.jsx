@@ -12,7 +12,8 @@ function Login() {
   // const [password, setPassword] = useState("");
   // const [loading, setLoading] = useState(false);
   // const [message, setMessage] = useState("");
-
+  const [successful, setSuccessful] = useState(false);
+  const [message, setMessage] = useState("");
   const validationSchema = Yup.object().shape({
     // firstName: Yup.string().required("Fullname is required"),
     // lastName: Yup.string().required("Fullname is required"),
@@ -72,7 +73,7 @@ function Login() {
                         error.toString();
 
                       // setLoading(false);
-                      // setMessage(resMessage);
+                      setMessage(resMessage);
                     }
                   );
                 }}
@@ -86,6 +87,11 @@ function Login() {
                       >
                         Your email
                       </label>
+                      <span className="text-sm link-error">
+                        {props.errors.email && props.touched.email
+                          ? props.errors.password
+                          : null}
+                      </span>
                       <input
                         type="email"
                         name="email"
@@ -104,6 +110,11 @@ function Login() {
                       >
                         Password
                       </label>
+                      <span className="text-sm link-error">
+                        {props.errors.password && props.touched.password
+                          ? props.errors.password
+                          : null}
+                      </span>
                       <input
                         type="password"
                         name="password"
@@ -158,6 +169,20 @@ function Login() {
                         Sign up
                       </a>
                     </p>
+                    {message && (
+                      <div className="form-group">
+                        <div
+                          className={
+                            successful
+                              ? "alert alert-success"
+                              : "alert alert-danger"
+                          }
+                          role="alert"
+                        >
+                          {message}
+                        </div>
+                      </div>
+                    )}
                   </>
                 )}
               </Formik>
