@@ -1,17 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-const month = [];
-for (let i = 1; i < 13; i++) {
-  month.push({ label: i, value: i });
-}
-const year = [];
-const thisyear = new Date().getFullYear();
-const endyear = thisyear + 5;
-for (let i = thisyear; i < endyear; i++) {
-  year.push({ label: i, value: i });
-}
+import Bankpay from "./Bankpay";
+import Cardpay from "./Cardpay";
+import Mobilepay from "./Mobilepay";
 
 function Gateway() {
+  const [select, setSelect] = useState("CBOC");
   return (
     <div>
       <section className="bg-gray-100 dark:bg-gray-900">
@@ -20,7 +14,7 @@ function Gateway() {
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
               <img
                 className="w-full h-auto"
-                src="https://d6vdma9166ldh.cloudfront.net/media/images/1540976335764-pasted%20image%200.png"
+                src="../card.png"
                 alt="front credit card"
               />
               <div className="flex flex-col items-center justify-center">
@@ -41,69 +35,37 @@ function Gateway() {
                   </li>
                 </ul>
               </div>
-
-              <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                Card payment
+              <h1 className="leading-tight tracking-tight text-gray-900 dark:text-white">
+                choose payment
               </h1>
+              <div className="">
+                <select
+                  onChange={(e) => {
+                    setSelect(e.target.value);
+                  }}
+                  className="my-6 select bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                >
+                  <option value={"CBOC"} selected>
+                    Cooperative bank of Oromia Card
+                  </option>
+                  <option value={"CBOA"}>
+                    Cooperative bank of Oromia Account
+                  </option>
+
+                  <option value={"EB"}>E-birr</option>
+                  <option value={"TB"}>Tele Birr</option>
+                  <option value={"BOAC"}>Bank of Abisinia Card</option>
+                  <option value={"BOAA"}>Bank of Abisinia Account</option>
+                </select>
+              </div>
+
               <htmlForm className="space-y-4 md:space-y-6" action="">
-                <div>
-                  <input
-                    type="text"
-                    name="cardholder"
-                    id="cardNumber"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Card Holder"
-                    required=""
-                  />
-                </div>
-                <div>
-                  <input
-                    type="text"
-                    name="cardNumber"
-                    id="cardNumber"
-                    placeholder="0000 0000 0000 0000"
-                    className="bg-gray-50 border
-            border-gray-300 text-gray-900 sm:text-sm rounded-lg
-            focus:ring-primary focus:border-primary block w-full p-2.5
-            dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
-            dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    required=""
-                  />
-                </div>
-                <div className="flex flex-col my-3">
-                  <div className="mb-2">
-                    <label htmlFor="" className="text-gray-700">
-                      Expired
-                    </label>
-                  </div>
-                  <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
-                    <select
-                      name=""
-                      id=""
-                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                      x-model="expired.month"
-                    >
-                      {month.map((arr) => (
-                        <option value={arr.value}>{arr.label}</option>
-                      ))}
-                    </select>
-                    <select
-                      name=""
-                      id=""
-                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                      x-model="expired.year"
-                    >
-                      {year.map((arr) => (
-                        <option value={arr.value}>{arr.label}</option>
-                      ))}
-                    </select>
-                    <div className="w-full col-span-2">
-                      <h1 className="mt-2 text-lg font-bold text-center">
-                        $100
-                      </h1>
-                    </div>
-                  </div>
-                </div>
+                {select === "CBOA" && <Bankpay />}
+                {select === "CBOC" && <Cardpay />}
+                {select === "EB" && <Mobilepay />}
+                {select === "BOAA" && <Bankpay />}
+                {select === "BOAC" && <Cardpay />}
+                {select === "TB" && <Mobilepay />}
                 <Link
                   to={"/otp"}
                   type="submit"

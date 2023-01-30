@@ -40,8 +40,7 @@ function Addressproof(props) {
                   ></path>
                 </svg>
                 <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                  <span className="font-semibold">Click to upload</span> or drag
-                  and drop
+                  <span className="font-semibold">Click to upload</span>
                 </p>
                 <p className="text-xs text-gray-500 dark:text-gray-400">
                   SVG, PNG, JPG or GIF (MAX. 800x400px)
@@ -53,7 +52,7 @@ function Addressproof(props) {
           <input
             type="file"
             id="file"
-           
+            accept="image/*"
             onChange={props.file1}
             onInput={({ target: { files } }) => {
               files[0] && setFilename(files[0].name);
