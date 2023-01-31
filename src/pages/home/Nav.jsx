@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Icon from "../../components/Icon";
 
 function Nav() {
@@ -28,7 +29,7 @@ function Nav() {
               className="p-2 mt-3 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
             >
               <li>
-                <a href="/">Home</a>
+                <Link to={"/"}>Home</Link>
               </li>
               <li className="dropdown dropdown-bottom">
                 <label tabIndex={0} className="m-1">
@@ -48,15 +49,15 @@ function Nav() {
                   className="p-2 shadow dropdown-content menu bg-base-100 rounded-box w-52"
                 >
                   <li>
-                    <a href="/intro">Intro</a>
+                    <Link to={"/intro"}>Intro</Link>
                   </li>
                   <li>
-                    <a href="/apidocs">Our API's</a>
+                    <Link to={"/apidocs"}>Our API's</Link>
                   </li>
                 </ul>
               </li>
               <li>
-                <a href="/contact">Contact</a>
+                <Link to={"/contact"}>Contact</Link>
               </li>
             </ul>
           </div>
@@ -65,7 +66,7 @@ function Nav() {
         <div className="hidden navbar-center lg:flex">
           <ul className="px-1 menu menu-horizontal">
             <li>
-              <a href="/">Home</a>
+              <Link to={"/"}>Home</Link>
             </li>
             <li className="dropdown dropdown-bottom">
               <label tabIndex={0} className="m-1">
@@ -85,28 +86,28 @@ function Nav() {
                 className="p-2 shadow dropdown-content menu bg-base-100 rounded-box w-52"
               >
                 <li>
-                  <a href="/intro">Intro</a>
+                  <Link to={"/intro"}>Intro</Link>
                 </li>
                 <li>
-                  <a href="/apidocs">Our API's</a>
+                  <Link to={"/apidocs"}>Our API's</Link>
                 </li>
               </ul>
             </li>
             <li>
-              <a href="/sandbox">Sandbox</a>
+              <Link to={"/sandbox"}>Sandbox</Link>
             </li>
             <li>
-              <a href="/contact">Contact</a>
+              <Link to={"/contact"}>Contact</Link>
             </li>
           </ul>
         </div>
         <div className="navbar-end">
           <div className="px-1 menu menu-horizontal">
             <li>
-              <a href="/auth">Log in</a>
+              <Link to={"/auth"}>Log in</Link>
             </li>
             <li>
-              <a href="/auth/registration">Sign Up</a>
+              <Link to={"/auth/registration"}>Sign Up</Link>
             </li>
           </div>
         </div>

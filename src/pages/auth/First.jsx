@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function First() {
   return (
@@ -74,12 +75,12 @@ function First() {
                     className="font-light text-gray-500 dark:text-gray-300"
                   >
                     I accept the{" "}
-                    <a
+                    <Link
                       className="font-medium text-primary hover:underline dark:text-primary"
-                      href="#"
+                      to={"#"}
                     >
                       Terms and Conditions
-                    </a>
+                    </Link>
                   </label>
                 </div>
               </div>

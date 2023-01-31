@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import Business from "./Business";
 import UserService from "../../services/user.service";
 import Fileinput from "../../components/Fileinput";
 import Input from "../../components/Input";
@@ -186,7 +185,6 @@ function Settings() {
                 {!successful && (
                   <>
                     <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
-                      <div className="sm:col-span-2 divider"></div>
                       <h2 className="mb-4 text-xl font-bold text-gray-900 sm:col-span-2 dark:text-white">
                         Business In Formation
                       </h2>
@@ -342,7 +340,7 @@ function Settings() {
                           required=""
                         />
                       </div>
-                      <div className="">
+                      <div className="sm:col-span-2">
                         <Fileinput
                           lable="trdlicence"
                           title="Trade Licence"

@@ -7,6 +7,7 @@ import Sandbox from "./Sandbox";
 import Error from "./Error";
 import Users from "./Users";
 import OTP from "./pages/auth/OTP";
+import PrivateRoiutes from "./pages/auth/PrivateRoutes";
 
 function App() {
   return (
@@ -16,9 +17,11 @@ function App() {
         <Route path="/gateway" element={<Gateway />}></Route>
         <Route path="/otp" element={<OTP />}></Route>
         <Route path="/auth/*" element={<Auth />}></Route>
-        <Route path="/admin/*" element={<Admin />}></Route>
+        <Route element={<PrivateRoiutes />}>
+          <Route path="/admin/*" element={<Admin />}></Route>
+          <Route path="/users/*" element={<Users />}></Route>
+        </Route>
         <Route path="/sandbox/*" element={<Sandbox />}></Route>
-        <Route path="/users/*" element={<Users />}></Route>
         <Route path="*" element={<Error />}></Route>
       </Routes>
     </>
