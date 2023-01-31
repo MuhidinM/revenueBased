@@ -8,7 +8,7 @@ function Activate() {
     const pendingBussinesses = await UserService.getAllPendingBussiness();
     // console.log(pendingBussinesses[0]);
     if (pendingBussinesses) {
-      setpendinRequest(pendingBussinesses[0]);
+      setpendinRequest(pendingBussinesses);
     }
   };
   useEffect(() => {

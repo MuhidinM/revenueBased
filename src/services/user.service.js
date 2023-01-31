@@ -25,28 +25,42 @@ const getAllPendingBussiness = async () => {
     .then((response) => response.data.bussinessDetail);
 };
 
-const getPendingBussinessById = () => {
+const approvePendingBussinessById = (id) => {
+  console.log(id);
   return axios
-    .get(API_URL + "test/bussinessRequest/:id")
-    .then((response) => response.json())
-    .then((bussinessDetail) => {
-      console.log(bussinessDetail);
-    });
+    .patch(API_URL + "test/bussinessRequest/:id", { id })
+    .then((response) => response.data);
 };
 
 const headers = {
   "Content-Type": "multipart/form-data",
-  
 };
-const BussinessInfoRequest = (formData) => {
-  console.log(formData);
-
-  return axios
+const BussinessInfoRequest = async (formData) => {
+  for (const value of formData.values()) {
+    console.log(value);
+  }
+  return await axios
     .post(API_URL + "user/vrf", formData, headers)
     .then((response) => {
       // console.log(response.data.message);
       return response.data;
     });
+};
+
+const CreateBankAccount = async (
+  accountHolderName,
+  accountNumber,
+  bankName,
+  userId
+) => {
+  return await axios
+    .post(API_URL + "banckAccount/create", {
+      accountHolderName,
+      accountNumber,
+      bankName,
+      userId,
+    })
+    .then((response) => response.data);
 };
 
 const UserService = {
@@ -56,7 +70,8 @@ const UserService = {
   getAdminBoard,
   BussinessInfoRequest,
   getAllPendingBussiness,
-  getPendingBussinessById,
+  approvePendingBussinessById,
+  CreateBankAccount,
 };
 
 export default UserService;

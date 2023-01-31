@@ -58,7 +58,7 @@ function Sidebar() {
             </Link>
           </li>
           <li>
-            <a href="/users/uapi">
+            <Link to="/users/uapi">
               <svg
                 className="w-6 h-6 text-primary"
                 width="24"
@@ -76,10 +76,10 @@ function Sidebar() {
                 <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
               </svg>
               Api Links
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="/users/accounts">
+            <Link to="/users/accounts">
               <svg
                 className="w-6 h-6 text-primary"
                 width="24"
@@ -96,7 +96,7 @@ function Sidebar() {
                 <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
               </svg>
               Accounts
-            </a>
+            </Link>
           </li>
           <div className="divider"></div>
           <li>

@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import AuthService from "../../services/auth.service";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+const MySwal = withReactContent(Swal);
 // import { useState } from "react";
 function Registration() {
   // const form = useRef();
@@ -15,6 +18,7 @@ function Registration() {
   // const [password, setPassword] = useState("");
   const [successful, setSuccessful] = useState(false);
   const [message, setMessage] = useState("");
+  const [isOpen, setOpen] = useState(false);
   const validationSchema = Yup.object().shape({
     firstName: Yup.string().required("Fullname is required"),
     lastName: Yup.string().required("Fullname is required"),
@@ -29,6 +33,7 @@ function Registration() {
       .oneOf([Yup.ref("password"), null], "Confirm Password does not match"),
     // acceptTerms: Yup.bool().oneOf([true], "Accept Terms"),
   });
+  let navigate = useNavigate();
   return (
     <>
       <section className="bg-gray-50 dark:bg-gray-900">
@@ -56,6 +61,7 @@ function Registration() {
                   //   setSubmitting(false);
                   // }, 400);
                   console.log(values);
+                  setOpen(true);
                   AuthService.register(
                     values.firstName,
                     values.lastName,
@@ -67,7 +73,15 @@ function Registration() {
                       console.log(resp.message);
                       setMessage(resp.message);
                       setSuccessful(true);
-                      // console.log(successful);
+                      Swal.fire({
+                        title: "You are Successfully registers",
+                        text: "Do you want to continue",
+                        icon: "success",
+                        confirmButtonText: "Cool",
+                      });
+                      navigate("/auth");
+                      window.location.reload();
+                      console.log(successful);
                     },
                     (error) => {
                       const resMessage =
@@ -85,6 +99,19 @@ function Registration() {
               >
                 {(props) => (
                   <>
+                    {isOpen && (
+                      <>
+                        {MySwal.fire({
+                          title: <p>Hello World</p>,
+                          show: { isOpen },
+                          didOpen: () => {
+                            // `MySwal` is a subclass of `Swal` with all the same instance & static methods
+                            MySwal.showLoading();
+                          },
+                        })}
+                      </>
+                    )}
+
                     {!successful && (
                       <>
                         <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">

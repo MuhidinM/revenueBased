@@ -33,7 +33,7 @@ function Sidebar() {
             </Link>
           </li>
           <li>
-            <a href="/admin/sites">
+            <Link to="/admin/sites">
               <svg
                 className="w-6 h-6 text-primary"
                 width="24"
@@ -54,10 +54,10 @@ function Sidebar() {
                 <line x1="12" y1="9" x2="12" y2="12" />
               </svg>
               Sites
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="/admin/activate">
+            <Link to="/admin/activate">
               <svg
                 className="w-6 h-6 text-primary"
                 width="24"
@@ -74,7 +74,7 @@ function Sidebar() {
                 <path d="M7 11V7a5 5 0 0 1 9.9-1" />
               </svg>
               Activate
-            </a>
+            </Link>
           </li>
           <li>
             <a href="/admin/banks">

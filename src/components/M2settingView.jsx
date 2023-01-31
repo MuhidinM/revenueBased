@@ -1,9 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import UserService from "../services/user.service";
 
 function M2settingView(props) {
   const m2SettingData = props.modal_data;
-  console.log(m2SettingData && m2SettingData.legalName);
+
   if (m2SettingData) {
+    // setdataId(m2SettingData.bussiness_id);
+    // console.log(m2SettingData.bussiness_id);
+    // console.log(tradeLicenseImage);
+    const onSubmit = () => {
+      console.log("Clicked");
+      UserService.approvePendingBussinessById(m2SettingData.bussiness_id).then(
+        (resp) => {
+          console.log(resp.message);
+        },
+        (error) => {
+          console.log(error.message);
+        }
+      );
+    };
+
+    // console.log(m2SettingData.tradeLicense);
+
     return (
       <>
         <h3 className="text-lg font-bold">{props.title}</h3>
@@ -90,11 +108,12 @@ function M2settingView(props) {
               </div>
               <div className="sm:col-span-4">
                 <b>Proof of Address:</b> <br />
-                <img className="" src="../card.png" alt="ID" />
+                <img className="" src={m2SettingData.tradeLicense} alt="ID" />
               </div>
             </div>
             <button
               type="submit"
+              onClick={onSubmit}
               className="inline-flex items-center px-5 py-3.5 mt-4 text-sm font-medium text-center text-white rounded-lg sm:mt-6 bg-primary focus:ring-4 focus:ring-primary dark:focus:ring-primary hover:bg-primary"
             >
               Activate
