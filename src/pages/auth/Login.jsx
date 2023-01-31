@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import AuthService from "../../services/auth.service";
 // import { PASSWORD } from "../../../../server/configs/db";
 import { Formik } from "formik";
@@ -146,12 +146,12 @@ function Login() {
                           </label>
                         </div>
                       </div>
-                      <a
-                        href="/auth/recover"
+                      <Link
+                        to={"/auth/recover"}
                         className="text-sm font-medium text-primary hover:underline dark:text-primary"
                       >
                         Forgot password?
-                      </a>
+                      </Link>
                     </div>
                     <button
                       type="submit"
@@ -162,12 +162,12 @@ function Login() {
                     </button>
                     <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                       Don’t have an account yet?
-                      <a
-                        href="/auth/registration"
+                      <Link
+                        to={"/auth/registration"}
                         className="font-medium text-primary hover:underline dark:text-primary"
                       >
                         Sign up
-                      </a>
+                      </Link>
                     </p>
                     {message && (
                       <div className="form-group">
@@ -239,28 +239,28 @@ function Login() {
                       </label>
                     </div>
                   </div>
-                  <a
-                    href="/auth/recover"
+                  <Link
+                    to="/auth/recover"
                     className="text-sm font-medium text-primary hover:underline dark:text-primary"
                   >
                     Forgot password?
-                  </a>
+                  </Link>
                 </div>
-                <a
-                  href="/users"
+                <Link
+                  to="/users"
                   type="submit"
                   className="w-full text-white bg-primary hover:bg-primary focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary dark:hover:bg-primary dark:focus:ring-primary"
                 >
                   Sign in
-                </a>
+                </Link>
                 <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                   Don’t have an account yet?
-                  <a
-                    href="/auth/registration"
+                  <Link
+                    to="/auth/registration"
                     className="font-medium text-primary hover:underline dark:text-primary"
                   >
                     Sign up
-                  </a>
+                  </Link>
                 </p>
               </htmlForm> */}
             </div>

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Transactions() {
   return (
@@ -23,10 +24,10 @@ function Transactions() {
                 <td>1022225648986</td>
                 <td>CBO</td>
                 <td>
-                  <a href="/users/uapi">Copy</a>
+                  <Link to={"/users/uapi"}>Copy</Link>
                 </td>
                 <td>
-                  <a href="/users/uapi">Delete</a>
+                  <Link to={"/users/uapi"}>Delete</Link>
                 </td>
               </tr>
               <tr className="hover">
@@ -35,10 +36,10 @@ function Transactions() {
                 <td>1000003656654</td>
                 <td>CBE</td>
                 <td>
-                  <a href="/users/uapi">Copy</a>
+                  <Link to={"/users/uapi"}>Copy</Link>
                 </td>
                 <td>
-                  <a href="/users/uapi">Delete</a>
+                  <Link to={"/users/uapi"}>Delete</Link>
                 </td>
               </tr>
               <tr>
@@ -47,10 +48,10 @@ function Transactions() {
                 <td>1000000646</td>
                 <td>BOA</td>
                 <td>
-                  <a href="/users/uapi">Copy</a>
+                  <Link to={"/users/uapi"}>Copy</Link>
                 </td>
                 <td>
-                  <a href="/users/uapi">Delete</a>
+                  <Link to={"/users/uapi"}>Delete</Link>
                 </td>
               </tr>
             </tbody>

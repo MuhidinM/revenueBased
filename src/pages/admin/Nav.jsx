@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Nav() {
   return (
@@ -67,12 +68,12 @@ function Nav() {
               className="p-2 mt-3 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
             >
               <li>
-                <a href="/admin/profile" className="justify-between">
+                <Link to={"/admin/profile"} className="justify-between">
                   Profile
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/">Logout</a>
+                <Link to={"/"}>Logout</Link>
               </li>
             </ul>
           </div>

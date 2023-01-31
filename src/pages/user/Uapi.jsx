@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import Modal from "../../components/Modal";
+
 function Uapi() {
   const [modaState, setModalState] = useState(false);
 
@@ -46,12 +48,12 @@ function Uapi() {
                 <td>Qjnalfjvndljnv3094889mdkco983</td>
                 <td>CBO</td>
                 <td>
-                  <a href="/users/uapi">Copy</a>
+                  <Link to={"/users/uapi"}>Copy</Link>
                 </td>
                 <td>
-                  <a className="link link-error" href="/users/uapi">
+                  <Link className="link link-error" to={"/users/uapi"}>
                     Delete
-                  </a>
+                  </Link>
                 </td>
               </tr>
               <tr className="hover">
@@ -60,12 +62,12 @@ function Uapi() {
                 <td>ij894ujn498jn48hg84n484n84nbn</td>
                 <td>CBE</td>
                 <td>
-                  <a href="/users/uapi">Copy</a>
+                  <Link to={"/users/uapi"}>Copy</Link>
                 </td>
                 <td>
-                  <a className="link link-error" href="/users/uapi">
+                  <Link className="link link-error" to={"/users/uapi"}>
                     Delete
-                  </a>
+                  </Link>
                 </td>
               </tr>
               <tr>
@@ -74,12 +76,12 @@ function Uapi() {
                 <td>ahvoprmmrko0004kmtk033m9555tg</td>
                 <td>BOA</td>
                 <td>
-                  <a href="/users/uapi">Copy</a>
+                  <Link to={"/users/uapi"}>Copy</Link>
                 </td>
                 <td>
-                  <a className="link link-error" href="/users/uapi">
+                  <Link className="link link-error" to={"/users/uapi"}>
                     Delete
-                  </a>
+                  </Link>
                 </td>
               </tr>
             </tbody>
