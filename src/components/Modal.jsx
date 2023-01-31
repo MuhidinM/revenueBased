@@ -5,23 +5,27 @@ import Mapi from "./Mapi";
 import Mbank from "./Mbank";
 import Msite from "./Msite";
 
-function Modal(props, { handleIsOpen }) {
-  console.log(props.page);
+function Modal({ handleClose, show, children, page }) {
+  // console.log(props.page);
+  const showHideClassName = show ? "my-modal-4" : "";
+  console.log(page);
   return (
     <>
-      <input type="checkbox" id="my-modal-4" className="modal-toggle" />
+      <input type="checkbox" id={showHideClassName} className="modal-toggle" />
       <div className="modal">
-        <div className="relative w-11/12 max-w-5xl modal-box">
-          <label
-            htmlFor="my-modal-4"
+        <div className="relative w-11/12 max-w-3xl modal-box">
+          <button
+            type="button"
+            onClick={handleClose}
             className="absolute btn btn-sm btn-circle right-2 top-2"
-            // onClick={reload}
-            onClick={() => handleIsOpen}
+            // onClick={() => handleIsOpen}
           >
             ✕
-          </label>
+          </button>
 
-          {props.page === "a" ? <Msite title="Add Site" /> : ""}
+          {/* {props.page === "a" ? <Msite title="Add Site" /> : ""} */}
+          {page === "a" && <Maccounts title="Add Account" />}
+          {page === "b" && <Mapi title="Generate API" />}
           {/* {window.location.pathname === "/admin/sites" ? (
             <Msite title="Add Site" />
           ) : window.location.pathname === "/admin/banks" ? (

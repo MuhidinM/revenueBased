@@ -1,15 +1,32 @@
-import React from "react";
-
+import React, { useState } from "react";
+import Modal from "../../components/Modal";
 function Uapi() {
+  const [modaState, setModalState] = useState(false);
+
+  const showModal = () => {
+    console.log("show the modal");
+    console.log(modaState);
+    setModalState(true);
+  };
+
+  const hideModal = () => {
+    setModalState(false);
+  };
   return (
     <>
       <div className="w-5/6 m-4">
         <label
           htmlFor="my-modal-4"
+          onClick={showModal}
           className="mb-4 btn btn-outline btn-primary"
         >
           Add New
         </label>
+        {modaState && (
+          <Modal show={showModal} handleClose={hideModal} page="b">
+            <p>Modal</p>
+          </Modal>
+        )}
         <div className="mt-4 overflow-x-auto">
           <table className="table w-full">
             <thead>
