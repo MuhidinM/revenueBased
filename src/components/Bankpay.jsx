@@ -13,110 +13,79 @@ function Bankpay() {
     bankName: Yup.string().required("You Have to select Bank"),
   });
   return (
-    <div>
-      <section className="bg-gray-100 dark:bg-gray-900">
-        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-          <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-            <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-              <img
-                className="w-full h-auto"
-                src="https://d6vdma9166ldh.cloudfront.net/media/images/1540976335764-pasted%20image%200.png"
-                alt="front credit card"
-              />
-              <div className="flex flex-col items-center justify-center">
-                <ul className="flex">
-                  <li className="mx-2">
-                    <img
-                      className="w-16"
-                      src="https://www.computop-paygate.com/Templates/imagesaboutYou_desktop/images/verified-by-visa.png"
-                      alt=""
-                    />
-                  </li>
-                  <li className="ml-5">
-                    <img
-                      className="w-9"
-                      src="https://www.computop-paygate.com/Templates/imagesaboutYou_desktop/images/mastercard-id-check.png"
-                      alt=""
-                    />
-                  </li>
-                </ul>
-              </div>
+    <>
+      <Formik
+        initialValues={{
+          debitAccount: "",
+          debitAmount: "",
+          // bankName: "",
+        }}
+        // validationSchema={validationSchema}
+        onSubmit={(values) => {
+          // setTimeout(() => {
+          //   alert(JSON.stringify(values, null, 2));
+          //   setSubmitting(false);
+          // }, 400);
+          console.log("hello");
+          console.log(values);
+          PaymentServices.pay(values.debitAccount, values.debitAmount).then(
+            (resp) => {
+              console.log(resp);
+              setMessage(resp);
+              setSuccessful(true);
+              // console.log(successful);
+            },
+            (error) => {
+              const resMessage =
+                (error.response &&
+                  error.response.data &&
+                  error.response.data.message) ||
+                error.message ||
+                error.toString();
 
-              <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                Card payment
-              </h1>
-              <Formik
-                initialValues={{
-                  debitAccount: "",
-                  debitAmount: "",
-                  // bankName: "",
-                }}
-                // validationSchema={validationSchema}
-                onSubmit={(values) => {
-                  // setTimeout(() => {
-                  //   alert(JSON.stringify(values, null, 2));
-                  //   setSubmitting(false);
-                  // }, 400);
-                  console.log("hello");
-                  console.log(values);
-                  PaymentServices.pay(
-                    values.debitAccount,
-                    values.debitAmount
-                  ).then(
-                    (resp) => {
-                      console.log(resp);
-                      setMessage(resp);
-                      setSuccessful(true);
-                      // console.log(successful);
-                    },
-                    (error) => {
-                      const resMessage =
-                        (error.response &&
-                          error.response.data &&
-                          error.response.data.message) ||
-                        error.message ||
-                        error.toString();
-
-                      setMessage(resMessage);
-                      setSuccessful(false);
-                    }
-                  );
-                }}
-              >
-                {(props) => (
-                  <>
-                    {!successful && (
-                      <>
-                        <div className="grid gap-4 mb-4 sm:grid-cols-2 sm:gap-6 sm:mb-5">
-                          <div>
-                            {/* <span className="text-sm link-error">
+              setMessage(resMessage);
+              setSuccessful(false);
+            }
+          );
+        }}
+      >
+        {(props) => (
+          <>
+            {!successful && (
+              <>
+                <div className="grid grid-cols-2 gap-2 sm:grid-cols-5">
+                  <div className="w-full col-span-3">
+                    {/* <span className="text-sm link-error">
                               {props.errors.cardholder &&
                               props.touched.cardholder
                                 ? props.errors.cardholder
                                 : null}
                             </span> */}
-                            <input
-                              type="text"
-                              name="debitAccount"
-                              id="debitAccount"
-                              className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                              placeholder="Account Number"
-                              // required=""
-                              value={props.values.debitAccount}
-                              onChange={props.handleChange}
-                            />
-                          </div>
-                          <input
-                            type="text"
-                            name="debitAmount"
-                            id="debitAmount"
-                            className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="Amount"
-                            required=""
-                            value={props.values.debitAmount}
-                            onChange={props.handleChange}
-                          />
-                          {/* <div>
+                    <input
+                      type="text"
+                      name="debitAccount"
+                      id="debitAccount"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="Account Number"
+                      // required=""
+                      value={props.values.debitAccount}
+                      onChange={props.handleChange}
+                    />
+                  </div>
+                  <div className="w-full col-span-2">
+                    <input
+                      type="text"
+                      name="debitAmount"
+                      id="debitAmount"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="Amount"
+                      required=""
+                      value={props.values.debitAmount}
+                      onChange={props.handleChange}
+                    />
+                  </div>
+
+                  {/* <div>
                             <span className="text-sm link-error">
                               {props.errors.cardNumber &&
                               props.touched.cardNumber
@@ -138,7 +107,7 @@ function Bankpay() {
                               onChange={props.handleChange}
                             />
                           </div> */}
-                          {/* <div className="flex flex-col my-3">
+                  {/* <div className="flex flex-col my-3">
                             <div className="mb-2">
                               <label htmlFor="" className="text-gray-700">
                                 Expired
@@ -200,39 +169,33 @@ function Bankpay() {
                               </div>
                             </div>
                           </div> */}
-                        </div>
-                        <button
-                          // href="/otp"
-                          type="submit"
-                          onClick={props.handleSubmit}
-                          className="w-full text-white bg-primary hover:bg-primary focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary dark:hover:bg-primary dark:focus:ring-primary"
-                        >
-                          Pay now
-                        </button>
-                      </>
-                    )}
-                    {message && (
-                      <div className="form-group">
-                        <div
-                          className={
-                            successful
-                              ? "alert alert-success"
-                              : "alert alert-danger"
-                          }
-                          role="alert"
-                        >
-                          {message}
-                        </div>
-                      </div>
-                    )}
-                  </>
-                )}
-              </Formik>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
+                </div>
+                <button
+                  // href="/otp"
+                  type="submit"
+                  onClick={props.handleSubmit}
+                  className="w-full text-white bg-primary hover:bg-primary focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary dark:hover:bg-primary dark:focus:ring-primary"
+                >
+                  Pay now
+                </button>
+              </>
+            )}
+            {message && (
+              <div className="form-group">
+                <div
+                  className={
+                    successful ? "alert alert-success" : "alert alert-danger"
+                  }
+                  role="alert"
+                >
+                  {message}
+                </div>
+              </div>
+            )}
+          </>
+        )}
+      </Formik>
+    </>
   );
 }
 
