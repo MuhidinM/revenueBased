@@ -85,7 +85,7 @@ function Maccounts(props) {
                     currentUser.id
                   )
                 )
-                  .then(() => console.log("Submitted successfully"))
+                  .then((res) => console.log(res))
                   .catch((e) => console.log(e));
               }}
             >
