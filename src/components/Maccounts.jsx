@@ -44,7 +44,7 @@ function Maccounts(props) {
               initialValues={{
                 accountHolder: "",
                 accountNumber: "",
-                bankName: "",
+                bankName: "CBO",
               }}
               validationSchema={validationSchema}
               onSubmit={(values) => {
