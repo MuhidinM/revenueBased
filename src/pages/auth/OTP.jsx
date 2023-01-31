@@ -1,6 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 function OTP() {
+  const [otp, setOtp] = useState(new Array(4).fill(""));
+  const handleChange = (element, index) => {
+    if (isNaN(element.value)) return false;
+
+    setOtp([...otp.map((d, idx) => (idx === index ? element.value : d))]);
+
+    //Focus next input
+    if (element.nextSibling) {
+      element.nextSibling.focus();
+    }
+  };
   return (
     <>
       <section className="text-center bg-gray-50 dark:bg-gray-900">
@@ -21,56 +33,32 @@ function OTP() {
             >
               <div>
                 <label
-                  htmlFor="email"
+                  htmlFor="otp"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
                   OTP Code
                 </label>
                 <div className="flex flex-row items-center justify-between w-full max-w-xs py-4 mx-auto">
-                  <div className="w-16 h-16">
-                    <input
-                      type="number"
-                      name="email"
-                      id="email"
-                      className="bg-gray-50 border text-center border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                      placeholder=""
-                      required=""
-                      maxlength="1"
-                    />
-                  </div>
-                  <div className="w-16 h-16">
-                    <input
-                      type="number"
-                      name="email"
-                      id="email"
-                      className="bg-gray-50 border text-center border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                      placeholder=""
-                      required=""
-                      maxlength="1"
-                    />
-                  </div>
-                  <div className="w-16 h-16">
-                    <input
-                      type="number"
-                      name="email"
-                      id="email"
-                      className="bg-gray-50 border text-center border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                      placeholder=""
-                      required=""
-                      maxlength="1"
-                    />
-                  </div>
-                  <div className="w-16 h-16">
-                    <input
-                      type="text"
-                      name="email"
-                      id="email"
-                      className="bg-gray-50 border text-center border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                      placeholder=""
-                      required=""
-                      maxlength="1"
-                    />
-                  </div>
+                  {otp.map((data, index) => {
+                    return (
+                      <div className="w-16 h-16">
+                        <input
+                          type="text"
+                          name="otp"
+                          id="otp"
+                          className="bg-gray-50 border text-center border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          placeholder=""
+                          required=""
+                          maxLength="1"
+                          key={index}
+                          value={data}
+                          onChange={(e) => handleChange(e.target, index)}
+                          onFocus={(e) => e.target.select()}
+                        />
+                      </div>
+                    );
+                  })}
+                  {/* {otp.join("")} use this to send the data */}
                 </div>
               </div>
               <div className="flex items-start">
@@ -79,7 +67,8 @@ function OTP() {
                   <a
                     className="flex flex-row items-center text-primary"
                     href="http://"
-                    target="_blank"
+                    target="popup"
+                    onclick="window.open('http://','popup','width=600,height=600,scrollbars=no,resizable=no'); return false;"
                     rel="noopener noreferrer"
                   >
                     Resend

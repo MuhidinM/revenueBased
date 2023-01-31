@@ -12,7 +12,7 @@ function Sidebar() {
           <Icon re="/users/" />
           <div className=""></div>
           <li>
-            <Link href="/users">
+            <Link to={"/users"}>
               <svg
                 className="w-6 h-6 text-primary"
                 width="24"
@@ -34,7 +34,7 @@ function Sidebar() {
             </Link>
           </li>
           <li>
-            <Link to="/users/transactions">
+            <Link to={"/users/transactions"}>
               <svg
                 className="w-6 h-6 text-primary"
                 width="24"
@@ -100,7 +100,7 @@ function Sidebar() {
           </li>
           <div className="divider"></div>
           <li>
-            <a href="/intro">
+            <Link to={"/intro"}>
               <svg
                 className="w-6 h-6 text-primary"
                 fill="none"
@@ -115,10 +115,10 @@ function Sidebar() {
                 />
               </svg>
               Docs
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="/apidocs">
+            <Link to={"/apidocs"}>
               <svg
                 className="w-6 h-6 text-primary"
                 fill="none"
@@ -133,10 +133,10 @@ function Sidebar() {
                 />
               </svg>
               API's
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="/contact">
+            <Link to={"/contact"}>
               <svg
                 className="w-6 h-6 text-primary"
                 width="24"
@@ -155,7 +155,7 @@ function Sidebar() {
                 <path d="M12 13.5a1.5 1.5 0 0 1 1 -1.5a2.6 2.6 0 1 0 -3 -4" />
               </svg>
               Help
-            </a>
+            </Link>
           </li>
         </ul>
       </div>
