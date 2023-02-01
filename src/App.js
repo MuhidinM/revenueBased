@@ -14,7 +14,7 @@ function App() {
     <>
       <Routes>
         <Route path="/*" element={<Home />}></Route>
-        <Route path="/gateway" element={<Gateway />}></Route>
+        <Route path="/gateway/*" element={<Gateway />}></Route>
         <Route path="/otp" element={<OTP />}></Route>
         <Route path="/auth/*" element={<Auth />}></Route>
         <Route element={<PrivateRoiutes />}>
