@@ -23,7 +23,7 @@ function Tablesite(props) {
         <th>{item.bussiness_id}</th>
         <td>{item.legalName}</td>
         <td>{item.incorporationType}</td>
-        <td>{item.status}</td>
+        <td>{item.status === "0"?("pending"): "approved"}</td>
         <td>
           <label
             htmlFor="my-modal-3"

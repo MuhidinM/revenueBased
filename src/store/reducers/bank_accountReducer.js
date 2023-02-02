@@ -1,8 +1,14 @@
-import { GET_ACCOUNTS, ACCOUNTS_ERROR, CREATE_BAK_ACCOUNT } from "../types";
+import {
+  GET_ACCOUNTS,
+  ACCOUNTS_ERROR,
+  CREATE_BAK_ACCOUNT,
+  SET_PRIMARY,
+} from "../types";
 
 const initialState = {
   bankAccounts: [],
   message: "",
+  accountMessage: "",
   loading: true,
 };
 
@@ -25,6 +31,12 @@ export default function (state = initialState, action) {
         loading: false,
       };
 
+    case SET_PRIMARY:
+      return {
+        ...state,
+        accountMessage: action.payload,
+        loading: false,
+      };
     case ACCOUNTS_ERROR:
       return {
         loading: false,
