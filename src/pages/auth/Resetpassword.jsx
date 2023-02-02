@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function First() {
+const Resetpassword = () => {
   return (
     <>
       <section className="bg-gray-50 dark:bg-gray-900">
@@ -14,22 +14,6 @@ function First() {
               className="mt-4 space-y-4 lg:mt-5 md:space-y-5"
               action="#"
             >
-              <div>
-                <label
-                  htmlFor="password"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Old Password
-                </label>
-                <input
-                  type="password"
-                  name="password"
-                  id="password"
-                  placeholder="••••••••"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  required=""
-                />
-              </div>
               <div>
                 <label
                   htmlFor="password"
@@ -99,6 +83,6 @@ function First() {
       </section>
     </>
   );
-}
+};
 
-export default First;
+export default Resetpassword;

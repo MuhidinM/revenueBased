@@ -53,9 +53,6 @@ function Gateway() {
                   </option>
 
                   <option value={"EB"}>E-birr</option>
-                  <option value={"TB"}>Tele Birr</option>
-                  <option value={"BOAC"}>Bank of Abisinia Card</option>
-                  <option value={"BOAA"}>Bank of Abisinia Account</option>
                 </select>
               </div>
 
@@ -63,9 +60,6 @@ function Gateway() {
                 {select === "CBOA" && <Bankpay />}
                 {select === "CBOC" && <Cardpay />}
                 {select === "EB" && <Mobilepay />}
-                {select === "BOAA" && <Bankpay />}
-                {select === "BOAC" && <Cardpay />}
-                {select === "TB" && <Mobilepay />}
               </htmlForm>
             </div>
           </div>
