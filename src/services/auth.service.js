@@ -37,6 +37,16 @@ const logout = () => {
   localStorage.removeItem("user");
 };
 
+const resetPasswordRequest = (email) => {
+  return axios
+    .post(API_URL + "resetpasswordRequest", {
+      email,
+    })
+    .then((response) => {
+      return response.data;
+    });
+};
+
 const checkToken = () => {
   return localStorage.getItem(user.token);
 };
@@ -49,6 +59,7 @@ const AuthService = {
   register,
   login,
   logout,
+  resetPasswordRequest,
   getCurrentUser,
 };
 

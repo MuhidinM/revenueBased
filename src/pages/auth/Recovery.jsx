@@ -14,7 +14,10 @@ function Recovery() {
               Don't fret! Just type in your email and we will send you a code to
               reset your password!
             </p>
-            <htmlForm className="mt-4 space-y-4 lg:mt-5 md:space-y-5" action="#">
+            <htmlForm
+              className="mt-4 space-y-4 lg:mt-5 md:space-y-5"
+              action="#"
+            >
               <div>
                 <label
                   htmlFor="email"
@@ -31,31 +34,7 @@ function Recovery() {
                   required=""
                 />
               </div>
-              <div className="flex items-start">
-                <div className="flex items-center h-5">
-                  <input
-                    id="terms"
-                    aria-describedby="terms"
-                    type="checkbox"
-                    className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary dark:ring-offset-gray-800"
-                    required=""
-                  />
-                </div>
-                <div className="ml-3 text-sm">
-                  <label
-                    htmlFor="terms"
-                    className="font-light text-gray-500 dark:text-gray-300"
-                  >
-                    I accept the{" "}
-                    <Link
-                      className="font-medium text-primary hover:underline dark:text-primary"
-                      to={"#"}
-                    >
-                      Terms and Conditions
-                    </Link>
-                  </label>
-                </div>
-              </div>
+
               <button
                 type="submit"
                 className="w-full text-white bg-primary hover:bg-primary focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary dark:hover:bg-primary dark:focus:ring-primary"
