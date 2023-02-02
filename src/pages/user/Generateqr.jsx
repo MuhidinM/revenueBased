@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import QRCode from "react-qr-code";
 
 const Generateqr = () => {
-  const sk = "";
-  const mid = "";
-  const url = "http://localhost:3000/gateway/" + sk + mid;
+    const sk = "&secretKey=95f838bd-2c7d-40f7-ab0a-121814b81871";
+    const mid = "?clientId=5b5433ad-21df-46f5-a873-a540a0373bc1";
+  const url = "http://192.168.0.217:3000/gateway/" + sk + mid;
   const [text, setText] = useState(url);
   const [amount, setamount] = useState(0);
   function value(e) {
