@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+//here to add the logic
+
 function Transactions() {
   return (
     <>
@@ -9,50 +11,22 @@ function Transactions() {
           <table className="table w-full">
             <thead>
               <tr>
-                <th></th>
-                <th>Account Holder</th>
-                <th>Account</th>
-                <th>Bank</th>
-                <th></th>
-                <th></th>
+                <th>paymentId</th>
+                <th>messageId</th>
+                <th>Debit Amount</th>
+                <th>CreditAccount</th>
+                <th>Debit Account</th>
+                <th>Currency</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th>1</th>
-                <td>ME</td>
-                <td>1022225648986</td>
-                <td>CBO</td>
-                <td>
-                  <Link to={"/users/uapi"}>Copy</Link>
-                </td>
-                <td>
-                  <Link to={"/users/uapi"}>Delete</Link>
-                </td>
-              </tr>
               <tr className="hover">
-                <th>2</th>
-                <td>Hart</td>
-                <td>1000003656654</td>
-                <td>CBE</td>
-                <td>
-                  <Link to={"/users/uapi"}>Copy</Link>
-                </td>
-                <td>
-                  <Link to={"/users/uapi"}>Delete</Link>
-                </td>
-              </tr>
-              <tr>
-                <th>3</th>
-                <td>Brice</td>
-                <td>1000000646</td>
-                <td>BOA</td>
-                <td>
-                  <Link to={"/users/uapi"}>Copy</Link>
-                </td>
-                <td>
-                  <Link to={"/users/uapi"}>Delete</Link>
-                </td>
+                <th>1</th>
+                <td>MessageId</td>
+                <td>100</td>
+                <td>1022200021557</td>
+                <td>1022200021557</td>
+                <td>ETB</td>
               </tr>
             </tbody>
           </table>
