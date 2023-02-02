@@ -37,6 +37,37 @@ const logout = () => {
   localStorage.removeItem("user");
 };
 
+const resetPasswordRequest = (email) => {
+  console.log(email);
+  return axios
+    .post(API_URL + "resetpasswordRequest", {
+      email,
+    })
+    .then((response) => {
+      return response.data;
+    });
+};
+
+const resetPassword = (password, token, id) => {
+  console.log(password, token, id);
+  return axios
+    .post(
+      API_URL + `resetpassword`,
+      {
+        password,
+      },
+      {
+        params: {
+          token,
+          id,
+        },
+      }
+    )
+    .then((response) => {
+      return response.data;
+    });
+};
+
 const checkToken = () => {
   return localStorage.getItem(user.token);
 };
@@ -49,6 +80,8 @@ const AuthService = {
   register,
   login,
   logout,
+  resetPasswordRequest,
+  resetPassword,
   getCurrentUser,
 };
 
