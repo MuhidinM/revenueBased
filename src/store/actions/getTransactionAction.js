@@ -5,6 +5,7 @@ import FetchTransactionServices from "../../services/fetchTransaction";
 export const getTransactionDetail = () => async (dispatch) => {
   try {
     // const user = AuthService.getCurrentUser();
+    console.log("running");
     const transactioDetail = await FetchTransactionServices.getTransaction();
     console.log(transactioDetail);
     dispatch({
