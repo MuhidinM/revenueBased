@@ -10,7 +10,7 @@ const getBankAccountById = async (id) => {
     .then((response) => response.data.bankAccounts);
 };
 
-const setPrimaryAccount = async (account_id, userId) => {
+const setPrimaryAccount = async (userId, account_id) => {
   console.log(account_id, userId);
   return await axios
     .patch(API_URL + `setPrimary/`, { account_id, userId })

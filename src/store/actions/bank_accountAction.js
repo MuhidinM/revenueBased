@@ -28,6 +28,7 @@ export const getAccounts = () => async (dispatch) => {
 };
 
 export const setPrimaryAccount = (account_id) => async (dispatch) => {
+  console.log(account_id);
   try {
     const user = AuthService.getCurrentUser();
     if (user) {

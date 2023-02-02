@@ -63,6 +63,16 @@ const CreateBankAccount = async (
     .then((response) => response.data);
 };
 
+const CreateUserProfile = async (formData) => {
+  console.log(formData);
+  for (const value of formData.values()) {
+    console.log(value);
+  }
+  return await axios
+    .post(API_URL + "banckAccount/create", formData, headers)
+    .then((response) => response.data);
+};
+
 const UserService = {
   getPublicContent,
   getUserBoard,
@@ -72,6 +82,7 @@ const UserService = {
   getAllPendingBussiness,
   approvePendingBussinessById,
   CreateBankAccount,
+  CreateUserProfile,
 };
 
 export default UserService;

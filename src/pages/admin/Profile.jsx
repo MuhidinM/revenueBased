@@ -3,6 +3,13 @@ import { Link } from "react-router-dom";
 function Profile() {
   return (
     <>
+      <button
+        class="button"
+        type="button"
+        onClick={window.open("http://localhost:3000/gateway?amount=100")}
+      >
+        <span class="icon">Open</span>
+      </button>
       <div className="w-5/6 m-4">
         <div className="mt-4 overflow-x-auto">
           <table className="table w-full">
