@@ -1,7 +1,7 @@
 import { GET_TRANSACTION, GET_TRANSACTION_ERROR } from "../types";
 
 const initialState = {
-  transactionDetail: {},
+  transactionDetail: [],
   loading: true,
 };
 
