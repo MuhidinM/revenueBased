@@ -1,9 +1,32 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
-//here to add the logic
+import { useDispatch, useSelector } from "react-redux";
+import { getTransactionDetail } from "../../store/actions/getTransactionAction";
 
 function Transactions() {
+  const TransactionList = useSelector((state) => state.transactionDetail);
+  console.log(TransactionList);
+  const { loading, error, transactionDetail } = TransactionList;
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getTransactionDetail());
+  }, [dispatch]);
+  console.log(transactionDetail);
+
+  const renderList = transactionDetail.map((item, index) => (
+    <tr>
+      <th>{item.paymentId}</th>
+      <td>{item.messageId}</td>
+      <td>{item.debitAmount}</td>
+      <td>{item.creditAccount}</td>
+      <td>{item.debitAccount}</td>
+      <td>{item.debitAccount}</td>
+    </tr>
+  ));
+
   return (
     <>
       <div className="w-5/6 m-8">
@@ -28,6 +51,7 @@ function Transactions() {
                 <td>1022200021557</td>
                 <td>ETB</td>
               </tr>
+              {renderList}
             </tbody>
           </table>
         </div>
