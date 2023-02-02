@@ -38,10 +38,31 @@ const logout = () => {
 };
 
 const resetPasswordRequest = (email) => {
+  console.log(email);
   return axios
     .post(API_URL + "resetpasswordRequest", {
       email,
     })
+    .then((response) => {
+      return response.data;
+    });
+};
+
+const resetPassword = (password, token, id) => {
+  console.log(password, token, id);
+  return axios
+    .post(
+      API_URL + `resetpassword`,
+      {
+        password,
+      },
+      {
+        params: {
+          token,
+          id,
+        },
+      }
+    )
     .then((response) => {
       return response.data;
     });
@@ -60,6 +81,7 @@ const AuthService = {
   login,
   logout,
   resetPasswordRequest,
+  resetPassword,
   getCurrentUser,
 };
 
