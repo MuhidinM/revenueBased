@@ -7,6 +7,7 @@ import { ModalForm } from "./ModalForm";
 import UserService from "../services/user.service";
 import AuthService from "../services/auth.service";
 import { createTutorial } from "../store/actions/bank_accountAction";
+import Otp from "./Otp";
 const MySwal = withReactContent(Swal);
 
 function ModalFire() {
@@ -19,19 +20,38 @@ function ModalFire() {
             values={values}
             onSubmit={(values) => {
               console.log("Hello");
-              dispatch(
-                createTutorial(
-                  values.accountHolder,
-                  values.accountNumber,
-                  values.bankName,
-                  currentUser.id
-                )
-              )
-                .then(() => {})
-                .catch((e) => console.log(e));
+
+              //   dispatch(
+              //     createTutorial(
+              //       values.accountHolder,
+              //       values.accountNumber,
+              //       values.bankName,
+              //       currentUser.id
+              //     )
+              //   )
+              // .then(() => {})
+              // .catch((e) => console.log(e));
               resolve(values);
-              Swal.fire("Saved!", "", "success");
-            //   Swal.close();
+              MySwal.fire({
+                title: "",
+                html: (
+                  <Otp
+                    onSubmit={(values) => {
+                      console.log("Hello from the second swal");
+                      Swal.fire({
+                        icon: "success",
+                        title: "Your work has been saved",
+                        showConfirmButton: false,
+                        timer: 3000,
+                      });
+                    }}
+                  ></Otp>
+                ),
+                onClose: () => reject(),
+                showConfirmButton: false,
+              });
+              //   MySwal.close();
+              //   Swal.close();
             }}
             onCancel={() => Swal.close()}
           />
