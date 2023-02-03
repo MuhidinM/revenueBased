@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-function Otp({ onSubmit }) {
+import AuthService from "../services/auth.service";
+function Otp({ onSubmit, values }) {
   const [otp, setOtp] = useState(new Array(4).fill(""));
+  
+
   const handleChange = (element, index) => {
     if (isNaN(element.value)) return false;
 
@@ -20,6 +23,14 @@ function Otp({ onSubmit }) {
       document.getElementById(last).focus();
     }
   }
+  const ValidationSchema = Yup.object().shape({
+    first: Yup.string().required("First Number is required"),
+    second: Yup.string().required("Second Number is required"),
+    third: Yup.string().required("Third Number is required"),
+    fourth: Yup.string().required("Fourth Number is required"),
+    fifth: Yup.string().required("Fifth Number is required"),
+    sixth: Yup.string().required("Sith Number is required"),
+  });
 
   return (
     <>
@@ -37,9 +48,9 @@ function Otp({ onSubmit }) {
         </p>
 
         <Formik
-          //   initialValues={values}
-          //   validationSchema={ValidationSchema}
-          //   isInitialValid={ValidationSchema.isValidSync(values)}
+          initialValues={values}
+          validationSchema={ValidationSchema}
+          isInitialValid={ValidationSchema.isValidSync(values)}
           onSubmit={onSubmit}
         >
           {(formik) => (
@@ -55,53 +66,86 @@ function Otp({ onSubmit }) {
                   <div className="w-16 h-16">
                     <input
                       type="text"
-                      name="otp"
+                      name="first"
                       id="Ist"
                       className="bg-gray-50 border text-center border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder=""
                       required=""
                       maxLength="1"
                       //   onKeyUp={ClickEvent("Ist", "Sec")}
-                      onChange={(e) => handleChange(e.target)}
+                      value={formik.values.first}
+                      onChange={formik.handleChange}
+                      //   onChange={(e) => handleChange(e.target)}
                       onFocus={(e) => e.target.select()}
                     />
                   </div>
                   <div className="w-16 h-16">
                     <input
                       type="text"
-                      name="otp"
+                      name="second"
                       id="Sec"
                       className="bg-gray-50 border text-center border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder=""
                       required=""
                       maxLength="1"
-                      onChange={(e) => handleChange(e.target)}
+                      value={formik.values.second}
+                      onChange={formik.handleChange}
                       onFocus={(e) => e.target.select()}
                     />
                   </div>
                   <div className="w-16 h-16">
                     <input
                       type="text"
-                      name="otp"
+                      name="third"
                       id="Third"
                       className="bg-gray-50 border text-center border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder=""
                       required=""
                       maxLength="1"
-                      onChange={(e) => handleChange(e.target)}
+                      value={formik.values.third}
+                      onChange={formik.handleChange}
                       onFocus={(e) => e.target.select()}
                     />
                   </div>
                   <div className="w-16 h-16">
                     <input
                       type="text"
-                      name="otp"
+                      name="fourth"
                       id="Fourth"
                       className="bg-gray-50 border text-center border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder=""
                       required=""
                       maxLength="1"
-                      onChange={(e) => handleChange(e.target)}
+                      value={formik.values.fourth}
+                      onChange={formik.handleChange}
+                      onFocus={(e) => e.target.select()}
+                    />
+                  </div>
+                  <div className="w-16 h-16">
+                    <input
+                      type="text"
+                      name="fifth"
+                      id="Fourth"
+                      className="bg-gray-50 border text-center border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder=""
+                      required=""
+                      maxLength="1"
+                      value={formik.values.fifth}
+                      onChange={formik.handleChange}
+                      onFocus={(e) => e.target.select()}
+                    />
+                  </div>
+                  <div className="w-16 h-16">
+                    <input
+                      type="text"
+                      name="sixth"
+                      id="Fourth"
+                      className="bg-gray-50 border text-center border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder=""
+                      required=""
+                      maxLength="1"
+                      value={formik.values.sixth}
+                      onChange={formik.handleChange}
                       onFocus={(e) => e.target.select()}
                     />
                   </div>

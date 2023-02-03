@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { ModalForm } from "./ModalForm";
 import UserService from "../services/user.service";
 import AuthService from "../services/auth.service";
+import BankAccountServices from "../services/bank-account.services";
 import { createTutorial } from "../store/actions/bank_accountAction";
 import Otp from "./Otp";
 const MySwal = withReactContent(Swal);
@@ -20,7 +21,7 @@ function ModalFire() {
             values={values}
             onSubmit={(values) => {
               console.log("Hello");
-
+              BankAccountServices.sendOtp("0927355418");
               //   dispatch(
               //     createTutorial(
               //       values.accountHolder,
@@ -32,12 +33,24 @@ function ModalFire() {
               // .then(() => {})
               // .catch((e) => console.log(e));
               resolve(values);
+              const value = {
+                first: "",
+                second: "",
+                third: "",
+                fourth: "",
+                fifth: "",
+                sixth: "",
+              };
               MySwal.fire({
                 title: "",
                 html: (
                   <Otp
+                    values={value}
                     onSubmit={(values) => {
                       console.log("Hello from the second swal");
+                      resolve(values);
+                      console.log(values);
+
                       Swal.fire({
                         icon: "success",
                         title: "Your work has been saved",
@@ -61,7 +74,6 @@ function ModalFire() {
       });
     });
   };
-
   const [currentUser, setCurrentUser] = useState({});
   const dispatch = useDispatch();
   useEffect(() => {
