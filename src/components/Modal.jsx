@@ -24,7 +24,7 @@ function Modal({ handleClose, show, children, page }) {
           </button>
 
           {/* {props.page === "a" ? <Msite title="Add Site" /> : ""} */}
-          {page === "a" && <Maccounts title="Add Account" />}
+          {page === "a" && <Maccounts title="Add Account" handleClose={handleClose} />}
           {page === "b" && <Mapi title="Generate API" />}
           {/* {window.location.pathname === "/admin/sites" ? (
             <Msite title="Add Site" />

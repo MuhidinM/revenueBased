@@ -8,6 +8,8 @@ import {
   setPrimaryAccount,
 } from "../../store/actions/bank_accountAction";
 import Selectinput from "../../components/Selectinput";
+import ModalFire from "../../components/index";
+
 const choose = [];
 
 function Accounts() {
@@ -71,13 +73,14 @@ function Accounts() {
         <div className="w-5/6 m-4">
           <div className="grid grid-cols-2 gap-2 sm:grid-cols-12">
             <div className="col-span-8 mt-6">
-              <label
+              {/* <label
                 htmlFor="my-modal-4"
                 onClick={showModal}
                 className="mb-4 btn btn-outline btn-primary"
               >
                 Add New
-              </label>
+              </label> */}
+              <ModalFire></ModalFire>
             </div>
             <div className="col-span-2">
               <Selectinput
@@ -91,11 +94,11 @@ function Accounts() {
             </div>
           </div>
 
-          {modaState && (
+          {/* {modaState && (
             <Modal show={showModal} handleClose={hideModal} page="a">
               <p>Modal</p>
             </Modal>
-          )}
+          )} */}
 
           <div className="mt-4 overflow-x-auto">
             <table className="table w-full">
