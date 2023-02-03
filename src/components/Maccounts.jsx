@@ -7,6 +7,7 @@ import Input from "./Input";
 import Selectinput from "./Selectinput";
 import UserService from "../services/user.service";
 import AuthService from "../services/auth.service";
+
 const dropdown = [
   { label: "CBO", value: "CBO" },
   { label: "CBE", value: "CBE" },
@@ -48,35 +49,6 @@ function Maccounts(props) {
               }}
               validationSchema={validationSchema}
               onSubmit={(values) => {
-                // setTimeout(() => {
-                //   alert(JSON.stringify(values, null, 2));
-                //   setSubmitting(false);
-                // }, 400);
-
-                // UserService.CreateBankAccount(
-                //   values.accountHolder,
-                //   values.accountNumber,
-                //   values.bankName,
-                //   currentUser.id
-                // ).then(
-                //   (resp) => {
-                //     console.log(resp.message);
-                //     setMessage(resp.message);
-                //     setSuccessful(true);
-                //     // console.log(successful);
-                //   },
-                //   (error) => {
-                //     const resMessage =
-                //       (error.response &&
-                //         error.response.data &&
-                //         error.response.data.message) ||
-                //       error.message ||
-                //       error.toString();
-
-                //     setMessage(resMessage);
-                //     setSuccessful(false);
-                //   }
-                // );
                 dispatch(
                   createTutorial(
                     values.accountHolder,
@@ -85,7 +57,11 @@ function Maccounts(props) {
                     currentUser.id
                   )
                 )
-                  .then((res) => console.log(res))
+                  .then((res) => {
+                    console.log(res.message);
+                    setMessage(res.message);
+                    setSuccessful(true);
+                  })
                   .catch((e) => console.log(e));
               }}
             >
@@ -194,6 +170,7 @@ function Maccounts(props) {
                             : "alert alert-danger"
                         }
                         role="alert"
+                        onClick={props.handleClose}
                       >
                         {message}
                       </div>
