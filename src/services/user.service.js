@@ -47,6 +47,16 @@ const BussinessInfoRequest = async (formData) => {
     });
 };
 
+const CreateUserProfile = async (formData) => {
+  console.log(formData);
+  for (const value of formData.values()) {
+    console.log(value);
+  }
+  return await axios
+    .post(API_URL + "user/updateProfile", formData, headers)
+    .then((response) => response.data);
+};
+
 const CreateBankAccount = async (
   accountHolderName,
   accountNumber,
@@ -60,16 +70,6 @@ const CreateBankAccount = async (
       bankName,
       userId,
     })
-    .then((response) => response.data);
-};
-
-const CreateUserProfile = async (formData) => {
-  console.log(formData);
-  for (const value of formData.values()) {
-    console.log(value);
-  }
-  return await axios
-    .post(API_URL + "banckAccount/create", formData, headers)
     .then((response) => response.data);
 };
 
