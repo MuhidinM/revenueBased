@@ -2,7 +2,7 @@ import axios from "axios";
 import authHeader from "./auth-header";
 
 const API_URL = "http://localhost:5000/api/banckAccount/";
-const OTP_URL = "http://localhost:7090/tame/otp";
+const OTP_URL = "http://192.168.0.249:7090/tame/otp";
 const getBankAccountById = async (id) => {
   console.log(id);
   return await axios
@@ -18,6 +18,13 @@ const setPrimaryAccount = async (userId, account_id) => {
 };
 
 const sendOtp = async (mobile) => {
+  console.log(mobile);
+  return await axios
+    .post(OTP_URL, { mobile })
+    .then((response) => response.data);
+};
+
+const confirmOtp = async (mobile) => {
   console.log(mobile);
   return await axios
     .post(OTP_URL, { mobile })

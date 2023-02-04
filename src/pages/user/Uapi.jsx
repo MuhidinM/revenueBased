@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Modal from "../../components/Modal";
-
+import GenerateApiModal from "../../components/generateApi";
 function Uapi() {
   const [modaState, setModalState] = useState(false);
 
@@ -17,18 +17,13 @@ function Uapi() {
   return (
     <>
       <div className="w-5/6 m-4">
-        <label
-          htmlFor="my-modal-4"
-          onClick={showModal}
-          className="mb-4 btn btn-outline btn-primary"
-        >
-          Add New
-        </label>
-        {modaState && (
+        <GenerateApiModal></GenerateApiModal>
+        {/* {modaState && (
           <Modal show={showModal} handleClose={hideModal} page="b">
             <p>Modal</p>
           </Modal>
-        )}
+        )} */}
+
         <div className="mt-4 overflow-x-auto">
           <table className="table w-full">
             <thead>

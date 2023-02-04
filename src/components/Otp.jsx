@@ -5,7 +5,6 @@ import * as Yup from "yup";
 import AuthService from "../services/auth.service";
 function Otp({ onSubmit, values }) {
   const [otp, setOtp] = useState(new Array(4).fill(""));
-  
 
   const handleChange = (element, index) => {
     if (isNaN(element.value)) return false;
@@ -75,7 +74,7 @@ function Otp({ onSubmit, values }) {
                       //   onKeyUp={ClickEvent("Ist", "Sec")}
                       value={formik.values.first}
                       onChange={formik.handleChange}
-                      //   onChange={(e) => handleChange(e.target)}
+                      onInput={(e) => handleChange(e.target)}
                       onFocus={(e) => e.target.select()}
                     />
                   </div>

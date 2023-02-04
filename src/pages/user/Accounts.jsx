@@ -73,8 +73,8 @@ function Accounts() {
                 onSubmit={(values) => {
                   console.log("Hello from the second swal");
                   // resolve(values);
-                  console.log(values);
-
+                  console.log(values.first);
+                  // let otpCode = values.first + values.second
                   Swal.fire({
                     icon: "success",
                     title: "Your work has been saved",

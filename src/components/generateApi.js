@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { useDispatch } from "react-redux";
-import { ModalForm } from "./ModalForm";
+import { ModalForm } from "./generateApiForm";
 import UserService from "../services/user.service";
 import AuthService from "../services/auth.service";
 import BankAccountServices from "../services/bank-account.services";
@@ -11,11 +11,11 @@ import { createTutorial } from "../store/actions/bank_accountAction";
 import Otp from "./Otp";
 const MySwal = withReactContent(Swal);
 
-function ModalFire() {
+function GenerateApiModal() {
   const showFormModal = (values) => {
     return new Promise((resolve, reject) => {
       MySwal.fire({
-        title: "ADD ACCOUNTS",
+        title: "GENERATE NEW API KEY",
         html: (
           <ModalForm
             values={values}
@@ -99,9 +99,9 @@ function ModalFire() {
       className="mb-4 btn btn-outline btn-primary"
       onClick={showModal}
     >
-      Add New Account
+      Generate New Api
     </button>
   );
 }
 
-export default ModalFire;
+export default GenerateApiModal;
