@@ -3,15 +3,16 @@ import ReactDOM from "react-dom";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { useDispatch } from "react-redux";
-import { ModalForm } from "./generateApiForm";
+import { ModalForm } from "./GenerateApiForm";
 import UserService from "../services/user.service";
 import AuthService from "../services/auth.service";
 import BankAccountServices from "../services/bank-account.services";
-import { createTutorial } from "../store/actions/bank_accountAction";
+import { generateApiKey } from "../store/actions/generateApiKeyAction";
 import Otp from "./Otp";
+
 const MySwal = withReactContent(Swal);
 
-function GenerateApiModal() {
+function GenerateApiModal(props) {
   const showFormModal = (values) => {
     return new Promise((resolve, reject) => {
       MySwal.fire({
@@ -20,49 +21,19 @@ function GenerateApiModal() {
           <ModalForm
             values={values}
             onSubmit={(values) => {
-              console.log("Hello");
-              // BankAccountServices.sendOtp("0927355418");
-              //   dispatch(
-              //     createTutorial(
-              //       values.accountHolder,
-              //       values.accountNumber,
-              //       values.bankName,
-              //       currentUser.id
-              //     )
-              //   )
-              // .then(() => {})
-              // .catch((e) => console.log(e));
-              resolve(values);
-              const value = {
-                first: "",
-                second: "",
-                third: "",
-                fourth: "",
-                fifth: "",
-                sixth: "",
-              };
-              MySwal.fire({
-                title: "",
-                html: (
-                  <Otp
-                    values={value}
-                    onSubmit={(values) => {
-                      console.log("Hello from the second swal");
-                      resolve(values);
-                      console.log(values);
+              console.log("Your button is got Clicked");
+              console.log(values);
 
-                      Swal.fire({
-                        icon: "success",
-                        title: "Your work has been saved",
-                        showConfirmButton: false,
-                        timer: 3000,
-                      });
-                    }}
-                  ></Otp>
-                ),
-                onClose: () => reject(),
+              dispatch(generateApiKey(values.accountNumber, values.expiryDate));
+
+              resolve(values);
+              Swal.fire({
+                icon: "success",
+                title: "Your work has been saved",
                 showConfirmButton: false,
+                timer: 3000,
               });
+
               //   MySwal.close();
               //   Swal.close();
             }}
@@ -87,9 +58,8 @@ function GenerateApiModal() {
   }, []);
   const showModal = () => {
     showFormModal({
-      accountHolder: "",
-      accountNumber: "",
-      bankName: "",
+      accountNumber: props.accountNumber[0],
+      expiryDate: "",
     })
       .then((values) => console.log(values))
       .catch(() => console.log("Modal closed"));

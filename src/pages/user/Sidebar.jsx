@@ -43,7 +43,7 @@ function Sidebar() {
               Dashboard
             </Link>
           </li>
-          {currentUser.secrate_key != null ? (
+          {currentUser.secrate_key == null ? (
             <>
               <li>
                 <Link to={"/users/transactions"}>

@@ -82,17 +82,17 @@ function Accounts() {
                     values.fourth +
                     values.fifth +
                     values.sixth;
-                  BankAccountServices.confirmOtp("0932308204", otp).then(
-                    (res) => {
-                      dispatch(setPrimaryAccount(e.target.value));
-                      Swal.fire({
-                        icon: "success",
-                        title: "Your work has been saved",
-                        showConfirmButton: false,
-                        timer: 3000,
-                      });
-                    }
-                  );
+                  // BankAccountServices.confirmOtp("0932308204", otp).then(
+                  //   (res) => {
+                  //     dispatch(setPrimaryAccount(e.target.value));
+                  //     Swal.fire({
+                  //       icon: "success",
+                  //       title: "Your work has been saved",
+                  //       showConfirmButton: false,
+                  //       timer: 3000,
+                  //     });
+                  //   }
+                  // );
                 }}
                 onCancel={() => MySwal.close()}
               ></Otp>
