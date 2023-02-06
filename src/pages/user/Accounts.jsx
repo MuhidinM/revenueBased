@@ -56,8 +56,8 @@ function Accounts() {
         confirmButtonText: "Yes!",
       }).then((result) => {
         console.log(result);
-        BankAccountServices.sendOtp("0927355418");
         if (result.isConfirmed === true) {
+          BankAccountServices.sendOtp("0927355418");
           const value = {
             first: "",
             second: "",
@@ -66,6 +66,7 @@ function Accounts() {
             fifth: "",
             sixth: "",
           };
+
           MySwal.fire({
             title: "",
             html: (
@@ -74,14 +75,24 @@ function Accounts() {
                 onSubmit={(values) => {
                   console.log("Hello from the second swal");
                   // resolve(values);
-                  console.log(values.first);
-                  // let otpCode = values.first + values.second
-                  Swal.fire({
-                    icon: "success",
-                    title: "Your work has been saved",
-                    showConfirmButton: false,
-                    timer: 3000,
-                  });
+                  const otp =
+                    values.first +
+                    values.second +
+                    values.third +
+                    values.fourth +
+                    values.fifth +
+                    values.sixth;
+                  BankAccountServices.confirmOtp("0932308204", otp).then(
+                    (res) => {
+                      dispatch(setPrimaryAccount(e.target.value));
+                      Swal.fire({
+                        icon: "success",
+                        title: "Your work has been saved",
+                        showConfirmButton: false,
+                        timer: 3000,
+                      });
+                    }
+                  );
                 }}
                 onCancel={() => MySwal.close()}
               ></Otp>
@@ -94,10 +105,6 @@ function Accounts() {
         }
       });
     });
-
-    // dispatch(setPrimaryAccount(e.target.value))
-    //   .then((res) => console.log(res))
-    //   .catch((e) => console.log(e));
   };
 
   if (bankAccounts) {
