@@ -55,8 +55,9 @@ function Accounts() {
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes!",
       }).then((result) => {
+        console.log(result);
         BankAccountServices.sendOtp("0927355418");
-        if (result) {
+        if (result.isConfirmed === true) {
           const value = {
             first: "",
             second: "",
@@ -82,8 +83,10 @@ function Accounts() {
                     timer: 3000,
                   });
                 }}
+                onCancel={() => MySwal.close()}
               ></Otp>
             ),
+
             // onClose: () => reject(),
             showConfirmButton: false,
           });

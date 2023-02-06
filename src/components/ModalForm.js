@@ -23,64 +23,66 @@ export const ModalForm = ({ values, onSubmit, onCancel }) => {
       onSubmit={onSubmit}
     >
       {(formik) => (
-        <form onSubmit={formik.handleSubmit}>
-          <div className="grid gap-4 mb-4 sm:grid-cols-2 sm:gap-6 sm:mb-5">
-            <div className="sm:col-span-2">
-              <span className="text-sm link-error">
-                <ErrorMessage name="accountHolder" />
-              </span>
-              <Input
-                label="accholder"
-                title="Account Holder"
-                type="text"
-                name="accountHolder"
-                id="accountHolder"
-                place="Hunda Temam Biniam"
-                value={formik.values.accountHolder}
-                handleChange={formik.handleChange}
-              />
+        <>
+          <form onSubmit={formik.handleSubmit}>
+            <div className="grid gap-4 mb-4 sm:grid-cols-2 sm:gap-6 sm:mb-5">
+              <div className="sm:col-span-2">
+                <span className="text-sm link-error">
+                  <ErrorMessage name="accountHolder" />
+                </span>
+                <Input
+                  label="accholder"
+                  title="Account Holder"
+                  type="text"
+                  name="accountHolder"
+                  id="accountHolder"
+                  place="Hunda Temam Biniam"
+                  value={formik.values.accountHolder}
+                  handleChange={formik.handleChange}
+                />
+              </div>
+              <div className="w-full">
+                <span className="text-sm link-error">
+                  <ErrorMessage name="accountHolder" />
+                </span>
+                <Input
+                  label="accno"
+                  title="Account Number"
+                  type="text"
+                  name="accountNumber"
+                  id="accountNumber"
+                  place="1022225648986"
+                  value={formik.values.accountNumber}
+                  handleChange={formik.handleChange}
+                  //   handleChange={handleChange}
+                />
+              </div>
+              <div>
+                <span className="text-sm link-error">
+                  <ErrorMessage name="accountHolder" />
+                </span>
+                <Selectinput
+                  arr={dropdown}
+                  id="bankName"
+                  name="bankName"
+                  title="Choose Bank"
+                  value={values.bankName}
+                  handleChange={formik.handleChange}
+                />
+              </div>
             </div>
-            <div className="w-full">
-              <span className="text-sm link-error">
-                <ErrorMessage name="accountHolder" />
-              </span>
-              <Input
-                label="accno"
-                title="Account Number"
-                type="text"
-                name="accountNumber"
-                id="accountNumber"
-                place="1022225648986"
-                value={formik.values.accountNumber}
-                handleChange={formik.handleChange}
-                //   handleChange={handleChange}
-              />
-            </div>
-            <div>
-              <span className="text-sm link-error">
-                <ErrorMessage name="accountHolder" />
-              </span>
-              <Selectinput
-                arr={dropdown}
-                id="bankName"
-                name="bankName"
-                title="Choose Bank"
-                value={values.bankName}
-                handleChange={formik.handleChange}
-              />
-            </div>
-          </div>
-          <button
-            type="submit"
-            onSubmit={onSubmit}
-            className="swal2-confirm swal2-styled"
-          >
-            OK
-          </button>
+            <button
+              type="submit"
+              onSubmit={onSubmit}
+              className="swal2-confirm swal2-styled"
+            >
+              OK
+            </button>
+          </form>
           <button onClick={onCancel} className="swal2-cancel swal2-styled">
             Cancel
           </button>
-        </form>
+        </>
       )}
     </Formik>
     //   render={({ isValid }) => {

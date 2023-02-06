@@ -66,10 +66,11 @@ function GenerateApiModal() {
               //   MySwal.close();
               //   Swal.close();
             }}
-            onCancel={() => Swal.close()}
+            onCancel={() => MySwal.close()}
           />
         ),
         onClose: () => reject(),
+        onCancel: () => Swal.close(),
         showConfirmButton: false,
       });
     });
