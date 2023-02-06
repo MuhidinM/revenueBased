@@ -204,7 +204,7 @@ function Settings() {
                           handleChange={props.handleChange}
                           // onChange={props.handleChange}
 
-                          place="Egate S.C"
+                          place="Epay S.C"
                           required=""
                         />
                       </div>
@@ -336,7 +336,7 @@ function Settings() {
                           value={props.values.waddress}
                           handleChange={props.handleChange}
                           id="waddress"
-                          place="egate.com"
+                          place="Epay.com"
                           required=""
                         />
                       </div>

@@ -33,7 +33,25 @@ function Sidebar() {
             </Link>
           </li>
           <li>
-            <Link to="/admin/sites">
+            <Link to="/admin/users">
+              <svg
+                class="h-6 w-6 text-primary"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                />
+              </svg>
+              Users
+            </Link>
+          </li>
+          <li>
+            <Link to={"/admin/transactions"}>
               <svg
                 className="w-6 h-6 text-primary"
                 width="24"
@@ -46,14 +64,14 @@ function Sidebar() {
                 strokeLinejoin="round"
               >
                 {" "}
-                <path stroke="none" d="M0 0h24v24H0z" />{" "}
-                <rect x="3" y="15" width="6" height="6" rx="2" />{" "}
-                <rect x="15" y="15" width="6" height="6" rx="2" />{" "}
-                <rect x="9" y="3" width="6" height="6" rx="2" />{" "}
-                <path d="M6 15v-1a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v1" />{" "}
-                <line x1="12" y1="9" x2="12" y2="12" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"
+                />
               </svg>
-              Sites
+              Transaction
             </Link>
           </li>
           <li>

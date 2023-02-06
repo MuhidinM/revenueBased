@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getTransactionDetail } from "../../store/actions/getTransactionAction";
+import Input from "../../components/Input";
 
 function Transactions() {
   const TransactionList = useSelector((state) => state.transactionDetail);
@@ -32,6 +33,23 @@ function Transactions() {
   // if (transactionDetail) {
   return (
     <>
+      <div className="grid gap-4 my-4 mt-4 md:grid-cols-12 justify-self-auto">
+        <div className="col-span-9"></div>
+        <div className="col-span-3">
+          <Input
+            label="search"
+            title="Search"
+            type="text"
+            name="search"
+            // value={props.values.lgname}
+            // handleChange={props.handleChange}
+            // onChange={props.handleChange}
+
+            place="Search by transactionid"
+            required=""
+          />
+        </div>
+      </div>
       <div className="w-5/6 m-8">
         <div className="mt-4 overflow-x-auto">
           <table className="table w-full">
