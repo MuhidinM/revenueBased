@@ -3,17 +3,20 @@ import BankAccountServices from "../../services/bank-account.services";
 import AuthService from "../../services/auth.service";
 import Modal from "../../components/Modal";
 import { useDispatch, useSelector } from "react-redux";
-import { getAccounts } from "../../store/actions/bank_accountAction";
+import {
+  getAccounts,
+  setPrimaryAccount,
+} from "../../store/actions/bank_accountAction";
 import Selectinput from "../../components/Selectinput";
-const choose = [
-  { label: "A", value: "A" },
-  { label: "B", value: "B" },
-];
+import ModalFire from "../../components/index";
+
+const choose = [];
 
 function Accounts() {
   const [pendinRequest, setpendinRequest] = useState([]);
   // const [currentUser, setCurrentUser] = useState();
   const [modaState, setModalState] = useState(false);
+  const [selectedArray, setSelectedArray] = useState();
   const AccountListData = useSelector((state) => state.accountsList);
   console.log(AccountListData);
   const { loading, error, bankAccounts } = AccountListData;
@@ -32,36 +35,37 @@ function Accounts() {
   useEffect(() => {
     dispatch(getAccounts());
   }, [dispatch]);
-  // useEffect(() => {
-  //   const user = AuthService.getCurrentUser();
-  //   if (user) {
-  //     console.log(user.id);
-  //     async function fetchData() {
-  //       const bankAccountByID = await BankAccountServices.getBankAccountById(
-  //         user.id
-  //       );
-  //       if (bankAccountByID) {
-  //         setpendinRequest(bankAccountByID);
-  //       }
-  //     }
-  //     fetchData();
-  //   }
-  // }, []);
 
   console.log(bankAccounts);
 
+  const handleChange = (e) => {
+    console.log(e.target.value);
+    dispatch(setPrimaryAccount(e.target.value))
+      .then((res) => console.log(res))
+      .catch((e) => console.log(e));
+  };
+
   if (bankAccounts) {
+    console.log(bankAccounts);
+    for (let index = 0; index < bankAccounts.length; index++) {
+      const element = bankAccounts[index];
+      // console.log(element);
+      console.log("running");
+      if (choose.length < bankAccounts.length) {
+        choose.push({
+          label: element.bankName + "-" + element.accountNumber,
+          value: element.bankaccount_id,
+        });
+      }
+    }
+    console.log(choose);
     const renderList = bankAccounts.map((item, index) => (
       <tr>
         <th>{item.bankaccount_id}</th>
         <td>{item.accountHolderName}</td>
         <td>{item.accountNumber}</td>
         <td>{item.bankName}</td>
-        <td>Verified</td>
-
-        {/* <td>
-          <a href="">view</a>
-        </td> */}
+        <td>{item.primaryAccount === "1" ? "primary" : "secondary"}</td>
       </tr>
     ));
     return (
@@ -69,13 +73,14 @@ function Accounts() {
         <div className="w-5/6 m-4">
           <div className="grid grid-cols-2 gap-2 sm:grid-cols-12">
             <div className="col-span-8 mt-6">
-              <label
+              {/* <label
                 htmlFor="my-modal-4"
                 onClick={showModal}
                 className="mb-4 btn btn-outline btn-primary"
               >
                 Add New
-              </label>
+              </label> */}
+              <ModalFire></ModalFire>
             </div>
             <div className="col-span-2">
               <Selectinput
@@ -83,17 +88,17 @@ function Accounts() {
                 id="choose"
                 name="choose"
                 // value={props.values.industry}
-                // handleChange={props.handleChange}
+                handleChange={handleChange}
                 title="Choose Primary"
               />
             </div>
           </div>
 
-          {modaState && (
+          {/* {modaState && (
             <Modal show={showModal} handleClose={hideModal} page="a">
               <p>Modal</p>
             </Modal>
-          )}
+          )} */}
 
           <div className="mt-4 overflow-x-auto">
             <table className="table w-full">

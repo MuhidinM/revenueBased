@@ -108,7 +108,13 @@ function M2settingView(props) {
               </div>
               <div className="sm:col-span-4">
                 <b>Proof of Address:</b> <br />
-                <img className="" src={m2SettingData.tradeLicense} alt="ID" />
+                <img
+                  className=""
+                  src={m2SettingData.tradeLicense}
+                  width={300}
+                  height={400}
+                  alt="ID"
+                />
               </div>
             </div>
             <button

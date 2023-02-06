@@ -1,7 +1,25 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams, useNavigate } from "react-router-dom";
+import { Formik } from "formik";
+import * as Yup from "yup";
+import AuthService from "../../services/auth.service";
 
 const Resetpassword = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const token = searchParams.get("token");
+  const id = searchParams.get("id");
+  console.log(token);
+  const validationSchema = Yup.object().shape({
+    password: Yup.string()
+      .required("Password is required")
+      .min(6, "Password must be at least 6 characters")
+      .max(40, "Password must not exceed 40 characters"),
+    confirmPassword: Yup.string()
+      .required("Confirm Password is required")
+      .oneOf([Yup.ref("password"), null], "Confirm Password does not match"),
+    // acceptTerms: Yup.bool().oneOf([true], "Accept Terms"),
+  });
+  let navigate = useNavigate();
   return (
     <>
       <section className="bg-gray-50 dark:bg-gray-900">
@@ -10,74 +28,97 @@ const Resetpassword = () => {
             <h2 className="mb-1 text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Change Password
             </h2>
-            <htmlForm
-              className="mt-4 space-y-4 lg:mt-5 md:space-y-5"
-              action="#"
+            <Formik
+              initialValues={{
+                password: "",
+                confirmPassword: "",
+                // acceptTerms: false,
+              }}
+              validationSchema={validationSchema}
+              onSubmit={(values) => {
+                // setOpen(true);
+                AuthService.resetPassword(
+                  values.password.toString(),
+                  token,
+                  id
+                ).then(
+                  (resp) => {
+                    console.log(resp.message);
+                    navigate("/auth/login");
+                    window.location.reload();
+                  },
+                  (error) => {
+                    const resMessage =
+                      (error.response &&
+                        error.response.data &&
+                        error.response.data.message) ||
+                      error.message ||
+                      error.toString();
+
+                    // setMessage(resMessage);
+                    // setSuccessful(false);
+                  }
+                );
+              }}
             >
-              <div>
-                <label
-                  htmlFor="password"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  New Password
-                </label>
-                <input
-                  type="password"
-                  name="password"
-                  id="password"
-                  placeholder="••••••••"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  required=""
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="confirm-password"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Reset password
-                </label>
-                <input
-                  type="confirm-password"
-                  name="confirm-password"
-                  id="confirm-password"
-                  placeholder="••••••••"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  required=""
-                />
-              </div>
-              <div className="flex items-start">
-                <div className="flex items-center h-5">
-                  <input
-                    id="newsletter"
-                    aria-describedby="newsletter"
-                    type="checkbox"
-                    className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary dark:ring-offset-gray-800"
-                    required=""
-                  />
-                </div>
-                <div className="ml-3 text-sm">
-                  <label
-                    htmlFor="newsletter"
-                    className="font-light text-gray-500 dark:text-gray-300"
-                  >
-                    I accept the{" "}
-                    <Link
-                      className="font-medium text-primary hover:underline dark:text-primary"
-                      to={"#"}
+              {(props) => (
+                <div className="mt-4 space-y-4 lg:mt-5 md:space-y-5">
+                  <div>
+                    <label
+                      htmlFor="password"
+                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >
-                      Terms and Conditions
-                    </Link>
-                  </label>
+                      New Password
+                    </label>
+                    <span className="text-sm link-error">
+                      {props.errors.password && props.touched.password
+                        ? props.errors.password
+                        : null}
+                    </span>
+                    <input
+                      type="password"
+                      name="password"
+                      id="password"
+                      placeholder="••••••••"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      value={props.values.password}
+                      onChange={props.handleChange}
+                    />
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="confirm-password"
+                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      Confirm password
+                    </label>
+                    <span className="text-sm link-error">
+                      {props.errors.confirmPassword &&
+                      props.touched.confirmPassword
+                        ? props.errors.confirmPassword
+                        : null}
+                    </span>
+                    <input
+                      type="password"
+                      name="confirmPassword"
+                      id="confirm-password"
+                      placeholder="••••••••"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      value={props.values.confirmPassword}
+                      onChange={props.handleChange}
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    onClick={props.handleSubmit}
+                    className="w-full text-white bg-primary hover:bg-primary focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary dark:hover:bg-primary dark:focus:ring-primary"
+                  >
+                    Reset passwod
+                  </button>
                 </div>
-              </div>
-              <button
-                type="submit"
-                className="w-full text-white bg-primary hover:bg-primary focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary dark:hover:bg-primary dark:focus:ring-primary"
-              >
-                Reset passwod
-              </button>
-            </htmlForm>
+              )}
+            </Formik>
           </div>
         </div>
       </section>

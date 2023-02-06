@@ -10,6 +10,13 @@ const getBankAccountById = async (id) => {
     .then((response) => response.data.bankAccounts);
 };
 
+const setPrimaryAccount = async (userId, account_id) => {
+  console.log(account_id, userId);
+  return await axios
+    .patch(API_URL + `setPrimary/`, { account_id, userId })
+    .then((response) => response.data.bankAccounts);
+};
+
 const CreateBankAccount = async (
   accountHolderName,
   accountNumber,
@@ -30,6 +37,7 @@ const CreateBankAccount = async (
 const BankAccountServices = {
   CreateBankAccount,
   getBankAccountById,
+  setPrimaryAccount,
 };
 
 export default BankAccountServices;
