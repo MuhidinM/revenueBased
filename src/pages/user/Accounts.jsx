@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Swal from "sweetalert2";
 import BankAccountServices from "../../services/bank-account.services";
 import AuthService from "../../services/auth.service";
 import Modal from "../../components/Modal";
@@ -9,9 +10,10 @@ import {
 } from "../../store/actions/bank_accountAction";
 import Selectinput from "../../components/Selectinput";
 import ModalFire from "../../components/index";
-
+import Otp from "../../components/Otp";
+import withReactContent from "sweetalert2-react-content";
 const choose = [];
-
+const MySwal = withReactContent(Swal);
 function Accounts() {
   const [pendinRequest, setpendinRequest] = useState([]);
   // const [currentUser, setCurrentUser] = useState();
@@ -39,10 +41,70 @@ function Accounts() {
   console.log(bankAccounts);
 
   const handleChange = (e) => {
-    console.log(e.target.value);
-    dispatch(setPrimaryAccount(e.target.value))
-      .then((res) => console.log(res))
-      .catch((e) => console.log(e));
+    e.preventDefault();
+    console.log(e.target.data);
+
+    return new Promise((resolve, reject) => {
+      MySwal.fire({
+        title: "Are you sure?",
+        text: `You want to set ${e.target.value}Your Primary Account?`,
+        icon: "warning",
+        // dangerMode: true,
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes!",
+      }).then((result) => {
+        console.log(result);
+        if (result.isConfirmed === true) {
+          BankAccountServices.sendOtp("0927355418");
+          const value = {
+            first: "",
+            second: "",
+            third: "",
+            fourth: "",
+            fifth: "",
+            sixth: "",
+          };
+
+          MySwal.fire({
+            title: "",
+            html: (
+              <Otp
+                values={value}
+                onSubmit={(values) => {
+                  console.log("Hello from the second swal");
+                  // resolve(values);
+                  const otp =
+                    values.first +
+                    values.second +
+                    values.third +
+                    values.fourth +
+                    values.fifth +
+                    values.sixth;
+                  // BankAccountServices.confirmOtp("0932308204", otp).then(
+                  //   (res) => {
+                  //     dispatch(setPrimaryAccount(e.target.value));
+                  //     Swal.fire({
+                  //       icon: "success",
+                  //       title: "Your work has been saved",
+                  //       showConfirmButton: false,
+                  //       timer: 3000,
+                  //     });
+                  //   }
+                  // );
+                }}
+                onCancel={() => MySwal.close()}
+              ></Otp>
+            ),
+
+            // onClose: () => reject(),
+            showConfirmButton: false,
+          });
+          // <Otp></Otp>
+        }
+      });
+    });
   };
 
   if (bankAccounts) {
