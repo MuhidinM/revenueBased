@@ -6,7 +6,7 @@ function Footer() {
       <div className="divider"></div>
       <footer className="p-4 footer footer-center text-base-content">
         <div>
-          <p>Copyright © {thisyear} - All right reserved by Egate</p>
+          <p>Copyright © {thisyear} - All right reserved by Epay</p>
         </div>
       </footer>
     </>

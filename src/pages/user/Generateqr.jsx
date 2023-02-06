@@ -13,8 +13,8 @@ const Generateqr = () => {
   }
   return (
     <>
-      <div className="w-5/6 m-auto mt-10 md:mt-48">
-        <div className="text-center text-4xl my-12 text-primary">
+      <div className="w-5/6 m-auto mt-10 md:mt-32">
+        <div className="my-12 text-4xl text-center text-primary">
           You are paying {amount} birr
         </div>
         <div
