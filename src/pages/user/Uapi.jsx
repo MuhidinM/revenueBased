@@ -48,9 +48,9 @@ function Uapi() {
               <thead>
                 <tr>
                   <th></th>
-                  <th>Name</th>
+                  <th>Secrate Key</th>
                   <th>Api key</th>
-                  <th>Account</th>
+                  <th>Client Id</th>
                   <th></th>
                   <th></th>
                 </tr>
