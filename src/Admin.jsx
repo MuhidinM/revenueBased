@@ -6,12 +6,12 @@ import E404 from "./pages/error/E404";
 import Nav from "./pages/admin/Nav";
 import Sidebar from "./pages/admin/Sidebar";
 import Footer from "./components/Footer";
-import Sites from "./pages/admin/Sites";
+import Users from "./pages/admin/Users";
 import Banks from "./pages/admin/Banks";
 import Messages from "./pages/admin/Messages";
 import Modal from "./components/Modal";
 import Activate from "./pages/admin/Activate";
-import Modal2 from "./components/Modal2";
+import Transactions from "./pages/admin/Transactions";
 function Admin() {
   return (
     <>
@@ -24,7 +24,8 @@ function Admin() {
           <Nav />
           <Routes>
             <Route index element={<Home />}></Route>
-            <Route path="sites" element={<Sites />}></Route>
+            <Route path="users" element={<Users />}></Route>
+            <Route path="transactions" element={<Transactions />}></Route>
             <Route path="banks" element={<Banks />}></Route>
             <Route path="activate" element={<Activate />}></Route>
             <Route path="messages" element={<Messages />}></Route>
