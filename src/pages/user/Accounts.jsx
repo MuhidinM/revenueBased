@@ -15,23 +15,9 @@ import withReactContent from "sweetalert2-react-content";
 const choose = [];
 const MySwal = withReactContent(Swal);
 function Accounts() {
-  const [pendinRequest, setpendinRequest] = useState([]);
-  // const [currentUser, setCurrentUser] = useState();
-  const [modaState, setModalState] = useState(false);
-  const [selectedArray, setSelectedArray] = useState();
   const AccountListData = useSelector((state) => state.accountsList);
   console.log(AccountListData);
   const { loading, error, bankAccounts } = AccountListData;
-
-  const showModal = () => {
-    console.log("show the modal");
-    console.log(modaState);
-    setModalState(true);
-  };
-
-  const hideModal = () => {
-    setModalState(false);
-  };
   const dispatch = useDispatch();
 
   useEffect(() => {
