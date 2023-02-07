@@ -1,18 +1,16 @@
 import { ADD_BANK, ADD_BANK_ERROR, GET_BANK, GET_BANK_ERROR } from "../types";
 import AuthService from "../../services/auth.service";
+import BankServices from "../../services/bank.services";
 // import BankAccountServices from "../../services/bank-account.services";
 export const addBank = () => async (dispatch) => {
   try {
-    const user = AuthService.getCurrentUser();
-    if (user) {
-      const generatedApiKey = await AuthService.getGeneratedApiKey(user.id);
-      console.log(generatedApiKey);
-      //   dispatch(getAccounts());
-      dispatch({
-        type: ADD_BANK,
-        payload: generatedApiKey,
-      });
-    }
+    const addedBank = await BankServices.addBank();
+    console.log(addedBank);
+    //   dispatch(getAccounts());
+    dispatch({
+      type: ADD_BANK,
+      payload: addedBank,
+    });
   } catch (error) {
     dispatch({
       type: ADD_BANK_ERROR,
@@ -22,16 +20,13 @@ export const addBank = () => async (dispatch) => {
 };
 export const gateBanks = () => async (dispatch) => {
   try {
-    const user = AuthService.getCurrentUser();
-    if (user) {
-      const generateNewApiKey = await AuthService.generateApiKey();
-      console.log(generateNewApiKey);
-      //   dispatch(getGeneratedApiKey());
-      dispatch({
-        type: GET_BANK,
-        payload: generateNewApiKey,
-      });
-    }
+    const getBank = await BankServices.getBank();
+    console.log(getBank);
+    //   dispatch(getGeneratedApiKey());
+    dispatch({
+      type: GET_BANK,
+      payload: getBank,
+    });
   } catch (error) {
     dispatch({
       type: GET_BANK_ERROR,
