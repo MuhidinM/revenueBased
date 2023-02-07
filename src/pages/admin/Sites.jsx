@@ -1,22 +1,53 @@
-import React from "react";
+import axios from "axios";
+import React, { useState, useEffect } from "react";
 import Card from "../../components/Card";
+import Input from "../../components/Input";
 import Tablesite from "../../components/Tablesite";
+
+// const fetch_url = "http://localhost:8081/payment/v1/fetchAllTransaction";
+// const FetchPayment = () => {
+//   const fetchTransactions = () => {
+//     axios.get(fetch_url).then((res) => {
+//       console.log("data res" + res.data);
+//     });
+//   };
+
+//   useEffect(() => {
+//     fetchTransactions();
+//   }, []);
+//   return <h1>hello txn fetch</h1>;
+// };
 
 function Sites() {
   return (
     <>
-      <div className="grid grid-cols-12 gap-4 mt-4 justify-self-auto">
-        <div className="col-span-8">
-        <label
-          htmlFor="my-modal-4"
-          className="mb-4 btn btn-outline btn-primary"
-        >
-          Add New
-        </label>
-          <Tablesite />
-        </div>
-        <div className="flex col-span-4">
-          <Card />
+      <Input
+        label="transactions"
+        title="Transaction Search"
+        type="text"
+        name="transactions"
+        // value={props.values.lgname}
+        // handleChange={props.handleChange}
+        // onChange={props.handleChange}
+
+        place="Search by transactionId"
+        required=""
+      />
+      <div className="w-5/6 m-8">
+        <div className="mt-4 overflow-x-auto">
+          <table className="table w-full">
+            <thead>
+              <tr>
+                <th>paymentId</th>
+                <th>messageId</th>
+                <th>Debit Amount</th>
+                <th>CreditAccount</th>
+                <th>Debit Account</th>
+                <th>Currency</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
         </div>
       </div>
     </>

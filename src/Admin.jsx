@@ -11,6 +11,7 @@ import Banks from "./pages/admin/Banks";
 import Messages from "./pages/admin/Messages";
 import Modal from "./components/Modal";
 import Activate from "./pages/admin/Activate";
+import Usermanagement from "./pages/admin/Usermanagement";
 import Modal2 from "./components/Modal2";
 function Admin() {
   return (
@@ -29,6 +30,7 @@ function Admin() {
             <Route path="activate" element={<Activate />}></Route>
             <Route path="messages" element={<Messages />}></Route>
             <Route path="Profile" element={<Profile />}></Route>
+            <Route path="Usermanagement" element={<Usermanagement />}></Route>
             <Route path="*" element={<E404 />}></Route>
           </Routes>
           <Footer />
