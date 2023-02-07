@@ -1,7 +1,7 @@
 import React from "react";
-import Card from "../../components/Card";
+import Card from "./Card";
 import Stat from "../../components/Stat";
-import Table from "../../components/Tablesite";
+import Table from "./Table";
 function Content() {
   return (
     <>

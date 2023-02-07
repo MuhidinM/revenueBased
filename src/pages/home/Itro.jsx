@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Feature } from "./Feature";
+import Test from "./Test";
 
 function Itro() {
   return (
@@ -9,8 +11,8 @@ function Itro() {
           <div className="max-w-screen-xl px-4 py-8 mx-auto lg:py-16 lg:px-6">
             <div className="max-w-screen-lg text-gray-500 sm:text-lg dark:text-gray-400">
               <h2 className="mb-4 text-4xl font-bold tracking-tight text-gray-900 dark:text-white">
-                Paying with <span className="font-extrabold">Epay</span> is fast,
-                secure and easy.
+                Paying with <span className="font-extrabold">Epay</span> is
+                fast, secure and easy.
               </h2>
               <p className="mb-4 font-light">
                 Our payment gateway is a secure solution that makes it simple to
@@ -55,155 +57,242 @@ function Itro() {
             </div>
           </div>
         </section>
-        <section className="text-gray-600 body-font">
-          <div className="container flex flex-wrap px-5 py-24 mx-auto">
-            <div className="flex flex-wrap w-full">
-              <div className="lg:w-2/5 md:w-1/2 md:pr-10 md:py-6">
-                <div className="relative flex pb-12">
-                  <div className="absolute inset-0 flex items-center justify-center w-10 h-full">
-                    <div className="w-1 h-full bg-gray-200 pointer-events-none"></div>
+        <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+          <div className="grid gap-6 row-gap-10 lg:grid-cols-2">
+            <div className="lg:py-6 lg:pr-16">
+              <div className="flex">
+                <div className="flex flex-col items-center mr-4">
+                  <div>
+                    <div className="flex items-center justify-center w-10 h-10 border rounded-full">
+                      <svg
+                        className="w-4 text-gray-600"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        viewBox="0 0 24 24"
+                      >
+                        <line
+                          fill="none"
+                          strokeMiterlimit="10"
+                          x1="12"
+                          y1="2"
+                          x2="12"
+                          y2="22"
+                        />
+                        <polyline
+                          fill="none"
+                          strokeMiterlimit="10"
+                          points="19,15 12,22 5,15"
+                        />
+                      </svg>
+                    </div>
                   </div>
-                  <div className="relative z-10 inline-flex items-center justify-center flex-shrink-0 w-10 h-10 text-white rounded-full bg-primary">
-                    <svg
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      className="w-5 h-5"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                    </svg>
-                  </div>
-                  <div className="flex-grow pl-4">
-                    <h2 className="mb-1 text-sm font-medium tracking-wider text-gray-900 title-font">
-                      STEP 1
-                    </h2>
-                    <p className="leading-relaxed">
-                      Prepare scanned document of both your recently renewed
-                      Identificatiion card and Trade Licence.
-                    </p>
-                  </div>
+                  <div className="w-px h-full bg-gray-300" />
                 </div>
-                <div className="relative flex pb-12">
-                  <div className="absolute inset-0 flex items-center justify-center w-10 h-full">
-                    <div className="w-1 h-full bg-gray-200 pointer-events-none"></div>
-                  </div>
-                  <div className="relative z-10 inline-flex items-center justify-center flex-shrink-0 w-10 h-10 text-white rounded-full bg-primary">
-                    <svg
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      className="w-5 h-5"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-                    </svg>
-                  </div>
-                  <div className="flex-grow pl-4">
-                    <h2 className="mb-1 text-sm font-medium tracking-wider text-gray-900 title-font">
-                      STEP 2
-                    </h2>
-                    <p className="leading-relaxed">
-                      Go to <Link to={"/"}>epay.com/registration</Link> and fill all
-                      the required fields and submit your request.
-                    </p>
-                  </div>
-                </div>
-                <div className="relative flex pb-12">
-                  <div className="absolute inset-0 flex items-center justify-center w-10 h-full">
-                    <div className="w-1 h-full bg-gray-200 pointer-events-none"></div>
-                  </div>
-                  <div className="relative z-10 inline-flex items-center justify-center flex-shrink-0 w-10 h-10 text-white rounded-full bg-primary">
-                    <svg
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      className="w-5 h-5"
-                      viewBox="0 0 24 24"
-                    >
-                      <circle cx="12" cy="5" r="3"></circle>
-                      <path d="M12 22V8M5 12H2a10 10 0 0020 0h-3"></path>
-                    </svg>
-                  </div>
-                  <div className="flex-grow pl-4">
-                    <h2 className="mb-1 text-sm font-medium tracking-wider text-gray-900 title-font">
-                      STEP 3
-                    </h2>
-                    <p className="leading-relaxed">
-                      Our team will be checking for the validity in the
-                      background and will send you a link to your email.
-                    </p>
-                  </div>
-                </div>
-                <div className="relative flex pb-12">
-                  <div className="absolute inset-0 flex items-center justify-center w-10 h-full">
-                    <div className="w-1 h-full bg-gray-200 pointer-events-none"></div>
-                  </div>
-                  <div className="relative z-10 inline-flex items-center justify-center flex-shrink-0 w-10 h-10 text-white rounded-full bg-primary">
-                    <svg
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      className="w-5 h-5"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
-                      <circle cx="12" cy="7" r="4"></circle>
-                    </svg>
-                  </div>
-                  <div className="flex-grow pl-4">
-                    <h2 className="mb-1 text-sm font-medium tracking-wider text-gray-900 title-font">
-                      STEP 4
-                    </h2>
-                    <p className="leading-relaxed">
-                      Follow the link in the email and change your password when
-                      entering for the first time.
-                    </p>
-                  </div>
-                </div>
-                <div className="relative flex">
-                  <div className="relative z-10 inline-flex items-center justify-center flex-shrink-0 w-10 h-10 text-white rounded-full bg-primary">
-                    <svg
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      className="w-5 h-5"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
-                      <path d="M22 4L12 14.01l-3-3"></path>
-                    </svg>
-                  </div>
-                  <div className="flex-grow pl-4">
-                    <h2 className="mb-1 text-sm font-medium tracking-wider text-gray-900 title-font">
-                      FINISH
-                    </h2>
-                    <p className="leading-relaxed">
-                      Now you have successfully created un account with us. You
-                      can log in using your credentials and access api and other
-                      services.
-                    </p>
-                  </div>
+                <div className="pt-1 pb-8">
+                  <p className="mb-2 text-lg font-bold">Step 1</p>
+                  <p className="text-gray-700">
+                    Prepare scanned document of both your recently renewed
+                    Identificatiion card and Trade Licence.
+                  </p>
                 </div>
               </div>
+              <div className="flex">
+                <div className="flex flex-col items-center mr-4">
+                  <div>
+                    <div className="flex items-center justify-center w-10 h-10 border rounded-full">
+                      <svg
+                        className="w-4 text-gray-600"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        viewBox="0 0 24 24"
+                      >
+                        <line
+                          fill="none"
+                          strokeMiterlimit="10"
+                          x1="12"
+                          y1="2"
+                          x2="12"
+                          y2="22"
+                        />
+                        <polyline
+                          fill="none"
+                          strokeMiterlimit="10"
+                          points="19,15 12,22 5,15"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                  <div className="w-px h-full bg-gray-300" />
+                </div>
+                <div className="pt-1 pb-8">
+                  <p className="mb-2 text-lg font-bold">Step 2</p>
+                  <p className="text-gray-700">
+                    Go to epay.com/auth/registration and fill all the required
+                    fields and register. We will send to your email for
+                    verification purpose.
+                  </p>
+                </div>
+              </div>
+              <div className="flex">
+                <div className="flex flex-col items-center mr-4">
+                  <div>
+                    <div className="flex items-center justify-center w-10 h-10 border rounded-full">
+                      <svg
+                        className="w-4 text-gray-600"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        viewBox="0 0 24 24"
+                      >
+                        <line
+                          fill="none"
+                          strokeMiterlimit="10"
+                          x1="12"
+                          y1="2"
+                          x2="12"
+                          y2="22"
+                        />
+                        <polyline
+                          fill="none"
+                          strokeMiterlimit="10"
+                          points="19,15 12,22 5,15"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                  <div className="w-px h-full bg-gray-300" />
+                </div>
+                <div className="pt-1 pb-8">
+                  <p className="mb-2 text-lg font-bold">Step 3</p>
+                  <p className="text-gray-700">
+                    Follow the link in the email and change your password when
+                    entering for the first time.
+                  </p>
+                </div>
+              </div>
+              <div className="flex">
+                <div className="flex flex-col items-center mr-4">
+                  <div>
+                    <div className="flex items-center justify-center w-10 h-10 border rounded-full">
+                      <svg
+                        className="w-4 text-gray-600"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        viewBox="0 0 24 24"
+                      >
+                        <line
+                          fill="none"
+                          strokeMiterlimit="10"
+                          x1="12"
+                          y1="2"
+                          x2="12"
+                          y2="22"
+                        />
+                        <polyline
+                          fill="none"
+                          strokeMiterlimit="10"
+                          points="19,15 12,22 5,15"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                  <div className="w-px h-full bg-gray-300" />
+                </div>
+                <div className="pt-1 pb-8">
+                  <p className="mb-2 text-lg font-bold">Step 4</p>
+                  <p className="text-gray-700">
+                    After Signing in with your credentials go to settings and
+                    fill all the necessary business information and send.
+                  </p>
+                </div>
+              </div>
+              <div className="flex">
+                <div className="flex flex-col items-center mr-4">
+                  <div>
+                    <div className="flex items-center justify-center w-10 h-10 border rounded-full">
+                      <svg
+                        className="w-4 text-gray-600"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        viewBox="0 0 24 24"
+                      >
+                        <line
+                          fill="none"
+                          strokeMiterlimit="10"
+                          x1="12"
+                          y1="2"
+                          x2="12"
+                          y2="22"
+                        />
+                        <polyline
+                          fill="none"
+                          strokeMiterlimit="10"
+                          points="19,15 12,22 5,15"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                  <div className="w-px h-full bg-gray-300" />
+                </div>
+                <div className="pt-1 pb-8">
+                  <p className="mb-2 text-lg font-bold">Step 5</p>
+                  <p className="text-gray-700">
+                    Our team will be checking for the validity in the background
+                    and will notifiy you through your email once the
+                    verification is complete.
+                  </p>
+                </div>
+              </div>
+              <div className="flex">
+                <div className="flex flex-col items-center mr-4">
+                  <div>
+                    <div className="flex items-center justify-center w-10 h-10 border rounded-full">
+                      <svg
+                        className="w-6 text-gray-600"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <polyline
+                          fill="none"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeMiterlimit="10"
+                          points="6,12 10,16 18,8"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <div className="pt-1">
+                  <p className="mb-2 text-lg font-bold">Success</p>
+                  <p className="text-gray-700">
+                    Now you have successfully created un account with us. You
+                    can log in using your credentials and access api and other
+                    services.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="relative">
               <img
-                className="object-cover object-center mt-12 rounded-lg lg:w-3/5 md:w-1/2 md:mt-0"
-                src="https://dummyimage.com/1200x500"
-                alt="step"
+                className="inset-0 object-cover object-bottom w-full rounded shadow-lg h-96 lg:absolute lg:h-full"
+                src="https://images.pexels.com/photos/3184287/pexels-photo-3184287.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
+                alt=""
               />
             </div>
           </div>
-        </section>
+        </div>
+        <Feature />
         <section className="text-gray-600 body-font">
           <div className="container flex flex-col items-center px-5 py-24 mx-auto md:flex-row">
             <div className="w-5/6 mb-10 lg:max-w-lg lg:w-full md:w-1/2 md:mb-0">

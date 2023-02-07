@@ -27,6 +27,7 @@ module.exports = {
           error: "#F87272",
 
           "back-200": "#F2F2F2",
+          
         },
       },
     ],

@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+
 function Landing() {
   return (
     <>
@@ -30,9 +31,15 @@ function Landing() {
               ></path>
             </svg>
           </Link>
-          <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
-            Smarter Payments. Smarter Business
-          </h1>
+
+          <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto">
+            {/* <h2 className="mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white"> */}
+
+            <span className="relative">
+              {" "}
+              Smarter Payments. Smarter Business
+            </span>
+          </h2>
           <p className="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
             We're a payment gateway platform for online ecommerce sites, and
             we've got the speed, security, and reliability you need to make sure
@@ -199,7 +206,9 @@ function Landing() {
                   ></path>
                 </svg>
               </div>
-              <h3 className="mb-2 text-xl font-bold dark:text-white">Operations</h3>
+              <h3 className="mb-2 text-xl font-bold dark:text-white">
+                Operations
+              </h3>
               <p className="text-gray-500 dark:text-gray-400">
                 E-gate offers fast and secure transactions, with extremely low
                 fees. We also offer a variety of features that make it easy to
