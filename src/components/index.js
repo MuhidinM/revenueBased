@@ -13,7 +13,7 @@ const MySwal = withReactContent(Swal);
 
 function ModalFire() {
   const callOtpVerification = async (otp) => {
-    const confirmedOtp = BankAccountServices.confirmOtp("0932308204", otp);
+    const confirmedOtp = BankAccountServices.confirmOtp("0925825012", otp);
     console.log(confirmedOtp);
   };
 
@@ -26,7 +26,7 @@ function ModalFire() {
             values={values}
             onSubmit={(values) => {
               console.log("Hello");
-              // BankAccountServices.sendOtp("0932308204");
+              BankAccountServices.sendOtp("0925825012");
               resolve(values);
               const value = {
                 first: "",
@@ -54,7 +54,7 @@ function ModalFire() {
                         values1.sixth;
 
                       const confirmedOtp = BankAccountServices.confirmOtp(
-                        "0932308204",
+                        "0925825012",
                         otp
                       ).then((res) => {
                         console.log("creating account");

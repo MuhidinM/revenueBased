@@ -95,7 +95,7 @@ function Sidebar() {
             </Link>
           </li>
           <li>
-            <a href="/admin/banks">
+            <Link to="/admin/banks">
               <svg
                 className="w-6 h-6 text-primary"
                 width="24"
@@ -119,7 +119,7 @@ function Sidebar() {
                 <line x1="16" y1="14" x2="16" y2="17" />
               </svg>
               Bank
-            </a>
+            </Link>
           </li>
           <li>
             <Link to={"/admin/messages"}>

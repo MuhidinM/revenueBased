@@ -15,23 +15,9 @@ import withReactContent from "sweetalert2-react-content";
 const choose = [];
 const MySwal = withReactContent(Swal);
 function Accounts() {
-  const [pendinRequest, setpendinRequest] = useState([]);
-  // const [currentUser, setCurrentUser] = useState();
-  const [modaState, setModalState] = useState(false);
-  const [selectedArray, setSelectedArray] = useState();
   const AccountListData = useSelector((state) => state.accountsList);
   console.log(AccountListData);
   const { loading, error, bankAccounts } = AccountListData;
-
-  const showModal = () => {
-    console.log("show the modal");
-    console.log(modaState);
-    setModalState(true);
-  };
-
-  const hideModal = () => {
-    setModalState(false);
-  };
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -57,7 +43,7 @@ function Accounts() {
       }).then((result) => {
         console.log(result);
         if (result.isConfirmed === true) {
-          BankAccountServices.sendOtp("0927355418");
+          BankAccountServices.sendOtp("0925825012");
           const value = {
             first: "",
             second: "",
@@ -82,17 +68,17 @@ function Accounts() {
                     values.fourth +
                     values.fifth +
                     values.sixth;
-                  // BankAccountServices.confirmOtp("0932308204", otp).then(
-                  //   (res) => {
-                  //     dispatch(setPrimaryAccount(e.target.value));
-                  //     Swal.fire({
-                  //       icon: "success",
-                  //       title: "Your work has been saved",
-                  //       showConfirmButton: false,
-                  //       timer: 3000,
-                  //     });
-                  //   }
-                  // );
+                  BankAccountServices.confirmOtp("0925825012", otp).then(
+                    (res) => {
+                      dispatch(setPrimaryAccount(e.target.value));
+                      Swal.fire({
+                        icon: "success",
+                        title: "Your work has been saved",
+                        showConfirmButton: false,
+                        timer: 3000,
+                      });
+                    }
+                  );
                 }}
                 onCancel={() => MySwal.close()}
               ></Otp>
