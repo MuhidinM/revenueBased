@@ -1,13 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Input from "./Input";
 import Selectinput from "./Selectinput";
-const dropdown = [
-  { label: "CBO", value: "CBO" },
-  { label: "CBE", value: "CBE" },
-  { label: "BOA", value: "BOA" },
-];
+import BankServices from "../services/bank.services";
+
 const ValidationSchema = Yup.object().shape({
   accountHolder: Yup.string().required("Account Holder Name is required"),
   accountNumber: Yup.string().required("Account Number is required"),
@@ -15,6 +12,21 @@ const ValidationSchema = Yup.object().shape({
 });
 
 export const ModalForm = ({ values, onSubmit, onCancel }) => {
+  const [currentBank, setCurrentUser] = useState({});
+  const dropdown = [];
+  if (currentBank instanceof Array) {
+    currentBank.map((item, index) =>
+      dropdown.push({ label: item.bankName, value: item.bankCode })
+    );
+  }
+
+  useEffect(() => {
+    const bank = BankServices.getBank().then((res) => {
+      setCurrentUser(res);
+    });
+    // console.log("our", bank);
+  }, []);
+  console.log(currentBank);
   return (
     <Formik
       initialValues={values}

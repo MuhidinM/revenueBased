@@ -43,7 +43,7 @@ function Accounts() {
       }).then((result) => {
         console.log(result);
         if (result.isConfirmed === true) {
-          BankAccountServices.sendOtp("0927355418");
+          BankAccountServices.sendOtp("0925825012");
           const value = {
             first: "",
             second: "",
@@ -68,17 +68,17 @@ function Accounts() {
                     values.fourth +
                     values.fifth +
                     values.sixth;
-                  // BankAccountServices.confirmOtp("0932308204", otp).then(
-                  //   (res) => {
-                  //     dispatch(setPrimaryAccount(e.target.value));
-                  //     Swal.fire({
-                  //       icon: "success",
-                  //       title: "Your work has been saved",
-                  //       showConfirmButton: false,
-                  //       timer: 3000,
-                  //     });
-                  //   }
-                  // );
+                  BankAccountServices.confirmOtp("0925825012", otp).then(
+                    (res) => {
+                      dispatch(setPrimaryAccount(e.target.value));
+                      Swal.fire({
+                        icon: "success",
+                        title: "Your work has been saved",
+                        showConfirmButton: false,
+                        timer: 3000,
+                      });
+                    }
+                  );
                 }}
                 onCancel={() => MySwal.close()}
               ></Otp>

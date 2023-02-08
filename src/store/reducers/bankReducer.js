@@ -1,8 +1,8 @@
 import { ADD_BANK, ADD_BANK_ERROR, GET_BANK, GET_BANK_ERROR } from "../types";
 
 const initialState = {
-  bank: {},
-  banks: [],
+  bank: [],
+  message: {},
   loading: true,
 };
 

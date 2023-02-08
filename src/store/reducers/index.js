@@ -10,5 +10,5 @@ export default combineReducers({
   userProfile: user_profile_reducer,
   apiKey: generate_api_key_reducer,
   transactionDetail: getTransactionDetailReducer,
-  bankInfo:bankReducer
+  bankInfo: bankReducer,
 });

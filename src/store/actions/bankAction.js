@@ -2,11 +2,11 @@ import { ADD_BANK, ADD_BANK_ERROR, GET_BANK, GET_BANK_ERROR } from "../types";
 import AuthService from "../../services/auth.service";
 import BankServices from "../../services/bank.services";
 // import BankAccountServices from "../../services/bank-account.services";
-export const addBank = () => async (dispatch) => {
+export const addBank = (bankName, bankCode) => async (dispatch) => {
   try {
-    const addedBank = await BankServices.addBank();
+    const addedBank = await BankServices.addBank(bankName, bankCode);
     console.log(addedBank);
-    //   dispatch(getAccounts());
+    dispatch(gateBanks());
     dispatch({
       type: ADD_BANK,
       payload: addedBank,
@@ -22,7 +22,7 @@ export const gateBanks = () => async (dispatch) => {
   try {
     const getBank = await BankServices.getBank();
     console.log(getBank);
-    //   dispatch(getGeneratedApiKey());
+    // dispatch(getGeneratedApiKey());
     dispatch({
       type: GET_BANK,
       payload: getBank,
