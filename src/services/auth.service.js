@@ -60,6 +60,15 @@ const generateApiKey = (id, expiryDate) => {
     });
 };
 
+const getGeneratedApiKey = (id) => {
+  console.log(id);
+  return axios.get(API_URL + `gateApiKey/${id}`).then((response) => {
+    // console.log(response.data);
+    return response.data;
+    // console.log(response.data);
+  });
+};
+
 const resetPassword = (password, token, id) => {
   console.log(password, token, id);
   return axios
@@ -96,6 +105,7 @@ const AuthService = {
   resetPassword,
   getCurrentUser,
   generateApiKey,
+  getGeneratedApiKey,
 };
 
 export default AuthService;

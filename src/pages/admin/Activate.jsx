@@ -17,7 +17,7 @@ function Activate() {
   console.log(pendinRequest);
   return (
     <>
-      <div className="w-5/6 mt-8">
+      <div className="w-5/6 m-4 mt-8">
         <Tablesite request={pendinRequest} />
       </div>
     </>
