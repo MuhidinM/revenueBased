@@ -6,11 +6,17 @@ import { useDispatch } from "react-redux";
 import { ModalForm } from "./ModalForm";
 import UserService from "../services/user.service";
 import AuthService from "../services/auth.service";
+import BankAccountServices from "../services/bank-account.services";
 import { createTutorial } from "../store/actions/bank_accountAction";
 import Otp from "./Otp";
 const MySwal = withReactContent(Swal);
 
 function ModalFire() {
+  const callOtpVerification = async (otp) => {
+    const confirmedOtp = BankAccountServices.confirmOtp("0925825012", otp);
+    console.log(confirmedOtp);
+  };
+
   const showFormModal = (values) => {
     return new Promise((resolve, reject) => {
       MySwal.fire({
@@ -20,30 +26,68 @@ function ModalFire() {
             values={values}
             onSubmit={(values) => {
               console.log("Hello");
-
-              //   dispatch(
-              //     createTutorial(
-              //       values.accountHolder,
-              //       values.accountNumber,
-              //       values.bankName,
-              //       currentUser.id
-              //     )
-              //   )
-              // .then(() => {})
-              // .catch((e) => console.log(e));
+              BankAccountServices.sendOtp("0925825012");
               resolve(values);
+              const value = {
+                first: "",
+                second: "",
+                third: "",
+                fourth: "",
+                fifth: "",
+                sixth: "",
+              };
               MySwal.fire({
                 title: "",
                 html: (
                   <Otp
-                    onSubmit={(values) => {
+                    values={value}
+                    onSubmit={(values1) => {
                       console.log("Hello from the second swal");
-                      Swal.fire({
-                        icon: "success",
-                        title: "Your work has been saved",
-                        showConfirmButton: false,
-                        timer: 3000,
+                      resolve(values);
+                      console.log(values.first);
+                      const otp =
+                        values1.first +
+                        values1.second +
+                        values1.third +
+                        values1.fourth +
+                        values1.fifth +
+                        values1.sixth;
+
+                      const confirmedOtp = BankAccountServices.confirmOtp(
+                        "0925825012",
+                        otp
+                      ).then((res) => {
+                        console.log("creating account");
+                        if (res.status === "success") {
+                          console.log("success is responded");
+                          dispatch(
+                            createTutorial(
+                              values.accountHolder,
+                              values.accountNumber,
+                              values.bankName,
+                              currentUser.id
+                            ),
+                            Swal.fire({
+                              icon: "success",
+                              title: "Your work has been saved",
+                              showConfirmButton: false,
+                              timer: 3000,
+                            })
+                          ).then(() => {
+                            console.log("firing swal");
+                          });
+                        }
                       });
+
+                      console.log(confirmedOtp);
+
+                      // let confirmedOtp = async () =>
+                      //   await BankAccountServices.confirmOtp("0932308204", otp);
+
+                      if (confirmedOtp.data.status === "success") {
+                      }
+
+                      console.log(confirmedOtp);
                     }}
                   ></Otp>
                 ),
@@ -53,15 +97,17 @@ function ModalFire() {
               //   MySwal.close();
               //   Swal.close();
             }}
-            onCancel={() => Swal.close()}
+            onCancel={() => {
+              Swal.close();
+            }}
           />
         ),
+
         onClose: () => reject(),
         showConfirmButton: false,
       });
     });
   };
-
   const [currentUser, setCurrentUser] = useState({});
   const dispatch = useDispatch();
   useEffect(() => {

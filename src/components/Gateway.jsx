@@ -17,24 +17,7 @@ function Gateway() {
                 src="../Cooperative_Bank_of_Oromia.png"
                 alt="front credit card"
               />
-              <div className="flex flex-col items-center justify-center">
-                <ul className="flex">
-                  <li className="mx-2">
-                    <img
-                      className="w-16"
-                      src="https://www.computop-paygate.com/Templates/imagesaboutYou_desktop/images/verified-by-visa.png"
-                      alt=""
-                    />
-                  </li>
-                  <li className="ml-5">
-                    <img
-                      className="w-9"
-                      src="https://www.computop-paygate.com/Templates/imagesaboutYou_desktop/images/mastercard-id-check.png"
-                      alt=""
-                    />
-                  </li>
-                </ul>
-              </div>
+
               <h1 className="leading-tight tracking-tight text-gray-900 dark:text-white">
                 choose payment
               </h1>

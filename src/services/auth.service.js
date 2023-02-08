@@ -48,6 +48,27 @@ const resetPasswordRequest = (email) => {
     });
 };
 
+const generateApiKey = (id, expiryDate) => {
+  console.log(id);
+  return axios
+    .post(API_URL + "generateApiKey", {
+      id,
+      expiryDate,
+    })
+    .then((response) => {
+      return response.data;
+    });
+};
+
+const getGeneratedApiKey = (id) => {
+  console.log(id);
+  return axios.get(API_URL + `gateApiKey/${id}`).then((response) => {
+    // console.log(response.data);
+    return response.data;
+    // console.log(response.data);
+  });
+};
+
 const resetPassword = (password, token, id) => {
   console.log(password, token, id);
   return axios
@@ -83,6 +104,8 @@ const AuthService = {
   resetPasswordRequest,
   resetPassword,
   getCurrentUser,
+  generateApiKey,
+  getGeneratedApiKey,
 };
 
 export default AuthService;

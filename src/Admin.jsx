@@ -11,7 +11,11 @@ import Banks from "./pages/admin/Banks";
 import Messages from "./pages/admin/Messages";
 import Modal from "./components/Modal";
 import Activate from "./pages/admin/Activate";
+import Usermanagement from "./pages/admin/Usermanagement";
+import Modal2 from "./components/Modal2";
+
 import Transactions from "./pages/admin/Transactions";
+
 function Admin() {
   return (
     <>
@@ -19,6 +23,7 @@ function Admin() {
       {/* <Modal2 /> */}
       <div className="drawer drawer-mobile">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
+        <div className="flex flex-col drawer-content bg-slate-100">
         <div className="flex flex-col drawer-content bg-slate-100">
           {/* <!-- Page content here --> */}
           <Nav />
