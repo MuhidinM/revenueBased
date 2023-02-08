@@ -18,7 +18,7 @@ function Users() {
       <Modal />
       <div className="drawer drawer-mobile">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-        <div className="items-center drawer-content bg-slate-100">
+        <div className="drawer-content bg-slate-100">
           {/* <!-- Page content here --> */}
           <Nav />
           <Routes>

@@ -14,7 +14,7 @@ function Gateway() {
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
               <img
                 className="w-full h-auto"
-                src="../card.png"
+                src="../Cooperative_Bank_of_Oromia.png"
                 alt="front credit card"
               />
               <div className="flex flex-col items-center justify-center">
