@@ -44,7 +44,7 @@ const Resetpassword = () => {
                 ).then(
                   (resp) => {
                     console.log(resp.message);
-                    navigate("/auth/login");
+                    navigate("/auth");
                     window.location.reload();
                   },
                   (error) => {

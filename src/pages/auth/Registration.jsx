@@ -31,7 +31,7 @@ function Registration() {
     confirmPassword: Yup.string()
       .required("Confirm Password is required")
       .oneOf([Yup.ref("password"), null], "Confirm Password does not match"),
-    // acceptTerms: Yup.bool().oneOf([true], "Accept Terms"),
+    acceptTerms: Yup.bool().oneOf([true], "Accept Terms"),
   });
   let navigate = useNavigate();
   return (
@@ -52,7 +52,7 @@ function Registration() {
                   password: "",
                   // confirmPassword: "",
                   confirmPassword: "",
-                  // acceptTerms: false,
+                  acceptTerms: false,
                 }}
                 validationSchema={validationSchema}
                 onSubmit={(values) => {
@@ -258,14 +258,22 @@ function Registration() {
                         </div>
                         <div className="flex items-start">
                           <div className="flex items-center h-5">
+                            <span className="text-sm link-error">
+                              {props.errors.acceptTerms &&
+                              props.touched.acceptTerms
+                                ? props.errors.acceptTerms
+                                : null}
+                            </span>
                             <input
-                              id="terms"
+                              id="acceptTerms"
+                              name="acceptTerms"
                               aria-describedby="terms"
                               type="checkbox"
-                              value={props.values.confirmPassword}
+                              value={props.values.acceptTerms}
+                            
                               onChange={props.handleChange}
                               className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary dark:ring-offset-gray-800"
-                              required=""
+                              
                             />
                           </div>
                           <div className="ml-3 text-sm">

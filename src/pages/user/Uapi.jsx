@@ -47,20 +47,21 @@ function Uapi() {
               <p>Modal</p>
             </Modal>
           )} */}
-          {generatedApiKey.credentialDetail ? (
-            <div className="mt-4 overflow-x-auto">
-              <table className="table w-full">
-                <thead>
-                  <tr>
-                    <th></th>
-                    <th>Secrate Key</th>
-                    <th>Api key</th>
-                    <th>Client Id</th>
-                    <th></th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
+
+          <div className="mt-4 overflow-x-auto">
+            <table className="table w-full">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Secrate Key</th>
+                  <th>Api key</th>
+                  <th>Client Id</th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {generatedApiKey.credentialDetail ? (
                   <tr className="hover">
                     <th>1</th>
                     <td>
@@ -74,12 +75,12 @@ function Uapi() {
                       <Link to={"/users/uapi"}>Copy</Link>
                     </td>
                   </tr>
-                </tbody>
-              </table>
-            </div>
-          ) : (
-            "Loadig"
-          )}
+                ) : (
+                  ""
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
       </>
     );

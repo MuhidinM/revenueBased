@@ -13,6 +13,9 @@ const register = (fname, lname, email, phone, password) => {
     })
     .then((response) => {
       // console.log(response.data.message);
+      if (response.data.token) {
+        localStorage.setItem("user", JSON.stringify(response.data));
+      }
       return response.data;
     });
 };

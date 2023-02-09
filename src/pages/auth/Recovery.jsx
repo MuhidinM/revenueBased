@@ -31,9 +31,10 @@ function Recovery() {
                 email: "",
               }}
               validationSchema={validationSchema}
-              onSubmit={(values) => {
+              onSubmit={(values, { resetForm }) => {
                 console.log("I got Clicked");
                 console.log(values.email);
+                resetForm({ values: "" });
 
                 AuthService.resetPasswordRequest(values.email).then(
                   () => {

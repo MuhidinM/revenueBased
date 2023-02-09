@@ -8,6 +8,7 @@ import Addressproof from "../../components/Addressproof";
 import Selectinput from "../../components/Selectinput";
 import Textarea from "../../components/Textarea";
 import AuthService from "../../services/auth.service";
+import Swal from "sweetalert2";
 // import UserInfo from "./UserInfo";
 const region = [
   { label: "Afar", value: "af" },
@@ -139,7 +140,7 @@ function Settings() {
               location: "",
             }}
             validationSchema={validationSchema}
-            onSubmit={(values) => {
+            onSubmit={(values, { resetForm }) => {
               formData.append("lgname", values.lgname);
               formData.append("incorporation", "A");
               formData.append("industry", "A");
@@ -160,11 +161,16 @@ function Settings() {
               formData.append("hno", values.hno);
               formData.append("location", values.location);
               formData.append("proofOfAddress", proofOfAddress);
+              resetForm({ values: "" });
               UserService.BussinessInfoRequest(formData).then(
                 (resp) => {
                   console.log(resp.message);
-                  setMessage(resp.message);
-                  setSuccessful(true);
+                  Swal.fire({
+                    icon: "success",
+                    title: "Your work has been saved",
+                    showConfirmButton: false,
+                    timer: 3000,
+                  });
                 },
                 (error) => {
                   const resMessage =

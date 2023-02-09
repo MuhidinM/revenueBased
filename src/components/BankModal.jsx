@@ -44,12 +44,13 @@ function BankModal({ values, onSubmit, onCancel }) {
                           handleChange={formik.handleChange}
                         />
                       </div>
-                      <div>
-                        <Selectinput
-                          arr={dropdown}
-                          id="bankCode"
+                      <div className="w-full">
+                        <Input
+                          label="name"
+                          title="Bank Code"
+                          type="text"
                           name="bankCode"
-                          title="Choose Bank Code"
+                          id="bankCode"
                           place="Bank Code"
                           value={formik.values.bankCode}
                           handleChange={formik.handleChange}

@@ -43,7 +43,7 @@ function Accounts() {
       }).then((result) => {
         console.log(result);
         if (result.isConfirmed === true) {
-          BankAccountServices.sendOtp("0925825012");
+          BankAccountServices.sendOtp("+251927355418");
           const value = {
             first: "",
             second: "",
@@ -68,7 +68,7 @@ function Accounts() {
                     values.fourth +
                     values.fifth +
                     values.sixth;
-                  BankAccountServices.confirmOtp("0925825012", otp).then(
+                  BankAccountServices.confirmOtp("+251927355418", otp).then(
                     (res) => {
                       dispatch(setPrimaryAccount(e.target.value));
                       Swal.fire({
@@ -114,6 +114,7 @@ function Accounts() {
         <td>{item.accountNumber}</td>
         <td>{item.bankName}</td>
         <td>{item.primaryAccount === "1" ? "primary" : "secondary"}</td>
+        <td>Pending</td>
       </tr>
     ));
     return (
@@ -156,6 +157,7 @@ function Accounts() {
                   <th>Account Holder</th>
                   <th>Account</th>
                   <th>Bank</th>
+                  <th>Account Level</th>
                   <th>Status</th>
                 </tr>
               </thead>
