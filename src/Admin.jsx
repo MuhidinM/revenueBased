@@ -15,7 +15,7 @@ import Activate from "./pages/admin/Activate";
 // import Usermanagement from "./pages/admin/Usermanagement";
 // import Modal2 from "./components/Modal2";
 import Transactions from "./pages/admin/Transactions";
-import Usermanagement from "./pages/admin/Usermanagement";
+// import Usermanagement from "./pages/admin/Usermanagement";
 import Modal2 from "./components/Modal2";
 
 function Admin() {
@@ -38,7 +38,6 @@ function Admin() {
               <Route path="activate" element={<Activate />}></Route>
               <Route path="messages" element={<Messages />}></Route>
               <Route path="Profile" element={<Profile />}></Route>
-              <Route path="Usermanagement" element={<Usermanagement />}></Route>
               <Route path="*" element={<E404 />}></Route>
             </Routes>
           </div>
