@@ -26,7 +26,7 @@ function ModalFire() {
             values={values}
             onSubmit={(values) => {
               console.log("Hello");
-              BankAccountServices.sendOtp("0925825012");
+              BankAccountServices.sendOtp("0927355418");
               resolve(values);
               const value = {
                 first: "",
@@ -54,7 +54,7 @@ function ModalFire() {
                         values1.sixth;
 
                       const confirmedOtp = BankAccountServices.confirmOtp(
-                        "0925825012",
+                        "0927355418",
                         otp
                       ).then((res) => {
                         console.log("creating account");
