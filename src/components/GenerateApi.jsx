@@ -29,7 +29,7 @@ function GenerateApiModal(props) {
               resolve(values);
               Swal.fire({
                 icon: "success",
-                title: "Your work has been saved",
+                title: "Your Key has been generated",
                 showConfirmButton: false,
                 timer: 3000,
               });

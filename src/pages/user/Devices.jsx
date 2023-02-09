@@ -1,6 +1,10 @@
 import React, { useMemo } from "react";
 import DataTable from "react-data-table-component";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
+
+const MySwal = withReactContent(Swal);
 const columns = [
   {
     name: "Title",
@@ -100,7 +104,7 @@ const Export = ({ onExport }) => (
   </button>
 );
 
-function Profile() {
+function Devices() {
   const [filterText, setFilterText] = React.useState("");
   const actionsMemo = useMemo(
     () => <Export onExport={() => downloadCSV(data)} />,
@@ -130,21 +134,70 @@ function Profile() {
     );
   }, [filterText, resetPaginationToggle]);
 
+  const showFormModal = (values) => {
+    return new Promise((resolve, reject) => {
+      MySwal.fire({
+        title: "Register Your Domain",
+        html: (
+          <div className="p-8">
+            <div>
+              <label
+                htmlFor="id"
+                className=" mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >
+                Device Id
+              </label>
+              <span className="text-sm link-error"></span>
+              <input
+                type="text"
+                name="id"
+                id="id"
+                placeholder="COOP-00-000"
+                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                //   value={props.values.text}
+                //   onChange={props.handleChange}
+              />
+            </div>
+          </div>
+        ),
+        onClose: () => reject(),
+        onCancel: () => Swal.close(),
+        showConfirmButton: true,
+        showCancelButton: true,
+        confirmButtonColor: "#01AFEF",
+      });
+    });
+  };
+  const showModal = () => {
+    showFormModal({})
+      .then((values) => console.log(values))
+      .catch(() => console.log("Modal closed"));
+  };
+
   return (
-    <DataTable
-      title="Test List"
-      columns={columns}
-      data={filteredItems}
-      pagination
-      paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
-      subHeader
-      subHeaderComponent={subHeaderComponentMemo}
-      // selectableRows
-      persistTableHeadstriped
-      highlightOnHover
-      actions={actionsMemo}
-    />
+    <div className="m-4">
+      <button
+        type="button"
+        className="mb-4 btn btn-outline btn-primary"
+        onClick={showModal}
+      >
+        Add Device
+      </button>
+      <DataTable
+        title="Devices List"
+        columns={columns}
+        data={filteredItems}
+        pagination
+        paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
+        subHeader
+        subHeaderComponent={subHeaderComponentMemo}
+        // selectableRows
+        persistTableHeadstriped
+        highlightOnHover
+        actions={actionsMemo}
+      />
+    </div>
   );
 }
 
-export default Profile;
+export default Devices;

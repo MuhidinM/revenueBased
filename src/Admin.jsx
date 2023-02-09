@@ -26,7 +26,7 @@ function Admin() {
         <div className="flex flex-col drawer-content bg-slate-100">
           {/* <!-- Page content here --> */}
           <Nav />
-          <div className="m-4 ">
+          <div className="m-4">
             <Routes>
               <Route index element={<Home />}></Route>
               <Route path="users" element={<Users />}></Route>
@@ -35,8 +35,7 @@ function Admin() {
               <Route path="activate" element={<Activate />}></Route>
               <Route path="messages" element={<Messages />}></Route>
               <Route path="Profile" element={<Profile />}></Route>
-              <Route path="Usermanagement" element={<Usermanagement />}></Route>
-            <Route path="*" element={<E404 />}></Route>
+              <Route path="*" element={<E404 />}></Route>
             </Routes>
           </div>
 
