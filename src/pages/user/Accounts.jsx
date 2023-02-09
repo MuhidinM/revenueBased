@@ -37,7 +37,7 @@ function Accounts() {
         icon: "warning",
         // dangerMode: true,
         showCancelButton: true,
-        confirmButtonColor: "#3085d6",
+        confirmButtonColor: "#01AFEF",
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes!",
       }).then((result) => {

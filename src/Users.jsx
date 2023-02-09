@@ -11,6 +11,8 @@ import Sidebar from "./pages/user/Sidebar";
 import Profile from "./pages/user/Profile";
 import Settings from "./pages/user/Settings";
 import Generateqr from "./pages/user/Generateqr";
+import Domains from "./pages/user/Domains";
+import Devices from "./pages/user/Devices";
 
 function Users() {
   return (
@@ -26,6 +28,8 @@ function Users() {
             <Route path="uapi" element={<Uapi />}></Route>
             <Route path="transactions" element={<Transactions />}></Route>
             <Route path="accounts" element={<Accounts />}></Route>
+            <Route path="domains" element={<Domains />}></Route>
+            <Route path="devices" element={<Devices />}></Route>
             <Route path="qr" element={<Generateqr />}></Route>
             <Route path="profile" element={<Profile />}></Route>
             <Route path="setting" element={<Settings />}></Route>
