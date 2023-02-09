@@ -29,6 +29,7 @@ function BankTable() {
             onSubmit={(values) => {
               console.log("Hello from the second swal");
               console.log(values.bankName);
+              console.log(values.bankCode);
               dispatch(addBank(values.bankName, values.bankCode));
               // dispatch()
               // resolve(values);
