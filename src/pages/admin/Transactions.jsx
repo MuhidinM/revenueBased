@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getTransactionDetailAll } from "../../store/actions/adminFetchAllTransactions";
 import { getTransactionByTransactionId } from "../../store/actions/adminFetchAllTransactions";
 import Input from "../../components/Input";
+//This is for the transaction
 
 function Transactions() {
   const [conditionalRendering, setconditionalRendering] = useState(true);
