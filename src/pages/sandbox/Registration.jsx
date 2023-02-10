@@ -31,7 +31,7 @@ function Registration() {
     confirmPassword: Yup.string()
       .required("Confirm Password is required")
       .oneOf([Yup.ref("password"), null], "Confirm Password does not match"),
-    acceptTerms: Yup.bool().oneOf([true], "Accept Terms"),
+    // acceptTerms: Yup.bool().oneOf([true], "Accept Terms"),
   });
   let navigate = useNavigate();
   return (
@@ -52,7 +52,7 @@ function Registration() {
                   password: "",
                   // confirmPassword: "",
                   confirmPassword: "",
-                  acceptTerms: false,
+                  // acceptTerms: false,
                 }}
                 validationSchema={validationSchema}
                 onSubmit={(values) => {
@@ -120,7 +120,7 @@ function Registration() {
                               htmlFor="fname"
                               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                             >
-                              First Name
+                              First Name (use : Lelisa)
                             </label>
                             <span className="text-sm link-error">
                               {props.errors.firstName && props.touched.firstName
@@ -143,7 +143,7 @@ function Registration() {
                               htmlFor="mname"
                               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                             >
-                              Middle Name
+                              Middle Name (use : Abdu)
                             </label>
                             <span className="text-sm link-error">
                               {props.errors.lastName && props.touched.lastName
@@ -157,7 +157,7 @@ function Registration() {
                               value={props.values.lastName}
                               onChange={props.handleChange}
                               className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
-                              placeholder="Abdusemed"
+                              placeholder="Abdu"
                               required=""
                             />
                           </div>
@@ -167,7 +167,7 @@ function Registration() {
                             htmlFor="email"
                             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                           >
-                            Business email
+                            Business email (use : test@epay.com)
                           </label>
                           <span className="text-sm link-error">
                             {props.errors.email && props.touched.email
@@ -190,7 +190,7 @@ function Registration() {
                             htmlFor="phone"
                             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                           >
-                            Business Phone
+                            Business Phone  (use : 0900000000)
                           </label>
                           <span className="text-sm link-error">
                             {props.errors.phone && props.touched.phone
@@ -214,7 +214,7 @@ function Registration() {
                             htmlFor="password"
                             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                           >
-                            Password
+                            Password (use : helloworld)
                           </label>
                           <span className="text-sm link-error">
                             {props.errors.password && props.touched.password
@@ -237,7 +237,7 @@ function Registration() {
                             htmlFor="confirm-password"
                             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                           >
-                            Confirm password
+                            Confirm password (use : helloworld)
                           </label>
                           <span className="text-sm link-error">
                             {props.errors.confirmPassword &&
@@ -256,41 +256,7 @@ function Registration() {
                             required=""
                           />
                         </div>
-                        <div className="flex items-start">
-                          <div className="flex items-center h-5">
-                            <span className="text-sm link-error">
-                              {props.errors.acceptTerms &&
-                              props.touched.acceptTerms
-                                ? props.errors.acceptTerms
-                                : null}
-                            </span>
-                            <input
-                              id="acceptTerms"
-                              name="acceptTerms"
-                              aria-describedby="terms"
-                              type="checkbox"
-                              value={props.values.acceptTerms}
-                            
-                              onChange={props.handleChange}
-                              className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary dark:ring-offset-gray-800"
-                              
-                            />
-                          </div>
-                          <div className="ml-3 text-sm">
-                            <label
-                              htmlFor="terms"
-                              className="font-light text-gray-500 dark:text-gray-300"
-                            >
-                              I accept the{" "}
-                              <Link
-                                className="font-medium text-primary hover:underline dark:text-primary"
-                                to={"/"}
-                              >
-                                Terms and Conditions
-                              </Link>
-                            </label>
-                          </div>
-                        </div>
+                        
                         <button
                           type="submit"
                           onClick={props.handleSubmit}
@@ -301,7 +267,7 @@ function Registration() {
                         <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                           Already have an account?{" "}
                           <Link
-                            to={"/auth"}
+                            to={"/sandbox"}
                             className="font-medium text-primary hover:underline dark:text-primary"
                           >
                             Login here
@@ -320,7 +286,7 @@ function Registration() {
                           role="alert"
                         >
                           {message}
-                          <Link to={"/auth"} className="btn btn-primary">
+                          <Link to={"/sandbox"} className="btn btn-primary">
                             Login
                           </Link>
                         </div>

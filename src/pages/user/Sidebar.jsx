@@ -43,8 +43,28 @@ function Sidebar() {
               Dashboard
             </Link>
           </li>
-          {currentUser.secrate_key == null ? (
+          {currentUser.secrate_key != null ? (
             <>
+              <li>
+                <Link to="/users/accounts">
+                  <svg
+                    className="w-6 h-6 text-primary"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    strokeWidth="2"
+                    stroke="currentColor"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    {" "}
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />{" "}
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+                  </svg>
+                  Accounts
+                </Link>
+              </li>
               <li>
                 <Link to={"/users/transactions"}>
                   <svg
@@ -91,23 +111,43 @@ function Sidebar() {
                 </Link>
               </li>
               <li>
-                <Link to="/users/accounts">
+                <Link to="/users/domains">
                   <svg
-                    className="w-6 h-6 text-primary"
+                    class="h-6 w-6 text-primary"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"
+                    />
+                  </svg>
+                  Domains
+                </Link>
+              </li>
+              <li>
+                <Link to="/users/devices">
+                  <svg
+                    class="h-6 w-6 text-primary"
                     width="24"
                     height="24"
                     viewBox="0 0 24 24"
-                    strokeWidth="2"
+                    stroke-width="2"
                     stroke="currentColor"
                     fill="none"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
                   >
                     {" "}
-                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />{" "}
-                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+                    <path stroke="none" d="M0 0h24v24H0z" />{" "}
+                    <rect x="13" y="8" width="8" height="12" rx="1" />{" "}
+                    <path d="M18 8v-3a1 1 0 0 0 -1 -1h-13a1 1 0 0 0 -1 1v12a1 1 0 0 0 1 1h9" />{" "}
+                    <line x1="16" y1="9" x2="18" y2="9" />
                   </svg>
-                  Accounts
+                  Devices
                 </Link>
               </li>
               <li>

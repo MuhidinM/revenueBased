@@ -5,7 +5,7 @@ import AuthService from "../../services/auth.service";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
-function Recovery() {
+function Activation() {
   const [successful, setSuccessful] = useState(false);
   const [message, setMessage] = useState("");
   const validationSchema = Yup.object().shape({
@@ -97,4 +97,4 @@ function Recovery() {
   );
 }
 
-export default Recovery;
+export default Activation;

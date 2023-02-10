@@ -22,7 +22,7 @@ function Stat() {
               </svg>
             </div>
             <div className="stat-title">Total Transaction</div>
-            <div className="stat-value text-primary">4.6M</div>
+            <div className="stat-value text-primary">-</div>
           </div>
 
           <div className="stat">
@@ -42,8 +42,8 @@ function Stat() {
               </svg>
             </div>
             <div className="stat-title">Daily Transactions</div>
-            <div className="stat-value text-secondary">5.1k</div>
-            <div className="stat-desc">11% less than yesterday</div>
+            <div className="stat-value text-secondary">-</div>
+            {/* <div className="stat-desc">11% less than yesterday</div> */}
           </div>
 
           <div className="stat">
@@ -63,8 +63,8 @@ function Stat() {
               </svg>
             </div>
             <div className="stat-title">Monthly Transactions</div>
-            <div className="stat-value text-primary">2.6M</div>
-            <div className="stat-desc">21% more than last month</div>
+            <div className="stat-value text-primary">-</div>
+            {/* <div className="stat-desc">21% more than last month</div> */}
           </div>
 
           <div className="stat">
@@ -86,7 +86,7 @@ function Stat() {
               </svg>
             </div>
             <div className="stat-title">Total Accounts</div>
-            <div className="stat-value text-accent">5</div>
+            <div className="stat-value text-accent">-</div>
           </div>
         </div>
       </div>

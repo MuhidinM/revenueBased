@@ -2,8 +2,9 @@ import axios from "axios";
 import authHeader from "./auth-header";
 
 const API_URL = "http://localhost:5000/api/banckAccount/";
-const OTP_URL = "http://192.168.0.249:7090/tame/otp";
-const OTP_URL_CONFIRMATION = "http://192.168.0.249:7090/tame/otp/otpconfirm";
+const OTP_URL = "http://192.168.0.172:8081/payment/v1/sendOtp";
+const OTP_URL_CONFIRMATION =
+  "http://192.168.0.172:8081/payment/v1/otpVerification";
 const getBankAccountById = async (id) => {
   console.log(id);
   return await axios
@@ -47,7 +48,9 @@ const CreateBankAccount = async (
       bankName,
       userId,
     })
-    .then((response) => {console.log(response.data);});
+    .then((response) => {
+      console.log(response.data);
+    });
 };
 
 const BankAccountServices = {

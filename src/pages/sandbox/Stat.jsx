@@ -21,8 +21,8 @@ function Stat() {
                 />
               </svg>
             </div>
-            <div className="stat-title">Total Users</div>
-            <div className="stat-value text-primary">-</div>
+            <div className="stat-title">Total Transaction</div>
+            <div className="stat-value text-primary">4.6M</div>
           </div>
 
           <div className="stat">
@@ -42,8 +42,8 @@ function Stat() {
               </svg>
             </div>
             <div className="stat-title">Daily Transactions</div>
-            <div className="stat-value text-secondary">-</div>
-            {/* <div className="stat-desc">11% less than yesterday</div> */}
+            <div className="stat-value text-secondary">5.1k</div>
+            <div className="stat-desc">11% less than yesterday</div>
           </div>
 
           <div className="stat">
@@ -63,8 +63,30 @@ function Stat() {
               </svg>
             </div>
             <div className="stat-title">Monthly Transactions</div>
-            <div className="stat-value text-primary">-</div>
-            {/* <div className="stat-desc">21% more than last month</div> */}
+            <div className="stat-value text-primary">2.6M</div>
+            <div className="stat-desc">21% more than last month</div>
+          </div>
+
+          <div className="stat">
+            <div className="stat-figure text-accent">
+              <svg
+                className="w-6 h-6 text-accent"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                strokeWidth="2"
+                stroke="currentColor"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                {" "}
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />{" "}
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+              </svg>
+            </div>
+            <div className="stat-title">Total Accounts</div>
+            <div className="stat-value text-accent">5</div>
           </div>
         </div>
       </div>
