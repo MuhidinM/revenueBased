@@ -2,30 +2,35 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getTransactionDetail } from "../../store/actions/getTransactionAction";
+import { getTransactionDetailAll } from "../../store/actions/adminFetchAllTransactions";
 
 function Transactions() {
-  const TransactionList = useSelector((state) => state.transactionDetail);
+  const TransactionList = useSelector((state) => state.getTransactionDetailAll);
   // this.setState({data: data.conversations});
   console.log(TransactionList);
-  const { loading, error, transactionDetail } = TransactionList;
+  const { loading, error, transactionDetailAll } = TransactionList;
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     // console.log("useEffect");
-    dispatch(getTransactionDetail());
+    dispatch(getTransactionDetailAll());
   }, [dispatch]);
-  console.log(transactionDetail);
+  console.log(transactionDetailAll);
 
-  const renderList = transactionDetail.map((item, index) => (
+  const renderList = transactionDetailAll.map((item, index) => (
     <tr>
-      <th>{item.paymentId}</th>
+      <th>{item.transactionID}</th>
+      <td>{item.clientId}</td>
       <td>{item.messageId}</td>
-      <td>{item.debitAmount}</td>
-      <td>{item.creditAccount}</td>
-      <td>{item.debitAccount}</td>
-      <td>{item.debitCurrency}</td>
+      <td>{item.TRANSACTIONTYPE}</td>
+      <td>{item.DEBITACCTNO}</td>
+      <td>{item.DEBITAMOUNT}</td>
+      <td>{item.CREDITTHEIRREF}</td>
+      <td>{item.CREDITACCTNO}</td>
+      <td>{item.CREDITCURRENCY}</td>
+      <td>{item.TRANSACTION_DATE}</td>
+      <td>{item.STATUS}</td>
     </tr>
   ));
 
@@ -37,12 +42,17 @@ function Transactions() {
           <table className="table w-full">
             <thead>
               <tr>
-                <th>paymentId</th>
+                <th>transactionID</th>
+                <th>clientId</th>
                 <th>messageId</th>
-                <th>Debit Amount</th>
-                <th>CreditAccount</th>
-                <th>Debit Account</th>
-                <th>Currency</th>
+                <th>TRANSACTIONTYPE</th>
+                <th>DEBITACCTNO</th>
+                <th>DEBITAMOUNT</th>
+                <th>CREDITTHEIRREF</th>
+                <th>CREDITACCTNO</th>
+                <th>CREDITCURRENCY</th>
+                <th>TRANSACTION_DATE</th>
+                <th>STATUS</th>
               </tr>
             </thead>
             <tbody>{renderList}</tbody>
