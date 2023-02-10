@@ -24,7 +24,9 @@ function GenerateApiModal(props) {
               console.log("Your button is got Clicked");
               console.log(values);
 
-              dispatch(generateApiKey(values.accountNumber, values.expiryDate));
+              dispatch(
+                generateApiKey(currentUser.email_address, values.expiryDate)
+              );
 
               resolve(values);
               Swal.fire({

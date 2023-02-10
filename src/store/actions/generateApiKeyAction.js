@@ -25,26 +25,27 @@ export const getGeneratedApiKey = () => async (dispatch) => {
     });
   }
 };
-export const generateApiKey = (account_id, expiryDate) => async (dispatch) => {
-  console.log(account_id);
-  try {
-    const user = AuthService.getCurrentUser();
-    if (user) {
-      const generateNewApiKey = await AuthService.generateApiKey(
-        account_id,
-        expiryDate
-      );
-      console.log(generateNewApiKey);
+export const generateApiKey =
+  (email_address, expiryDate) => async (dispatch) => {
+    console.log(email_address);
+    try {
+      const user = AuthService.getCurrentUser();
+      if (user) {
+        const generateNewApiKey = await AuthService.generateApiKey(
+          email_address,
+          expiryDate
+        );
+        console.log(generateNewApiKey);
         dispatch(getGeneratedApiKey());
+        dispatch({
+          type: GENERATE_API_KEY,
+          payload: generateNewApiKey,
+        });
+      }
+    } catch (error) {
       dispatch({
-        type: GENERATE_API_KEY,
-        payload: generateNewApiKey,
+        type: GENERATE_API_KEY_ERROR,
+        payload: error,
       });
     }
-  } catch (error) {
-    dispatch({
-      type: GENERATE_API_KEY_ERROR,
-      payload: error,
-    });
-  }
-};
+  };
