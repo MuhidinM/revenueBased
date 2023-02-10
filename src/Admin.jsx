@@ -11,15 +11,15 @@ import Banks from "./pages/admin/Banks";
 import Messages from "./pages/admin/Messages";
 import Modal from "./components/Modal";
 import Activate from "./pages/admin/Activate";
-// import Usermanagement from "./pages/admin/Usermanagement";
 import Modal2 from "./components/Modal2";
-
 import Transactions from "./pages/admin/Transactions";
-//change is happened
+import DeviceManagement from "./pages/admin/DeviceManagement";
+//Motuma devices
 function Admin() {
   return (
     <>
       <Modal />
+
       {/* <Modal2 /> */}
       <div className="drawer drawer-mobile">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -31,6 +31,7 @@ function Admin() {
               <Route index element={<Home />}></Route>
               <Route path="users" element={<Users />}></Route>
               <Route path="transactions" element={<Transactions />}></Route>
+              <Route path="devices" element={<DeviceManagement />}></Route>
               <Route path="banks" element={<Banks />}></Route>
               <Route path="activate" element={<Activate />}></Route>
               <Route path="messages" element={<Messages />}></Route>

@@ -16,7 +16,7 @@ const getAdminTransactionsAall = async () => {
 };
 
 const getTransactionByTransactionId = async (transactionID) => {
-  console.log("am" + transactionID);
+  // console.log("am" + transactionID);
   return await axios
     .post(adminTransactionFetchUrl + "fetchByTransactionid", {
       transactionID,
