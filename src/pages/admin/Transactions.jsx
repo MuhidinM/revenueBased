@@ -2,33 +2,72 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getTransactionDetail } from "../../store/actions/getTransactionAction";
+import { getTransactionDetailAll } from "../../store/actions/adminFetchAllTransactions";
+import { getTransactionByTransactionId } from "../../store/actions/adminFetchAllTransactions";
 import Input from "../../components/Input";
+//This is for the transaction
 
 function Transactions() {
-  const TransactionList = useSelector((state) => state.transactionDetail);
+  const [conditionalRendering, setconditionalRendering] = useState(true);
+  const TransactionList = useSelector((state) => state.transactionDetailAll);
+  const TransactionById = useSelector(
+    (state) => state.transactionByTransactionId
+  );
   // this.setState({data: data.conversations});
   console.log(TransactionList);
-  const { loading, error, transactionDetail } = TransactionList;
+  const { loading, error, transactionDetailAll } = TransactionList;
+  const { loadingt, errort, transactionByTransactionId } = TransactionById;
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     // console.log("useEffect");
-    dispatch(getTransactionDetail());
+    dispatch(getTransactionDetailAll());
   }, [dispatch]);
-  console.log(transactionDetail);
+  console.log(transactionDetailAll);
 
-  const renderList = transactionDetail.map((item, index) => (
+  const renderList = conditionalRendering ? (
+    transactionDetailAll.map((item, index) => (
+      <tr>
+        <th>{item.transactionID}</th>
+        <td>{item.clientId}</td>
+        <td>{item.messageId}</td>
+        <td>{item.TRANSACTIONTYPE}</td>
+        <td>{item.DEBITACCTNO}</td>
+        <td>{item.DEBITAMOUNT}</td>
+        <td>{item.CREDITTHEIRREF}</td>
+        <td>{item.CREDITACCTNO}</td>
+        <td>{item.CREDITCURRENCY}</td>
+        <td>{item.TRANSACTION_DATE}</td>
+        <td>{item.STATUS}</td>
+      </tr>
+    ))
+  ) : (
     <tr>
-      <th>{item.paymentId}</th>
-      <td>{item.messageId}</td>
-      <td>{item.debitAmount}</td>
-      <td>{item.creditAccount}</td>
-      <td>{item.debitAccount}</td>
-      <td>{item.debitCurrency}</td>
+      <th>{transactionByTransactionId.transactionID}</th>
+      <td>{transactionByTransactionId.clientId}</td>
+      <td>{transactionByTransactionId.messageId}</td>
+      <td>{transactionByTransactionId.TRANSACTIONTYPE}</td>
+      <td>{transactionByTransactionId.DEBITACCTNO}</td>
+      <td>{transactionByTransactionId.DEBITAMOUNT}</td>
+      <td>{transactionByTransactionId.CREDITTHEIRREF}</td>
+      <td>{transactionByTransactionId.CREDITACCTNO}</td>
+      <td>{transactionByTransactionId.CREDITCURRENCY}</td>
+      <td>{transactionByTransactionId.TRANSACTION_DATE}</td>
+      <td>{transactionByTransactionId.STATUS}</td>
     </tr>
-  ));
+  );
+
+  const searchByTransactionId = (e) => {
+    e.preventDefault();
+    console.log(typeof e.target.value);
+    if (e.target.value.length >= 12) {
+      dispatch(getTransactionByTransactionId(e.target.value));
+    }
+    setconditionalRendering(false);
+
+    console.log("response" + transactionByTransactionId);
+  };
 
   // if (transactionDetail) {
   return (
@@ -44,7 +83,7 @@ function Transactions() {
             // value={props.values.lgname}
             // handleChange={props.handleChange}
             // onChange={props.handleChange}
-
+            handleChange={searchByTransactionId}
             place="Search by transactionid"
             required=""
           />
@@ -55,12 +94,17 @@ function Transactions() {
           <table className="table w-full">
             <thead>
               <tr>
-                <th>paymentId</th>
-                <th>messageId</th>
-                <th>Debit Amount</th>
-                <th>CreditAccount</th>
-                <th>Debit Account</th>
-                <th>Currency</th>
+                <th>TransactionID</th>
+                <th>ClientId</th>
+                <th>MessageId</th>
+                <th>TRANSACTION TYPE</th>
+                <th>DEBIT ACCTNO</th>
+                <th>DEBIT AMOUNT</th>
+                <th>CREDITTHEIRREF</th>
+                <th>CREDIT ACCTNO</th>
+                <th>CURRENCY</th>
+                <th>TRANSACTION_DATE</th>
+                <th>STATUS</th>
               </tr>
             </thead>
             <tbody>{renderList}</tbody>

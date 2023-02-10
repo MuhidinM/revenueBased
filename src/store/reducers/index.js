@@ -4,11 +4,14 @@ import user_profile_reducer from "./user_profile_reducer";
 import getTransactionDetailReducer from "./getTransactionDetailReducer";
 import generate_api_key_reducer from "./generateApiKeyReducer";
 import bankReducer from "./bankReducer";
+import adminFetchAllTransactions from "./adminFetchAllTransactions";
 // console.log(bank_accountReducer)
 export default combineReducers({
   accountsList: bank_accountReducer,
   userProfile: user_profile_reducer,
   apiKey: generate_api_key_reducer,
   transactionDetail: getTransactionDetailReducer,
+  transactionByTransactionId: getTransactionDetailReducer,
+  transactionDetailAll: adminFetchAllTransactions,
   bankInfo: bankReducer,
 });
