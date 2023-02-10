@@ -75,6 +75,30 @@ function Sidebar() {
             </Link>
           </li>
           <li>
+            <Link to={"/admin/devices"}>
+              <svg
+                className="w-6 h-6 text-primary"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                strokeWidth="2"
+                stroke="currentColor"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                {" "}
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"
+                />
+              </svg>
+              Devices
+            </Link>
+          </li>
+          <li>
             <Link to="/admin/activate">
               <svg
                 className="w-6 h-6 text-primary"
