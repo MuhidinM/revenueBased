@@ -6,7 +6,7 @@ const getAllRegisteredDevices = async () => {
   // console.log("calling endpoint");
 
   return await axios.get(fetchRegisteredDevicesUrl).then((response) => {
-    return response.data.allDevices;
+    return response.data.allDevices; //
   });
 };
 
