@@ -1,8 +1,11 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-
+import DomainComponent from "../../components/DomainComponent";
+import { addDomain } from "../../store/actions/domainAction";
+import AuthService from "../../services/auth.service";
+import { useDispatch, useSelector } from "react-redux";
 const MySwal = withReactContent(Swal);
 
 const columns = [
@@ -105,6 +108,21 @@ const Export = ({ onExport }) => (
 );
 
 function Domains() {
+  const addedDomain = useSelector((state) => state.domain);
+  console.log(addedDomain);
+  const { loading, error, domain } = addedDomain;
+  const dispatch = useDispatch();
+
+  const [currentUser, setCurrentUser] = useState({});
+  useEffect(() => {
+    const user = AuthService.getCurrentUser();
+    if (user) {
+      setCurrentUser(user);
+      // setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
+      // setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
+    }
+  }, []);
+
   const [filterText, setFilterText] = React.useState("");
   const actionsMemo = useMemo(
     () => <Export onExport={() => downloadCSV(data)} />,
@@ -139,73 +157,29 @@ function Domains() {
       MySwal.fire({
         title: "Register Your Domain",
         html: (
-          <div className="p-8">
-            <div>
-              <label
-                htmlFor="name"
-                className=" mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >
-                Name
-              </label>
-              <span className="text-sm link-error"></span>
-              <input
-                type="text"
-                name="name"
-                id="name"
-                placeholder="Epay"
-                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                //   value={props.values.text}
-                //   onChange={props.handleChange}
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="url"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >
-                URL
-              </label>
-              <span className="text-sm link-error"></span>
-              <input
-                type="text"
-                name="url"
-                id="url"
-                placeholder="epay.com"
-                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                //   value={props.values.text}
-                //   onChange={props.handleChange}
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="ip"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >
-                Ip Address
-              </label>
-              <span className="text-sm link-error"></span>
-              <input
-                type="text"
-                name="ip"
-                id="ip"
-                placeholder="124.122.12.10:8080"
-                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                //   value={props.values.text}
-                //   onChange={props.handleChange}
-              />
-            </div>
-          </div>
+          <DomainComponent
+            values={values}
+            onSubmit={(values) => {
+              console.log(values);
+              console.log(currentUser.id);
+              dispatch(addDomain(currentUser.id, values.name, values.url));
+              console.log("The button is got Clicked");
+            }}
+          ></DomainComponent>
         ),
         onClose: () => reject(),
         onCancel: () => Swal.close(),
-        showConfirmButton: true,
-        showCancelButton: true,
+        showConfirmButton: false,
+        showCancelButton: false,
         confirmButtonColor: "#01AFEF",
       });
     });
   };
   const showModal = () => {
-    showFormModal({})
+    showFormModal({
+      name: "",
+      url: "",
+    })
       .then((values) => console.log(values))
       .catch(() => console.log("Modal closed"));
   };

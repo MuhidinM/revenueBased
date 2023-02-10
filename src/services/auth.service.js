@@ -51,11 +51,11 @@ const resetPasswordRequest = (email) => {
     });
 };
 
-const generateApiKey = (id, expiryDate) => {
-  console.log(id);
+const generateApiKey = (email, expiryDate) => {
+  console.log(email);
   return axios
     .post(API_URL + "generateApiKey", {
-      id,
+      email,
       expiryDate,
     })
     .then((response) => {
