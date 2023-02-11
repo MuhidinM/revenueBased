@@ -12,8 +12,9 @@ import Messages from "./pages/admin/Messages";
 import Modal from "./components/Modal";
 import Activate from "./pages/admin/Activate";
 import Modal2 from "./components/Modal2";
-import Transactions from "./pages/admin/Transactions";
+import TransactionList from "./pages/admin/TransactionList";
 import DeviceManagement from "./pages/admin/DeviceManagement";
+import Devices from "./pages/user/Devices";
 //Motuma devices
 function Admin() {
   return (
@@ -30,8 +31,9 @@ function Admin() {
             <Routes>
               <Route index element={<Home />}></Route>
               <Route path="users" element={<Users />}></Route>
-              <Route path="transactions" element={<Transactions />}></Route>
-              <Route path="devices" element={<DeviceManagement />}></Route>
+              <Route path="transactions" element={<TransactionList />}></Route>
+              <Route path="device" element={<DeviceManagement />}></Route>
+              <Route path="devices" element={<Devices />}></Route>
               <Route path="banks" element={<Banks />}></Route>
               <Route path="activate" element={<Activate />}></Route>
               <Route path="messages" element={<Messages />}></Route>
