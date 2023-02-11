@@ -20,9 +20,11 @@ const getAdminBoard = () => {
 };
 
 const getAllPendingBussiness = async () => {
-  return await axios
-    .get(API_URL + "test/bussinessRequest")
-    .then((response) => response.data.bussinessDetail);
+  return await axios.get(API_URL + "test/bussinessRequest").then((response) => {
+    console.log("Calling Your services");
+    console.log(response.data);
+    return response.data.bussinessDetail;
+  });
 };
 
 const approvePendingBussinessById = (id) => {

@@ -1,34 +1,99 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import M2settingView from "./M2settingView";
+import ReactDOM from "react-dom";
+import Swal from "sweetalert2";
+import { useDispatch, useSelector } from "react-redux";
+import withReactContent from "sweetalert2-react-content";
+import { ModalForm } from "./ModalForm";
+import BankAccountServices from "../services/bank-account.services";
+import { approvePendingBussiness } from "../store/actions/BussinessAction";
+import Otp from "./Otp";
+import UserService from "../services/user.service";
+const MySwal = withReactContent(Swal);
 function Tablesite(props) {
+  const bussinesResponse = useSelector((state) => state.bussinessInfo);
+  console.log(bussinesResponse);
+  const { loading, error, pendingBussiness } = bussinesResponse;
+  const dispatch = useDispatch();
   const tableData = props.request;
   const [isOpen, setisOpen] = useState(false);
   const [dataIndex, setdataIndex] = useState();
 
-  // console.log(window.name);
-  // const [prop, setprop] = useState(null);
-  // if (props.request) {
-  //   setprop(props.request);
-  // }
+  const showFormModal = (values) => {
+    return new Promise((resolve, reject) => {
+      MySwal.fire({
+        title: "ADD ACCOUNTS",
+        html: (
+          <M2settingView
+            modal_data={values}
+            title="View Unactivated Account"
+            onSubmit={(value) => {
+              console.log(value);
+              console.log("Your Button is got Clicked");
+              dispatch(
+                approvePendingBussiness(value),
+                Swal.fire({
+                  icon: "success",
+                  title: "Verified Successfully",
+                  showConfirmButton: false,
+                  timer: 3000,
+                })
+              ).then(() => {
+                console.log("firing swal");
+              });
+
+              // UserService.approvePendingBussinessById(value).then(
+              //   (resp) => {
+              //     console.log(resp.message);
+              //     Swal.fire({
+              //       icon: "success",
+              //       title: "The Account Has been Successfully Activated",
+              //       showConfirmButton: false,
+              //       timer: 3000,
+              //     });
+              //   },
+              //   (error) => {
+              //     console.log(error.message);
+              //   }
+              // );
+            }}
+            onCancel={() => {
+              Swal.close();
+            }}
+          />
+        ),
+
+        onClose: () => reject(),
+        showConfirmButton: false,
+      });
+    });
+  };
+
   const setBoolean = (index) => () => {
     console.log(index);
     setisOpen(true);
     setdataIndex(index);
   };
+
   if (tableData) {
-    console.log(tableData);
+    const showModal = (index) => {
+      showFormModal(tableData[index])
+        .then((values) => console.log(values))
+        .catch(() => console.log("Modal closed"));
+    };
+
     const renderList = tableData.map((item, index) => (
       <tr>
         <th>{item.bussiness_id}</th>
         <td>{item.legalName}</td>
         <td>{item.incorporationType}</td>
-        <td>{item.status === "0"?("pending"): "approved"}</td>
+        <td>{item.status === "0" ? "pending" : "approved"}</td>
         <td>
           <label
             htmlFor="my-modal-3"
             className="cursor-pointer"
-            onClick={setBoolean(index)}
+            onClick={() => showModal(index)}
           >
             <svg
               className="w-6 h-6 text-primary"
@@ -52,6 +117,7 @@ function Tablesite(props) {
         </td>
       </tr>
     ));
+
     return (
       <>
         <div className="overflow-x-auto">
@@ -72,26 +138,6 @@ function Tablesite(props) {
               {renderList}
             </tbody>
           </table>
-          <input type="checkbox" id="my-modal-3" className="modal-toggle" />
-          <div className="modal">
-            <div className="relative w-11/12 max-w-3xl modal-box">
-              <label
-                htmlFor="my-modal-3"
-                className="absolute btn btn-sm btn-circle right-2 top-2"
-              >
-                ✕
-              </label>
-
-              {window.location.pathname === "/admin/activate" && isOpen ? (
-                <M2settingView
-                  modal_data={tableData[dataIndex]}
-                  title="View Unactivated Account"
-                />
-              ) : (
-                ""
-              )}
-            </div>
-          </div>
         </div>
       </>
     );

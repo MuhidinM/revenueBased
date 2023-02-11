@@ -13,7 +13,7 @@ import Settings from "./pages/user/Settings";
 import Generateqr from "./pages/user/Generateqr";
 import DomainList from "./pages/user/DomainList";
 import Devices from "./pages/user/Devices";
-
+import MultiStepForm from "./pages/user/MultiStepForm";
 function Users() {
   return (
     <>
@@ -32,7 +32,7 @@ function Users() {
             <Route path="devices" element={<Devices />}></Route>
             <Route path="qr" element={<Generateqr />}></Route>
             <Route path="profile" element={<Profile />}></Route>
-            <Route path="setting" element={<Settings />}></Route>
+            <Route path="setting" element={<MultiStepForm />}></Route>
             <Route path="*" element={<E404 />}></Route>
           </Routes>
         </div>
