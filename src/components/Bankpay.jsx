@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
+import styled from "styled-components";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import PaymentServices from "../services/payment.service";
+// import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Otp from "./Otp";
 import BankAccountServices from "../../src/services/bank-account.services";
 
@@ -29,6 +32,21 @@ function Bankpay() {
   const changeState = () => {
     setVerified(true);
   };
+  const navigate = useNavigate();
+  const handleClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    navigate("/epass");
+  };
+  const Button = styled.button`
+    background-color: black;
+    color: white;
+    font-size: 20px;
+    padding: 10px 60px;
+    border-radius: 5px;
+    margin: 10px 0px;
+    cursor: pointer;
+  `;
   return (
     <>
       {verified === 0 ? (
@@ -109,6 +127,7 @@ function Bankpay() {
                     >
                       Verify
                     </button>
+                    <button onClick={handleClick}>SignUp</button>
                   </div>
                 </div>
               </>

@@ -1,4 +1,9 @@
-import { GET_ADMIN_ALL_DEVICES, GET_ADMIN_ALL_DEVICES_ERROR } from "../types";
+import {
+  GET_ADMIN_ALL_DEVICES,
+  GET_ADMIN_ALL_DEVICES_ERROR,
+  // REGISTER_DEVICES,
+  // REGISTER_DEVICES_ERROR,
+} from "../types";
 
 const initialState = {
   deviceDetail: [],
@@ -6,7 +11,7 @@ const initialState = {
 };
 export default function (state = initialState, action) {
   //   console.log(state);
-  console.log(action.payload);
+  console.log("heloo" + action.payload);
   switch (action.type) {
     case GET_ADMIN_ALL_DEVICES:
       //   console.log(action.payload);
@@ -16,10 +21,7 @@ export default function (state = initialState, action) {
         loading: false,
       };
     case GET_ADMIN_ALL_DEVICES_ERROR:
-      //   console.log(action.payload);
       return {
-        ...state,
-
         loading: false,
         error: action.payload,
       };

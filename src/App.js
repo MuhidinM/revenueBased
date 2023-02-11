@@ -8,6 +8,7 @@ import Error from "./Error";
 import Users from "./Users";
 import OTP from "./pages/auth/OTP";
 import PrivateRoiutes from "./pages/auth/PrivateRoutes";
+import EpassRegistration from "./components/EpassRegistration";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Routes>
         <Route path="/*" element={<Home />}></Route>
         <Route path="/gateway/*" element={<Gateway />}></Route>
+        <Route path="epass" element={<EpassRegistration />}></Route>
         <Route path="/otp" element={<OTP />}></Route>
         <Route path="/auth/*" element={<Auth />}></Route>
         <Route element={<PrivateRoiutes />}>

@@ -3,19 +3,54 @@ import DataTable from "react-data-table-component";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { useDispatch, useSelector } from "react-redux";
-import RegisteredDeviceServices from "../../services/allowedDevices.services";
+
+import { getTransactionDetailAll } from "../../store/actions/adminFetchAllTransactions";
 import AuthService from "../../services/auth.service";
-import { getAllRegisterdDevices } from "../../store/actions/deviceManagementAction";
 const MySwal = withReactContent(Swal);
 const columns = [
   {
-    name: "Device Name",
-    selector: (row) => row.deviceId,
+    name: "Transaction ID",
+    selector: (row) => row.transactionID,
     sortable: true,
   },
   {
-    name: "Merchant ID",
-    selector: (row) => row.userUserId,
+    name: "Message ID",
+    selector: (row) => row.messageId,
+    sortable: true,
+  },
+  {
+    name: "Credit Account",
+    selector: (row) => row.CREDITACCTNO,
+    sortable: true,
+  },
+  {
+    name: "Debit Account",
+    selector: (row) => row.DEBITACCTNO,
+    sortable: true,
+  },
+  {
+    name: "Status",
+    selector: (row) => row.STATUS,
+    sortable: true,
+  },
+  {
+    name: "Amount",
+    selector: (row) => row.DEBITAMOUNT,
+    sortable: true,
+  },
+  {
+    name: "TRANSACTION_DATE",
+    selector: (row) => row.TRANSACTION_DATE,
+    sortable: true,
+  },
+  {
+    name: "PROCESSINGDATE",
+    selector: (row) => row.PROCESSINGDATE,
+    sortable: true,
+  },
+  {
+    name: "TRANSACTIONTYPE",
+    selector: (row) => row.TRANSACTIONTYPE,
     sortable: true,
   },
 ];
@@ -106,20 +141,20 @@ const Export = ({ onExport }) => (
   </button>
 );
 
-function Devices() {
+function TransactionList() {
   const [tableData, setTableData] = useState([]);
-  const addedDevices = useSelector((state) => state.deviceDetail);
-  console.log("Devices list" + addedDevices);
-  const { loading, error, deviceDetail } = addedDevices;
-  console.log("Fetched devices" + deviceDetail);
+  const getAllDevices = useSelector((state) => state.transactionDetailAll);
+  console.log("Devices list" + getAllDevices);
+  const { loading, error, transactionDetailAll } = getAllDevices;
+  console.log("Fetched devices" + transactionDetailAll);
   const dispatch = useDispatch();
   const [currentUser, setCurrentUser] = useState({});
   useEffect(() => {
     const user = AuthService.getCurrentUser();
     if (user) {
       setCurrentUser(user);
-      dispatch(getAllRegisterdDevices());
-      setTableData(deviceDetail);
+      dispatch(getTransactionDetailAll());
+      setTableData(transactionDetailAll);
     }
   }, []);
   const [filterText, setFilterText] = React.useState("");
@@ -194,9 +229,9 @@ function Devices() {
   return (
     <div className="m-4">
       <DataTable
-        title="Devices List"
+        title="Transaction Lists"
         columns={columns}
-        data={deviceDetail}
+        data={transactionDetailAll}
         pagination
         paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
         subHeader
@@ -210,4 +245,4 @@ function Devices() {
   );
 }
 
-export default Devices;
+export default TransactionList;
