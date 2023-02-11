@@ -16,15 +16,15 @@ const addUrls = async (user_id, name, url) => {
       return response.data;
     });
 };
-const getBank = async () => {
-  return await axios.get(API_URL + "getbank").then((response) => {
+const getDomain = async () => {
+  return await axios.get(API_URL + "getdomain").then((response) => {
     console.log(response.data.bankDetail);
-    return response.data.bankDetail;
+    return response.data.urlDetail;
   });
 };
 const DomainServices = {
   addUrls,
-  getBank,
+  getDomain,
 };
 
 export default DomainServices;
