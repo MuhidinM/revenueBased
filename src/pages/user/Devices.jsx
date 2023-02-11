@@ -2,12 +2,11 @@ import React, { useMemo } from "react";
 import DataTable from "react-data-table-component";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-
-
+import RegisteredDeviceServices from "../../services/allowedDevices.services";
 const MySwal = withReactContent(Swal);
 const columns = [
   {
-    name: "Title",
+    name: "Device MAC",
     selector: (row) => row.title,
     sortable: true,
   },
@@ -21,13 +20,13 @@ const columns = [
 const data = [
   {
     id: 1,
-    title: "Beetlejuice",
-    year: "1988",
+    title: "Mac123qaz",
+    year: "2023",
   },
   {
     id: 2,
-    title: "Ghostbusters",
-    year: "1984",
+    title: "Mac123qaz",
+    year: "2022",
   },
 ];
 

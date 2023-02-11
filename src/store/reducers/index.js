@@ -16,6 +16,7 @@ export default combineReducers({
   transactionByTransactionId: getTransactionDetailReducer,
   transactionDetailAll: adminFetchAllTransactions,
   deviceDetail: deviceManagementReducer,
+  registerDevice: deviceManagementReducer,
   bankInfo: bankReducer,
   domain: domainReducer,
   // domains: domainReducer,
