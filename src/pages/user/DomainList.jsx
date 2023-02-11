@@ -3,19 +3,27 @@ import DataTable from "react-data-table-component";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { useDispatch, useSelector } from "react-redux";
-import RegisteredDeviceServices from "../../services/allowedDevices.services";
+// import RegisteredDeviceServices from "../../services/allowedDevices.services";
 import AuthService from "../../services/auth.service";
-import { getAllRegisterdDevices } from "../../store/actions/deviceManagementAction";
+import DomainComponent from "../../components/DomainComponent";
+// import { getAllRegisterdDevices } from "../../store/actions/deviceManagementAction";
+
+import { addDomain, getDomain } from "../../store/actions/domainAction";
 const MySwal = withReactContent(Swal);
 const columns = [
   {
-    name: "Device Name",
-    selector: (row) => row.deviceId,
+    name: "URL name",
+    selector: (row) => row.urlsName,
+    sortable: true,
+  },
+  {
+    name: "URL",
+    selector: (row) => row.url,
     sortable: true,
   },
   {
     name: "Merchant ID",
-    selector: (row) => row.userUserId,
+    selector: (row) => row.urls_id,
     sortable: true,
   },
 ];
@@ -106,20 +114,23 @@ const Export = ({ onExport }) => (
   </button>
 );
 
-function Devices() {
+function DomainList() {
   const [tableData, setTableData] = useState([]);
-  const addedDevices = useSelector((state) => state.deviceDetail);
-  console.log("Devices list" + addedDevices);
-  const { loading, error, deviceDetail } = addedDevices;
-  console.log("Fetched devices" + deviceDetail);
+  const addedDomain = useSelector((state) => state.domain);
+  // const addedDomain = useSelector((state) => console.log(state));
+  console.log(addedDomain);
+  const { loading, error, domain, domains } = addedDomain;
   const dispatch = useDispatch();
   const [currentUser, setCurrentUser] = useState({});
   useEffect(() => {
     const user = AuthService.getCurrentUser();
     if (user) {
       setCurrentUser(user);
-      dispatch(getAllRegisterdDevices());
-      setTableData(deviceDetail);
+      dispatch(getDomain());
+      setTableData(domains);
+
+      // setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
+      // setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
     }
   }, []);
   const [filterText, setFilterText] = React.useState("");
@@ -156,47 +167,46 @@ function Devices() {
       MySwal.fire({
         title: "Register Your Domain",
         html: (
-          <div className="p-8">
-            <div>
-              <label
-                htmlFor="id"
-                className=" mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >
-                Device Id
-              </label>
-              <span className="text-sm link-error"></span>
-              <input
-                type="text"
-                name="id"
-                id="id"
-                placeholder="COOP-00-000"
-                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                //   value={props.values.text}
-                //   onChange={props.handleChange}
-              />
-            </div>
-          </div>
+          <DomainComponent
+            values={values}
+            onSubmit={(values) => {
+              console.log(values);
+              console.log(currentUser.id);
+              dispatch(addDomain(currentUser.id, values.name, values.url));
+              console.log("The button is got Clicked");
+            }}
+          ></DomainComponent>
         ),
         onClose: () => reject(),
         onCancel: () => Swal.close(),
-        showConfirmButton: true,
-        showCancelButton: true,
+        showConfirmButton: false,
+        showCancelButton: false,
         confirmButtonColor: "#01AFEF",
       });
     });
   };
   const showModal = () => {
-    showFormModal({})
+    showFormModal({
+      name: "",
+      url: "",
+    })
       .then((values) => console.log(values))
       .catch(() => console.log("Modal closed"));
   };
 
   return (
     <div className="m-4">
+      <button
+        type="button"
+        className="mb-4 btn btn-outline btn-primary"
+        onClick={showModal}
+      >
+        Add Domain
+      </button>
       <DataTable
         title="Devices List"
         columns={columns}
-        data={deviceDetail}
+        data={domains}
         pagination
         paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
         subHeader
@@ -210,4 +220,4 @@ function Devices() {
   );
 }
 
-export default Devices;
+export default DomainList;

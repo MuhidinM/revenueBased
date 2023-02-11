@@ -10,24 +10,24 @@ function DeviceManagement() {
   // const [conditionalRendering, setconditionalRendering] = useState(true);
   const DeviceList = useSelector((state) => state.deviceDetail);
   // this.setState({data: data.conversations});
-  console.log(DeviceList);
+  console.log("List of dv" + DeviceList);
   const { loading, error, deviceDetail } = DeviceList;
   const dispatch = useDispatch();
   console.log(deviceDetail);
   useEffect(() => {
     // console.log("useEffect");
     dispatch(getAllRegisterdDevices());
-  }, [dispatch]);
+  }, []);
   console.log(deviceDetail);
-  const renderList =
-    deviceDetail instanceof Array
-      ? deviceDetail.map((item, index) => (
-          <tr>
-            <th>{item.deviceId}</th>
-            <td>{item.id}</td>
-          </tr>
-        ))
-      : "";
+  // const renderList =
+  // deviceDetail instanceof Array
+  //   ? deviceDetail.map((item, index) => (
+  //       <tr>
+  //         <th>{item.deviceId}</th>
+  //         <td>{item.id}</td>
+  //       </tr>
+  //     ))
+  //   : "";
   // if (transactionDetail) {
   return (
     <>
@@ -57,7 +57,6 @@ function DeviceManagement() {
                 <th>Merchant ID</th>
               </tr>
             </thead>
-            <tbody>{renderList}</tbody>
           </table>
         </div>
       </div>
