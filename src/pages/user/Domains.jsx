@@ -26,22 +26,6 @@ const columns = [
       sort: false,
     },
   },
-  {
-    name: "city",
-    label: "City",
-    options: {
-      filter: true,
-      sort: false,
-    },
-  },
-  {
-    name: "state",
-    label: "State",
-    options: {
-      filter: true,
-      sort: false,
-    },
-  },
 ];
 
 // const data = [
@@ -118,7 +102,7 @@ function Domains() {
       {console.log(tableData)}
       <MUIDataTable
         title={"Domain List"}
-        data={tableData}
+        data={domains}
         columns={columns}
         options={options}
       />

@@ -3,22 +3,24 @@ import UserService from "../services/user.service";
 
 function M2settingView(props) {
   const m2SettingData = props.modal_data;
-
+  console.log(m2SettingData);
   if (m2SettingData) {
     // setdataId(m2SettingData.bussiness_id);
     // console.log(m2SettingData.bussiness_id);
     // console.log(tradeLicenseImage);
-    const onSubmit = () => {
-      console.log("Clicked");
-      UserService.approvePendingBussinessById(m2SettingData.bussiness_id).then(
-        (resp) => {
-          console.log(resp.message);
-        },
-        (error) => {
-          console.log(error.message);
-        }
-      );
-    };
+    // const onSubmit = () => {
+    //   console.log("Clicked");
+    // UserService.approvePendingBussinessById(m2SettingData.bussiness_id).then(
+    //   (resp) => {
+    //     console.log(resp.message);
+    //   },
+    //   (error) => {
+    //     console.log(error.message);
+    //   }
+    // );
+    // };
+
+    console.log("Modal Content Has been Called");
 
     // console.log(m2SettingData.tradeLicense);
 
@@ -119,10 +121,17 @@ function M2settingView(props) {
             </div>
             <button
               type="submit"
-              onClick={onSubmit}
+              onClick={() => props.onSubmit(m2SettingData.bussiness_id)}
               className="inline-flex items-center px-5 py-3.5 mt-4 text-sm font-medium text-center text-white rounded-lg sm:mt-6 bg-primary focus:ring-4 focus:ring-primary dark:focus:ring-primary hover:bg-primary"
             >
               Activate
+            </button>
+            <button
+              type="submit"
+              onClick={props.onCancel}
+              className="inline-flex items-center px-5 py-3.5 mt-4 text-sm font-medium text-center text-white rounded-lg sm:mt-6 bg-primary focus:ring-4 focus:ring-primary dark:focus:ring-primary hover:bg-primary"
+            >
+              Cancel
             </button>
           </section>
         </div>
