@@ -3,154 +3,76 @@ import DataTable from "react-data-table-component";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import DomainComponent from "../../components/DomainComponent";
-import { addDomain } from "../../store/actions/domainAction";
+import { addDomain, getDomain } from "../../store/actions/domainAction";
 import AuthService from "../../services/auth.service";
 import { useDispatch, useSelector } from "react-redux";
+import MUIDataTable from "mui-datatables";
 const MySwal = withReactContent(Swal);
 
 const columns = [
   {
-    name: "Title",
-    selector: (row) => row.title,
-    sortable: true,
+    name: "urlsName",
+    label: "Name",
+    options: {
+      filter: true,
+      sort: true,
+    },
   },
   {
-    name: "Year",
-    selector: (row) => row.year,
-    sortable: true,
+    name: "url",
+    label: "url",
+    options: {
+      filter: true,
+      sort: false,
+    },
+  },
+  {
+    name: "city",
+    label: "City",
+    options: {
+      filter: true,
+      sort: false,
+    },
+  },
+  {
+    name: "state",
+    label: "State",
+    options: {
+      filter: true,
+      sort: false,
+    },
   },
 ];
 
-const data = [
-  {
-    id: 1,
-    title: "Beetlejuice",
-    year: "1988",
-  },
-  {
-    id: 2,
-    title: "Ghostbusters",
-    year: "1984",
-  },
-];
-
-const FilterComponent = ({ filterText, onFilter, onClear }) => (
-  <>
-    <input
-      id="search"
-      type="text"
-      placeholder="Filter By Title"
-      aria-label="Search Input"
-      value={filterText}
-      onChange={onFilter}
-      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm focus:ring-primary focus:border-primary block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-    />
-
-    <button
-      type="button"
-      onClick={onClear}
-      className="text-white bg-primary hover:bg-primary focus:ring-4 focus:outline-none focus:ring-primary font-medium text-sm px-5 py-2.5 text-center dark:bg-primary dark:hover:bg-primary dark:focus:ring-primary"
-    >
-      Clear
-    </button>
-  </>
-);
-
-function convertArrayOfObjectsToCSV(array) {
-  let result;
-
-  const columnDelimiter = ",";
-  const lineDelimiter = "\n";
-  const keys = Object.keys(data[0]);
-
-  result = "";
-  result += keys.join(columnDelimiter);
-  result += lineDelimiter;
-
-  array.forEach((item) => {
-    let ctr = 0;
-    keys.forEach((key) => {
-      if (ctr > 0) result += columnDelimiter;
-
-      result += item[key];
-
-      ctr++;
-    });
-    result += lineDelimiter;
-  });
-
-  return result;
-}
-
-function downloadCSV(array) {
-  const link = document.createElement("a");
-  let csv = convertArrayOfObjectsToCSV(array);
-  if (csv == null) return;
-
-  const filename = "export.csv";
-
-  if (!csv.match(/^data:text\/csv/i)) {
-    csv = `data:text/csv;charset=utf-8,${csv}`;
-  }
-
-  link.setAttribute("href", encodeURI(csv));
-  link.setAttribute("download", filename);
-  link.click();
-}
-
-const Export = ({ onExport }) => (
-  <button
-    onClick={(e) => onExport(e.target.value)}
-    className="text-white bg-primary hover:bg-primary focus:ring-4 focus:outline-none focus:ring-primary font-medium text-sm px-2.5 py-2.5 mr-4 text-center dark:bg-primary dark:hover:bg-primary dark:focus:ring-primary"
-  >
-    Export
-  </button>
-);
+// const data = [
+//   { name: "Joe James", company: "Test Corp", city: "Yonkers", state: "NY" },
+//   { name: "John Walsh", company: "Test Corp", city: "Hartford", state: "CT" },
+//   { name: "Bob Herm", company: "Test Corp", city: "Tampa", state: "FL" },
+//   { name: "James Houston", company: "Test Corp", city: "Dallas", state: "TX" },
+// ];
+const options = {
+  filterType: "checkbox",
+};
 
 function Domains() {
+  const [tableData, setTableData] = useState([]);
   const addedDomain = useSelector((state) => state.domain);
+  // const addedDomain = useSelector((state) => console.log(state));
   console.log(addedDomain);
-  const { loading, error, domain } = addedDomain;
+  const { loading, error, domain, domains } = addedDomain;
   const dispatch = useDispatch();
-
   const [currentUser, setCurrentUser] = useState({});
   useEffect(() => {
     const user = AuthService.getCurrentUser();
     if (user) {
       setCurrentUser(user);
+      dispatch(getDomain());
+      setTableData(domains);
+
       // setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
       // setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
     }
   }, []);
-
-  const [filterText, setFilterText] = React.useState("");
-  const actionsMemo = useMemo(
-    () => <Export onExport={() => downloadCSV(data)} />,
-    []
-  );
-  const [resetPaginationToggle, setResetPaginationToggle] =
-    React.useState(false);
-  const filteredItems = data.filter(
-    (item) =>
-      item.title && item.title.toLowerCase().includes(filterText.toLowerCase())
-  );
-
-  const subHeaderComponentMemo = React.useMemo(() => {
-    const handleClear = () => {
-      if (filterText) {
-        setResetPaginationToggle(!resetPaginationToggle);
-        setFilterText("");
-      }
-    };
-
-    return (
-      <FilterComponent
-        onFilter={(e) => setFilterText(e.target.value)}
-        onClear={handleClear}
-        filterText={filterText}
-      />
-    );
-  }, [filterText, resetPaginationToggle]);
 
   const showFormModal = (values) => {
     return new Promise((resolve, reject) => {
@@ -193,18 +115,12 @@ function Domains() {
       >
         Add Domain
       </button>
-      <DataTable
-        title="Domains List"
+      {console.log(tableData)}
+      <MUIDataTable
+        title={"Domain List"}
+        data={tableData}
         columns={columns}
-        data={filteredItems}
-        pagination
-        paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
-        subHeader
-        subHeaderComponent={subHeaderComponentMemo}
-        selectableRows
-        persistTableHeadstriped
-        highlightOnHover
-        actions={actionsMemo}
+        options={options}
       />
     </div>
   );

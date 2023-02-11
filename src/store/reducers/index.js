@@ -6,7 +6,7 @@ import generate_api_key_reducer from "./generateApiKeyReducer";
 import bankReducer from "./bankReducer";
 import adminFetchAllTransactions from "./adminFetchAllTransactions";
 import deviceManagementReducer from "./deviceManagementReducer";
-import domainReducer from "./deviceManagementReducer";
+import domainReducer from "./domainReducer";
 // console.log(bank_accountReducer)
 export default combineReducers({
   accountsList: bank_accountReducer,
@@ -18,4 +18,5 @@ export default combineReducers({
   deviceDetail: deviceManagementReducer,
   bankInfo: bankReducer,
   domain: domainReducer,
+  // domains: domainReducer,
 });
