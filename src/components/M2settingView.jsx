@@ -30,7 +30,7 @@ function M2settingView(props) {
         <div className="">
           <section className="bg-white dark:bg-gray-900">
             <div className="grid gap-4 pt-8 sm:grid-cols-4 sm:gap-6">
-              <div className="divider sm:col-span-4">Business Information</div>
+              <div className="sm:col-span-4">Business Information</div>
               <div className="w-full">
                 <b>Legal Name:</b> <br />
                 {m2SettingData.legalName}
