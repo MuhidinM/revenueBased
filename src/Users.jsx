@@ -14,6 +14,7 @@ import Generateqr from "./pages/user/Generateqr";
 import DomainList from "./pages/user/DomainList";
 import Devices from "./pages/user/Devices";
 import MultiStepForm from "./pages/user/MultiStepForm";
+import ActivatePrimaryAccount from "./pages/user/ActivatePrimaryAccount";
 function Users() {
   return (
     <>

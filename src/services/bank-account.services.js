@@ -19,6 +19,13 @@ const setPrimaryAccount = async (userId, account_id) => {
     .then((response) => response.data.bankAccounts);
 };
 
+const activateAccount = async (id, acId) => {
+  console.log(id, acId);
+  return await axios
+    .get(API_URL + `activateAccount?&id=${id}&acId=${acId}`)
+    .then((response) => response.data.message);
+};
+
 const sendOtp = async (mobile) => {
   console.log(mobile);
   return await axios
@@ -59,6 +66,7 @@ const BankAccountServices = {
   setPrimaryAccount,
   sendOtp,
   confirmOtp,
+  activateAccount,
 };
 
 export default BankAccountServices;
