@@ -36,8 +36,39 @@ function Registration() {
   let navigate = useNavigate();
   return (
     <>
-      <section className="bg-gray-50 dark:bg-gray-900">
-        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+      <section className="bg-gray-50 dark:bg-gray-900 lg:flex">
+        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:w-1/2 md:h-screen lg:py-0">
+          <div className="w-full max-w-xl mb-12 xl:mb-0 xl:pr-16 xl:w-7/12">
+            <img
+              className="w-full mb-4"
+              src="../Cooperative_Bank_of_Oromia.png"
+              alt="front credit card"
+            />
+            <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold tracking-tight text-black sm:text-4xl sm:leading-none">
+              Smarter Payments. Smarter Business
+            </h2>
+            <p className="max-w-xl mb-4 text-base text-gray-900 md:text-lg">
+              We're a payment gateway platform for online ecommerce sites, and
+              we've got the speed, security, and reliability you need to make
+              sure your customers get what they want.
+            </p>
+            <a
+              href="/"
+              aria-label=""
+              className="inline-flex items-center font-semibold tracking-wider transition-colors duration-200 text-primary hover:text-blue-800"
+            >
+              Learn more
+              <svg
+                className="inline-block w-3 ml-2"
+                fill="currentColor"
+                viewBox="0 0 12 12"
+              >
+                <path d="M9.707,5.293l-5-5A1,1,0,0,0,3.293,1.707L7.586,6,3.293,10.293a1,1,0,1,0,1.414,1.414l5-5A1,1,0,0,0,9.707,5.293Z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:w-1/2 md:h-screen lg:py-0">
           <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
@@ -270,10 +301,8 @@ function Registration() {
                               aria-describedby="terms"
                               type="checkbox"
                               value={props.values.acceptTerms}
-                            
                               onChange={props.handleChange}
                               className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary dark:ring-offset-gray-800"
-                              
                             />
                           </div>
                           <div className="ml-3 text-sm">
