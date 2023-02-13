@@ -7,6 +7,7 @@ function Landing() {
     <>
       <section className="bg-white dark:bg-gray-900">
         <div className="max-w-screen-xl px-4 py-8 mx-auto mt-32 text-center lg:px-12">
+        {/* <div class="w-36 h-36 bg-primary rounded-full"></div> */}
           <Link
             to={"/"}
             className="inline-flex items-center justify-between px-1 py-1 pr-4 text-sm text-gray-700 bg-gray-100 rounded-full mb-7 dark:bg-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700"

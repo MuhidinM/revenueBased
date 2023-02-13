@@ -41,7 +41,7 @@ function Registration() {
           <div className="w-full max-w-xl mb-12 xl:mb-0 xl:pr-16 xl:w-7/12">
             <img
               className="w-full mb-4"
-              src="../Cooperative_Bank_of_Oromia.png"
+              src="../PaymentGateway.png"
               alt="front credit card"
             />
             <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold tracking-tight text-black sm:text-4xl sm:leading-none">

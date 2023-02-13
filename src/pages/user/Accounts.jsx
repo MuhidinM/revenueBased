@@ -37,7 +37,7 @@ function Accounts() {
         icon: "warning",
         // dangerMode: true,
         showCancelButton: true,
-        confirmButtonColor: "#01AFEF",
+        confirmButtonColor: "#01ADED",
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes!",
       }).then((result) => {
@@ -73,7 +73,7 @@ function Accounts() {
                       dispatch(setPrimaryAccount(e.target.value));
                       Swal.fire({
                         icon: "success",
-                        title: "Your work has been saved",
+                        title: "You have successfuly changed primary account",
                         showConfirmButton: false,
                         timer: 3000,
                       });
