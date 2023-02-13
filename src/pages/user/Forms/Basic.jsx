@@ -48,29 +48,10 @@ const transaction = [
 
 function Basic() {
   const [successful, setSuccessful] = useState(false);
-  const [message, setMessage] = useState("");
-  const [tradeLicenseImage, settradeLicenseImage] = useState();
-  const [tradeLicenseImageName, settradeLicenseImageName] = useState("");
-  const [proofOfAddress, setproofOfAddress] = useState({});
-  const [proofOfAddressImageName, setproofOfAddressImageName] = useState("");
+
   const { activeStepIndex, setActiveStepIndex, formData, setFormData } =
     useContext(FormContext);
 
-  const renderError = (message) => (
-    <p className="italic text-red-600">{message}</p>
-  );
-
-  const file1 = (e) => {
-    console.log("Hello");
-    setproofOfAddress(e.target.files[0]);
-    setproofOfAddressImageName(e.target.files[0].name);
-  };
-
-  const fileInputTOForm = (e) => {
-    console.log(e.currentTarget.id);
-    settradeLicenseImage(e.target.files[0]);
-    settradeLicenseImageName(e.target.files[0].name);
-  };
   const validationSchema = Yup.object().shape({
     lgname: Yup.string().required("Legal Name is required"),
     incorporation: Yup.string().required("Incorporation is required"),
@@ -95,7 +76,7 @@ function Basic() {
       validationSchema={validationSchema}
       onSubmit={(values) => {
         const data = { ...formData, ...values };
-        console.log(data)
+        console.log(data);
         setFormData(data);
         setActiveStepIndex(activeStepIndex + 1);
       }}

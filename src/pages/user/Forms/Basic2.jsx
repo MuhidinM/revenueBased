@@ -8,51 +8,9 @@ import Textarea from "../../../components/Textarea";
 import Addressproof from "../../../components/Addressproof";
 import * as Yup from "yup";
 
-const region = [
-  { label: "Afar", value: "af" },
-  { label: "Amhara", value: "am" },
-  { label: "Benishangul", value: "bg" },
-  { label: "Fedral", value: "fd" },
-  { label: "Gambela", value: "gm" },
-  { label: "Harar", value: "hr" },
-  { label: "Oromia", value: "or" },
-  { label: "Sidama", value: "sd" },
-  { label: "Somalia", value: "sm" },
-  { label: "SNNPR", value: "sn" },
-  { label: "Tigray", value: "tg" },
-];
-const incorporation = [
-  { label: "A", value: "A" },
-  { label: "B", value: "B" },
-];
-const industry = [
-  { label: "A", value: "A" },
-  { label: "B", value: "B" },
-];
-const category = [
-  { label: "A", value: "A" },
-  { label: "B", value: "B" },
-];
-const staffsize = [
-  { label: "Up to 5", value: "5" },
-  { label: "6 to 15", value: "15" },
-  { label: "16 to 50", value: "50" },
-  { label: "Above 50", value: "a50" },
-];
-const transaction = [
-  { label: "Below 10,000", value: "10000" },
-  { label: "10,000 to 50,000", value: "50000" },
-  { label: "50,000 to 100,000", value: "100000" },
-  { label: "Above 100,000", value: "a100000" },
-];
-
 function Basic2() {
   const [successful, setSuccessful] = useState(false);
-  const [message, setMessage] = useState("");
-  const [tradeLicenseImage, settradeLicenseImage] = useState();
-  const [tradeLicenseImageName, settradeLicenseImageName] = useState("");
-  const [proofOfAddress, setproofOfAddress] = useState({});
-  const [proofOfAddressImageName, setproofOfAddressImageName] = useState("");
+
   const { activeStepIndex, setActiveStepIndex, formData, setFormData } =
     useContext(FormContext);
 
@@ -60,17 +18,6 @@ function Basic2() {
     <p className="italic text-red-600">{message}</p>
   );
 
-  const file1 = (e) => {
-    console.log("Hello");
-    setproofOfAddress(e.target.files[0]);
-    setproofOfAddressImageName(e.target.files[0].name);
-  };
-
-  const fileInputTOForm = (e) => {
-    console.log(e.currentTarget.id);
-    settradeLicenseImage(e.target.files[0]);
-    settradeLicenseImageName(e.target.files[0].name);
-  };
   const FILE_SIZE = 160 * 1024;
   const SUPPORTED_FORMATS = [
     "image/jpg",
@@ -101,11 +48,12 @@ function Basic2() {
       initialValues={{
         waddress: "",
         description: "",
-        file: undefined,
+        file: null,
       }}
       validationSchema={validationSchema}
       onSubmit={(values) => {
         // formData.append("tradeLicenseImage", tradeLicenseImage);
+
         const data = { ...formData, ...values };
         console.log(data);
         setFormData(data);
@@ -139,12 +87,25 @@ function Basic2() {
                 />
               </div>
               <div className="sm:col-span-2">
+                <span className="text-sm link-error">
+                  {props.errors.file && props.touched.file
+                    ? props.errors.file
+                    : null}
+                </span>
                 <Fileinput
                   lable="trdlicence"
                   title="Trade Licence"
                   name="file"
-                  fileInputTOForm={fileInputTOForm}
-                  //   value={tradeLicenseImage}
+                  // handleChange={props.handleChange}
+                  fileInputTOForm={(e) => {
+                    console.log(e.currentTarget.id);
+                    console.log(e.target.files);
+                    props.setTouched({
+                      file: true,
+                    });
+                    props.setFieldValue("file", e.target.files[0]);
+                  }}
+                  value={props.values.file}
                 />
               </div>
               <div className="sm:col-span-2">
