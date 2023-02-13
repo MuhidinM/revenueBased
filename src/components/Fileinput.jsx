@@ -21,6 +21,7 @@ function Fileinput(props) {
             type="file"
             id="dropzone-file"
             hidden
+            // onChange={props.handleChange}
             onChange={props.fileInputTOForm}
             onInput={({ target: { files } }) => {
               files[0] && setFilename(files[0].name);

@@ -47,30 +47,18 @@ const transaction = [
 ];
 
 function Workspace() {
+  const FILE_SIZE = 160 * 1024;
+  const SUPPORTED_FORMATS = [
+    "image/jpg",
+    "image/jpeg",
+    "image/gif",
+    "image/png",
+  ];
   const [successful, setSuccessful] = useState(false);
-  const [message, setMessage] = useState("");
-  const [tradeLicenseImage, settradeLicenseImage] = useState();
-  const [tradeLicenseImageName, settradeLicenseImageName] = useState("");
-  const [proofOfAddress, setproofOfAddress] = useState({});
-  const [proofOfAddressImageName, setproofOfAddressImageName] = useState("");
+
   const { activeStepIndex, setActiveStepIndex, formData, setFormData } =
     useContext(FormContext);
 
-  const renderError = (message) => (
-    <p className="italic text-red-600">{message}</p>
-  );
-
-  const file1 = (e) => {
-    console.log("Hello");
-    setproofOfAddress(e.target.files[0]);
-    setproofOfAddressImageName(e.target.files[0].name);
-  };
-
-  const fileInputTOForm = (e) => {
-    console.log(e.currentTarget.id);
-    settradeLicenseImage(e.target.files[0]);
-    settradeLicenseImageName(e.target.files[0].name);
-  };
   const validationSchema = Yup.object().shape({
     region: Yup.string().required("Fullname is required"),
     bcity: Yup.string().required("Fullname is required"),
@@ -79,6 +67,18 @@ function Workspace() {
     bkebele: Yup.string().required("Fullname is required"),
     hno: Yup.string().required("Fullname is required"),
     location: Yup.string().required("Fullname is required"),
+    addressProof: Yup.mixed()
+      .required("A file is required")
+      .test(
+        "fileSize",
+        "File too large",
+        (value) => value && value.size <= FILE_SIZE
+      )
+      .test(
+        "fileFormat",
+        "Unsupported Format",
+        (value) => value && SUPPORTED_FORMATS.includes(value.type)
+      ),
   });
 
   return (
@@ -91,6 +91,7 @@ function Workspace() {
         bkebele: "",
         hno: "",
         location: "",
+        addressProof: null,
       }}
       validationSchema={validationSchema}
       onSubmit={(values) => {
@@ -233,11 +234,21 @@ function Workspace() {
               </div>
               <div className="sm:col-span-2">
                 <Addressproof
-                  lable="proof"
+                  lable="addressProof"
                   title="Proof of Address"
-                  name="proof"
-                  file1={file1}
-                  value={proofOfAddress}
+                  name="addressProof"
+                  fileInput={(e) => {
+                    // console.log(e.currentTarget.id);
+                    // settradeLicenseImage(e.target.files[0]);
+                    // settradeLicenseImageName(e.target.files[0].name);
+                    console.log(e.target.files);
+
+                    props.setTouched({
+                      addressProof: true,
+                    });
+                    props.setFieldValue("addressProof", e.target.files[0]);
+                  }}
+                  value={props.values.addressProof}
                 />
               </div>
               <button
@@ -245,40 +256,12 @@ function Workspace() {
                 onClick={props.handleSubmit}
                 className="sm:col-span-2 text-white bg-primary hover:bg-primary focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary dark:hover:bg-primary dark:focus:ring-primary"
               >
-                Verify
+                Continue
               </button>
             </>
           )}
         </>
       )}
-
-      {/* <Form className="flex flex-col justify-center items-center">
-        <div className="text-2xl font-medium self-center mb-2">Welcome!</div>
-        <div className="flex flex-col items-start mb-2">
-          <label className="font-medium text-gray-900">Name</label>
-          <Field
-            name="name"
-            className="rounded-md border-2 p-2"
-            placeholder="John Doe"
-          />
-        </div>
-        <ErrorMessage name="name" render={renderError} />
-        <div className="flex flex-col items-start mb-2">
-          <label className="font-medium text-gray-900">Email</label>
-          <Field
-            name="email"
-            className="rounded-md border-2 p-2"
-            placeholder="john.doe@gmail.com"
-          />
-        </div>
-        <ErrorMessage name="email" render={renderError} />
-        <button
-          className="rounded-md bg-indigo-500 font-medium text-white my-2 p-2"
-          type="submit"
-        >
-          Continue
-        </button>
-      </Form> */}
     </Formik>
   );
 }
