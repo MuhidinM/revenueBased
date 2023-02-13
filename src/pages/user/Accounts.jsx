@@ -122,13 +122,6 @@ function Accounts() {
         <div className="w-5/6 m-4">
           <div className="grid grid-cols-2 gap-2 sm:grid-cols-12">
             <div className="col-span-8 mt-6">
-              {/* <label
-                htmlFor="my-modal-4"
-                onClick={showModal}
-                className="mb-4 btn btn-outline btn-primary"
-              >
-                Add New
-              </label> */}
               <ModalFire></ModalFire>
             </div>
             <div className="col-span-2">
@@ -136,18 +129,11 @@ function Accounts() {
                 arr={choose}
                 id="choose"
                 name="choose"
-                // value={props.values.industry}
                 handleChange={handleChange}
                 title="Choose Primary"
               />
             </div>
           </div>
-
-          {/* {modaState && (
-            <Modal show={showModal} handleClose={hideModal} page="a">
-              <p>Modal</p>
-            </Modal>
-          )} */}
 
           <div className="mt-4 overflow-x-auto">
             <table className="table w-full">
