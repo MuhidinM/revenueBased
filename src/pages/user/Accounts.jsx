@@ -114,7 +114,7 @@ function Accounts() {
         <td>{item.accountNumber}</td>
         <td>{item.bankName}</td>
         <td>{item.primaryAccount === "1" ? "primary" : "secondary"}</td>
-        <td>Pending</td>
+        <td>{item.status === "0" ? "pending" : "activated"}</td>
       </tr>
     ));
     return (

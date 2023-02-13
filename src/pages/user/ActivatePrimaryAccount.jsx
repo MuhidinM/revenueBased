@@ -1,6 +1,30 @@
-import React from "react";
-
-const test = () => {
+import React, { useEffect, useState } from "react";
+import { useParams, useSearchParams } from "react-router-dom";
+import BankAccountServices from "../../services/bank-account.services";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+const MySwal = withReactContent(Swal);
+function ActivatePrimaryAccount() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const id = searchParams.get("id");
+  const acId = searchParams.get("acId");
+  console.log(id, acId);
+  const ActivatePrimaryAccount = () => {
+    BankAccountServices.activateAccount(id, acId)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        MySwal.fire({
+          text: "Your Account is Already Activated",
+          icon: "error",
+          value: true,
+          visible: true,
+          className: "",
+          closeModal: true,
+        });
+      });
+  };
   return (
     <>
       <section className="bg-gray-50 dark:bg-gray-900">
@@ -16,6 +40,7 @@ const test = () => {
             <br />
             <button
               type="submit"
+              onClick={ActivatePrimaryAccount}
               className="w-full text-white bg-primary hover:bg-primary focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary dark:hover:bg-primary dark:focus:ring-primary"
             >
               Activate
@@ -25,6 +50,6 @@ const test = () => {
       </section>
     </>
   );
-};
+}
 
-export default test;
+export default ActivatePrimaryAccount;
