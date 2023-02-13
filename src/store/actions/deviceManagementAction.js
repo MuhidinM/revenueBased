@@ -1,9 +1,4 @@
-import {
-  GET_ADMIN_ALL_DEVICES,
-  GET_ADMIN_ALL_DEVICES_ERROR,
-  REGISTER_DEVICES,
-  REGISTER_DEVICES_ERROR,
-} from "../types";
+import { GET_ADMIN_ALL_DEVICES, GET_ADMIN_ALL_DEVICES_ERROR } from "../types";
 // import AuthService from "../../services/auth.service";
 
 import RegisteredDeviceServices from "../../services/allowedDevices.services";
