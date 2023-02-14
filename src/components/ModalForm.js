@@ -36,9 +36,9 @@ export const ModalForm = ({ values, onSubmit, onCancel }) => {
     const bank = BankServices.getBank().then((res) => {
       setCurrentUser(res);
     });
-
     // console.log("our", bank);
   }, []);
+
   console.log(currentBank);
   const queryCustomerName = (e) => {
     if (e.target.value.length === 13) {
@@ -109,6 +109,21 @@ export const ModalForm = ({ values, onSubmit, onCancel }) => {
                   handleChange={formik.handleChange}
                 />
               </div>
+              <div className="sm:col-span-2">
+                <span className="text-sm link-error">
+                  <ErrorMessage name="accountHolder" />
+                </span>
+                <Input
+                  label="accholder"
+                  title="Account Holder"
+                  type="text"
+                  name="accountHolder"
+                  id="accountHolder"
+                  disabled="disabled"
+                  value={formik.values.accountHolder}
+                  handleChange={formik.handleChange}
+                />
+              </div>
             </div>
             <button
               type="submit"
@@ -117,10 +132,10 @@ export const ModalForm = ({ values, onSubmit, onCancel }) => {
             >
               OK
             </button>
+            <button onClick={onCancel} className="swal2-cancel swal2-styled">
+              Cancel
+            </button>
           </form>
-          <button onClick={onCancel} className="swal2-cancel swal2-styled">
-            Cancel
-          </button>
         </>
       )}
     </Formik>

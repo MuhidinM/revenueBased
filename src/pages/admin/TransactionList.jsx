@@ -55,25 +55,12 @@ const columns = [
   },
 ];
 
-const data = [
-  {
-    id: 1,
-    title: "Mac123qaz",
-    year: "2023",
-  },
-  {
-    id: 2,
-    title: "Mac123qaz",
-    year: "2022",
-  },
-];
-
 const FilterComponent = ({ filterText, onFilter, onClear }) => (
   <>
     <input
       id="search"
       type="text"
-      placeholder="Filter By Title"
+      placeholder="Filter By Transaction Id"
       aria-label="Search Input"
       value={filterText}
       onChange={onFilter}
@@ -90,12 +77,23 @@ const FilterComponent = ({ filterText, onFilter, onClear }) => (
   </>
 );
 
+const Export = ({ onExport }) => (
+  <button
+    onClick={(e) => onExport(e.target.value)}
+    className="text-white bg-primary hover:bg-primary focus:ring-4 focus:outline-none focus:ring-primary font-medium text-sm px-2.5 py-2.5 mr-4 text-center dark:bg-primary dark:hover:bg-primary dark:focus:ring-primary"
+  >
+    Export
+  </button>
+);
+
+function TransactionList() {
+  
 function convertArrayOfObjectsToCSV(array) {
   let result;
 
   const columnDelimiter = ",";
   const lineDelimiter = "\n";
-  const keys = Object.keys(data[0]);
+  const keys = Object.keys(transactionDetailAll[0]);
 
   result = "";
   result += keys.join(columnDelimiter);
@@ -132,16 +130,7 @@ function downloadCSV(array) {
   link.click();
 }
 
-const Export = ({ onExport }) => (
-  <button
-    onClick={(e) => onExport(e.target.value)}
-    className="text-white bg-primary hover:bg-primary focus:ring-4 focus:outline-none focus:ring-primary font-medium text-sm px-2.5 py-2.5 mr-4 text-center dark:bg-primary dark:hover:bg-primary dark:focus:ring-primary"
-  >
-    Export
-  </button>
-);
-
-function TransactionList() {
+  
   const [tableData, setTableData] = useState([]);
   const getAllDevices = useSelector((state) => state.transactionDetailAll);
   console.log("Devices list" + getAllDevices);
@@ -157,16 +146,17 @@ function TransactionList() {
       setTableData(transactionDetailAll);
     }
   }, []);
+  
   const [filterText, setFilterText] = React.useState("");
   const actionsMemo = useMemo(
-    () => <Export onExport={() => downloadCSV(data)} />,
+    () => <Export onExport={() => downloadCSV(transactionDetailAll)} />,
     []
   );
   const [resetPaginationToggle, setResetPaginationToggle] =
     React.useState(false);
-  const filteredItems = data.filter(
+  const filteredItems = transactionDetailAll.filter(
     (item) =>
-      item.title && item.title.toLowerCase().includes(filterText.toLowerCase())
+      item.transactionID && item.transactionID.toLowerCase().includes(filterText.toLowerCase())
   );
 
   const subHeaderComponentMemo = React.useMemo(() => {
@@ -195,7 +185,7 @@ function TransactionList() {
             <div>
               <label
                 htmlFor="id"
-                className=" mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                className="mb-2 text-sm font-medium text-gray-900 dark:text-white"
               >
                 Device Id
               </label>
@@ -231,7 +221,7 @@ function TransactionList() {
       <DataTable
         title="Transaction Lists"
         columns={columns}
-        data={transactionDetailAll}
+        data={filteredItems}
         pagination
         paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
         subHeader
