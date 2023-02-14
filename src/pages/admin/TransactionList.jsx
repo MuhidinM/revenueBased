@@ -118,7 +118,7 @@ function TransactionList() {
     let csv = convertArrayOfObjectsToCSV(array);
     if (csv == null) return;
 
-    const filename = "export.csv";
+    const filename = "TransactionLists.csv";
 
     if (!csv.match(/^data:text\/csv/i)) {
       csv = `data:text/csv;charset=utf-8,${csv}`;
@@ -222,7 +222,7 @@ function TransactionList() {
         columns={columns}
         data={filteredItems}
         pagination
-        paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
+        paginationResetDefaultPage={resetPaginationToggle}
         subHeader
         subHeaderComponent={subHeaderComponentMemo}
         // selectableRows
