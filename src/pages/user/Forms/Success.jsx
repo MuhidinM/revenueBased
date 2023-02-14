@@ -1,8 +1,65 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { FormContext } from "../MultiStepForm";
+import Swal from "sweetalert2";
+import UserService from "../../../services/user.service";
+import AuthService from "../../../services/auth.service";
 function Success() {
   const { activeStepIndex, setActiveStepIndex, formData, setFormData } =
     useContext(FormContext);
+  const [currentUser, setCurrentUser] = useState({});
+
+  useEffect(() => {
+    const user = AuthService.getCurrentUser();
+    if (user) {
+      setCurrentUser(user);
+      // setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
+      // setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
+    }
+  }, []);
+  const sendDataToBackend = () => {
+    console.log("your Button is got Clicked");
+    console.log(typeof formData);
+    let fd = new FormData();
+    fd.append("lgname", formData.lgname);
+    fd.append("incorporation", formData.incorporation);
+    fd.append("industry", formData.industry);
+    fd.append("category", formData.category);
+    fd.append("regstaffsizeion", formData.regstaffsizeion);
+    fd.append("transaction", formData.transaction);
+    fd.append("tinno", formData.tinno);
+    fd.append("bno", formData.bno);
+    fd.append("waddress", formData.waddress);
+    fd.append("tradeLicenseImage", formData.addressProof);
+    fd.append("description", formData.description);
+    fd.append("region", formData.region);
+    fd.append("user", currentUser.email);
+    fd.append("bcity", formData.bcity);
+    fd.append("bkifleketema", formData.bkifleketema);
+    fd.append("bworeda", formData.bworeda);
+    fd.append("bkebele", formData.bkebele);
+    fd.append("hno", formData.hno);
+    fd.append("location", formData.location);
+    fd.append("proofOfAddress", formData.file);
+    UserService.BussinessInfoRequest(fd).then(
+      (resp) => {
+        console.log(resp.message);
+        Swal.fire({
+          icon: "success",
+          title: "Your Request Has been sent ",
+          showConfirmButton: false,
+          timer: 3000,
+        });
+      },
+      (error) => {
+        const resMessage =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+      }
+    );
+  };
   return (
     <div className="font-medium">
       <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
@@ -86,15 +143,11 @@ function Success() {
         </div>
         <div className="sm:col-span-4">
           <b>Proof of Address:</b> <br />
-          <img
-            className=""
-            // src={m2SettingData.tradeLicense}
-            alt="ID"
-          />
+          <img className="" src={formData.file} alt="ID" />
         </div>
         <button
           type="submit"
-          // onClick={props.handleSubmit}
+          onClick={sendDataToBackend}
           className="sm:col-span-4 text-white bg-primary hover:bg-primary focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary dark:hover:bg-primary dark:focus:ring-primary"
         >
           Submit

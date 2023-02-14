@@ -13,6 +13,7 @@ const ValidationSchema = Yup.object().shape({
 
 export const ModalForm = ({ values, onSubmit, onCancel }) => {
   const [currentBank, setCurrentUser] = useState({});
+  const [customerName, setcustomerName] = useState({});
   const dropdown = [];
   if (currentBank instanceof Array) {
     currentBank.map((item, index) =>
@@ -24,8 +25,13 @@ export const ModalForm = ({ values, onSubmit, onCancel }) => {
     const bank = BankServices.getBank().then((res) => {
       setCurrentUser(res);
     });
+    const customerName = BankServices.addBank().then((res) => {
+      // call services to get Customer Name
+      // set CustomerName State
+    });
     // console.log("our", bank);
   }, []);
+
   console.log(currentBank);
   return (
     <Formik
@@ -38,21 +44,6 @@ export const ModalForm = ({ values, onSubmit, onCancel }) => {
         <>
           <form onSubmit={formik.handleSubmit}>
             <div className="grid gap-4 mb-4 sm:grid-cols-2 sm:gap-6 sm:mb-5">
-              <div className="sm:col-span-2">
-                <span className="text-sm link-error">
-                  <ErrorMessage name="accountHolder" />
-                </span>
-                <Input
-                  label="accholder"
-                  title="Account Holder"
-                  type="text"
-                  name="accountHolder"
-                  id="accountHolder"
-                  place="Hunda Temam Biniam"
-                  value={formik.values.accountHolder}
-                  handleChange={formik.handleChange}
-                />
-              </div>
               <div className="w-full">
                 <span className="text-sm link-error">
                   <ErrorMessage name="accountHolder" />
@@ -82,6 +73,21 @@ export const ModalForm = ({ values, onSubmit, onCancel }) => {
                   handleChange={formik.handleChange}
                 />
               </div>
+              <div className="sm:col-span-2">
+                <span className="text-sm link-error">
+                  <ErrorMessage name="accountHolder" />
+                </span>
+                <Input
+                  label="accholder"
+                  title="Account Holder"
+                  type="text"
+                  name="accountHolder"
+                  id="accountHolder"
+                  disabled="disabled"
+                  value={formik.values.accountHolder}
+                  handleChange={formik.handleChange}
+                />
+              </div>
             </div>
             <button
               type="submit"
@@ -90,10 +96,10 @@ export const ModalForm = ({ values, onSubmit, onCancel }) => {
             >
               OK
             </button>
+            <button onClick={onCancel} className="swal2-cancel swal2-styled">
+              Cancel
+            </button>
           </form>
-          <button onClick={onCancel} className="swal2-cancel swal2-styled">
-            Cancel
-          </button>
         </>
       )}
     </Formik>
