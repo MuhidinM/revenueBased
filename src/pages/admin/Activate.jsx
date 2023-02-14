@@ -23,7 +23,7 @@ function Activate() {
   console.log(pendingBussiness);
   return (
     <>
-      <div className="w-5/6 m-4 mt-8">
+      <div className="m-4 mt-8 ">
         <Tablesite request={pendingBussiness} />
       </div>
     </>
