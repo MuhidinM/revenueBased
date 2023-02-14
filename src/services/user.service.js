@@ -38,13 +38,16 @@ const headers = {
   "Content-Type": "multipart/form-data",
 };
 const BussinessInfoRequest = async (formData) => {
-  for (const value of formData.values()) {
+  console.log("heloo");
+  console.log(formData);
+  for (const value of formData) {
     console.log(value);
   }
   return await axios
     .post(API_URL + "user/vrf", formData, headers)
     .then((response) => {
       // console.log(response.data.message);
+      console.log(response.data);
       return response.data;
     });
 };
