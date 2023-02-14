@@ -28,6 +28,7 @@ export const getAccounts = () => async (dispatch) => {
     });
   }
 };
+
 export const nameEnquiryByAccountNumber =
   (criteriaValue) => async (dispatch) => {
     console.log(criteriaValue);

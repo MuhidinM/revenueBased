@@ -1,20 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { useDispatch, useSelector } from "react-redux";
 import Input from "./Input";
 import Selectinput from "./Selectinput";
 import BankServices from "../services/bank.services";
 import BankAccountServices from "../services/bank-account.services";
-
+import {
+  nameEnquiryByAccountNumber,
+  setPrimaryAccount,
+} from "../store/actions/bank_accountAction";
 const ValidationSchema = Yup.object().shape({
-  accountHolder: Yup.string().required("Account Holder Name is required"),
+  // accountHolder: Yup.string().required("Account Holder Name is required"),
   accountNumber: Yup.string().required("Account Number is required"),
   bankName: Yup.string().required("You Have to select Bank"),
 });
 
 export const ModalForm = ({ values, onSubmit, onCancel }) => {
+  const AccountListData = useSelector((state) => state.accountsList);
   const [currentBank, setCurrentUser] = useState({});
   const [currentName, setCurrentName] = useState({});
+  const dispatch = useDispatch();
+  console.log(AccountListData);
+  const { loading, error, bankAccounts, criteriaValue } = AccountListData;
+  console.log("The criterial value is:" + criteriaValue);
+
   const dropdown = [];
   if (currentBank instanceof Array) {
     currentBank.map((item, index) =>
@@ -32,12 +42,13 @@ export const ModalForm = ({ values, onSubmit, onCancel }) => {
   console.log(currentBank);
   const queryCustomerName = (e) => {
     if (e.target.value.length === 13) {
-      const customerName = BankAccountServices.nameEnquiryByAccountNumber(
-        e.target.value
-      ).then((res) => {
-        console.log(typeof res);
-        setCurrentName(res);
-      });
+      dispatch(nameEnquiryByAccountNumber(e.target.value));
+      // const customerName = BankAccountServices.nameEnquiryByAccountNumber(
+      //   e.target.value
+      // ).then((res) => {
+      //   console.log(typeof res);
+      //   setCurrentName(res);
+      // });
     }
   };
 
@@ -54,7 +65,7 @@ export const ModalForm = ({ values, onSubmit, onCancel }) => {
             <div className="grid gap-4 mb-4 sm:grid-cols-2 sm:gap-6 sm:mb-5">
               <div className="w-full">
                 <span className="text-sm link-error">
-                  <ErrorMessage name="accountHolder" />
+                  <ErrorMessage name="accountNumber" />
                 </span>
                 <Input
                   label="accno"
@@ -71,7 +82,7 @@ export const ModalForm = ({ values, onSubmit, onCancel }) => {
               </div>
               <div>
                 <span className="text-sm link-error">
-                  <ErrorMessage name="accountHolder" />
+                  <ErrorMessage name="bankName" />
                 </span>
                 <Selectinput
                   arr={dropdown}
@@ -94,7 +105,7 @@ export const ModalForm = ({ values, onSubmit, onCancel }) => {
                   name="accountHolder"
                   id="accountHolder"
                   disabled="disabled"
-                  value={typeof currentName === "string" ? currentName : ""}
+                  value={typeof criteriaValue === "string" ? criteriaValue : ""}
                   handleChange={formik.handleChange}
                 />
               </div>
