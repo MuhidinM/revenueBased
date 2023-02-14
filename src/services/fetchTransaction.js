@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // const baseurl = "http://192.168.0.173:8080/payment/v1/queryTransaction";
-const adminTransactionFetchUrl = "http://192.168.0.175:8081/payment/v1/";
+const adminTransactionFetchUrl = "http://192.168.0.174:8081/payment/v1/";
 // console.log(baseurl);
 
 // const getTransaction = async () => {

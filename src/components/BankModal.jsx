@@ -56,15 +56,22 @@ function BankModal({ values, onSubmit, onCancel }) {
                           handleChange={formik.handleChange}
                         />
                       </div>
-                      <button
-                        type="submit"
-                        onSubmit={onSubmit}
-                        className="text-white bg-primary hover:bg-primary focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary dark:hover:bg-primary dark:focus:ring-primary"
-                      >
-                        ADD
-                      </button>
                     </div>
                   </div>
+                  <button
+                    type="submit"
+                    onSubmit={onSubmit}
+                    style={{ backgroundColor: "#01AFEF" }}
+                    className="swal2-confirm swal2-styled"
+                  >
+                    Register
+                  </button>
+                  <button
+                    onClick={onCancel}
+                    className="swal2-cancel swal2-styled"
+                  >
+                    Cancel
+                  </button>
                 </form>
               </div>
             </section>

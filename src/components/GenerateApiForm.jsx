@@ -56,13 +56,20 @@ export const ModalForm = ({ values, onSubmit, onCancel }) => {
                 />
               </div>
 
-              <div className="flex items-center space-x-4">
+              <div className="items-center col-span-2 space-x-4">
                 <button
                   type="submit"
                   onSubmit={onSubmit}
-                  className="text-white bg-primary hover:bg-primary focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary dark:hover:bg-primary dark:focus:ring-primary"
+                  className="text-white rounded-md swal2-styled bg-primary"
+                  // className="text-white bg-primary hover:bg-primary focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary dark:hover:bg-primary dark:focus:ring-primary"
                 >
                   Generate
+                </button>
+                <button
+                  onClick={onCancel}
+                  className="swal2-cancel swal2-styled"
+                >
+                  Cancel
                 </button>
               </div>
             </div>
@@ -75,9 +82,6 @@ export const ModalForm = ({ values, onSubmit, onCancel }) => {
             OK
           </button> */}
           </form>
-          <button onClick={onCancel} className="swal2-cancel swal2-styled">
-            Cancel
-          </button>
         </>
       )}
     </Formik>
