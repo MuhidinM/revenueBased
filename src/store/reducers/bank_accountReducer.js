@@ -3,12 +3,15 @@ import {
   ACCOUNTS_ERROR,
   CREATE_BAK_ACCOUNT,
   SET_PRIMARY,
+  NAME_ENQ_BY_ACCNO,
+  NAME_ENQ_BY_ACCNO_ERROR,
 } from "../types";
 
 const initialState = {
   bankAccounts: [],
   message: "",
   accountMessage: "",
+  criteriaValue: "",
   loading: true,
 };
 
@@ -37,7 +40,18 @@ export default function (state = initialState, action) {
         accountMessage: action.payload,
         loading: false,
       };
+    case NAME_ENQ_BY_ACCNO:
+      return {
+        ...state,
+        criteriaValue: action.payload,
+        loading: false,
+      };
     case ACCOUNTS_ERROR:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+    case NAME_ENQ_BY_ACCNO_ERROR:
       return {
         loading: false,
         error: action.payload,

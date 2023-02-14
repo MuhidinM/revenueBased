@@ -8,6 +8,7 @@ import adminFetchAllTransactions from "./adminFetchAllTransactions";
 import deviceManagementReducer from "./deviceManagementReducer";
 import domainReducer from "./domainReducer";
 import bussinessReducer from "./bussinessReducer";
+import { reducer as modalProvider } from "react-redux-modal-provider";
 // console.log(bank_accountReducer)
 export default combineReducers({
   accountsList: bank_accountReducer,
@@ -21,5 +22,6 @@ export default combineReducers({
   bankInfo: bankReducer,
   domain: domainReducer,
   bussinessInfo: bussinessReducer,
+  modalProvider,
   // domains: domainReducer,
 });

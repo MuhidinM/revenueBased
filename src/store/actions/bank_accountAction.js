@@ -3,6 +3,8 @@ import {
   ACCOUNTS_ERROR,
   CREATE_BAK_ACCOUNT,
   SET_PRIMARY,
+  NAME_ENQ_BY_ACCNO,
+  NAME_ENQ_BY_ACCNO_ERROR,
 } from "../types";
 import AuthService from "../../services/auth.service";
 import BankAccountServices from "../../services/bank-account.services";
@@ -26,6 +28,26 @@ export const getAccounts = () => async (dispatch) => {
     });
   }
 };
+
+export const nameEnquiryByAccountNumber =
+  (criteriaValue) => async (dispatch) => {
+    console.log(criteriaValue);
+    try {
+      const nameResponse = await BankAccountServices.nameEnquiryByAccountNumber(
+        criteriaValue
+      );
+      console.log(nameResponse);
+      dispatch({
+        type: NAME_ENQ_BY_ACCNO,
+        payload: nameResponse,
+      });
+    } catch (error) {
+      dispatch({
+        type: NAME_ENQ_BY_ACCNO_ERROR,
+        payload: error,
+      });
+    }
+  };
 
 export const setPrimaryAccount = (account_id) => async (dispatch) => {
   console.log(account_id);
