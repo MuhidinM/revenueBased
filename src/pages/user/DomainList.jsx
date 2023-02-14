@@ -175,6 +175,7 @@ function DomainList() {
               dispatch(addDomain(currentUser.id, values.name, values.url));
               console.log("The button is got Clicked");
             }}
+            onCancel={() => MySwal.close()}
           ></DomainComponent>
         ),
         onClose: () => reject(),
