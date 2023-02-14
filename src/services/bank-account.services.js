@@ -2,9 +2,10 @@ import axios from "axios";
 import authHeader from "./auth-header";
 
 const API_URL = "http://localhost:5000/api/banckAccount/";
-const OTP_URL = "http://192.168.0.172:8081/payment/v1/sendOtp";
+const OTP_URL = "http://192.168.0.174:8081/payment/v1/sendOtp";
 const OTP_URL_CONFIRMATION =
-  "http://192.168.0.172:8081/payment/v1/otpVerification";
+  "http://192.168.0.174:8081/payment/v1/otpVerification";
+const NAME_ENQ_URL = "http://192.168.0.174:8081/payment/v1/customerNameByAccno";
 const getBankAccountById = async (id) => {
   console.log(id);
   return await axios
@@ -40,6 +41,12 @@ const confirmOtp = async (mobile, text) => {
   let data = response.data;
   return data;
 };
+const nameEnquiryByAccountNumber = async (criteriaValue) => {
+  console.log("Account number:" + criteriaValue);
+  const res = await axios.post(NAME_ENQ_URL, { criteriaValue });
+  let data = res.data.AccountDetailsResponse.name;
+  return data;
+};
 
 const CreateBankAccount = async (
   accountHolderName,
@@ -67,6 +74,7 @@ const BankAccountServices = {
   sendOtp,
   confirmOtp,
   activateAccount,
+  nameEnquiryByAccountNumber,
 };
 
 export default BankAccountServices;

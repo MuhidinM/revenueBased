@@ -60,6 +60,8 @@ function ModalFire() {
                         console.log("creating account");
                         if (res.status === "success") {
                           console.log("success is responded");
+                          console.log(values);
+                          console.log(values.accountHolder);
                           dispatch(
                             createTutorial(
                               values.accountHolder,

@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import Input from "./Input";
 import Selectinput from "./Selectinput";
 import BankServices from "../services/bank.services";
+import BankAccountServices from "../services/bank-account.services";
 
 const ValidationSchema = Yup.object().shape({
   accountHolder: Yup.string().required("Account Holder Name is required"),
@@ -13,6 +14,7 @@ const ValidationSchema = Yup.object().shape({
 
 export const ModalForm = ({ values, onSubmit, onCancel }) => {
   const [currentBank, setCurrentUser] = useState({});
+  const [currentName, setCurrentName] = useState({});
   const dropdown = [];
   if (currentBank instanceof Array) {
     currentBank.map((item, index) =>
@@ -24,9 +26,21 @@ export const ModalForm = ({ values, onSubmit, onCancel }) => {
     const bank = BankServices.getBank().then((res) => {
       setCurrentUser(res);
     });
+
     // console.log("our", bank);
   }, []);
   console.log(currentBank);
+  const queryCustomerName = (e) => {
+    if (e.target.value.length === 13) {
+      const customerName = BankAccountServices.nameEnquiryByAccountNumber(
+        e.target.value
+      ).then((res) => {
+        console.log(typeof res);
+        setCurrentName(res);
+      });
+    }
+  };
+
   return (
     <Formik
       initialValues={values}
@@ -38,21 +52,6 @@ export const ModalForm = ({ values, onSubmit, onCancel }) => {
         <>
           <form onSubmit={formik.handleSubmit}>
             <div className="grid gap-4 mb-4 sm:grid-cols-2 sm:gap-6 sm:mb-5">
-              <div className="sm:col-span-2">
-                <span className="text-sm link-error">
-                  <ErrorMessage name="accountHolder" />
-                </span>
-                <Input
-                  label="accholder"
-                  title="Account Holder"
-                  type="text"
-                  name="accountHolder"
-                  id="accountHolder"
-                  place="Hunda Temam Biniam"
-                  value={formik.values.accountHolder}
-                  handleChange={formik.handleChange}
-                />
-              </div>
               <div className="w-full">
                 <span className="text-sm link-error">
                   <ErrorMessage name="accountHolder" />
@@ -66,6 +65,7 @@ export const ModalForm = ({ values, onSubmit, onCancel }) => {
                   place="1022225648986"
                   value={formik.values.accountNumber}
                   handleChange={formik.handleChange}
+                  fetchName={queryCustomerName}
                   //   handleChange={handleChange}
                 />
               </div>
@@ -79,6 +79,22 @@ export const ModalForm = ({ values, onSubmit, onCancel }) => {
                   name="bankName"
                   title="Choose Bank"
                   value={values.bankName}
+                  handleChange={formik.handleChange}
+                  // selectName={selectBankName}
+                />
+              </div>
+              <div className="sm:col-span-2">
+                <span className="text-sm link-error">
+                  <ErrorMessage name="accountHolder" />
+                </span>
+                <Input
+                  label="accholder"
+                  title="Account Holder"
+                  type="text"
+                  name="accountHolder"
+                  id="accountHolder"
+                  disabled="disabled"
+                  value={typeof currentName === "string" ? currentName : ""}
                   handleChange={formik.handleChange}
                 />
               </div>
