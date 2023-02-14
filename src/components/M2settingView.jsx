@@ -31,36 +31,36 @@ function M2settingView(props) {
           <section className="bg-white dark:bg-gray-900">
             <div className="grid gap-4 pt-8 sm:grid-cols-4 sm:gap-6">
               <div className="sm:col-span-4">Business Information</div>
-              <div className="w-full">
+              <div className="sm:col-span-2">
                 <b>Legal Name:</b> <br />
                 {m2SettingData.legalName}
               </div>
-              <div className="w-full">
+              <div className="sm:col-span-2">
                 <b>Type of Incorporation:</b> <br />
                 {m2SettingData.incorporationType}
               </div>
 
-              <div className="w-full">
+              <div className="sm:col-span-2">
                 <b>Industry:</b> <br />
                 {m2SettingData.industry}
               </div>
-              <div className="w-full">
+              <div className="sm:col-span-2">
                 <b>Category:</b> <br />
                 {m2SettingData.category}
               </div>
-              <div className="w-full">
+              <div className="sm:col-span-2">
                 <b>Staff size:</b> <br />
                 {m2SettingData.staffSize}
               </div>
-              <div className="w-full">
+              <div className="sm:col-span-2">
                 <b>Monthly Transaction Amount:</b> <br />
                 {m2SettingData.monthlyTransacionAmount}
               </div>
-              <div className="w-full">
+              <div className="sm:col-span-2">
                 <b>Tin Number:</b> <br />
                 {m2SettingData.tinNumber}
               </div>
-              <div className="w-full">
+              <div className="sm:col-span-2">
                 <b>Business Registration Number:</b> <br />
                 {m2SettingData.bussinessRegistrationNumber}
               </div>
@@ -80,27 +80,27 @@ function M2settingView(props) {
               <div className="divider sm:col-span-4">
                 <h1>Comapany Address</h1>
               </div>
-              <div className="w-full">
+              <div className="sm:col-span-2">
                 <b>Region:</b> <br />
                 {m2SettingData.bussinessAddresses[0].region}
               </div>
-              <div className="w-full">
+              <div className="sm:col-span-2">
                 <b>City:</b> <br />
                 {m2SettingData.bussinessAddresses[0].city}
               </div>
-              <div className="w-full">
+              <div className="sm:col-span-2">
                 <b>Kifle Ketema:</b> <br />
                 {m2SettingData.bussinessAddresses[0].kifleKetema}
               </div>
-              <div className="w-full">
+              <div className="sm:col-span-2">
                 <b>Woreda:</b> <br />
                 {m2SettingData.bussinessAddresses[0].woreda}
               </div>
-              <div className="w-full">
+              <div className="sm:col-span-2">
                 <b>Kebele:</b> <br />
                 {m2SettingData.bussinessAddresses[0].kebele}
               </div>
-              <div className="w-full">
+              <div className="sm:col-span-2">
                 <b>House Number:</b> <br />
                 {m2SettingData.bussinessAddresses[0].housNumber}
               </div>
@@ -127,9 +127,8 @@ function M2settingView(props) {
               Activate
             </button>
             <button
-              type="submit"
               onClick={props.onCancel}
-              className="inline-flex items-center px-5 py-3.5 mt-4 text-sm font-medium text-center text-white rounded-lg sm:mt-6 bg-primary focus:ring-4 focus:ring-primary dark:focus:ring-primary hover:bg-primary"
+              className="swal2-cancel swal2-styled"
             >
               Cancel
             </button>

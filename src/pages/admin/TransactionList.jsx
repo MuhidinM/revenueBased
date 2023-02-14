@@ -80,57 +80,55 @@ const FilterComponent = ({ filterText, onFilter, onClear }) => (
 const Export = ({ onExport }) => (
   <button
     onClick={(e) => onExport(e.target.value)}
-    className="text-white bg-primary hover:bg-primary focus:ring-4 focus:outline-none focus:ring-primary font-medium text-sm px-2.5 py-2.5 mr-4 text-center dark:bg-primary dark:hover:bg-primary dark:focus:ring-primary"
+    className="text-white bg-primary hover:bg-primary focus:ring-4 focus:outline-none focus:ring-primary font-medium text-sm px-3.5 py-2.5 mr-2 text-center dark:bg-primary dark:hover:bg-primary dark:focus:ring-primary"
   >
     Export
   </button>
 );
 
 function TransactionList() {
-  
-function convertArrayOfObjectsToCSV(array) {
-  let result;
+  function convertArrayOfObjectsToCSV(array) {
+    let result;
 
-  const columnDelimiter = ",";
-  const lineDelimiter = "\n";
-  const keys = Object.keys(transactionDetailAll[0]);
+    const columnDelimiter = ",";
+    const lineDelimiter = "\n";
+    const keys = Object.keys(transactionDetailAll[0]);
 
-  result = "";
-  result += keys.join(columnDelimiter);
-  result += lineDelimiter;
-
-  array.forEach((item) => {
-    let ctr = 0;
-    keys.forEach((key) => {
-      if (ctr > 0) result += columnDelimiter;
-
-      result += item[key];
-
-      ctr++;
-    });
+    result = "";
+    result += keys.join(columnDelimiter);
     result += lineDelimiter;
-  });
 
-  return result;
-}
+    array.forEach((item) => {
+      let ctr = 0;
+      keys.forEach((key) => {
+        if (ctr > 0) result += columnDelimiter;
 
-function downloadCSV(array) {
-  const link = document.createElement("a");
-  let csv = convertArrayOfObjectsToCSV(array);
-  if (csv == null) return;
+        result += item[key];
 
-  const filename = "export.csv";
+        ctr++;
+      });
+      result += lineDelimiter;
+    });
 
-  if (!csv.match(/^data:text\/csv/i)) {
-    csv = `data:text/csv;charset=utf-8,${csv}`;
+    return result;
   }
 
-  link.setAttribute("href", encodeURI(csv));
-  link.setAttribute("download", filename);
-  link.click();
-}
+  function downloadCSV(array) {
+    const link = document.createElement("a");
+    let csv = convertArrayOfObjectsToCSV(array);
+    if (csv == null) return;
 
-  
+    const filename = "export.csv";
+
+    if (!csv.match(/^data:text\/csv/i)) {
+      csv = `data:text/csv;charset=utf-8,${csv}`;
+    }
+
+    link.setAttribute("href", encodeURI(csv));
+    link.setAttribute("download", filename);
+    link.click();
+  }
+
   const [tableData, setTableData] = useState([]);
   const getAllDevices = useSelector((state) => state.transactionDetailAll);
   console.log("Devices list" + getAllDevices);
@@ -146,7 +144,7 @@ function downloadCSV(array) {
       setTableData(transactionDetailAll);
     }
   }, []);
-  
+
   const [filterText, setFilterText] = React.useState("");
   const actionsMemo = useMemo(
     () => <Export onExport={() => downloadCSV(transactionDetailAll)} />,
@@ -156,7 +154,8 @@ function downloadCSV(array) {
     React.useState(false);
   const filteredItems = transactionDetailAll.filter(
     (item) =>
-      item.transactionID && item.transactionID.toLowerCase().includes(filterText.toLowerCase())
+      item.transactionID &&
+      item.transactionID.toLowerCase().includes(filterText.toLowerCase())
   );
 
   const subHeaderComponentMemo = React.useMemo(() => {
@@ -229,6 +228,7 @@ function downloadCSV(array) {
         // selectableRows
         persistTableHeadstriped
         highlightOnHover
+        fixedHeader
         actions={actionsMemo}
       />
     </div>
