@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAccounts } from "../../store/actions/bank_accountAction";
 import { getGeneratedApiKey } from "../../store/actions/generateApiKeyAction";
 import AuthService from "../../services/auth.service";
+import Code from "./Code";
+import Card from "./Card";
 function Uapi() {
   const primaryAccount = [];
   const AccountListData = useSelector((state) => state.accountsList);
@@ -39,47 +41,52 @@ function Uapi() {
     console.log(generatedApiKey.credentialDetail);
     return (
       <>
-        <div className="w-5/6 m-4">
-          <GenerateApiModal accountNumber={primaryAccount}></GenerateApiModal>
-          {/* <GenerateApiModal></GenerateApiModal> */}
-          {/* {modaState && (
+        <div className="grid gap-4 m-4 md:grid-cols-12 justify-self-auto">
+          <div className="col-span-8">
+            <GenerateApiModal accountNumber={primaryAccount}></GenerateApiModal>
+            {/* <GenerateApiModal></GenerateApiModal> */}
+            {/* {modaState && (
             <Modal show={showModal} handleClose={hideModal} page="b">
               <p>Modal</p>
             </Modal>
           )} */}
 
-          <div className="mt-4 overflow-x-auto">
-            <table className="table w-full">
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>Secrate Key</th>
-                  <th>Api key</th>
-                  <th>Client Id</th>
-                  <th></th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                {generatedApiKey.credentialDetail ? (
-                  <tr className="hover">
-                    <th>1</th>
-                    <td>
-                      {generatedApiKey.credentialDetail.secrate_key
-                        ? generatedApiKey.credentialDetail.secrate_key
-                        : "Not Provided"}
-                    </td>
-                    <td>{generatedApiKey.credentialDetail.key}</td>
-                    <td>{generatedApiKey.credentialDetail.client_id}</td>
-                    <td>
-                      <Link to={"/users/uapi"}>Copy</Link>
-                    </td>
+            <div className="mt-4 overflow-x-auto">
+              <table className="table w-full">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Secrate Key</th>
+                    <th>Api key</th>
+                    <th>Client Id</th>
+                    <th></th>
+                    <th></th>
                   </tr>
-                ) : (
-                  ""
-                )}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {generatedApiKey.credentialDetail ? (
+                    <tr className="hover">
+                      <th>1</th>
+                      <td>
+                        {generatedApiKey.credentialDetail.secrate_key
+                          ? generatedApiKey.credentialDetail.secrate_key
+                          : "Not Provided"}
+                      </td>
+                      <td>{generatedApiKey.credentialDetail.key}</td>
+                      <td>{generatedApiKey.credentialDetail.client_id}</td>
+                      <td>
+                        <Link to={"/users/uapi"}>Copy</Link>
+                      </td>
+                    </tr>
+                  ) : (
+                    ""
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div className="col-span-4 mt-16">
+            <Code />
           </div>
         </div>
       </>
