@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Icon from "../../components/Icon";
+import AuthService from "../../services/auth.service";
 
 function Nav() {
+  const [currentUser, setCurrentUser] = useState({});
+  useEffect(() => {
+    const user = AuthService.getCurrentUser();
+    if (user) {
+      setCurrentUser(user);
+    }
+  }, []);
   return (
     <>
       <div className="fixed top-0 left-0 z-20 w-full shadow-md navbar bg-base-100">
@@ -61,7 +69,7 @@ function Nav() {
               </li>
             </ul>
           </div>
-          <Icon re = "/" />
+          <Icon re="/" />
         </div>
         <div className="hidden navbar-center lg:flex">
           <ul className="px-1 menu menu-horizontal">
@@ -103,12 +111,20 @@ function Nav() {
         </div>
         <div className="navbar-end">
           <div className="px-1 menu menu-horizontal">
-            <li>
-              <Link to={"/auth"}>Log in</Link>
-            </li>
-            <li>
-              <Link to={"/auth/registration"}>Sign Up</Link>
-            </li>
+            {currentUser.client_id != null ? (
+              <li>
+                <Link to={"/users"}>Dashboard</Link>
+              </li>
+            ) : (
+              <>
+                <li>
+                  <Link to={"/auth"}>Log in</Link>
+                </li>
+                <li>
+                  <Link to={"/auth/registration"}>Sign Up</Link>
+                </li>
+              </>
+            )}
           </div>
         </div>
       </div>

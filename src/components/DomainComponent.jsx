@@ -23,7 +23,6 @@ function DomainComponent({ onSubmit, values, onCancel }) {
         >
           {(formik) => (
             <form onSubmit={formik.handleSubmit}>
-              <div>
                 <div className="grid gap-4 mb-4 sm:grid-cols-2 sm:gap-6 sm:mb-5">
                   <div>
                     <label
@@ -45,9 +44,9 @@ function DomainComponent({ onSubmit, values, onCancel }) {
                   </div>
 
                   <div>
-                    <label
-                      htmlFor="url"
-                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  <label
+                      htmlFor="name"
+                      className="mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >
                       URL
                     </label>
@@ -63,7 +62,6 @@ function DomainComponent({ onSubmit, values, onCancel }) {
                     />
                   </div>
                 </div>
-              </div>
 
               <button
                 type="submit"

@@ -77,23 +77,21 @@ function Sidebar() {
           <li>
             <Link to={"/admin/devices"}>
               <svg
-                className="w-6 h-6 text-primary"
+                class="h-6 w-6 text-primary"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
-                strokeWidth="2"
+                stroke-width="2"
                 stroke="currentColor"
                 fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+                stroke-linecap="round"
+                stroke-linejoin="round"
               >
                 {" "}
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"
-                />
+                <path stroke="none" d="M0 0h24v24H0z" />{" "}
+                <rect x="13" y="8" width="8" height="12" rx="1" />{" "}
+                <path d="M18 8v-3a1 1 0 0 0 -1 -1h-13a1 1 0 0 0 -1 1v12a1 1 0 0 0 1 1h9" />{" "}
+                <line x1="16" y1="9" x2="18" y2="9" />
               </svg>
               Devices
             </Link>
