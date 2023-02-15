@@ -26,7 +26,7 @@ function M2settingView(props) {
 
     return (
       <>
-        <h3 className="text-lg font-bold">{props.title}</h3>
+        <h3 className="font-sans text-lg">{props.title}</h3>
         <div className="">
           <section className="bg-white dark:bg-gray-900">
             <div className="grid gap-4 pt-8 sm:grid-cols-4 sm:gap-6">
