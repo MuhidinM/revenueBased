@@ -2,10 +2,10 @@ import axios from "axios";
 import authHeader from "./auth-header";
 
 const API_URL = "http://localhost:5000/api/banckAccount/";
-const OTP_URL = "http://192.168.0.174:8081/payment/v1/sendOtp";
+const OTP_URL = "http://192.168.0.173:8081/payment/v1/sendOtp";
 const OTP_URL_CONFIRMATION =
-  "http://192.168.0.174:8081/payment/v1/otpVerification";
-const NAME_ENQ_URL = "http://192.168.0.174:8081/payment/v1/customerNameByAccno";
+  "http://192.168.0.173:8081/payment/v1/otpVerification";
+const NAME_ENQ_URL = "http://192.168.0.173:8081/payment/v1/customerNameByAccno";
 const getBankAccountById = async (id) => {
   console.log(id);
   return await axios
