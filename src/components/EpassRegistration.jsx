@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import AuthService from "../services/auth.service";
-import Swal from "sweetalert2";
+import Swal from "sweetalert2"; 
 import withReactContent from "sweetalert2-react-content";
 const MySwal = withReactContent(Swal);
 // import { useState } from "react";

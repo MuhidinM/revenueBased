@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import ReactDOM from "react-dom";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
@@ -16,15 +16,26 @@ const MySwal = withReactContent(Swal);
 
 function ModalFire() {
   const [customerName, setcustomerName] = useState("");
+  const customerName2 = useRef("");
+  const [dependency, setdependency] = useState(false);
   const AccountListData = useSelector((state) => state.accountsList);
+  const dispatch = useDispatch();
   const { bankAccounts, message, accountMessage, criteriaValue, loading } =
     AccountListData;
+  const [currentUser, setCurrentUser] = useState({});
+  useEffect(() => {
+    const user = AuthService.getCurrentUser();
+    if (user) {
+      setCurrentUser(user);
+      setcustomerName(criteriaValue);
 
-  console.log("Criteria Value" + criteriaValue);
-  // const sendNameToParent = (name) => {
-  //   console.log("I got Clicked");
-  //   setcustomerName(name);
-  // };
+      // setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
+      // setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
+    }
+  }, []);
+  console.log("Criteria Value from index" + criteriaValue);
+  console.log("Customer Name " + customerName);
+  customerName2.current = criteriaValue;
 
   const showFormModal = (values) => {
     return new Promise((resolve, reject) => {
@@ -38,21 +49,28 @@ function ModalFire() {
               onSubmit={(values) => {
                 console.log("Hello");
                 console.log(values);
-                console.log("criteria value" + criteriaValue);
-                setcustomerName(criteriaValue);
-                const accountNumber = values.accountNumber;
-                const bankName = values.bankName;
-                const id = currentUser.id;
-                value = { customerName, accountNumber, bankName, id };
-                console.log(value);
-                createTutorial(
-                  customerName,
-                  values.accountNumber,
-                  values.bankName,
-                  currentUser.id
-                );
-                // BankAccountServices.sendOtp("0925825012");
-                resolve(values);
+                // let crtVal = getcriterialVal();
+                // console.log(crtVal);
+                const {
+                  bankAccounts,
+                  message,
+                  accountMessage,
+                  criteriaValue,
+                  loading,
+                } = AccountListData;
+
+                console.log("Criteria Value 2 " + customerName2.current);
+                // console.log("Id is" + currentUser.id);
+                // console.log(customerName);
+                // dispatch(
+                //   createTutorial(
+                //     customerName2.current,
+                //     values.accountNumber,
+                //     values.bankName,
+                //     currentUser.id
+                //   )
+                // );
+
                 const value = {
                   first: "",
                   second: "",
@@ -61,67 +79,72 @@ function ModalFire() {
                   fifth: "",
                   sixth: "",
                 };
-                // MySwal.fire({
-                //   title: "",
-                //   html: (
-                //     <Otp
-                //       values={value}
-                //       onSubmit={(values1) => {
-                //         console.log("Hello from the second swal");
-                //         resolve(values);
-                //         console.log(values.first);
-                //         const otp =
-                //           values1.first +
-                //           values1.second +
-                //           values1.third +
-                //           values1.fourth +
-                //           values1.fifth +
-                //           values1.sixth;
 
-                //         const confirmedOtp = BankAccountServices.confirmOtp(
-                //           "0925825012",
-                //           otp
-                //         ).then((res) => {
-                //           console.log("creating account");
-                //           if (res.status === "success") {
-                //             console.log("success is responded");
-                //             console.log(criteriaValue);
-                //             dispatch(
-                // createTutorial(
-                //   criteriaValue,
-                //   values.accountNumber,
-                //   values.bankName,
-                //   currentUser.id
-                // ),
-                //               Swal.fire({
-                //                 icon: "success",
-                //                 title: "Your work has been saved",
-                //                 showConfirmButton: false,
-                //                 timer: 3000,
-                //               })
-                //             ).then(() => {
-                //               console.log("firing swal");
-                //             });
-                //           }
-                //         });
+                BankAccountServices.sendOtp("0925825012").then((res) => {
+                  MySwal.fire({
+                    title: "",
+                    html: (
+                      <Otp
+                        values={value}
+                        onSubmit={(values1) => {
+                          console.log("Hello from the second swal");
+                          resolve(values);
+                          console.log(values.first);
+                          const otp =
+                            values1.first +
+                            values1.second +
+                            values1.third +
+                            values1.fourth +
+                            values1.fifth +
+                            values1.sixth;
 
-                //         console.log(confirmedOtp);
+                          const confirmedOtp = BankAccountServices.confirmOtp(
+                            "0925825012",
+                            otp
+                          ).then((res) => {
+                            console.log("creating account");
+                            if (res.status === "success") {
+                              console.log("success is responded");
+                              console.log(criteriaValue);
+                              dispatch(
+                                createTutorial(
+                                  customerName2.current,
+                                  values.accountNumber,
+                                  values.bankName,
+                                  currentUser.id
+                                ),
+                                Swal.fire({
+                                  icon: "success",
+                                  title: "Your work has been saved",
+                                  showConfirmButton: false,
+                                  timer: 3000,
+                                })
+                              ).then(() => {
+                                console.log("firing swal");
+                              });
+                            }
+                          });
 
-                //         // let confirmedOtp = async () =>
-                //         //   await BankAccountServices.confirmOtp("0932308204", otp);
+                          console.log(confirmedOtp);
 
-                //         if (confirmedOtp.data.status === "success") {
-                //         }
+                          // let confirmedOtp = async () =>
+                          //   await BankAccountServices.confirmOtp("0932308204", otp);
 
-                //         console.log(confirmedOtp);
-                //       }}
-                //     ></Otp>
-                //   ),
-                //   onClose: () => reject(),
-                //   showConfirmButton: false,
-                // });
-                //   MySwal.close();
-                //   Swal.close();
+                          if (confirmedOtp.data.status === "success") {
+                          }
+
+                          console.log(confirmedOtp);
+                        }}
+                      ></Otp>
+                    ),
+                    onClose: () => reject(),
+                    showConfirmButton: false,
+                  });
+                });
+                resolve(values);
+
+                MySwal.close();
+                Swal.close();
               }}
               onCancel={() => {
                 Swal.close();
@@ -135,19 +158,9 @@ function ModalFire() {
       });
     });
   };
-  const [currentUser, setCurrentUser] = useState({});
-  const dispatch = useDispatch();
-  useEffect(() => {
-    const user = AuthService.getCurrentUser();
-    if (user) {
-      setCurrentUser(user);
-      // setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
-      // setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
-    }
-  }, []);
+
   const showModal = () => {
     showFormModal({
-      // accountHolder: "",
       accountNumber: "",
       bankName: "",
     })

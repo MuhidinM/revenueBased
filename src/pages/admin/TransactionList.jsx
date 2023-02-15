@@ -117,8 +117,10 @@ function TransactionList() {
     const link = document.createElement("a");
     let csv = convertArrayOfObjectsToCSV(array);
     if (csv == null) return;
-
-    const filename = "TransactionLists.csv";
+    //Make dynamic the name of file
+    let d = new Date();
+    // let dformat = `${d.getHours()}-${d.getMinutes()}-${d.getSeconds()}`;
+    const filename = "TransactionMomo12.csv";
 
     if (!csv.match(/^data:text\/csv/i)) {
       csv = `data:text/csv;charset=utf-8,${csv}`;

@@ -75,6 +75,8 @@ export const setPrimaryAccount = (account_id) => async (dispatch) => {
 
 export const createTutorial =
   (accountHolderName, accountNumber, bankName, userId) => async (dispatch) => {
+    console.log("in redux");
+    console.log("redux " + accountHolderName, accountNumber, bankName, userId);
     try {
       const res = await BankAccountServices.CreateBankAccount(
         accountHolderName,
