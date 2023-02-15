@@ -12,6 +12,36 @@ import Selectinput from "../../components/Selectinput";
 import ModalFire from "../../components/index";
 import Otp from "../../components/Otp";
 import withReactContent from "sweetalert2-react-content";
+import DataTable from "react-data-table-component";
+
+const columns = [
+  {
+    name: "Account Holder",
+    selector: (row) => row.accountHolderName,
+    sortable: true,
+  },
+  {
+    name: "Account Number",
+    selector: (row) => row.accountNumber,
+    sortable: true,
+  },
+  {
+    name: "Bank Name",
+    selector: (row) => row.bankName,
+    sortable: true,
+  },
+  {
+    name: "Primary",
+    selector: (row) => row.primaryAccount,
+    sortable: true,
+  },
+  {
+    name: "Status",
+    selector: (row) => row.status,
+    sortable: true,
+  },
+];
+
 const choose = [];
 const MySwal = withReactContent(Swal);
 function Accounts() {
@@ -119,36 +149,38 @@ function Accounts() {
     ));
     return (
       <>
-        <div className="w-5/6 m-4">
-          <div className="grid grid-cols-2 gap-2 sm:grid-cols-12">
-            <div className="col-span-8 mt-6">
-              <ModalFire></ModalFire>
+        <div className="grid gap-4 m-4 md:grid-cols-12 justify-self-auto">
+          <div className="col-span-12">
+            <div className="grid grid-cols-2 gap-2 sm:grid-cols-12">
+              <div className="col-span-9 mt-6">
+                <ModalFire></ModalFire>
+              </div>
+              <div className="col-span-3">
+                <Selectinput
+                  arr={choose}
+                  id="choose"
+                  name="choose"
+                  handleChange={handleChange}
+                  title="Choose Primary"
+                />
+              </div>
             </div>
-            <div className="col-span-2">
-              <Selectinput
-                arr={choose}
-                id="choose"
-                name="choose"
-                handleChange={handleChange}
-                title="Choose Primary"
+
+            <div className="mt-4 overflow-x-auto">
+              <DataTable
+                title="Account List"
+                columns={columns}
+                data={bankAccounts}
+                pagination
+                // paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
+                subHeader
+                // subHeaderComponent={subHeaderComponentMemo}
+                // selectableRows
+                persistTableHeadstriped
+                highlightOnHover
+                // actions={actionsMemo}
               />
             </div>
-          </div>
-
-          <div className="mt-4 overflow-x-auto">
-            <table className="table w-full">
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>Account Holder</th>
-                  <th>Account</th>
-                  <th>Bank</th>
-                  <th>Account Level</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>{renderList}</tbody>
-            </table>
           </div>
         </div>
       </>
