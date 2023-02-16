@@ -150,7 +150,7 @@ function Sidebar() {
                 Devices
               </Link>
             </li>
-            <li>
+            {/* <li>
               <Link to="/users/qr">
                 <svg
                   className="w-6 h-6 text-primary"
@@ -167,7 +167,7 @@ function Sidebar() {
                 </svg>
                 Generate QR Code
               </Link>
-            </li>
+            </li> */}
           </>
            ) : (
             ""
