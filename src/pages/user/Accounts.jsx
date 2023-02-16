@@ -32,12 +32,12 @@ const columns = [
   },
   {
     name: "Primary",
-    selector: (row) => row.primaryAccount,
+    selector: (row) => (row.primaryAccount == 1 ? "primary" : "secondary"),
     sortable: true,
   },
   {
     name: "Status",
-    selector: (row) => row.status,
+    selector: (row) => (row.status == 1 ? "activated" : "pending"),
     sortable: true,
   },
 ];

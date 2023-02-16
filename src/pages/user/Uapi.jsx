@@ -23,7 +23,7 @@ function Uapi() {
     // console.log(generatedApiKey);
     dispatch(getAccounts());
 
-    console.log(bankAccounts);
+    console.log("Bank Accounts:" + bankAccounts);
 
     // setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
     // setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
@@ -44,6 +44,13 @@ function Uapi() {
         <div className="grid gap-4 m-4 md:grid-cols-12 justify-self-auto">
           <div className="col-span-8">
             <GenerateApiModal accountNumber={primaryAccount}></GenerateApiModal>
+            <div className="col-span-4 mt-16">
+              {generatedApiKey.credentialDetail ? (
+                <Code generatedCredential={generatedApiKey.credentialDetail} />
+              ) : (
+                ""
+              )}
+            </div>
             {/* <GenerateApiModal></GenerateApiModal> */}
             {/* {modaState && (
             <Modal show={showModal} handleClose={hideModal} page="b">
@@ -52,7 +59,7 @@ function Uapi() {
           )} */}
 
             <div className="mt-4 overflow-x-auto">
-              <table className="table w-full">
+              {/* <table className="table w-full">
                 <thead>
                   <tr>
                     <th></th>
@@ -82,11 +89,8 @@ function Uapi() {
                     ""
                   )}
                 </tbody>
-              </table>
+              </table> */}
             </div>
-          </div>
-          <div className="col-span-4 mt-16">
-            <Code />
           </div>
         </div>
       </>
