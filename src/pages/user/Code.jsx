@@ -1,18 +1,19 @@
 import React from "react";
 
-function Code() {
+function Code(props) {
+  console.log(props);
   return (
     <>
       <div className="my-4 text-left ">
         <div className="mockup-code">
           <pre data-prefix="1">
-            <code>npm i Epay</code>
+            <code>Secrate Key: {props.generatedCredential.secrate_key}</code>
           </pre>
           <pre data-prefix="2">
-            <code>installing...</code>
+            <code>ClientId:{props.generatedCredential.client_id}</code>
           </pre>
           <pre data-prefix="3" className="text-success">
-            <code>Success!</code>
+            <code>API Key: {props.generatedCredential.key}</code>
           </pre>
         </div>
       </div>
