@@ -13,8 +13,10 @@ const pay = async (debitAccount, debitAmount) => {
       },
       {
         params: {
-          clientId: "22c8b1c9-2591-4d57-a35b-e12308e4153f",
-          secretKey: "37526966-bb75-41f5-9e31-3b8f7227e4f7",
+          clientId: "0ace5fba-2d26-4a4d-b5b3-c9e8909aa527",
+          secretKey: "3e1cda9d-425e-43cd-a42f-a7dd88d6b344",
+          device_id: "09876544333",
+          key: "78521e1d-155d-4177-bf5c-404cc6f2cd9d",
           callBackUrl: "http://localhost:3000/users/accounts",
         },
       }

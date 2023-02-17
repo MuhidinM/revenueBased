@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useParams, useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 import { Formik } from "formik";
 import * as Yup from "yup";
@@ -16,6 +17,16 @@ function Bankpay() {
   const [message, setMessage] = useState("");
   const [verified, setVerified] = useState(0);
   const [currentUser, setCurrentUser] = useState({});
+  const [searchParams, setSearchParams] = useSearchParams();
+  const clientid = searchParams.get("clientId");
+  const secretKey = searchParams.get("secretKey");
+  const cid = clientid.trim();
+  const skey = secretKey.trim();
+  // const clientid = searchParams.get("clientId");
+  const acId = searchParams.get("acId");
+  console.log("ClientId " + clientid);
+  console.log("secretKey" + secretKey);
+  useEffect(() => {}, []);
 
   const validationSchema = Yup.object().shape({
     accountHolder: Yup.string().required("Account Holder Name is required"),
@@ -74,8 +85,6 @@ function Bankpay() {
                   if ((resp[0] = "success")) {
                     setVerified(1);
                   }
-                  // window.location.replace(resp[1]);
-                  // console.log(successful);
                 },
                 (error) => {
                   const resMessage =
@@ -188,8 +197,18 @@ function Bankpay() {
                             setMessage(resp[0]);
                             setSuccessful(true);
                             // setTimeout(3000)
-                            window.location.replace(resp[1]);
-                            // console.log(successful);
+                            // if (resp[0]) {
+
+                            // }
+                            if (resp[0] === "Success") {
+                              window.opener.postMessage(resp[0], "*");
+                              window.opener.focus();
+                              window.close();
+                            } else {
+                              window.opener.postMessage(resp[0], "*");
+                              window.opener.focus();
+                              window.close();
+                            }
                           },
                           (error) => {
                             const resMessage =

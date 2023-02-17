@@ -115,7 +115,7 @@ function ModalFire() {
                                 ),
                                 Swal.fire({
                                   icon: "success",
-                                  title: "Your work has been saved",
+                                  title: "Account Added",
                                   showConfirmButton: false,
                                   timer: 3000,
                                 })
