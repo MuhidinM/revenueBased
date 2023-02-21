@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Bankpay from "./Bankpay";
 import Cardpay from "./Cardpay";
 import Mobilepay from "./Mobilepay";
-
+import PayPal from "./PayPal";
 function Gateway() {
   const [select, setSelect] = useState("CBOC");
   return (
@@ -36,6 +36,7 @@ function Gateway() {
                   </option>
 
                   <option value={"EB"}>E-birr</option>
+                  <option value={"payPal"}>payPal</option>
                 </select>
               </div>
 
@@ -43,6 +44,7 @@ function Gateway() {
                 {select === "CBOA" && <Bankpay />}
                 {select === "CBOC" && <Cardpay />}
                 {select === "EB" && <Mobilepay />}
+                {select === "payPal" && <PayPal />}
               </htmlForm>
             </div>
           </div>
