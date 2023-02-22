@@ -1,3 +1,5 @@
+import { useRef, useState } from "react";
+import { useIdleTimer } from "react-idle-timer";
 import { Route, Routes } from "react-router-dom";
 import Home from "./Home";
 import Gateway from "./components/Gateway";
@@ -9,8 +11,27 @@ import Users from "./Users";
 import OTP from "./pages/auth/OTP";
 import PrivateRoiutes from "./pages/auth/PrivateRoutes";
 import EpassRegistration from "./components/EpassRegistration";
+import AuthService from "./services/auth.service";
 
 function App() {
+  const user = AuthService.getCurrentUser();
+  const [refresh, setRefresh] = useState(false);
+  const onIdle = () => {
+    console.log("timeout");
+    localStorage.clear();
+    setRefresh(true);
+  };
+  if (refresh && user) {
+    window.location.reload(true);
+    setRefresh(false);
+  }
+
+  const idleTimer = useIdleTimer({
+    onIdle,
+    timeout: 1000 * 60 * 30,
+    // timeout: 1000 * 5, test
+  });
+
   return (
     <>
       <Routes>
