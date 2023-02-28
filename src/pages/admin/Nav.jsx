@@ -1,7 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import AuthService from "../../services/auth.service";
 
 function Nav() {
+  const logOut = () => {
+    AuthService.logout();
+  };
   return (
     <>
       <div className="shadow-md navbar bg-base-100">
@@ -73,7 +77,9 @@ function Nav() {
                 </Link>
               </li>
               <li>
-                <Link to={"/"}>Logout</Link>
+                <Link to={"/"} onClick={logOut}>
+                  Logout
+                </Link>
               </li>
             </ul>
           </div>

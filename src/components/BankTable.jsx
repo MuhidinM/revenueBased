@@ -83,13 +83,20 @@ function BankTable() {
 
   return (
     <>
+      <button
+        type="button"
+        className="mb-4 btn btn-outline btn-primary"
+        onClick={showModal}
+      >
+        Add Bank
+      </button>
       <DataTable
         title="Bank List"
         columns={columns}
         data={bank}
         pagination
         // paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
-        subHeader
+        // subHeader
         // subHeaderComponent={subHeaderComponentMemo}
         // selectableRows
         persistTableHeadstriped

@@ -218,7 +218,7 @@ function TransactionList() {
   };
 
   return (
-    <div className="m-4">
+    <div className="">
       <DataTable
         title="Transaction Lists"
         columns={columns}
