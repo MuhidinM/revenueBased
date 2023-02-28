@@ -15,6 +15,7 @@ import Activate from "./pages/admin/Activate";
 import TransactionList from "./pages/admin/TransactionList";
 import DeviceManagement from "./pages/admin/DeviceManagement";
 import Devices from "./pages/user/Devices";
+import Agents from "./pages/admin/Agents";
 //Motuma devices
 function Admin() {
   return (
@@ -31,6 +32,7 @@ function Admin() {
             <Routes>
               <Route index element={<Home />}></Route>
               <Route path="users" element={<Users />}></Route>
+              <Route path="agents" element={<Agents />}></Route>
               <Route path="transactions" element={<TransactionList />}></Route>
               <Route path="device" element={<DeviceManagement />}></Route>
               <Route path="devices" element={<Devices />}></Route>

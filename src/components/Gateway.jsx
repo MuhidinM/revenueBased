@@ -5,7 +5,7 @@ import Cardpay from "./Cardpay";
 import Mobilepay from "./Mobilepay";
 import PayPal from "./PayPal";
 function Gateway() {
-  const [select, setSelect] = useState("CBOC");
+  const [select, setSelect] = useState("CBOA");
   return (
     <div>
       <section className="bg-gray-100 dark:bg-gray-900">
@@ -28,13 +28,12 @@ function Gateway() {
                   }}
                   className="my-6 select bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 >
-                  <option value={"CBOC"} selected>
+                  <option value={"CBOA"} selected>
+                    Coopass
+                  </option>
+                  <option value={"CBOC"}>
                     Cooperative bank of Oromia Card
                   </option>
-                  <option value={"CBOA"}>
-                    Cooperative bank of Oromia Account
-                  </option>
-
                   <option value={"EB"}>E-birr</option>
                   <option value={"payPal"}>payPal</option>
                 </select>

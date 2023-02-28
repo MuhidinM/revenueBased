@@ -5,8 +5,23 @@ import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import BankModal from "./BankModal";
+import DataTable from "react-data-table-component";
 import { connect } from "react-redux";
 const MySwal = withReactContent(Swal);
+
+const columns = [
+  {
+    name: "Bank Name",
+    selector: (row) => row.bankName,
+    sortable: true,
+  },
+  {
+    name: "Bank Code",
+    selector: (row) => row.bankCode,
+    sortable: true,
+  },
+];
+
 function BankTable() {
   const bankListData = useSelector((state) => state.bankInfo);
   let { loading, error, bank, response } = bankListData;
@@ -105,16 +120,6 @@ function BankTable() {
   };
   console.log(bank, "heloo");
 
-  const renderList =
-    bank instanceof Array
-      ? bank.map((item, index) => (
-          <tr>
-            <th></th>
-            <td>{item.bankName}</td>
-            <td>{item.bankCode}</td>
-          </tr>
-        ))
-      : "";
   const showModal = () => {
     fireSwal({
       bankName: "",
@@ -124,43 +129,21 @@ function BankTable() {
       .catch(() => console.log("Modal closed"));
   };
 
-  // if(typeof bank ){
-
-  // }
-  // if(bank instanceof Array){
-
-  // }
-
   return (
     <>
-      <div className="grid gap-4 my-4 mt-4 md:grid-cols-12 justify-self-auto">
-        <div className="grid grid-cols-12 gap-4 m-4 justify-self-auto">
-          <div className="col-span-8 ">
-            <label
-              htmlFor="my-modal-4"
-              className="mb-4 btn btn-outline btn-primary"
-              onClick={showModal}
-            >
-              Add New
-            </label>
-            {/* <BankTable bank={bank} /> */}
-          </div>
-          <div className="flex col-span-4">{/* <Card /> */}</div>
-        </div>
-      </div>
-      <div className="overflow-x-auto">
-        <table className="table w-full">
-          {/* <!-- head --> */}
-          <thead>
-            <tr>
-              <th></th>
-              <th>Bank Name</th>
-              <th>Bank Code</th>
-            </tr>
-          </thead>
-          <tbody>{renderList}</tbody>
-        </table>
-      </div>
+      <DataTable
+        title="Bank List"
+        columns={columns}
+        data={bank}
+        pagination
+        // paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
+        subHeader
+        // subHeaderComponent={subHeaderComponentMemo}
+        // selectableRows
+        persistTableHeadstriped
+        highlightOnHover
+        // actions={actionsMemo}
+      />
     </>
   );
 }
