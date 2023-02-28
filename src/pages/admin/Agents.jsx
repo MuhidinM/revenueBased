@@ -7,6 +7,71 @@ import AgentComponent from "../../components/AgentComponent";
 
 const MySwal = withReactContent(Swal);
 
+const showFormModalAgent = (values) => {
+  return new Promise((resolve, reject) => {
+    MySwal.fire({
+      title: "Register Your Domain",
+      html: (
+        <AgentComponent
+          values={values}
+          onSubmit={(values) => {
+            //   console.log(values);
+            //   console.log(currentUser.id);
+            //   dispatch(addDomain(currentUser.id, values.name, values.url));
+            //   console.log("The button is got Clicked");
+          }}
+          onCancel={() => MySwal.close()}
+        ></AgentComponent>
+      ),
+      onClose: () => reject(),
+      onCancel: () => Swal.close(),
+      showConfirmButton: false,
+      showCancelButton: false,
+      confirmButtonColor: "#01AFEF",
+    });
+  });
+};
+const showModalAccount = () => {
+  showFormModalAccount({
+    name: "",
+    url: "",
+  })
+    .then((values) => console.log(values))
+    .catch(() => console.log("Modal closed"));
+};
+const showFormModalAccount = (values) => {
+  return new Promise((resolve, reject) => {
+    MySwal.fire({
+      title: "Register Your Domain",
+      html: (
+        <AccountComponent
+          values={values}
+          onSubmit={(values) => {
+            //   console.log(values);
+            //   console.log(currentUser.id);
+            //   dispatch(addDomain(currentUser.id, values.name, values.url));
+            //   console.log("The button is got Clicked");
+          }}
+          onCancel={() => MySwal.close()}
+        ></AccountComponent>
+      ),
+      onClose: () => reject(),
+      onCancel: () => Swal.close(),
+      showConfirmButton: false,
+      showCancelButton: false,
+      confirmButtonColor: "#01AFEF",
+    });
+  });
+};
+const showModalAgent = () => {
+  showFormModalAgent({
+    name: "",
+    url: "",
+  })
+    .then((values) => console.log(values))
+    .catch(() => console.log("Modal closed"));
+};
+
 const columns = [
   {
     name: "First Name",
@@ -27,6 +92,32 @@ const columns = [
     name: "Phone",
     selector: (row) => row.phone,
     sortable: true,
+  },
+  {
+    name: "View",
+    cell: (row) => (
+      <label
+        htmlFor="my-modal-3"
+        className="cursor-pointer"
+        onClick={() => showModalAccount(row)}
+      >
+        <svg
+          className="w-6 h-6 text-primary"
+          viewBox="0 0 24 24"
+          strokeWidth="2"
+          stroke="currentColor"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          {" "}
+          <path stroke="none" d="M0 0h24v24H0z" />{" "}
+          <path d="M9 7 h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" />{" "}
+          <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" />{" "}
+          <line x1="16" y1="5" x2="19" y2="8" />
+        </svg>
+      </label>
+    ),
   },
 ];
 
@@ -54,7 +145,7 @@ const FilterComponent = ({ filterText, onFilter, onClear }) => (
     <input
       id="search"
       type="text"
-      placeholder="Filter By Title"
+      placeholder="Filter By Name"
       aria-label="Search Input"
       value={filterText}
       onChange={onFilter}
@@ -116,7 +207,7 @@ function downloadCSV(array) {
 const Export = ({ onExport }) => (
   <button
     onClick={(e) => onExport(e.target.value)}
-    className="text-white bg-primary hover:bg-primary focus:ring-4 focus:outline-none focus:ring-primary font-medium text-sm px-2.5 py-2.5 mr-4 text-center dark:bg-primary dark:hover:bg-primary dark:focus:ring-primary"
+    className="text-white bg-primary hover:bg-primary focus:ring-4 focus:outline-none focus:ring-primary font-medium text-sm px-3.5 py-2.5 mr-2 text-center dark:bg-primary dark:hover:bg-primary dark:focus:ring-primary"
   >
     Export
   </button>
@@ -225,15 +316,8 @@ function Agents() {
       >
         Add Agent
       </button>
-      <button
-        type="button"
-        className="mb-4 ml-4 btn btn-outline btn-primary"
-        onClick={showModalAccount} //AccountComponent
-      >
-        Add Account
-      </button>
       <DataTable
-        title="Test List"
+        title="Agent List"
         columns={columns}
         data={filteredItems}
         pagination
