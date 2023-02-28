@@ -41,7 +41,7 @@ function Uapi() {
     console.log(generatedApiKey.credentialDetail);
     return (
       <>
-        <div className="grid gap-4 m-4 md:grid-cols-12 justify-self-auto">
+        <div className="grid gap-4 md:grid-cols-12 justify-self-auto">
           <div className="col-span-8">
             <GenerateApiModal accountNumber={primaryAccount}></GenerateApiModal>
             <div className="col-span-4 mt-16">

@@ -56,7 +56,7 @@ const FilterComponent = ({ filterText, onFilter, onClear }) => (
     <button
       type="button"
       onClick={onClear}
-      className="text-white bg-primary hover:bg-primary focus:ring-4 focus:outline-none focus:ring-primary font-medium text-sm px-5 py-2.5 text-center dark:bg-primary dark:hover:bg-primary dark:focus:ring-primary"
+      className="text-white bg-primary hover:bg-primary focus:ring-4 focus:outline-none focus:ring-primary font-medium text-sm px-3.5 py-2.5 mr-2 text-center dark:bg-primary dark:hover:bg-primary dark:focus:ring-primary"
     >
       Clear
     </button>
@@ -254,7 +254,7 @@ function DomainList() {
   };
 
   return (
-    <div className="m-4">
+    <div className="">
       <button
         type="button"
         className="mb-4 btn btn-outline btn-primary"

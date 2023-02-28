@@ -184,7 +184,7 @@ function Accounts() {
     ));
     return (
       <>
-        <div className="grid gap-4 m-4 md:grid-cols-12 justify-self-auto">
+        <div className="grid gap-4 md:grid-cols-12 justify-self-auto">
           <div className="col-span-12">
             <div className="grid grid-cols-2 gap-2 sm:grid-cols-12">
               <div className="col-span-9 mt-6">

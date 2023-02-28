@@ -31,7 +31,7 @@ const data = [
 function Content() {
   return (
     <>
-      <div className="grid grid-cols-12 gap-4 m-4 justify-self-auto">
+      <div className="grid grid-cols-12 gap-4 justify-self-auto">
         <div className="col-span-8">
           <Stat />
           <DataTable
