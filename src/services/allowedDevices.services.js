@@ -1,14 +1,15 @@
 import axios from "axios";
-const fetchRegisteredDevicesUrl =
-  "http://localhost:5000/registered/device/all/";
-const deviceRegisterUrl = "http://localhost:5000/allowed/device/register/";
+const fetchRegisteredDevicesUrl = "http://localhost:5000/device/";
+const deviceRegisterUrl = "http://localhost:5000/device/";
 
-const getAllRegisteredDevices = async () => {
+const getAllRegisteredDevices = async (id) => {
   // console.log("calling endpoint");
-  return await axios.get(fetchRegisteredDevicesUrl).then((response) => {
-    // console.log("text" + response.data);
-    return response.data.allDevices;
-  });
+  return await axios
+    .get(fetchRegisteredDevicesUrl + `all/${id}`)
+    .then((response) => {
+      // console.log("text" + response.data);
+      return response.data.allDevices;
+    });
 };
 
 const RegisteredDeviceServices = {

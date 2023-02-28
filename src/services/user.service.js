@@ -30,8 +30,24 @@ const getAllPendingBussiness = async () => {
 const approvePendingBussinessById = (id) => {
   console.log(id);
   return axios
-    .patch(API_URL + "test/bussinessRequest/:id", { id })
-    .then((response) => response.data);
+    .patch(
+      API_URL + "test/bussinessRequest/:id",
+      { id },
+      { withCredentials: true, credentials: "include" }
+    )
+    .then((response) => {
+      return [response.data, response.status];
+    })
+    .catch((err) => {
+      if (err.response) {
+        console.log(err.response.data);
+      } else if (err.request) {
+        console.log(err.request);
+      } else {
+        console.log("Error", err.message);
+      }
+      console.log(err.config);
+    });
 };
 
 const headers = {
@@ -48,7 +64,7 @@ const BussinessInfoRequest = async (formData) => {
     .then((response) => {
       // console.log(response.data.message);
       console.log(response.data);
-      return response.data;
+      return [response.data, response.status];
     });
 };
 

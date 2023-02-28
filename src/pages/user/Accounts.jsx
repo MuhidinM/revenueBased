@@ -48,6 +48,7 @@ function Accounts() {
   const AccountListData = useSelector((state) => state.accountsList);
   console.log(AccountListData);
   const { loading, error, bankAccounts } = AccountListData;
+  console.log("Account Numbers:", bankAccounts);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -55,6 +56,41 @@ function Accounts() {
   }, [dispatch]);
 
   console.log(bankAccounts);
+
+  const interpretResponse = (response) => {
+    let actionResponse = JSON.stringify(response);
+    console.log("Action Response Is" + actionResponse.response);
+    console.log(
+      " Response Is" + response.response,
+      response.message + "",
+      response.responseCode
+    );
+    if (response.response === "success" || response.responseCode == 200) {
+      console.log(response);
+      console.log("Rsponse from useEffect is here" + response);
+      Swal.fire({
+        icon: "success",
+        title: "Account Updated",
+        showConfirmButton: false,
+        timer: 3000,
+      });
+    } else if (response.responseCode === 403 && response.respone === "error") {
+      console.log("Un Authorised User ");
+      Swal.fire({
+        icon: "error",
+        title: response.message,
+        showConfirmButton: false,
+        timer: 3000,
+      });
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Account Is Not Updated",
+        showConfirmButton: false,
+        timer: 3000,
+      });
+    }
+  };
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -100,13 +136,12 @@ function Accounts() {
                     values.sixth;
                   BankAccountServices.confirmOtp("+251927355418", otp).then(
                     (res) => {
-                      dispatch(setPrimaryAccount(e.target.value));
-                      Swal.fire({
-                        icon: "success",
-                        title: "You have successfuly changed primary account",
-                        showConfirmButton: false,
-                        timer: 3000,
-                      });
+                      dispatch(
+                        setPrimaryAccount({
+                          value: e.target.value,
+                          interpretResponse,
+                        })
+                      );
                     }
                   );
                 }}
@@ -117,7 +152,7 @@ function Accounts() {
             // onClose: () => reject(),
             showConfirmButton: false,
           });
-          // <Otp></Otp>
+          <Otp></Otp>;
         }
       });
     });

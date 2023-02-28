@@ -9,8 +9,11 @@ import AuthService from "../../services/auth.service";
 export const getGeneratedApiKey = () => async (dispatch) => {
   try {
     const user = AuthService.getCurrentUser();
+    console.log("The User is:", user.user.user_id);
     if (user) {
-      const generatedApiKey = await AuthService.getGeneratedApiKey(user.id);
+      const generatedApiKey = await AuthService.getGeneratedApiKey(
+        user.user.user_id
+      );
       console.log(generatedApiKey);
       //   dispatch(getAccounts());
       dispatch({
@@ -26,16 +29,35 @@ export const getGeneratedApiKey = () => async (dispatch) => {
   }
 };
 export const generateApiKey =
-  (email_address, expiryDate) => async (dispatch) => {
-    console.log(email_address);
+  ({ email, expiryDate, interpretResponse }) =>
+  async (dispatch) => {
+    console.log(email);
     try {
       const user = AuthService.getCurrentUser();
       if (user) {
         const generateNewApiKey = await AuthService.generateApiKey(
-          email_address,
+          email,
           expiryDate
         );
-        console.log(generateNewApiKey);
+        if (generateNewApiKey[1] == 200) {
+          // dispatch(satResponse("success"));
+          console.log("Your Endpoint is created ");
+          interpretResponse({
+            // message: addedUrls[0].message,
+            response: "success",
+            responseCode: generateNewApiKey[1],
+          });
+        } else if (generateNewApiKey[1] == 403) {
+          interpretResponse({
+            message: generateNewApiKey[0].message,
+            response: "error",
+            responseCode: generateNewApiKey[1],
+          });
+        } else {
+          // dispatch(satResponse("error"));
+          console.log("It is Not Checking Your Credentials");
+          interpretResponse({ response: "error" });
+        }
         dispatch(getGeneratedApiKey());
         dispatch({
           type: GENERATE_API_KEY,

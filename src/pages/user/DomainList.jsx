@@ -117,22 +117,25 @@ const Export = ({ onExport }) => (
 function DomainList() {
   const [tableData, setTableData] = useState([]);
   const addedDomain = useSelector((state) => state.domain);
+  const userData = useSelector((state) => state.userProfile);
+  console.log(userData);
+  const { bankAccounts, userDetail } = userData;
   // const addedDomain = useSelector((state) => console.log(state));
   console.log(addedDomain);
-  const { loading, error, domain, domains } = addedDomain;
+  const { loading, error, domain, response, domains } = addedDomain;
   const dispatch = useDispatch();
   const [currentUser, setCurrentUser] = useState({});
   useEffect(() => {
     const user = AuthService.getCurrentUser();
+    dispatch(getDomain(user.user.user_id));
+
     if (user) {
       setCurrentUser(user);
-      dispatch(getDomain());
-      setTableData(domains);
-
-      // setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
-      // setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
+      // setTableData(domains);
+      console.log("did mount");
     }
   }, []);
+
   const [filterText, setFilterText] = React.useState("");
   const actionsMemo = useMemo(
     () => <Export onExport={() => downloadCSV(data)} />,
@@ -162,6 +165,49 @@ function DomainList() {
     );
   }, [filterText, resetPaginationToggle]);
 
+  const interpretResponse = (response) => {
+    let actionResponse = JSON.stringify(response);
+    console.log("Action Response Is" + actionResponse.response);
+    console.log(
+      " Response Is" + response.response,
+      response.message + "",
+      response.responseCode
+    );
+    if (response.response === "success" && response.responseCode == 200) {
+      console.log(response);
+      console.log("Response from useEffect is here" + response);
+      Swal.fire({
+        icon: "success",
+        title: "Domain Created",
+        showConfirmButton: false,
+        timer: 3000,
+      });
+    } else if (response.responseCode == 403 && response.respone === "error") {
+      console.log("Un Authorised User ");
+      Swal.fire({
+        icon: "error",
+        title: response.message,
+        showConfirmButton: false,
+        timer: 3000,
+      });
+    } else if (response.responseCode === 401 || response.respone === "error") {
+      console.log("Un Authorised User ");
+      Swal.fire({
+        icon: "error",
+        title: response.message,
+        showConfirmButton: false,
+        timer: 3000,
+      });
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Domain Is Not Created",
+        showConfirmButton: false,
+        timer: 3000,
+      });
+    }
+  };
+
   const showFormModal = (values) => {
     return new Promise((resolve, reject) => {
       MySwal.fire({
@@ -171,11 +217,23 @@ function DomainList() {
             values={values}
             onSubmit={(values) => {
               console.log(values);
-              console.log(currentUser.id);
-              dispatch(addDomain(currentUser.id, values.name, values.url));
+              console.log("Your Current User is" + JSON.stringify(userDetail));
+
+              dispatch(
+                addDomain({
+                  user_id: currentUser.user.user_id,
+                  name: values.name,
+                  url: values.url,
+                  interpretResponse,
+                })
+              );
               console.log("The button is got Clicked");
+              MySwal.close();
             }}
-            onCancel={() => MySwal.close()}
+            onCancel={() => {
+              console.log("Cancel Is Called:");
+              MySwal.close();
+            }}
           ></DomainComponent>
         ),
         onClose: () => reject(),
@@ -204,19 +262,23 @@ function DomainList() {
       >
         Add Domain
       </button>
-      <DataTable
-        title="Devices List"
-        columns={columns}
-        data={domains}
-        pagination
-        paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
-        subHeader
-        subHeaderComponent={subHeaderComponentMemo}
-        // selectableRows
-        persistTableHeadstriped
-        highlightOnHover
-        actions={actionsMemo}
-      />
+      {loading ? (
+        "Loading"
+      ) : (
+        <DataTable
+          title="List Of End Points"
+          columns={columns}
+          data={domains}
+          pagination
+          paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
+          subHeader
+          subHeaderComponent={subHeaderComponentMemo}
+          // selectableRows
+          persistTableHeadstriped
+          highlightOnHover
+          actions={actionsMemo}
+        />
+      )}
     </div>
   );
 }

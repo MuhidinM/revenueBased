@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useParams, useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 import { Formik } from "formik";
 import * as Yup from "yup";
@@ -9,14 +10,21 @@ import PaymentServices from "../services/payment.service";
 import { useNavigate } from "react-router-dom";
 import Otp from "./Otp";
 import BankAccountServices from "../../src/services/bank-account.services";
-
+import queryString from "query-string";
 const MySwal = withReactContent(Swal);
 function Bankpay() {
   const [successful, setSuccessful] = useState(false);
   const [message, setMessage] = useState("");
   const [verified, setVerified] = useState(0);
   const [currentUser, setCurrentUser] = useState({});
-
+  const [searchParams, setSearchParams] = useSearchParams();
+  const clientid = searchParams.get("secretKey");
+  const secretKey = searchParams.get("secretKey");
+  const key = searchParams.get("key");
+  const amount = searchParams.get("amount");
+  const callBackUrl = searchParams.get("callBackUrl");
+  console.log(clientid, secretKey, amount);
+  useEffect(() => {}, []);
   const validationSchema = Yup.object().shape({
     accountHolder: Yup.string().required("Account Holder Name is required"),
     accountNumber: Yup.string().required("Account Number is required"),
@@ -74,8 +82,6 @@ function Bankpay() {
                   if ((resp[0] = "success")) {
                     setVerified(1);
                   }
-                  // window.location.replace(resp[1]);
-                  // console.log(successful);
                 },
                 (error) => {
                   const resMessage =
@@ -146,7 +152,7 @@ function Bankpay() {
         <Formik
           initialValues={{
             debitAccount: "",
-            debitAmount: "",
+            // debitAmount: "",
             // bankName: "",
           }}
           // validationSchema={validationSchema}
@@ -189,15 +195,28 @@ function Bankpay() {
                         console.log(val.debitAccount);
                         PaymentServices.pay(
                           val.debitAccount,
-                          val.debitAmount
+                          amount,
+                          clientid,
+                          secretKey,
+                          key
                         ).then(
                           (resp) => {
                             console.log(resp);
                             setMessage(resp[0]);
                             setSuccessful(true);
                             // setTimeout(3000)
-                            window.location.replace(resp[1]);
-                            // console.log(successful);
+                            // if (resp[0]) {
+
+                            // }
+                            if (resp[0] === "Success") {
+                              window.opener.postMessage(resp[0], callBackUrl);
+                              window.opener.focus();
+                              window.close();
+                            } else {
+                              window.opener.postMessage(resp[0], callBackUrl);
+                              window.opener.focus();
+                              window.close();
+                            }
                           },
                           (error) => {
                             const resMessage =

@@ -2,10 +2,11 @@ import axios from "axios";
 import authHeader from "./auth-header";
 
 const API_URL = "http://localhost:5000/api/banckAccount/";
-const OTP_URL = "http://192.168.0.173:8081/payment/v1/sendOtp";
+const OTP_URL = "http://192.168.231.175:8081/payment/v1/sendOtp";
 const OTP_URL_CONFIRMATION =
-  "http://192.168.0.173:8081/payment/v1/otpVerification";
-const NAME_ENQ_URL = "http://192.168.0.173:8081/payment/v1/customerNameByAccno";
+  "http://192.168.231.175:8081/payment/v1/otpVerification";
+const NAME_ENQ_URL =
+  "http://192.168.231.175:8081/payment/v1/customerNameByAccno";
 const getBankAccountById = async (id) => {
   console.log(id);
   return await axios
@@ -17,7 +18,17 @@ const setPrimaryAccount = async (userId, account_id) => {
   console.log(account_id, userId);
   return await axios
     .patch(API_URL + `setPrimary/`, { account_id, userId })
-    .then((response) => response.data.bankAccounts);
+    .then((response) => [response.data.bankAccounts, response.status])
+    .catch((err) => {
+      if (err.response) {
+        return [err.response.data, err.response.status];
+      } else if (err.request) {
+        console.log(err.request);
+      } else {
+        console.log("Error", err.message);
+      }
+      console.log(err.config);
+    });
 };
 
 const activateAccount = async (id, acId) => {
@@ -63,7 +74,19 @@ const CreateBankAccount = async (
       userId,
     })
     .then((response) => {
-      console.log(response.data);
+      console.log("Your Response IS:", response.data);
+      return [response.data, response.status];
+    })
+    .catch((err) => {
+      if (err.response) {
+        console.log("Error Response", err.response);
+        return [err.response.data, err.response.status];
+      } else if (err.request) {
+        console.log(err.request);
+      } else {
+        console.log("Error", err.message);
+      }
+      console.log(err.config);
     });
 };
 

@@ -13,7 +13,7 @@ export const getAccounts = () => async (dispatch) => {
     const user = AuthService.getCurrentUser();
     if (user) {
       const bankAccountByID = await BankAccountServices.getBankAccountById(
-        user.id
+        user.user.user_id
       );
       console.log(bankAccountByID);
       dispatch({
@@ -49,42 +49,80 @@ export const nameEnquiryByAccountNumber =
     }
   };
 
-export const setPrimaryAccount = (account_id) => async (dispatch) => {
-  console.log(account_id);
-  try {
-    const user = AuthService.getCurrentUser();
-    if (user) {
-      const setPrimaryAccount = await BankAccountServices.setPrimaryAccount(
-        user.id,
-        account_id
-      );
-      console.log(setPrimaryAccount);
-      dispatch(getAccounts());
+export const setPrimaryAccount =
+  ({ value, interpretResponse }) =>
+  async (dispatch) => {
+    // console.log(account_id);
+    try {
+      const user = AuthService.getCurrentUser();
+      if (user) {
+        console.log(user.user.user_id);
+        const setPrimaryAccount = await BankAccountServices.setPrimaryAccount(
+          user.user.user_id,
+          value
+        );
+        console.log(setPrimaryAccount);
+        if (setPrimaryAccount[1] == "200") {
+          // dispatch(satResponse("success"));
+          interpretResponse({
+            message: "Updated",
+            response: "success",
+            responseCode: setPrimaryAccount[1],
+          });
+        } else if (setPrimaryAccount[1] == "403") {
+          interpretResponse({
+            message: "Not Updated",
+            response: "error",
+            responseCode: setPrimaryAccount[1],
+          });
+        } else {
+          // dispatch(satResponse("error"));
+          interpretResponse({ response: "error" });
+        }
+        dispatch(getAccounts());
+        dispatch({
+          type: SET_PRIMARY,
+          payload: setPrimaryAccount,
+        });
+      }
+    } catch (error) {
       dispatch({
-        type: SET_PRIMARY,
-        payload: setPrimaryAccount,
+        type: ACCOUNTS_ERROR,
+        payload: error,
       });
     }
-  } catch (error) {
-    dispatch({
-      type: ACCOUNTS_ERROR,
-      payload: error,
-    });
-  }
-};
+  };
 
 export const createTutorial =
-  (accountHolderName, accountNumber, bankName, userId) => async (dispatch) => {
+  ({ current, accountNumber, bankName, id, interpretResponse }) =>
+  async (dispatch) => {
     console.log("in redux");
-    console.log("redux " + accountHolderName, accountNumber, bankName, userId);
+    console.log("redux " + current, accountNumber, bankName, id);
     try {
       const res = await BankAccountServices.CreateBankAccount(
-        accountHolderName,
+        current,
         accountNumber,
         bankName,
-        userId
+        id
       );
       console.log(res);
+      if (res[1] == "200") {
+        // dispatch(satResponse("success"));
+        interpretResponse({
+          message: res[0].message,
+          response: "success",
+          responseCode: res[1],
+        });
+      } else if (res[1] == "403") {
+        interpretResponse({
+          message: res[0].message,
+          response: "error",
+          responseCode: res[1],
+        });
+      } else {
+        // dispatch(satResponse("error"));
+        interpretResponse({ response: "error" });
+      }
       dispatch(getAccounts());
       dispatch({
         type: CREATE_BAK_ACCOUNT,

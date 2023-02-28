@@ -1,8 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import AuthService from "../../services/auth.service";
+import { retrieveLoggedInUser } from "../../store/actions/userProfileAction";
 
 function Nav() {
+  const [currentUser, setCurrentUser] = useState({});
+  const userData = useSelector((state) => state.userProfile);
+  console.log(userData);
+  const { loading, error, bankAccounts, userDetail } = userData;
+  const dispatch = useDispatch();
+  const [jwtUser, setjwtUser] = useState("");
+  const retrievedata = async () => {
+    await AuthService.getLoggedInUser().then((res) => {
+      console.log(res);
+      return res;
+    });
+  };
+  useEffect(() => {
+    dispatch(retrieveLoggedInUser());
+    const user = retrievedata();
+    setCurrentUser(user);
+  }, []);
   const logOut = () => {
     AuthService.logout();
   };

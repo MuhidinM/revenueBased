@@ -90,14 +90,22 @@ function Login() {
 
                         AuthService.login(values.email, values.password).then(
                           (res) => {
-                            // console.log("Ther role response is:" + res);
-                            if (res.roles[0] === "ROLE_ 2") {
+                            console.log("Logged In:" + res.user);
+                            if (res.user.role == "admin") {
                               navigate("/admin");
                               window.location.reload();
                             } else {
                               navigate("/users");
                               window.location.reload();
                             }
+
+                            // if (res.roles[0] === "ROLE_ 2") {
+                            //   navigate("/admin");
+                            // window.location.reload();
+                            // } else {
+                            //   navigate("/users");
+                            //   window.location.reload();
+                            // }
                           },
                           (error) => {
                             const resMessage =

@@ -1,20 +1,28 @@
 import React, { useContext, useState, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import { FormContext } from "../MultiStepForm";
 import Swal from "sweetalert2";
 import UserService from "../../../services/user.service";
 import AuthService from "../../../services/auth.service";
+import { useDispatch, useSelector } from "react-redux";
+import { retrieveLoggedInUser } from "../../../store/actions/userProfileAction";
 function Success() {
   const { activeStepIndex, setActiveStepIndex, formData, setFormData } =
     useContext(FormContext);
   const [currentUser, setCurrentUser] = useState({});
-
+  const userData = useSelector((state) => state.userProfile);
+  console.log(userData);
+  const { loading, error, userProfile, userDetail } = userData;
+  const dispatch = useDispatch();
+  let navigate = useNavigate();
+  console.log(userDetail);
   useEffect(() => {
-    const user = AuthService.getCurrentUser();
-    if (user) {
-      setCurrentUser(user);
-      // setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
-      // setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
-    }
+    // const user = AuthService.getCurrentUser();
+
+    // setCurrentUser(user);
+    dispatch(retrieveLoggedInUser());
+    // setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
+    // setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
   }, []);
   const sendDataToBackend = () => {
     console.log("your Button is got Clicked");
@@ -32,7 +40,7 @@ function Success() {
     fd.append("tradeLicenseImage", formData.addressProof);
     fd.append("description", formData.description);
     fd.append("region", formData.region);
-    fd.append("user", currentUser.email);
+    fd.append("user", userDetail.email_address);
     fd.append("bcity", formData.bcity);
     fd.append("bkifleketema", formData.bkifleketema);
     fd.append("bworeda", formData.bworeda);
@@ -43,12 +51,15 @@ function Success() {
     UserService.BussinessInfoRequest(fd).then(
       (resp) => {
         console.log(resp.message);
-        Swal.fire({
-          icon: "success",
-          title: "Your Request Has been sent ",
-          showConfirmButton: false,
-          timer: 3000,
-        });
+        if (resp[1] == "200") {
+          Swal.fire({
+            icon: "success",
+            title: "Your Request Has been sent ",
+            showConfirmButton: false,
+            timer: 3000,
+          });
+          navigate("/users");
+        }
       },
       (error) => {
         const resMessage =
