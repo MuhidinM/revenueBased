@@ -11,6 +11,7 @@ import Users from "./Users";
 import OTP from "./pages/auth/OTP";
 import PrivateRoiutes from "./pages/auth/PrivateRoutes";
 import EpassRegistration from "./components/EpassRegistration";
+import AuthService from "./services/auth.service";
 
 function App() {
   const user = AuthService.getCurrentUser();

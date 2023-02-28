@@ -33,8 +33,8 @@ export const addBank =
         // dispatch(satResponse("error"));
         interpretResponse({ response: "error" });
       }
+
       dispatch(gateBanks());
-      console.log("status" + addedBank[1]);
       dispatch({
         type: ADD_BANK,
         payload: addedBank[0],
@@ -49,7 +49,7 @@ export const addBank =
 export const gateBanks = () => async (dispatch) => {
   try {
     const getBank = await BankServices.getBank();
-    console.log(getBank);
+    console.log("Getting Banks", getBank);
     // dispatch(getGeneratedApiKey());
     dispatch({
       type: GET_BANK,
@@ -59,20 +59,6 @@ export const gateBanks = () => async (dispatch) => {
     dispatch({
       type: GET_BANK_ERROR,
       payload: error,
-    });
-  }
-};
-
-export const satResponse = (response) => async (dispatch) => {
-  if (response === "success") {
-    dispatch({
-      type: SUCCESS_RESPONSE_SETTER,
-      payload: response,
-    });
-  } else {
-    dispatch({
-      type: ERROR_RESPONSE_SETTER,
-      payload: response,
     });
   }
 };

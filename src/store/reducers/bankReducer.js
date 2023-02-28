@@ -8,7 +8,8 @@ import {
 } from "../types";
 
 const initialState = {
-  bank: [],
+  bank: {},
+  banks: [],
   response: "",
   message: {},
   loading: true,
