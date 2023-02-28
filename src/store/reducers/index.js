@@ -8,9 +8,14 @@ import adminFetchAllTransactions from "./adminFetchAllTransactions";
 import deviceManagementReducer from "./deviceManagementReducer";
 import domainReducer from "./domainReducer";
 import bussinessReducer from "./bussinessReducer";
-// import { reducer as modalProvider } from "react-redux-modal-provider";
-// console.log(bank_accountReducer)
-export default combineReducers({
+import { persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+const persistConfig = {
+  key: "root",
+  storage,
+  whitelist: ["userProfile"],
+};
+const rootReducer = combineReducers({
   accountsList: bank_accountReducer,
   userProfile: user_profile_reducer,
   apiKey: generate_api_key_reducer,
@@ -25,3 +30,4 @@ export default combineReducers({
   // modalProvider,
   // domains: domainReducer,
 });
+export default persistReducer(persistConfig, rootReducer);

@@ -1,3 +1,4 @@
+/* global chrome */
 import { Route, Routes } from "react-router-dom";
 import Home from "./Home";
 import Gateway from "./components/Gateway";
@@ -9,8 +10,22 @@ import Users from "./Users";
 import OTP from "./pages/auth/OTP";
 import PrivateRoiutes from "./pages/auth/PrivateRoutes";
 import EpassRegistration from "./components/EpassRegistration";
+import { useEffect } from "react";
 
 function App() {
+  // useEffect(() => {
+  //   function logCookies(cookies) {
+  //     for (const cookie of cookies) {
+  //       console.log(cookie);
+  //     }
+  //   }
+  //   chrome.cookies
+  //     .getAll({
+  //       name: "sessionid",
+  //     })
+  //     .then((cookies) => logCookies(cookies));
+  // }, []);
+
   return (
     <>
       <Routes>

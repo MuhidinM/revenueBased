@@ -2,7 +2,7 @@ import axios from "axios";
 import authHeader from "./auth-header";
 
 const API_URL = "http://localhost:5000/api/";
-const SpringUrl = "http://192.168.231.33:8081/payment/v1/";
+const SpringUrl = "http://192.168.231.175:8081/payment/v1/";
 const pay = async (debitAccount, debitAmount, clientId, secretKey, key) => {
   return await axios
     .post(

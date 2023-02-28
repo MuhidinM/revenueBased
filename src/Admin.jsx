@@ -11,7 +11,7 @@ import Banks from "./pages/admin/Banks";
 import Messages from "./pages/admin/Messages";
 import Modal from "./components/Modal";
 import Activate from "./pages/admin/Activate";
-import Modal2 from "./components/Modal2";
+// import Modal2 from "./components/Modal2";
 import TransactionList from "./pages/admin/TransactionList";
 import DeviceManagement from "./pages/admin/DeviceManagement";
 import Devices from "./pages/user/Devices";

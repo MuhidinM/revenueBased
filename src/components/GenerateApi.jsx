@@ -13,6 +13,40 @@ import Otp from "./Otp";
 const MySwal = withReactContent(Swal);
 
 function GenerateApiModal(props) {
+  const interpretResponse = (response) => {
+    let actionResponse = JSON.stringify(response);
+    console.log("Action Response Is" + actionResponse.response);
+    console.log(
+      " Response Is" + response.response,
+      response.message + "",
+      response.responseCode
+    );
+    if (response.response === "success" && response.responseCode == 200) {
+      console.log(response);
+      console.log("Response from useEffect is here" + response);
+      Swal.fire({
+        icon: "success",
+        title: "Your Key Is Generated",
+        showConfirmButton: false,
+        timer: 3000,
+      });
+    } else if (response.responseCode == 403 || response.respone === "error") {
+      console.log("Un Authorised User ");
+      Swal.fire({
+        icon: "error",
+        title: response.message,
+        showConfirmButton: false,
+        timer: 3000,
+      });
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Bank Is Not Created",
+        showConfirmButton: false,
+        timer: 3000,
+      });
+    }
+  };
   const showFormModal = (values) => {
     return new Promise((resolve, reject) => {
       MySwal.fire({
@@ -24,15 +58,15 @@ function GenerateApiModal(props) {
               console.log("Your button is got Clicked");
               console.log(values);
               console.log(currentUser);
-              dispatch(generateApiKey(currentUser.email, values.expiryDate));
+              dispatch(
+                generateApiKey({
+                  email: currentUser.user.email_address,
+                  expiryDate: values.expiryDate,
+                  interpretResponse,
+                })
+              );
 
               resolve(values);
-              Swal.fire({
-                icon: "success",
-                title: "Your Key has been generated",
-                showConfirmButton: false,
-                timer: 3000,
-              });
 
               //   MySwal.close();
               //   Swal.close();

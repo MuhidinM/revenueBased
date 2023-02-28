@@ -9,13 +9,13 @@ import { getAllRegisterdDevices } from "../../store/actions/deviceManagementActi
 const MySwal = withReactContent(Swal);
 const columns = [
   {
-    name: "Device Name",
+    name: "Device Id",
     selector: (row) => row.deviceId,
     sortable: true,
   },
   {
     name: "Merchant ID",
-    selector: (row) => row.userUserId,
+    selector: (row) => row.createdAt,
     sortable: true,
   },
 ];
@@ -118,7 +118,7 @@ function Devices() {
     const user = AuthService.getCurrentUser();
     if (user) {
       setCurrentUser(user);
-      dispatch(getAllRegisterdDevices());
+      dispatch(getAllRegisterdDevices(user.user.user_id));
       setTableData(deviceDetail);
     }
   }, []);

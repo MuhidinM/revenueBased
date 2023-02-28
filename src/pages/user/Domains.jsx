@@ -43,9 +43,10 @@ function Domains() {
   const addedDomain = useSelector((state) => state.domain);
   // const addedDomain = useSelector((state) => console.log(state));
   console.log(addedDomain);
-  const { loading, error, domain, domains } = addedDomain;
+  const { loading, error, domain, domains, response } = addedDomain;
   const dispatch = useDispatch();
   const [currentUser, setCurrentUser] = useState({});
+
   useEffect(() => {
     const user = AuthService.getCurrentUser();
     if (user) {
@@ -56,7 +57,28 @@ function Domains() {
       // setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
       // setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
     }
-  }, []);
+  }, [dispatch]);
+
+  useEffect(() => {
+    console.log("Hello useEffect is running well");
+    if (response === "success") {
+      console.log("Rsponse from useEffect is here" + response);
+      Swal.fire({
+        icon: "success",
+        title: "Your work has been saved",
+        showConfirmButton: false,
+        timer: 3000,
+      });
+    } else if (response.length > 0 && response != "success") {
+      console.log("Rsponse from useEffect is here" + response);
+      Swal.fire({
+        icon: "error",
+        title: "Your work has not been saved",
+        showConfirmButton: false,
+        timer: 3000,
+      });
+    }
+  }, [response.length > 0]);
 
   const showFormModal = (values) => {
     return new Promise((resolve, reject) => {
@@ -66,10 +88,13 @@ function Domains() {
           <DomainComponent
             values={values}
             onSubmit={(values) => {
-              console.log(values);
+              console.log("Submitting V" + values);
               console.log(currentUser.id);
               dispatch(addDomain(currentUser.id, values.name, values.url));
-              console.log("The button is got Clicked");
+              console.log("response checker " + response);
+              if (response.length === 0) {
+                console.log("response is not returned");
+              }
             }}
           ></DomainComponent>
         ),
@@ -100,12 +125,12 @@ function Domains() {
         Add Domain
       </button>
       {console.log(tableData)}
-      <MUIDataTable
+      {/* <MUIDataTable
         title={"Domain List"}
         data={domains}
         columns={columns}
         options={options}
-      />
+      /> */}
     </div>
   );
 }
