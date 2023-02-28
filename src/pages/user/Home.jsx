@@ -43,7 +43,7 @@ function Home() {
     <>
       {currentUser.secrate_key == null ? <Banner /> : ""}
 
-      <div className="p-4">
+      <div className="">
         <Stat />
         <div className="grid gap-4 mt-4 md:grid-cols-12 justify-self-auto">
           <div className="col-span-8">
