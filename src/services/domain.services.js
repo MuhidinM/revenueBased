@@ -1,7 +1,7 @@
 import axios from "axios";
 import authHeader from "./auth-header";
 
-const API_URL = "http://localhost:5000/api/";
+const API_URL = "http://10.1.177.130:5000/api/";
 
 const addUrls = async (user_id, name, url) => {
   console.log(user_id);

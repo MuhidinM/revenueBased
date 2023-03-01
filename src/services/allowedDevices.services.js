@@ -1,10 +1,10 @@
 import axios from "axios";
-const fetchRegisteredDevicesUrl = "http://localhost:5000/device/";
-const deviceRegisterUrl = "http://localhost:5000/device/";
+const fetchRegisteredDevicesUrl = "http://10.1.177.130:5000/device/";
+const deviceRegisterUrl = "http://10.1.177.130:5000/device/";
 
 const getAllRegisteredDevices = async (id) => {
   // console.log("calling endpoint");
-  console.log("User Id Is: ", id)
+  console.log("User Id Is: ", id);
   return await axios
     .get(fetchRegisteredDevicesUrl + `all/${id}`)
     .then((response) => {
