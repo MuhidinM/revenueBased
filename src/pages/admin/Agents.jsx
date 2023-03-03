@@ -183,10 +183,8 @@ const Export = ({ onExport }) => (
 );
 function Agents() {
   const [filterText, setFilterText] = React.useState("");
-  const AccountListData = useSelector((state) => state.accountsList);
-  console.log(AccountListData);
-  const { loading, error, bankAccounts } = AccountListData;
-  console.log("Account Numbers:", bankAccounts);
+  const agentData = useSelector((state) => state.agentInfo);
+  const { loading, error, addedagent, agents } = agentData;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -275,11 +273,6 @@ function Agents() {
                   interpretResponse,
                 })
               );
-
-              //   console.log(values);
-              //   console.log(currentUser.id);
-              //   dispatch(addDomain(currentUser.id, values.name, values.url));
-              //   console.log("The button is got Clicked");
             }}
             onCancel={() => MySwal.close()}
           ></AgentComponent>
@@ -316,7 +309,7 @@ function Agents() {
       <DataTable
         title="Agent List"
         columns={columns}
-        data={filteredItems}
+        data={agents}
         pagination
         paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
         subHeader

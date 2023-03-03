@@ -13,6 +13,8 @@ function PayPal() {
   useEffect(() => {
     if (success) {
       alert("Payment successfull");
+      window.opener.postMessage("Success", callBackUrl);
+      window.opener.focus();
       // window.opener.postMessage("Success", callBackUrl);
       // window.opener.focus();
       // window.close();

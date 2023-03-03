@@ -9,6 +9,7 @@ const initialState = {
   agents: [],
   addedagent: {},
   loading: true,
+  error: {},
 };
 
 export default function (state = initialState, action) {

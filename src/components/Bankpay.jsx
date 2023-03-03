@@ -128,22 +128,21 @@ function Bankpay() {
                 </div>
                 <div className="flex items-center">
                   <button
-                  // href="/otp"
-                  type="submit"
-                  // onClick={changeState}
-                  onClick={props.handleSubmit}
-                  className="w-1/2 text-white rounded-md swal2-styled bg-primary"
-                >
-                  Verify
-                </button>
-                <button
-                  className="w-1/2 text-white rounded-md swal2-styled bg-primary"
-                  onClick={handleClick}
-                >
-                  SignUp
-                </button>
+                    // href="/otp"
+                    type="submit"
+                    // onClick={changeState}
+                    onClick={props.handleSubmit}
+                    className="w-1/2 text-white rounded-md swal2-styled bg-primary"
+                  >
+                    Verify
+                  </button>
+                  <button
+                    className="w-1/2 text-white rounded-md swal2-styled bg-primary"
+                    onClick={handleClick}
+                  >
+                    SignUp
+                  </button>
                 </div>
-                
               </>
             )}
           </Formik>
