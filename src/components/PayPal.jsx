@@ -76,8 +76,10 @@ function PayPal(props) {
       const payer_id = details.payer.payer_id;
       const payerCountry_code = details.payer.address.country_code;
       const linksHref = details.links[0].href;
+      const clientOrderId = props.orderId;
       const response_to_Client = {
-        orderId: orderId,
+        clientOrderId: clientOrderId,
+        paypalOrderId: orderId,
         status: status,
         amount: amountValue,
         currencyCode: currency_code,
@@ -121,9 +123,6 @@ function PayPal(props) {
     });
   };
   //capture likely error
-  const onError = (data, actions) => {
-    setErrorMessage("An Error occured with your payment ");
-  };
   return (
     <PayPalScriptProvider
       options={{

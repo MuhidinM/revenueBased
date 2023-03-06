@@ -11,6 +11,7 @@ function Gateway() {
   const [searchParams, setSearchParams] = useSearchParams();
   const currency = searchParams.get("currency");
   const amount = searchParams.get("amount");
+  const orderID = searchParams.get("orderId");
 
   useEffect(() => {
     if (currency === "ETB") {
@@ -88,7 +89,7 @@ function Gateway() {
                   : ""}
                 {currency === "ETB" ? select === "EB" && <Mobilepay /> : ""}
                 {currency === "USD" && select === "payPal" && (
-                  <PayPal amount={amount} />
+                  <PayPal amount={amount} orderId={orderID} />
                 )}
                 {/* {select === "CBOC" && <Cardpay />}
                 {select === "EB" && <Mobilepay />}
