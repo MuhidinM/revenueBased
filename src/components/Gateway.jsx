@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Bankpay from "./Bankpay";
 import Cardpay from "./Cardpay";
@@ -6,11 +6,21 @@ import Mobilepay from "./Mobilepay";
 import PayPal from "./PayPal";
 import { useParams, useSearchParams } from "react-router-dom";
 function Gateway() {
-  const [select, setSelect] = useState("CBOA");
+  const [select, setSelect] = useState("");
+
   const [searchParams, setSearchParams] = useSearchParams();
   const currency = searchParams.get("currency");
-  // const amount = searchParams.get("amount");
+  const amount = searchParams.get("amount");
+
+  useEffect(() => {
+    if (currency === "ETB") {
+      setSelect("CBOA");
+    } else {
+      setSelect("payPal");
+    }
+  }, []);
   console.log("currency is:", currency);
+
   return (
     <div>
       <section className="bg-gray-100 dark:bg-gray-900">
@@ -22,10 +32,17 @@ function Gateway() {
                 src="../Cooperative_Bank_of_Oromia.png"
                 alt="front credit card"
               />
+              <div className="grid grid-cols-2">
+                <h1 className="leading-tight mt-2 text-lg tracking-tight text-gray-900 dark:text-white">
+                  Choose payment
+                </h1>
+                {/* <div className="w-full col-span-2"> */}
+                <h1 className="mt-2 text-lg font-bold text-center">
+                  {amount} {currency}
+                </h1>
+                {/* </div> */}
+              </div>
 
-              <h1 className="leading-tight tracking-tight text-gray-900 dark:text-white">
-                choose payment
-              </h1>
               <div className="">
                 <select
                   onChange={(e) => {
@@ -52,22 +69,31 @@ function Gateway() {
                   ) : (
                     ""
                   )}
-                  {currency === "USD" ? (
-                    <option value={"payPal"}>payPal</option>
-                  ) : (
-                    ""
+                  {currency === "USD" && (
+                    <>
+                      <option value={"payPal"} selected>
+                        payPal
+                      </option>
+                      {/* <option value={"payPal"}>payPal</option> */}
+                    </>
                   )}
+                  {/* <option value={"payPal"}>payPal</option> */}
                 </select>
               </div>
 
               <htmlForm className="space-y-4 md:space-y-6" action="">
                 {currency === "ETB" ? select === "CBOA" && <Bankpay /> : ""}
-                {currency === "ETB" ? select === "CBOC" && <Cardpay /> : ""}
+                {currency === "ETB"
+                  ? select === "CBOC" && <Cardpay amount={amount} />
+                  : ""}
                 {currency === "ETB" ? select === "EB" && <Mobilepay /> : ""}
-                {currency === "USD" ? select === "payPal" && <PayPal /> : ""}
+                {currency === "USD" && select === "payPal" && (
+                  <PayPal amount={amount} />
+                )}
                 {/* {select === "CBOC" && <Cardpay />}
                 {select === "EB" && <Mobilepay />}
                 {select === "payPal" && <PayPal />} */}
+                {/* {select === "payPal" && <PayPal />} */}
               </htmlForm>
             </div>
           </div>

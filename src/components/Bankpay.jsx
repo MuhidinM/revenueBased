@@ -151,15 +151,8 @@ function Bankpay() {
         <Formik
           initialValues={{
             debitAccount: "",
-            // debitAmount: "",
-            // bankName: "",
           }}
-          // validationSchema={validationSchema}
           onSubmit={(val) => {
-            // setTimeout(() => {
-            //   alert(JSON.stringify(values, null, 2));
-            //   setSubmitting(false);
-            // }, 400);
             console.log("hello");
             console.log(val);
 

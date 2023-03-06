@@ -2,48 +2,30 @@ import React, { useState, useEffect } from "react";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { useParams, useSearchParams } from "react-router-dom";
 import PaymentServices from "../services/payment.service";
-function PayPal() {
+function PayPal(props) {
   const [show, setShow] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [responseData, setresponseData] = useState({});
   const [ErrorMessage, setErrorMessage] = useState("");
   const [orderID, setOrderID] = useState(false);
   const [data1, setData] = useState({});
   const [searchParams, setSearchParams] = useSearchParams();
   const callBackUrl = searchParams.get("callBackUrl");
+  console.log(callBackUrl);
   useEffect(() => {
     if (success) {
-      alert("Payment successfull");
-      window.opener.postMessage("Success", callBackUrl);
+      window.opener.postMessage(
+        JSON.stringify(responseData),
+        "http://localhost:3001/"
+      );
       window.opener.focus();
+      window.close();
       // window.opener.postMessage("Success", callBackUrl);
       // window.opener.focus();
       // window.close();
     }
   }, [success]);
   console.log(data1);
-
-  const responseData = {};
-  // if (data1 !== undefined) {
-  //   responseData.orderID = data1.id;
-  //   responseData.status = data1.status;
-  //   responseData.amountValue = data1.purchase_units[0].amount.value;
-  //   responseData.currency_code = data1.parchase_units[0].amount.currency_code;
-  //   responseData.payeeEmail = data1.parchase_units[0].payee.email_address;
-  //   responseData.description = data1.parchase_units[0].description;
-  //   responseData.transactionId = data1.parchase_units[0].description;
-  //   responseData.payeeMerchant_id =
-  //     data1.parchase_units[0].payments.captures[0].id;
-  //   responseData.payeeMerchant_id =
-  //     data1.parchase_units[0].payments.captures[0].id;
-  //   responseData.create_time = data1.create_time;
-  //   responseData.update_time = data1.update_time;
-  //   responseData.payerGiven_name = data1.payer.name.given_name;
-  //   responseData.payerSurname = data1.payer.name.surname;
-  //   responseData.payerEmailAddress = data1.payer.email_address;
-  //   responseData.payer_id = data1.payer.payer_id;
-  //   responseData.payerCountry_code = data1.payer.address.country_code;
-  //   responseData.linksHref = data1.parchase_units[0].payments.links[0].href;
-  // }
 
   const createOrder = (data, actions) => {
     return actions.order
@@ -53,7 +35,7 @@ function PayPal() {
             description: "Sunflower",
             amount: {
               currency_code: "USD",
-              value: 20,
+              value: props.amount,
             },
           },
         ],
@@ -78,7 +60,6 @@ function PayPal() {
       );
       const orderId = details.id;
       const status = details.status;
-
       const amountValue =
         details.purchase_units[0].payments.captures[0].amount.value;
       const currency_code =
@@ -95,6 +76,26 @@ function PayPal() {
       const payer_id = details.payer.payer_id;
       const payerCountry_code = details.payer.address.country_code;
       const linksHref = details.links[0].href;
+      const response_to_Client = {
+        orderId: orderId,
+        status: status,
+        amount: amountValue,
+        currencyCode: currency_code,
+        payeeEmail: payeeEmail,
+        payeeMerchant_id: payeeMerchant_id,
+        description: description,
+        transactionId: transactionId,
+        create_time: create_time,
+        payerGiven_name: payerGiven_name,
+        payerSurname: payerSurname,
+        payerEmailAddress: payerEmailAddress,
+        payer_id: payer_id,
+        payerCountry_code: payerCountry_code,
+        linksHref: linksHref,
+      };
+      setresponseData(response_to_Client);
+      console.log("Response to Jiggi", response_to_Client);
+
       PaymentServices.logPayPalResponse(
         orderId,
         status,
