@@ -1,6 +1,6 @@
 import axios from "axios";
 import jwt from "jwt-decode";
-const API_URL = "http://localhost:5000/api/user/";
+const API_URL = "http://10.1.177.130:5000/api/user/";
 const user = JSON.parse(localStorage.getItem("user"));
 const register = (fname, lname, email, phone, password) => {
   return axios

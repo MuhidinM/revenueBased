@@ -1,36 +1,13 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useEffect } from "react";
 import DataTable from "react-data-table-component";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import AccountComponent from "../../components/AccountComponent";
 import AgentComponent from "../../components/AgentComponent";
-
+import { useDispatch, useSelector } from "react-redux";
+import { addAgent, getAgent } from "../../store/actions/agentAction";
 const MySwal = withReactContent(Swal);
 
-const showFormModalAgent = (values) => {
-  return new Promise((resolve, reject) => {
-    MySwal.fire({
-      title: "Register Your Domain",
-      html: (
-        <AgentComponent
-          values={values}
-          onSubmit={(values) => {
-            //   console.log(values);
-            //   console.log(currentUser.id);
-            //   dispatch(addDomain(currentUser.id, values.name, values.url));
-            //   console.log("The button is got Clicked");
-          }}
-          onCancel={() => MySwal.close()}
-        ></AgentComponent>
-      ),
-      onClose: () => reject(),
-      onCancel: () => Swal.close(),
-      showConfirmButton: false,
-      showCancelButton: false,
-      confirmButtonColor: "#01AFEF",
-    });
-  });
-};
 const showModalAccount = () => {
   showFormModalAccount({
     name: "",
@@ -62,14 +39,6 @@ const showFormModalAccount = (values) => {
       confirmButtonColor: "#01AFEF",
     });
   });
-};
-const showModalAgent = () => {
-  showFormModalAgent({
-    name: "",
-    url: "",
-  })
-    .then((values) => console.log(values))
-    .catch(() => console.log("Modal closed"));
 };
 
 const columns = [
@@ -214,6 +183,14 @@ const Export = ({ onExport }) => (
 );
 function Agents() {
   const [filterText, setFilterText] = React.useState("");
+  const agentData = useSelector((state) => state.agentInfo);
+  const { loading, error, addedagent, agents } = agentData;
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAgent());
+  }, [dispatch]);
+
   const actionsMemo = useMemo(
     () => <Export onExport={() => downloadCSV(data)} />,
     []
@@ -242,6 +219,83 @@ function Agents() {
     );
   }, [filterText, resetPaginationToggle]);
 
+  const interpretResponse = (response) => {
+    let actionResponse = JSON.stringify(response);
+    console.log("Action Response Is" + actionResponse.response);
+    console.log(
+      " Response Is" + response.response,
+      response.message + "",
+      response.responseCode
+    );
+    if (response.response === "success" || response.responseCode == 200) {
+      console.log(response);
+      console.log("Rsponse from useEffect is here" + response);
+      Swal.fire({
+        icon: "success",
+        title: "Account Created",
+        showConfirmButton: false,
+        timer: 3000,
+      });
+    } else if (response.responseCode === 403 && response.respone === "error") {
+      console.log("Un Authorised User ");
+      Swal.fire({
+        icon: "error",
+        title: response.message,
+        showConfirmButton: false,
+        timer: 3000,
+      });
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Account Is Not Created",
+        showConfirmButton: false,
+        timer: 3000,
+      });
+    }
+  };
+
+  const showFormModalAgent = (values) => {
+    return new Promise((resolve, reject) => {
+      MySwal.fire({
+        title: "Register Your Domain",
+        html: (
+          <AgentComponent
+            values={values}
+            onSubmit={(values) => {
+              console.log("Value From The Child:", values);
+
+              dispatch(
+                addAgent({
+                  firstName: values.firstName,
+                  lastName: values.lastName,
+                  email: values.email,
+                  phoneNumber: values.phoneNumber,
+                  interpretResponse,
+                })
+              );
+            }}
+            onCancel={() => MySwal.close()}
+          ></AgentComponent>
+        ),
+        onClose: () => reject(),
+        onCancel: () => Swal.close(),
+        showConfirmButton: false,
+        showCancelButton: false,
+        confirmButtonColor: "#01AFEF",
+      });
+    });
+  };
+
+  const showModalAgent = () => {
+    showFormModalAgent({
+      firstName: "",
+      lastName: "",
+      email: "",
+      phoneNumber: "",
+    })
+      .then((values) => console.log(values))
+      .catch(() => console.log("Modal closed"));
+  };
 
   return (
     <>
@@ -255,7 +309,7 @@ function Agents() {
       <DataTable
         title="Agent List"
         columns={columns}
-        data={filteredItems}
+        data={agents}
         pagination
         paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
         subHeader

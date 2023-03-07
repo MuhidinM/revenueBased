@@ -14,7 +14,7 @@ const columns = [
     sortable: true,
   },
   {
-    name: "Merchant ID",
+    name: "Created At",
     selector: (row) => row.createdAt,
     sortable: true,
   },

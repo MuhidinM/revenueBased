@@ -26,6 +26,7 @@ export const ModalForm = ({ values, onSubmit, onCancel }) => {
   console.log("The criterial value is:" + criteriaValue);
 
   const dropdown = [];
+  dropdown[0] = { label: "Select Bank", value: "Bank Name" };
   if (currentBank instanceof Array) {
     currentBank.map((item, index) =>
       dropdown.push({ label: item.bankName, value: item.bankCode })

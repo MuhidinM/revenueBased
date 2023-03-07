@@ -1,14 +1,7 @@
 import axios from "axios";
-
-// const baseurl = "http://192.168.0.173:8080/payment/v1/queryTransaction";
 const adminTransactionFetchUrl = "http://localhost:8081/payment/v1/";
-// console.log(baseurl);
 
-// const getTransaction = async () => {
-//   console.log(baseurl);
-//   return await axios.get(baseurl).then((response) => response.data);
-// };
-const getAdminTransactionsAall = async () => {
+const getAllTransactions = async () => {
   // console.log(adminTransactionFetchUrl);
   return await axios
     .get(adminTransactionFetchUrl + "fetchAllTransaction")
@@ -28,7 +21,7 @@ const getTransactionByTransactionId = async (transactionID) => {
 
 const FetchTransactionServices = {
   // getTransaction,
-  getAdminTransactionsAall,
+  getAllTransactions,
   getTransactionByTransactionId,
 };
 

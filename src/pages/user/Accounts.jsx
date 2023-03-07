@@ -43,6 +43,7 @@ const columns = [
 ];
 
 const choose = [];
+choose[0] = { label: "Set Primary", value: "1" };
 const MySwal = withReactContent(Swal);
 function Accounts() {
   const AccountListData = useSelector((state) => state.accountsList);
@@ -94,68 +95,70 @@ function Accounts() {
 
   const handleChange = (e) => {
     e.preventDefault();
-    console.log(e.target.data);
+    console.log(e.target.value);
 
-    return new Promise((resolve, reject) => {
-      MySwal.fire({
-        title: "Are you sure?",
-        text: `You want to set ${e.target.value}Your Primary Account?`,
-        icon: "warning",
-        // dangerMode: true,
-        showCancelButton: true,
-        confirmButtonColor: "#01ADED",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes!",
-      }).then((result) => {
-        console.log(result);
-        if (result.isConfirmed === true) {
-          BankAccountServices.sendOtp("+251927355418");
-          const value = {
-            first: "",
-            second: "",
-            third: "",
-            fourth: "",
-            fifth: "",
-            sixth: "",
-          };
+    if (e.target.value != "1") {
+      return new Promise((resolve, reject) => {
+        MySwal.fire({
+          title: "Are you sure?",
+          text: `You want to set ${e.target.value}Your Primary Account?`,
+          icon: "warning",
+          // dangerMode: true,
+          showCancelButton: true,
+          confirmButtonColor: "#01ADED",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes!",
+        }).then((result) => {
+          console.log(result);
+          if (result.isConfirmed === true) {
+            BankAccountServices.sendOtp("+251927355418");
+            const value = {
+              first: "",
+              second: "",
+              third: "",
+              fourth: "",
+              fifth: "",
+              sixth: "",
+            };
 
-          MySwal.fire({
-            title: "",
-            html: (
-              <Otp
-                values={value}
-                onSubmit={(values) => {
-                  console.log("Hello from the second swal");
-                  // resolve(values);
-                  const otp =
-                    values.first +
-                    values.second +
-                    values.third +
-                    values.fourth +
-                    values.fifth +
-                    values.sixth;
-                  BankAccountServices.confirmOtp("+251927355418", otp).then(
-                    (res) => {
-                      dispatch(
-                        setPrimaryAccount({
-                          value: e.target.value,
-                          interpretResponse,
-                        })
-                      );
-                    }
-                  );
-                }}
-                onCancel={() => MySwal.close()}
-              ></Otp>
-            ),
+            MySwal.fire({
+              title: "",
+              html: (
+                <Otp
+                  values={value}
+                  onSubmit={(values) => {
+                    console.log("Hello from the second swal");
+                    // resolve(values);
+                    const otp =
+                      values.first +
+                      values.second +
+                      values.third +
+                      values.fourth +
+                      values.fifth +
+                      values.sixth;
+                    BankAccountServices.confirmOtp("+251927355418", otp).then(
+                      (res) => {
+                        dispatch(
+                          setPrimaryAccount({
+                            value: e.target.value,
+                            interpretResponse,
+                          })
+                        );
+                      }
+                    );
+                  }}
+                  onCancel={() => MySwal.close()}
+                ></Otp>
+              ),
 
-            // onClose: () => reject(),
-            showConfirmButton: false,
-          });
-          <Otp></Otp>;
-        }
+              // onClose: () => reject(),
+              showConfirmButton: false,
+            });
+            <Otp></Otp>;
+          }
+        });
       });
-    });
+    }
   };
 
   if (bankAccounts) {

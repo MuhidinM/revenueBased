@@ -4,9 +4,12 @@ import * as Yup from "yup";
 
 function AgentComponent({ onSubmit, values, onCancel }) {
   const ValidationSchema = Yup.object().shape({
-    name: Yup.string().required("First Number is required"),
-    url: Yup.string().required("Second Number is required"),
+    firstName: Yup.string().required("First Name is required"),
+    lastName: Yup.string().required("Last Name is required"),
+    email: Yup.string().required("Email is required"),
+    phoneNumber: Yup.string().required("Phone Number is required"),
   });
+  console.log("value From the Parent:", values);
   return (
     <>
       <Formik
@@ -20,37 +23,41 @@ function AgentComponent({ onSubmit, values, onCancel }) {
             <div className="grid gap-4 mb-4 sm:grid-cols-2 sm:gap-6 sm:mb-5">
               <div className="w-full">
                 <label
-                  htmlFor="fname"
+                  htmlFor="firstName"
                   className="mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
                   First Name
                 </label>
-                <span className="text-sm link-error"></span>
+                <span className="text-sm link-error">
+                  <ErrorMessage name="firstName"></ErrorMessage>
+                </span>
                 <input
                   type="text"
-                  name="fname"
-                  id="fname"
+                  name="firstName"
+                  id="firstName"
                   placeholder="Lelisa"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  value={formik.values.name}
+                  value={formik.values.firstName}
                   onChange={formik.handleChange}
                 />
               </div>
               <div>
                 <label
-                  htmlFor="lname"
+                  htmlFor="lastName"
                   className="mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
                   Last Name
                 </label>
-                <span className="text-sm link-error"></span>
+                <span className="text-sm link-error">
+                  <ErrorMessage name="lastName" />
+                </span>
                 <input
                   type="text"
-                  name="lname"
-                  id="lname"
+                  name="lastName"
+                  id="lastName"
                   placeholder="Chera"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  value={formik.values.name}
+                  value={formik.values.lastName}
                   onChange={formik.handleChange}
                 />
               </div>
@@ -61,14 +68,16 @@ function AgentComponent({ onSubmit, values, onCancel }) {
                 >
                   Email
                 </label>
-                <span className="text-sm link-error"></span>
+                <span className="text-sm link-error">
+                  <ErrorMessage name="email" />
+                </span>
                 <input
                   type="email"
                   name="email"
                   id="email"
                   placeholder="sample@epay.com"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  value={formik.values.name}
+                  value={formik.values.email}
                   onChange={formik.handleChange}
                 />
               </div>
@@ -79,14 +88,16 @@ function AgentComponent({ onSubmit, values, onCancel }) {
                 >
                   Phone
                 </label>
-                <span className="text-sm link-error"></span>
+                <span className="text-sm link-error">
+                  <ErrorMessage name="phoneNumber" />
+                </span>
                 <input
                   type="number"
-                  name="phone"
-                  id="phone"
+                  name="phoneNumber"
+                  id="phoneNumber"
                   placeholder="0987654321"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  value={formik.values.name}
+                  value={formik.values.phoneNumber}
                   onChange={formik.handleChange}
                 />
               </div>

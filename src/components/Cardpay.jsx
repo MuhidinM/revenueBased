@@ -11,7 +11,7 @@ for (let i = thisyear; i < endyear; i++) {
   year.push({ label: i, value: i });
 }
 
-const Cardpay = () => {
+const Cardpay = (props) => {
   return (
     <>
       <div>
@@ -65,9 +65,6 @@ const Cardpay = () => {
               <option value={arr.value}>{arr.label}</option>
             ))}
           </select>
-          <div className="w-full col-span-2">
-            <h1 className="mt-2 text-lg font-bold text-center">$100</h1>
-          </div>
         </div>
       </div>
       <Link
