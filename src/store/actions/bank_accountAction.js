@@ -5,6 +5,8 @@ import {
   SET_PRIMARY,
   NAME_ENQ_BY_ACCNO,
   NAME_ENQ_BY_ACCNO_ERROR,
+  GET_ACCOUNTS_BY_PHONE,
+  GET_ACCOUNTS_BY_PHONE_ERROR,
 } from "../types";
 import AuthService from "../../services/auth.service";
 import BankAccountServices from "../../services/bank-account.services";
@@ -126,6 +128,42 @@ export const createTutorial =
       dispatch(getAccounts());
       dispatch({
         type: CREATE_BAK_ACCOUNT,
+        payload: res,
+      });
+
+      return Promise.resolve(res.data);
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  };
+export const getAccountByPhone =
+  ({ phoneNumber, interpretResponse }) =>
+  async (dispatch) => {
+    console.log("in redux");
+    console.log("redux " + phoneNumber);
+    try {
+      const res = await BankAccountServices.getBankAccountByPhone(phoneNumber);
+      console.log(res);
+      if (res[1] == "200") {
+        // dispatch(satResponse("success"));
+        interpretResponse({
+          message: res[0].message,
+          response: "success",
+          responseCode: res[1],
+        });
+      } else if (res[1] == "403") {
+        interpretResponse({
+          message: res[0].message,
+          response: "error",
+          responseCode: res[1],
+        });
+      } else {
+        // dispatch(satResponse("error"));
+        interpretResponse({ response: "error" });
+      }
+      // dispatch(getAccounts());
+      dispatch({
+        type: GET_ACCOUNTS_BY_PHONE,
         payload: res,
       });
 

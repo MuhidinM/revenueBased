@@ -5,10 +5,13 @@ import {
   SET_PRIMARY,
   NAME_ENQ_BY_ACCNO,
   NAME_ENQ_BY_ACCNO_ERROR,
+  GET_ACCOUNTS_BY_PHONE,
+  GET_ACCOUNTS_BY_PHONE_ERROR,
 } from "../types";
 
 const initialState = {
   bankAccounts: [],
+  accounts: [],
   message: "",
   accountMessage: "",
   criteriaValue: "",
@@ -44,6 +47,12 @@ export default function (state = initialState, action) {
       return {
         ...state,
         criteriaValue: action.payload,
+        loading: false,
+      };
+    case GET_ACCOUNTS_BY_PHONE:
+      return {
+        ...state,
+        accounts: action.payload,
         loading: false,
       };
     case ACCOUNTS_ERROR:

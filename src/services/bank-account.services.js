@@ -7,6 +7,8 @@ const OTP_URL_CONFIRMATION =
   "http://192.168.231.175:8081/payment/v1/otpVerification";
 const NAME_ENQ_URL =
   "http://192.168.231.175:8081/payment/v1/customerNameByAccno";
+const ACCOUNT_BY_PHONE_ENQUIRY =
+  "http://192.168.231.175:8081/payment/v1/customerNameByAccno";
 const getBankAccountById = async (id) => {
   console.log(id);
   return await axios
@@ -42,6 +44,12 @@ const sendOtp = async (mobile) => {
   console.log(mobile);
   return await axios
     .post(OTP_URL, { mobile })
+    .then((response) => response.data);
+};
+const getBankAccountByPhone = async (mobile) => {
+  console.log(mobile);
+  return await axios
+    .post(ACCOUNT_BY_PHONE_ENQUIRY, { mobile })
     .then((response) => response.data);
 };
 
@@ -98,6 +106,7 @@ const BankAccountServices = {
   confirmOtp,
   activateAccount,
   nameEnquiryByAccountNumber,
+  getBankAccountByPhone,
 };
 
 export default BankAccountServices;
