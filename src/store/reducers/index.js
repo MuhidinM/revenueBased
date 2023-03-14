@@ -8,6 +8,7 @@ import adminFetchAllTransactions from "./adminFetchAllTransactions";
 import deviceManagementReducer from "./deviceManagementReducer";
 import domainReducer from "./domainReducer";
 import bussinessReducer from "./bussinessReducer";
+import agentReducer from "./agentReducer";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 const persistConfig = {
@@ -27,7 +28,6 @@ const rootReducer = combineReducers({
   bankInfo: bankReducer,
   domain: domainReducer,
   bussinessInfo: bussinessReducer,
-  // modalProvider,
-  // domains: domainReducer,
+  agentInfo: agentReducer,
 });
 export default persistReducer(persistConfig, rootReducer);

@@ -12,7 +12,7 @@ export const getTransactionDetailAll = () => async (dispatch) => {
     // const user = AuthService.getCurrentUser();
     console.log("running");
     const transactioDetailAll =
-      await FetchTransactionServices.getAdminTransactionsAall();
+      await FetchTransactionServices.getAllTransactions();
     console.log(transactioDetailAll);
     dispatch({
       type: GET_ADMIN_TRANSACTION_ALL,

@@ -1,6 +1,6 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useEffect } from "react";
 import DataTable from "react-data-table-component";
-
+import { useDispatch, useSelector } from "react-redux";
 const columns = [
   {
     name: "no",
@@ -128,6 +128,14 @@ const Export = ({ onExport }) => (
 
 function Users() {
   const [filterText, setFilterText] = React.useState("");
+  const AccountListData = useSelector((state) => state.accountsList);
+  console.log(AccountListData);
+  const { loading, error, bankAccounts } = AccountListData;
+  console.log("Account Numbers:", bankAccounts);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    // dispatch(getAccounts());
+  }, [dispatch]);
   const actionsMemo = useMemo(
     () => <Export onExport={() => downloadCSV(data)} />,
     []
@@ -171,87 +179,6 @@ function Users() {
       actions={actionsMemo}
     />
   );
-  //   return (
-  //     <>
-  //       <div className="grid gap-4 my-4 mt-4 md:grid-cols-12 justify-self-auto">
-  //         <div className="col-span-9"></div>
-  //         <div className="col-span-3">
-  //           <Input
-  //             label="search"
-  //             title="Search"
-  //             type="text"
-  //             name="search"
-  //             // value={props.values.lgname}
-  //             // handleChange={props.handleChange}
-  //             // onChange={props.handleChange}
-
-  //             place="Search by name"
-  //             required=""
-  //           />
-  //         </div>
-  //       </div>
-  //       <div className="overflow-x-auto">
-  //         <table className="table w-full">
-  //           {/* <!-- head --> */}
-  //           <thead>
-  //             <tr>
-  //               <th></th>
-  //               <th>Name</th>
-  //               <th>Address</th>
-  //               <th>Region</th>
-  //               <th>Birth Date</th>
-  //               <th>Identification No</th>
-  //               <th>View</th>
-  //             </tr>
-  //           </thead>
-  //           <tbody>
-  //             {/* <!-- row 1 --> */}
-  //             <tr>
-  //               <th>1</th>
-  //               <td>Cy Ganderton</td>
-  //               <td>Quality Control Specialist</td>
-  //               <td>Quality Control Specialist</td>
-  //               <td>Quality Control Specialist</td>
-  //               <td>Blue</td>
-  //               <td>
-  //                 <a href="" className="text-primary">
-  //                   view
-  //                 </a>
-  //               </td>
-  //             </tr>
-  //             {/* <!-- row 2 --> */}
-  //             <tr className="hover">
-  //               <th>2</th>
-  //               <td>Hart Hagerty</td>
-  //               <td>Desktop Support Technician</td>
-  //               <td>Desktop Support Technician</td>
-  //               <td>Desktop Support Technician</td>
-  //               <td>Purple</td>
-  //               <td>
-  //                 <a href="" className="text-primary">
-  //                   view
-  //                 </a>
-  //               </td>
-  //             </tr>
-  //             {/* <!-- row 3 --> */}
-  //             <tr>
-  //               <th>3</th>
-  //               <td>Brice Swyre</td>
-  //               <td>Tax Accountant</td>
-  //               <td>Tax Accountant</td>
-  //               <td>Tax Accountant</td>
-  //               <td>Red</td>
-  //               <td>
-  //                 <a href="" className="text-primary">
-  //                   view
-  //                 </a>
-  //               </td>
-  //             </tr>
-  //           </tbody>
-  //         </table>
-  //       </div>
-  //     </>
-  //   );
 }
 
 export default Users;
