@@ -16,6 +16,7 @@ function Bankpay() {
   const [successful, setSuccessful] = useState(false);
   const [message, setMessage] = useState("");
   const [verified, setVerified] = useState(0);
+  const [primaryAccount, setPrimaryAccount] = useState();
   const [currentUser, setCurrentUser] = useState({});
   const [searchParams, setSearchParams] = useSearchParams();
   const clientid = searchParams.get("secretKey");
@@ -79,8 +80,9 @@ function Bankpay() {
                   console.log(resp);
                   setMessage(resp[0]);
                   // setSuccessful(true);
-                  if ((resp[0] = "success")) {
+                  if ((resp[0] == "200")) {
                     setVerified(1);
+                    setPrimaryAccount(resp[1].accountNumber)
                   }
                 },
                 (error) => {
@@ -186,7 +188,7 @@ function Bankpay() {
                         // dispatch(setPrimaryAccount(e.target.value));
                         console.log(val.debitAccount);
                         PaymentServices.pay(
-                          val.debitAccount,
+                          primaryAccount,
                           amount,
                           clientid,
                           secretKey,

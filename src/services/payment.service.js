@@ -3,6 +3,7 @@ import authHeader from "./auth-header";
 
 const API_URL = "http://10.1.177.130:5000/api/";
 const SpringUrl = "http://10.1.177.130:8081/payment/v1/";
+const CoopasEndPoint = "http://192.168.231.132:9000/api/accounts/getPrimaryAccount";
 const pay = async (debitAccount, debitAmount, clientId, secretKey, key) => {
   return await axios
     .post(
@@ -31,9 +32,9 @@ const pay = async (debitAccount, debitAmount, clientId, secretKey, key) => {
 
 const verifyPin = async (username, passcode) => {
   return await axios
-    .post(SpringUrl + "validatePassbook", { passcode, username })
+    .post(CoopasEndPoint, { passcode, username })
     .then((response) => {
-      return response.data;
+      return [response.status,response.data];
     });
 };
 
