@@ -44,10 +44,10 @@ function Registration() {
               src="../PaymentGateway.png"
               alt="front credit card"
             />
-            <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold tracking-tight text-black sm:text-4xl sm:leading-none">
+            <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold tracking-tight text-black dark:text-white sm:text-4xl sm:leading-none">
               Smarter Payments. Smarter Business
             </h2>
-            <p className="max-w-xl mb-4 text-base text-gray-900 md:text-lg">
+            <p className="max-w-xl mb-4 text-base text-gray-900 md:text-lg dark:text-white">
               We're a payment gateway platform for online ecommerce sites, and
               we've got the speed, security, and reliability you need to make
               sure your customers get what they want.

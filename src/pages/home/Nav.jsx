@@ -13,10 +13,10 @@ function Nav() {
   }, []);
   return (
     <>
-      <div className="fixed top-0 left-0 z-20 w-full shadow-md navbar bg-base-100">
+      <div className="fixed top-0 left-0 z-20 w-full shadow-md navbar bg-base-100 dark:bg-gray-900">
         <div className="navbar-start">
           <div className="dropdown">
-            <label tabIndex={0} className="btn btn-ghost lg:hidden">
+            <label tabIndex={0} className="btn btn-ghost dark:text-white lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="w-5 h-5"
@@ -34,7 +34,7 @@ function Nav() {
             </label>
             <ul
               tabIndex={0}
-              className="p-2 mt-3 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
+              className="p-2 mt-3 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52 "
             >
               <li>
                 <Link to={"/"}>Home</Link>
@@ -72,12 +72,12 @@ function Nav() {
           <Icon re="/" />
         </div>
         <div className="hidden navbar-center lg:flex">
-          <ul className="px-1 menu menu-horizontal">
-            <li>
+          <ul className="px-1 menu menu-horizontal dark:text-white">
+            <li className="dark:hover:bg-gray-700 dark:rounded-xl">
               <Link to={"/"}>Home</Link>
             </li>
             <li className="dropdown dropdown-bottom">
-              <label tabIndex={0} className="m-1">
+              <label tabIndex={0} className="m-1 dark:hover:bg-gray-700 dark:rounded-xl">
                 Documentation
                 <svg
                   className="fill-current"
@@ -93,34 +93,34 @@ function Nav() {
                 tabIndex={0}
                 className="p-2 shadow dropdown-content menu bg-base-100 rounded-box w-52"
               >
-                <li>
+                <li className="dark:text-black">
                   <Link to={"/intro"}>Intro</Link>
                 </li>
-                <li>
+                <li className="dark:text-black">
                   <Link to={"/apidocs"}>Our API's</Link>
                 </li>
               </ul>
             </li>
-            <li>
+            <li className="dark:hover:bg-gray-700 dark:rounded-xl">
               <Link to={"/sandbox"}>Sandbox</Link>
             </li>
-            <li>
+            <li className="dark:hover:bg-gray-700 dark:rounded-xl">
               <Link to={"/contact"}>Contact</Link>
             </li>
           </ul>
         </div>
         <div className="navbar-end">
-          <div className="px-1 menu menu-horizontal">
+          <div className="px-1 menu menu-horizontal dark:text-white">
             {currentUser.client_id != null ? (
-              <li>
+              <li className="dark:hover:bg-gray-700 dark:rounded-xl">
                 <Link to={"/users"}>Dashboard</Link>
               </li>
             ) : (
               <>
-                <li>
+                <li className="dark:hover:bg-gray-700 dark:rounded-xl">
                   <Link to={"/auth"}>Log in</Link>
                 </li>
-                <li>
+                <li className="dark:hover:bg-gray-700 dark:rounded-xl">
                   <Link to={"/auth/registration"}>Sign Up</Link>
                 </li>
               </>

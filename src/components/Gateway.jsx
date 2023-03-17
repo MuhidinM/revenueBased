@@ -38,7 +38,7 @@ function Gateway() {
                   Choose payment
                 </h1>
                 {/* <div className="w-full col-span-2"> */}
-                <h1 className="mt-2 text-lg font-bold text-center">
+                <h1 className="mt-2 text-lg font-bold text-center dark:text-white">
                   {amount} {currency}
                 </h1>
                 {/* </div> */}
@@ -65,11 +65,11 @@ function Gateway() {
                   ) : (
                     ""
                   )}
-                  {currency === "ETB" ? (
+                  {/* {currency === "ETB" ? (
                     <option value={"EB"}>E-birr</option>
                   ) : (
                     ""
-                  )}
+                  )} */}
                   {currency === "USD" && (
                     <>
                       <option value={"payPal"} selected>

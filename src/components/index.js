@@ -203,7 +203,7 @@ function ModalFire() {
               isInitialValid={ValidationSchema.isValidSync(values)}
               onSubmit={(values) => {
                 // console.log("Values Are:", values);
-                
+
                 const value = {
                   first: "",
                   second: "",
@@ -259,11 +259,11 @@ function ModalFire() {
                                     id="default-checkbox"
                                     type="checkbox"
                                     value=""
-                                    class="w-4 h-4 checkbox checkbox-primary border-gray-300 rounded dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
+                                    class="w-4 h-4 checkbox checkbox-primary border-gray-300 rounded"
                                   />
                                   <label
                                     for="default-checkbox"
-                                    class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                    class="ml-2 text-sm font-medium text-gray-900"
                                   >
                                     {item}
                                   </label>
@@ -297,17 +297,20 @@ function ModalFire() {
                         <span className="text-sm link-error">
                           <ErrorMessage name="phoneNumber" />
                         </span>
-                        <Input
-                          label="pno"
-                          title="Phone Number"
+                        <label
+                          htmlFor="pno"
+                          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        >
+                          Phone Number
+                        </label>
+                        <input
                           type="number"
                           name="phoneNumber"
                           id="phoneNumber"
-                          place="0987654321"
                           value={formik.values.phoneNumber}
-                          handleChange={formik.handleChange}
-                          // fetchName={queryCustomerName}
-                          //   handleChange={handleChange}
+                          onChange={formik.handleChange}
+                          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5"
+                          placeholder="0987654321"
                         />
                       </div>
                       <div className="col-span-2 mt-5">

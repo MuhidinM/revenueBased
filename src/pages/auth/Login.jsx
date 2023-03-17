@@ -17,7 +17,7 @@ function Login() {
   let navigate = useNavigate();
   return (
     <>
-      <div className="relative">
+      <div className="relative bg-black">
         <img
           src="https://images.pexels.com/photos/3228766/pexels-photo-3228766.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
           className="absolute inset-0 object-cover w-full h-full"
@@ -25,7 +25,7 @@ function Login() {
         />
         <div className="relative bg-opacity-30 bg-primary">
           <svg
-            className="absolute inset-x-0 text-white -bottom-1"
+            className="absolute inset-x-0 text-white dark:text-gray-900 -bottom-1"
             viewBox="0 0 1160 163"
           >
             <path
@@ -65,7 +65,7 @@ function Login() {
                 </a>
               </div>
               <div className="w-full max-w-xl xl:w-5/12">
-                <div className="bg-white rounded shadow-2xl p-7 sm:p-10">
+                <div className="bg-white rounded shadow-2xl p-7 sm:p-10 dark:bg-gray-800">
                   <div className="space-y-4 md:space-y-4">
                     <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                       Sign in to your account
