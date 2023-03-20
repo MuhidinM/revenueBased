@@ -7,7 +7,7 @@ function Sidebar() {
     <>
       <div className="shadow-md drawer-side">
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-        <ul className="p-4 menu w-80 bg-base-100 text-base-content">
+        <ul className="p-4 menu w-80 bg-base-100 text-base-content  dark:bg-gray-900  dark:text-white">
           {/* <!-- Sidebar content here --> */}
           <Icon re="/admin/" />
           <li>

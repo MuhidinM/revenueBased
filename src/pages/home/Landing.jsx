@@ -33,7 +33,7 @@ function Landing() {
             </svg>
           </Link>
 
-          <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto">
+          <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto dark:text-white">
             {/* <h2 className="mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white"> */}
 
             <span className="relative">
@@ -89,7 +89,7 @@ function Landing() {
             <div>
               <div className="flex items-center justify-center w-10 h-10 mb-4 rounded-full bg-primary lg:h-12 lg:w-12 dark:bg-primary">
                 <svg
-                  className="w-5 h-5 text-base-100 lg:w-6 lg:h-6 dark:text-primary"
+                  className="w-5 h-5 text-base-100 lg:w-6 lg:h-6"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -111,7 +111,7 @@ function Landing() {
             <div>
               <div className="flex items-center justify-center w-10 h-10 mb-4 rounded-full bg-primary lg:h-12 lg:w-12 dark:bg-primary">
                 <svg
-                  className="w-5 h-5 text-base-100 lg:w-6 lg:h-6 dark:text-primary"
+                  className="w-5 h-5 text-base-100 lg:w-6 lg:h-6"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -131,7 +131,7 @@ function Landing() {
             <div>
               <div className="flex items-center justify-center w-10 h-10 mb-4 rounded-full bg-primary lg:h-12 lg:w-12 dark:bg-primary">
                 <svg
-                  className="w-5 h-5 text-base-100 lg:w-6 lg:h-6 dark:text-primary"
+                  className="w-5 h-5 text-base-100 lg:w-6 lg:h-6"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -153,7 +153,7 @@ function Landing() {
             <div>
               <div className="flex items-center justify-center w-10 h-10 mb-4 rounded-full bg-primary lg:h-12 lg:w-12 dark:bg-primary">
                 <svg
-                  className="w-5 h-5 text-base-100 lg:w-6 lg:h-6 dark:text-primary"
+                  className="w-5 h-5 text-base-100 lg:w-6 lg:h-6"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -178,7 +178,7 @@ function Landing() {
             <div>
               <div className="flex items-center justify-center w-10 h-10 mb-4 rounded-full bg-primary lg:h-12 lg:w-12 dark:bg-primary">
                 <svg
-                  className="w-5 h-5 text-base-100 lg:w-6 lg:h-6 dark:text-primary"
+                  className="w-5 h-5 text-base-100 lg:w-6 lg:h-6"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -195,7 +195,7 @@ function Landing() {
             <div>
               <div className="flex items-center justify-center w-10 h-10 mb-4 rounded-full bg-primary lg:h-12 lg:w-12 dark:bg-primary">
                 <svg
-                  className="w-5 h-5 text-base-100 lg:w-6 lg:h-6 dark:text-primary"
+                  className="w-5 h-5 text-base-100 lg:w-6 lg:h-6"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
