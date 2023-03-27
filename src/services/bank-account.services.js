@@ -4,16 +4,11 @@ import authHeader from "./auth-header";
 const API_URL = "http://10.1.177.130:5000/api/banckAccount/";
 const OTP_URL = "http://10.1.177.130:8081/payment/v1/sendOtp";
 const OTP_URL_CONFIRMATION =
-<<<<<<< HEAD
   "http://192.168.231.175:8081/payment/v1/otpVerification";
 const NAME_ENQ_URL =
   "http://192.168.231.175:8081/payment/v1/customerNameByAccno";
 const ACCOUNT_BY_PHONE_ENQUIRY =
   "http://192.168.231.175:8081/payment/v1/customerNameByAccno";
-=======
-  "http://10.1.177.130:8081/payment/v1/otpVerification";
-const NAME_ENQ_URL = "http://10.1.177.130:8081/payment/v1/customerNameByAccno";
->>>>>>> f513f1c98dee2e2da18694518d19430fdea82cc3
 const getBankAccountById = async (id) => {
   console.log(id);
   return await axios

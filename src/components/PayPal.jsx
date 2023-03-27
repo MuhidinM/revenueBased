@@ -14,12 +14,13 @@ function PayPal(props) {
   console.log(callBackUrl);
   useEffect(() => {
     if (success) {
+      console.log("Response Data Is:", responseData)
       window.opener.postMessage(
         JSON.stringify(responseData),
         "http://localhost:3001/"
       );
       window.opener.focus();
-      window.close();
+      // window.close();
       // window.opener.postMessage("Success", callBackUrl);
       // window.opener.focus();
       // window.close();

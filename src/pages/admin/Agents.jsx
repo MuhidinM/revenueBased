@@ -19,11 +19,12 @@ const showModalAccount = () => {
 const showFormModalAccount = (values) => {
   return new Promise((resolve, reject) => {
     MySwal.fire({
-      title: "Register Your Domain",
+      title: "Register Admin",
       html: (
         <AccountComponent
           values={values}
           onSubmit={(values) => {
+            console.log(values)
             //   console.log(values);
             //   console.log(currentUser.id);
             //   dispatch(addDomain(currentUser.id, values.name, values.url));
@@ -257,7 +258,7 @@ function Agents() {
   const showFormModalAgent = (values) => {
     return new Promise((resolve, reject) => {
       MySwal.fire({
-        title: "Register Your Domain",
+        title: "Register Agents",
         html: (
           <AgentComponent
             values={values}
