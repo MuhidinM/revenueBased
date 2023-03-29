@@ -4,6 +4,7 @@ import Bankpay from "./Bankpay";
 import Cardpay from "./Cardpay";
 import Mobilepay from "./Mobilepay";
 import PayPal from "./PayPal";
+import Stripe from "./Stripe";
 import { useParams, useSearchParams } from "react-router-dom";
 function Gateway() {
   const [select, setSelect] = useState("");
@@ -78,6 +79,13 @@ function Gateway() {
                       {/* <option value={"payPal"}>payPal</option> */}
                     </>
                   )}
+                  {currency === "USD" ? (
+                    <option value={"stripe"}>
+                      Stripe
+                    </option>
+                  ) : (
+                    ""
+                  )}
                   {/* <option value={"payPal"}>payPal</option> */}
                 </select>
               </div>
@@ -91,6 +99,7 @@ function Gateway() {
                 {currency === "USD" && select === "payPal" && (
                   <PayPal amount={amount} orderId={orderID} />
                 )}
+                {currency === "USD" ? select === "stripe" && <Stripe /> : ""}
                 {/* {select === "CBOC" && <Cardpay />}
                 {select === "EB" && <Mobilepay />}
                 {select === "payPal" && <PayPal />} */}
