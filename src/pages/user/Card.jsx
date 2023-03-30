@@ -28,14 +28,14 @@ function Card() {
 
   return (
     <>
-      <div className="card glass">
+      <div className="card dark:bg-gray-800 w-full dark:text-white">
         <div className="card-body">
           <h2 className="card-title">Primary account</h2>
           <div className="form-control">
             <div className="input-group">
               <input
                 type={type}
-                className="input input-bordered"
+                className="dark:bg-gray-700 w-full dark:border-gray-600 dark:placeholder-gray-400"
                 value={"100000057657"}
                 disabled
               />
@@ -66,13 +66,12 @@ function Card() {
               </button>
             </div>
           </div>
-          <div className="divider"></div>
           <h2 className="card-title">Secret key</h2>
           <div className="form-control">
             <div className="input-group">
               <input
                 type={type2}
-                className="input input-bordered"
+                className="dark:bg-gray-700 w-full dark:border-gray-600 dark:placeholder-gray-400"
                 value={"kjc48owdbui7390ur32i828b3u6"}
                 disabled
               />

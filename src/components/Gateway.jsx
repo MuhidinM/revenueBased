@@ -4,6 +4,7 @@ import Bankpay from "./Bankpay";
 import Cardpay from "./Cardpay";
 import Mobilepay from "./Mobilepay";
 import PayPal from "./PayPal";
+import Stripe from "./Stripe";
 import { useParams, useSearchParams } from "react-router-dom";
 function Gateway() {
   const [select, setSelect] = useState("");
@@ -38,7 +39,7 @@ function Gateway() {
                   Choose payment
                 </h1>
                 {/* <div className="w-full col-span-2"> */}
-                <h1 className="mt-2 text-lg font-bold text-center">
+                <h1 className="mt-2 text-lg font-bold text-center dark:text-white">
                   {amount} {currency}
                 </h1>
                 {/* </div> */}
@@ -65,11 +66,11 @@ function Gateway() {
                   ) : (
                     ""
                   )}
-                  {currency === "ETB" ? (
+                  {/* {currency === "ETB" ? (
                     <option value={"EB"}>E-birr</option>
                   ) : (
                     ""
-                  )}
+                  )} */}
                   {currency === "USD" && (
                     <>
                       <option value={"payPal"} selected>
@@ -77,6 +78,13 @@ function Gateway() {
                       </option>
                       {/* <option value={"payPal"}>payPal</option> */}
                     </>
+                  )}
+                  {currency === "USD" ? (
+                    <option value={"stripe"}>
+                      Stripe
+                    </option>
+                  ) : (
+                    ""
                   )}
                   {/* <option value={"payPal"}>payPal</option> */}
                 </select>
@@ -91,6 +99,7 @@ function Gateway() {
                 {currency === "USD" && select === "payPal" && (
                   <PayPal amount={amount} orderId={orderID} />
                 )}
+                {currency === "USD" ? select === "stripe" && <Stripe /> : ""}
                 {/* {select === "CBOC" && <Cardpay />}
                 {select === "EB" && <Mobilepay />}
                 {select === "payPal" && <PayPal />} */}

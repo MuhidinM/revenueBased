@@ -34,7 +34,7 @@ function Nav() {
       {loading ? (
         "Loading..."
       ) : (
-        <div className="shadow-md navbar bg-base-100">
+        <div className="shadow-md navbar bg-base-100 dark:bg-gray-900 dark:text-white">
           <div className="flex-1">
             <label htmlFor="my-drawer-2" className="ml-4 drawer-button">
               <svg
@@ -60,7 +60,7 @@ function Nav() {
               </label>
               <ul
                 tabIndex={0}
-                className="p-2 mt-3 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
+                className="p-2 mt-3 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52 dark:text-black"
               >
                 <span className="pt-2 pl-2">
                   client id: {userDetail ? userDetail.client_id : ""}
