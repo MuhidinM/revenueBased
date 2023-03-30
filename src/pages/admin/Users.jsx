@@ -35,22 +35,22 @@ const columns = [
 ];
 
 const data = [
-  {
-    no: 1,
-    fname: "Beetle",
-    lname: "Juice",
-    email: "1988@epay.com",
-    phone: "09887654",
-    idcard: "t1988",
-  },
-  {
-    no: 2,
-    fname: "Ghost",
-    lname: "Busters",
-    email: "1984@epay.com",
-    phone: "09849876",
-    idcard: "1u984",
-  },
+  // {
+  //   no: 1,
+  //   fname: "Beetle",
+  //   lname: "Juice",
+  //   email: "1988@epay.com",
+  //   phone: "09887654",
+  //   idcard: "t1988",
+  // },
+  // {
+  //   no: 2,
+  //   fname: "Ghost",
+  //   lname: "Busters",
+  //   email: "1984@epay.com",
+  //   phone: "09849876",
+  //   idcard: "1u984",
+  // },
 ];
 
 const FilterComponent = ({ filterText, onFilter, onClear }) => (

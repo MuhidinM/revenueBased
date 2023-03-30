@@ -9,7 +9,6 @@ function Landing() {
         <div className="max-w-screen-xl px-4 py-8 mx-auto mt-32 text-center lg:px-12">
           {/* <div class="w-36 h-36 bg-primary rounded-full"></div> */}
           <Link
-            to={"/"}
             className="inline-flex items-center justify-between px-1 py-1 pr-4 text-sm text-gray-700 bg-gray-100 rounded-full mb-7 dark:bg-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700"
             role="alert"
           >
@@ -48,7 +47,7 @@ function Landing() {
           </p>
           <div className="flex flex-col mb-8 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
             <Link
-              to={"/developers"}
+              to={"/intro"}
               className="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-white rounded-lg bg-primary hover:bg-primary focus:ring-4 focus:ring-primary dark:focus:ring-primary"
             >
               Learn more
@@ -244,7 +243,7 @@ function Landing() {
               make or break your business success.
             </p>
             <Link
-              to={"/registration"}
+              to={"/auth/registration"}
               className="inline-flex items-center text-white bg-primary hover:bg-primary focus:ring-4 focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary"
             >
               Get started
