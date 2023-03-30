@@ -1,13 +1,12 @@
 import axios from "axios";
 import authHeader from "./auth-header";
 
-const API_URL = "http://10.1.177.130:5000/api/";
+const API_URL = process.env.REACT_APP_API_NODE_URLS
 
 const addUrls = async (user_id, name, url) => {
-  console.log(user_id);
   return await axios
     .post(
-      API_URL + "createurl",
+      API_URL + "api/createurl",
       {
         user_id,
         name,
@@ -33,7 +32,7 @@ const addUrls = async (user_id, name, url) => {
 const getDomain = async (id) => {
   return await axios
     .get(
-      API_URL + `getdomain/${id}`,
+      API_URL + `api/getdomain/${id}`,
 
       {
         withCredentials: true,

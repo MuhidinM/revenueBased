@@ -20,10 +20,7 @@ function PayPal(props) {
         "http://localhost:3001/"
       );
       window.opener.focus();
-      // window.close();
-      // window.opener.postMessage("Success", callBackUrl);
-      // window.opener.focus();
-      // window.close();
+
     }
   }, [success]);
   console.log(data1);

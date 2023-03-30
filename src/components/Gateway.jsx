@@ -83,7 +83,7 @@ function Gateway() {
               </div>
 
               <htmlForm className="space-y-4 md:space-y-6" action="">
-                {currency === "ETB" ? select === "CBOA" && <Bankpay /> : ""}
+                {currency === "ETB" ? select === "CBOA" && <Bankpay amount={amount} /> : ""}
                 {currency === "ETB"
                   ? select === "CBOC" && <Cardpay amount={amount} />
                   : ""}

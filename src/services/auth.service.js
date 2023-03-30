@@ -1,11 +1,10 @@
 import axios from "axios";
 import jwt from "jwt-decode";
-const API_URL = "http://10.1.177.130:5000/api/user/";
 const user = JSON.parse(localStorage.getItem("user"));
 const register = (fname, lname, email, phone, password) => {
   return axios
     .post(
-      API_URL + "signup",
+      process.env.REACT_APP_API_NODE_URLS + "api/user/signup",
       {
         fname,
         lname,
@@ -27,7 +26,7 @@ const register = (fname, lname, email, phone, password) => {
 const login = (email, password) => {
   return axios
     .post(
-      API_URL + "signin",
+      process.env.REACT_APP_API_NODE_URLS + "api/user/signin",
       {
         email,
         password,
@@ -53,7 +52,7 @@ const login = (email, password) => {
 const getLoggedInUser = () => {
   return axios
     .post(
-      API_URL + "verifyToken",
+      process.env.REACT_APP_API_NODE_URLS + "api/user/verifyToken",
       {},
       { withCredentials: true, credentials: "include" }
 
@@ -85,7 +84,7 @@ const logout = () => {
 const resetPasswordRequest = (email) => {
   console.log(email);
   return axios
-    .post(API_URL + "resetpasswordRequest", {
+    .post(process.env.REACT_APP_API_NODE_URLS + "api/user/resetpasswordRequest", {
       email,
     })
     .then((response) => {
@@ -96,7 +95,7 @@ const resetPasswordRequest = (email) => {
 const generateApiKey = (email, expiryDate) => {
   console.log(email, expiryDate);
   return axios
-    .post(API_URL + "generateApiKey", {
+    .post(process.env.REACT_APP_API_NODE_URLS + "api/user/generateApiKey", {
       email,
       expiryDate,
     })
@@ -118,7 +117,7 @@ const generateApiKey = (email, expiryDate) => {
 
 const getGeneratedApiKey = (id) => {
   console.log(id);
-  return axios.get(API_URL + `gateApiKey/${id}`).then((response) => {
+  return axios.get(process.env.REACT_APP_API_NODE_URLS + `api/user/gateApiKey/${id}`).then((response) => {
     // console.log(response.data);
     return response.data;
     // console.log(response.data);
@@ -129,7 +128,7 @@ const resetPassword = (password, token, id) => {
   console.log(password, token, id);
   return axios
     .post(
-      API_URL + `resetpassword`,
+      process.env.REACT_APP_API_NODE_URLS + `api/user/resetpassword`,
       {
         password,
       },

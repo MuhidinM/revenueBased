@@ -1,15 +1,15 @@
 import axios from "axios";
 import authHeader from "./auth-header";
 
-const API_URL = "http://10.1.177.130:5000/api/";
+const API_URL = process.env.REACT_APP_API_NODE_URLS
 
 const addBank = async (bankName, bankCode) => {
   console.log(bankName, bankCode);
-  const header = authHeader();
+
   console.log();
   return await axios
     .post(
-      API_URL + "createbank",
+      API_URL + "api/createbank",
 
       {
         bankName,
@@ -34,7 +34,7 @@ const addBank = async (bankName, bankCode) => {
 };
 const getBank = async () => {
   return await axios
-    .get(API_URL + "getbank", { headers: authHeader() })
+    .get(API_URL + "api/getbank", { headers: authHeader() })
     .then((response) => {
       console.log(response.data.bankDetail);
       return response.data.bankDetail;

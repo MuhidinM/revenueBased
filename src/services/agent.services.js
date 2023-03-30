@@ -1,5 +1,5 @@
 import axios from "axios";
-const agentUrl = "http://10.1.177.130:8085/api/v1/auth/register";
+const agentUrl = process.env.REACT_APP_API_SPRING_URLS;
 
 const getAllAgents = async (id) => {
   // console.log("calling endpoint");
@@ -13,7 +13,7 @@ const getAllAgents = async (id) => {
 const addAgents = async (firstname, lastname, email, password) => {
   // console.log("calling endpoint");
   console.log(firstname, lastname, email, password)
-  return await axios.post(agentUrl, {
+  return await axios.post(agentUrl + `register`, {
     firstname,lastname,email,password
 
   }).then((response) => {    

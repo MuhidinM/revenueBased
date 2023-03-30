@@ -12,10 +12,11 @@ import Otp from "./Otp";
 import BankAccountServices from "../../src/services/bank-account.services";
 import queryString from "query-string";
 const MySwal = withReactContent(Swal);
-function Bankpay() {
+function Bankpay(props) {
   const [successful, setSuccessful] = useState(false);
   const [message, setMessage] = useState("");
   const [verified, setVerified] = useState(0);
+  const [phoneNumber, setphoneNumber] = useState("");
   const [primaryAccount, setPrimaryAccount] = useState();
   const [currentUser, setCurrentUser] = useState({});
   const [searchParams, setSearchParams] = useSearchParams();
@@ -81,8 +82,10 @@ function Bankpay() {
                   setMessage(resp[0]);
                   // setSuccessful(true);
                   if ((resp[0] == "200")) {
+                    setphoneNumber(values.phoneNumber)
                     setVerified(1);
                     setPrimaryAccount(resp[1].accountNumber)
+                    
                   }
                 },
                 (error) => {
@@ -155,10 +158,10 @@ function Bankpay() {
             debitAccount: "",
           }}
           onSubmit={(val) => {
-            console.log("hello");
+            console.log("hello", props.amount);
             console.log(val);
 
-            BankAccountServices.sendOtp("+251927355418");
+            BankAccountServices.sendOtp(phoneNumber);
             const value = {
               first: "",
               second: "",
@@ -183,13 +186,13 @@ function Bankpay() {
                       values.fourth +
                       values.fifth +
                       values.sixth;
-                    BankAccountServices.confirmOtp("+251927355418", otp).then(
+                    BankAccountServices.confirmOtp(phoneNumber, otp).then(
                       (res) => {
                         // dispatch(setPrimaryAccount(e.target.value));
                         console.log(val.debitAccount);
                         PaymentServices.pay(
                           primaryAccount,
-                          amount,
+                          props.amount,
                           clientid,
                           secretKey,
                           key
@@ -248,23 +251,13 @@ function Bankpay() {
                         id="debitAccount"
                         className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Account Number"
+                        disabled
                         // required=""
-                        value={props.values.debitAccount}
+                        value={primaryAccount}
                         onChange={props.handleChange}
                       />
                     </div>
-                    <div className="w-full col-span-2">
-                      <input
-                        type="text"
-                        name="debitAmount"
-                        id="debitAmount"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Amount"
-                        required=""
-                        value={props.values.debitAmount}
-                        onChange={props.handleChange}
-                      />
-                    </div>
+                   
                   </div>
                   <button
                     // href="/otp"
@@ -276,18 +269,7 @@ function Bankpay() {
                   </button>
                 </>
               )}
-              {message && (
-                <div className="form-group">
-                  <div
-                    className={
-                      successful ? "alert alert-success" : "alert alert-danger"
-                    }
-                    role="alert"
-                  >
-                    {message}
-                  </div>
-                </div>
-              )}
+              
             </>
           )}
         </Formik>

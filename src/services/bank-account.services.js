@@ -1,25 +1,17 @@
 import axios from "axios";
-import authHeader from "./auth-header";
-
-const API_URL = "http://10.1.177.130:5000/api/banckAccount/";
-const OTP_URL = "http://10.1.177.130:8081/payment/v1/sendOtp";
-const OTP_URL_CONFIRMATION =
-  "http://192.168.231.175:8081/payment/v1/otpVerification";
-const NAME_ENQ_URL =
-  "http://192.168.231.175:8081/payment/v1/customerNameByAccno";
-const ACCOUNT_BY_PHONE_ENQUIRY =
-  "http://192.168.231.175:8081/payment/v1/customerNameByAccno";
+const API_URL = process.env.REACT_APP_API_NODE_URLS;
+const SPRING_ENDPOINT = process.env.REACT_APP_API_SPRING_URLS;
 const getBankAccountById = async (id) => {
   console.log(id);
   return await axios
-    .get(API_URL + `accountById/${id}`)
+    .get(API_URL + `api/banckAccount/accountById/${id}`)
     .then((response) => response.data.bankAccounts);
 };
 
 const setPrimaryAccount = async (userId, account_id) => {
   console.log(account_id, userId);
   return await axios
-    .patch(API_URL + `setPrimary/`, { account_id, userId })
+    .patch(API_URL + `api/banckAccount/setPrimary/`, { account_id, userId })
     .then((response) => [response.data.bankAccounts, response.status])
     .catch((err) => {
       if (err.response) {
@@ -36,33 +28,33 @@ const setPrimaryAccount = async (userId, account_id) => {
 const activateAccount = async (id, acId) => {
   console.log(id, acId);
   return await axios
-    .get(API_URL + `activateAccount?&id=${id}&acId=${acId}`)
+    .get(API_URL + `api/banckAccount/activateAccount?&id=${id}&acId=${acId}`)
     .then((response) => response.data.message);
 };
 
 const sendOtp = async (mobile) => {
   console.log(mobile);
   return await axios
-    .post(OTP_URL, { mobile })
+    .post(SPRING_ENDPOINT + "sendOtp", { mobile })
     .then((response) => response.data);
 };
 const getBankAccountByPhone = async (mobile) => {
   console.log(mobile);
   return await axios
-    .post(ACCOUNT_BY_PHONE_ENQUIRY, { mobile })
+    .post(SPRING_ENDPOINT + "" , { mobile })
     .then((response) => response.data);
 };
 
 const confirmOtp = async (mobile, text) => {
   console.log(mobile);
   console.log(text);
-  const response = await axios.post(OTP_URL_CONFIRMATION, { mobile, text });
+  const response = await axios.post(SPRING_ENDPOINT + "otpVerification", { mobile, text });
   let data = response.data;
   return data;
 };
 const nameEnquiryByAccountNumber = async (criteriaValue) => {
   console.log("Account number:" + criteriaValue);
-  const res = await axios.post(NAME_ENQ_URL, { criteriaValue });
+  const res = await axios.post(SPRING_ENDPOINT + 'customerNameByAccno', { criteriaValue });
   let data = res.data.AccountDetailsResponse.name;
   return data;
 };
