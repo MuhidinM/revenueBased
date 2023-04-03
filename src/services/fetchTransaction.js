@@ -1,5 +1,5 @@
 import axios from "axios";
-const adminTransactionFetchUrl = "http://localhost:8081/payment/v1/";
+const adminTransactionFetchUrl = "http://10.1.177.130:8081/payment/v1/";
 
 const getAllTransactions = async () => {
   // console.log(adminTransactionFetchUrl);
@@ -8,11 +8,11 @@ const getAllTransactions = async () => {
     .then((response) => response.data);
 };
 
-const getTransactionByTransactionId = async (transactionID) => {
+const getTransactionByTransactionId = async (clientId) => {
   // console.log("am" + transactionID);
   return await axios
     .post(adminTransactionFetchUrl + "fetchByTransactionid", {
-      transactionID,
+      clientId,
     })
     .then((response) => {
       console.log(response.data);

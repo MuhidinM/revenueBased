@@ -84,7 +84,7 @@ const logout = () => {
 const resetPasswordRequest = (email) => {
   console.log(email);
   return axios
-    .post(process.env.REACT_APP_API_NODE_URLS + "api/user/resetpasswordRequest", {
+    .post(process.env.REACT_APP_API_NODE_URLS + "api/auth/resetpasswordRequest", {
       email,
     })
     .then((response) => {
@@ -128,7 +128,7 @@ const resetPassword = (password, token, id) => {
   console.log(password, token, id);
   return axios
     .post(
-      process.env.REACT_APP_API_NODE_URLS + `api/user/resetpassword`,
+      process.env.REACT_APP_API_NODE_URLS + `api/auth/resetpassword`,
       {
         password,
       },

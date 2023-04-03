@@ -120,7 +120,7 @@ function TransactionList() {
     //Make dynamic the name of file
     let d = new Date();
     // let dformat = `${d.getHours()}-${d.getMinutes()}-${d.getSeconds()}`;
-    const filename = "TransactionMomo12.csv";
+    const filename = "TransactionMomo3.csv";
 
     if (!csv.match(/^data:text\/csv/i)) {
       csv = `data:text/csv;charset=utf-8,${csv}`;

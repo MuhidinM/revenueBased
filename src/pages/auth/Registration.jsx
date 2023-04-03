@@ -130,18 +130,7 @@ function Registration() {
               >
                 {(props) => (
                   <>
-                    {isOpen && (
-                      <>
-                        {MySwal.fire({
-                          title: <p>Hello World</p>,
-                          show: { isOpen },
-                          didOpen: () => {
-                            // `MySwal` is a subclass of `Swal` with all the same instance & static methods
-                            MySwal.showLoading();
-                          },
-                        })}
-                      </>
-                    )}
+                   
 
                     {!successful && (
                       <>
@@ -349,9 +338,9 @@ function Registration() {
                           role="alert"
                         >
                           {message}
-                          <Link to={"/auth"} className="btn btn-primary">
+                          {/* <Link to={"/auth"} className="btn btn-primary">
                             Login
-                          </Link>
+                          </Link> */}
                         </div>
                       </div>
                     )}
