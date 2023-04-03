@@ -18,7 +18,7 @@ function Gateway() {
     if (currency === "ETB") {
       setSelect("CBOA");
     } else {
-      setSelect("payPal");
+      setSelect("stripe");
     }
   }, []);
   console.log("currency is:", currency);
@@ -71,21 +71,20 @@ function Gateway() {
                   ) : (
                     ""
                   )} */}
+                  {currency === "USD" ? (
+                    <option value={"stripe"} selected>Stripe</option>
+                  ) : (
+                    ""
+                  )}
                   {currency === "USD" && (
                     <>
-                      <option value={"payPal"} selected>
+                      <option value={"payPal"} >
                         payPal
                       </option>
                       {/* <option value={"payPal"}>payPal</option> */}
                     </>
                   )}
-                  {currency === "USD" ? (
-                    <option value={"stripe"}>
-                      Stripe
-                    </option>
-                  ) : (
-                    ""
-                  )}
+
                   {/* <option value={"payPal"}>payPal</option> */}
                 </select>
               </div>
