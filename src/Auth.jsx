@@ -10,6 +10,7 @@ import EpassRegistration from "./components/EpassRegistration";
 import ActivatePrimaryAccount from "./pages/user/ActivatePrimaryAccount";
 // import CheckOutPage from "./pages/auth/multi-step/CheckoutPage/CheckOutPage";
 import E404 from "./pages/error/E404";
+import TermsAndConditions from "./pages/auth/TermsAndConditions";
 
 function Auth() {
   return (
@@ -22,6 +23,7 @@ function Auth() {
         <Route path="resetpassword" element={<Resetpassword />}></Route>
         <Route path="recover" element={<Recovery />}></Route>
         <Route path="activate" element={<Activation />}></Route>
+        <Route path="termsandconditions" element={<TermsAndConditions />}></Route>
         <Route
           path="activateAccount/"
           element={<ActivatePrimaryAccount />}
