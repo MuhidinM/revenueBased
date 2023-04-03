@@ -135,6 +135,9 @@ function Bankpay(props) {
                         <div className="input-group">
                           <input
                             type={type}
+                            name="pin"
+                            value={props.values.pin}
+                            onChange={props.handleChange}
                             className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="••••••"
                           />
@@ -289,8 +292,8 @@ function Bankpay(props) {
             <>
               {!successful && (
                 <>
-                  <div className="grid grid-cols-2 gap-2 sm:grid-cols-5">
-                    <div className="w-full col-span-3">
+                  {/* <div className="grid grid-cols-2 gap-2 sm:grid-cols-5"> */}
+                    <div className="w-full">
                       <input
                         type="text"
                         name="debitAccount"
@@ -304,7 +307,7 @@ function Bankpay(props) {
                       />
                     </div>
                    
-                  </div>
+                  {/* </div> */}
                   <button
                     // href="/otp"
                     type="submit"
