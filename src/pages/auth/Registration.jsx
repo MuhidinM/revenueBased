@@ -302,7 +302,7 @@ function Registration() {
                               I accept the{" "}
                               <Link
                                 className="font-medium text-primary hover:underline dark:text-primary"
-                                to={"/"}
+                                to={"/auth/termsandconditions"}
                               >
                                 Terms and Conditions
                               </Link>
