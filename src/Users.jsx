@@ -10,11 +10,11 @@ import Transactions from "./pages/user/Transactions";
 import Sidebar from "./pages/user/Sidebar";
 import Profile from "./pages/user/Profile";
 import Settings from "./pages/user/Settings";
-import Generateqr from "./pages/user/Generateqr";
-import DomainList from "./pages/user/DomainList";
-import Devices from "./pages/user/Devices";
 import MultiStepForm from "./pages/user/MultiStepForm";
 import ActivatePrimaryAccount from "./pages/user/ActivatePrimaryAccount";
+import Sales from "./pages/user/Sales";
+import Inventory from "./pages/user/Inventory";
+import Loan from "./pages/user/Loan";
 function Users() {
   return (
     <>
@@ -30,9 +30,9 @@ function Users() {
               <Route path="uapi" element={<Uapi />}></Route>
               <Route path="transactions" element={<Transactions />}></Route>
               <Route path="accounts" element={<Accounts />}></Route>
-              <Route path="domains" element={<DomainList />}></Route>
-              <Route path="devices" element={<Devices />}></Route>
-              <Route path="qr" element={<Generateqr />}></Route>
+              <Route path="sales" element={<Sales />}></Route>
+              <Route path="inventory" element={<Inventory />}></Route>
+              <Route path="loan" element={<Loan />}></Route>
               <Route path="profile" element={<Profile />}></Route>
               <Route path="setting" element={<MultiStepForm />}></Route>
               <Route path="*" element={<E404 />}></Route>

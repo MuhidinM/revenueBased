@@ -12,6 +12,7 @@ import OTP from "./pages/auth/OTP";
 import PrivateRoiutes from "./pages/auth/PrivateRoutes";
 import EpassRegistration from "./components/EpassRegistration";
 import AuthService from "./services/auth.service";
+import Sales from "./Sales";
 
 function App() {
   const user = AuthService.getCurrentUser();
@@ -45,6 +46,7 @@ function App() {
         <Route element={<PrivateRoiutes />}>
           <Route path="/admin/*" element={<Admin />}></Route>
           <Route path="/users/*" element={<Users />}></Route>
+          <Route path="/sales/*" element={<Sales />}></Route>
         </Route>
         <Route path="/sandbox/*" element={<Sandbox />}></Route>
         <Route path="*" element={<Error />}></Route>

@@ -73,14 +73,6 @@ export const ModalForm = ({ values, onSubmit, onCancel }) => {
                 </button>
               </div>
             </div>
-
-            {/* <button
-            type="submit"
-            onSubmit={onSubmit}
-            className="swal2-confirm swal2-styled"
-          >
-            OK
-          </button> */}
           </form>
         </>
       )}

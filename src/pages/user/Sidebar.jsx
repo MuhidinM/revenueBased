@@ -122,7 +122,7 @@ function Sidebar() {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/users/domains">
+                  <Link to="/users/sales">
                     <svg
                       class="h-6 w-6 text-primary"
                       fill="none"
@@ -133,14 +133,14 @@ function Sidebar() {
                         stroke-linecap="round"
                         stroke-linejoin="round"
                         stroke-width="2"
-                        d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"
+                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
                       />
                     </svg>
-                    Domains
+                    Sales
                   </Link>
                 </li>
                 <li>
-                  <Link to="/users/devices">
+                  <Link to="/users/inventory">
                     <svg
                       class="h-6 w-6 text-primary"
                       width="24"
@@ -158,147 +158,35 @@ function Sidebar() {
                       <path d="M18 8v-3a1 1 0 0 0 -1 -1h-13a1 1 0 0 0 -1 1v12a1 1 0 0 0 1 1h9" />{" "}
                       <line x1="16" y1="9" x2="18" y2="9" />
                     </svg>
-                    Devices
+                    Inventory
                   </Link>
                 </li>
                 <li>
-                  <Link to="/users/qr">
+                  <Link to="/users/loan">
                     <svg
-                      className="w-6 h-6 text-primary"
-                      fill="none"
+                      class="h-6 w-6 text-primary"
+                      width="24"
+                      height="24"
                       viewBox="0 0 24 24"
+                      stroke-width="2"
                       stroke="currentColor"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"
-                      />
+                      {" "}
+                      <path stroke="none" d="M0 0h24v24H0z" />{" "}
+                      <rect x="7" y="9" width="14" height="10" rx="2" />{" "}
+                      <circle cx="14" cy="14" r="2" />{" "}
+                      <path d="M17 9v-2a2 2 0 0 0 -2 -2h-10a2 2 0 0 0 -2 2v6a2 2 0 0 0 2 2h2" />
                     </svg>
-                    Generate QR Code
+                    Loan List
                   </Link>
                 </li>
               </>
             ) : (
               ""
             )}
-
-            <div className="divider"></div>
-            <li>
-              <Link className="hover:bg-inherit">
-                <svg
-                  className="w-6 h-6 text-primary"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"
-                  />
-                </svg>
-                Docs
-              </Link>
-            </li>
-            <li>
-              <Link to={"/intro"}>
-                <svg
-                  class="w-6 h-6 text-primary"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  stroke-width="2"
-                  stroke="currentColor"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  {" "}
-                  <path stroke="none" d="M0 0h24v24H0z" />{" "}
-                  <path d="M6 6v6a3 3 0 0 0 3 3h10l-5 -5m0 10l5 -5" />
-                </svg>
-                <svg
-                  class="h-6 w-6 text-primary"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  stroke-width="2"
-                  stroke="currentColor"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  {" "}
-                  <path stroke="none" d="M0 0h24v24H0z" />{" "}
-                  <circle cx="6" cy="19" r="2" />{" "}
-                  <circle cx="18" cy="5" r="2" />{" "}
-                  <path d="M12 19h4.5a3.5 3.5 0 0 0 0 -7h-8a3.5 3.5 0 0 1 0 -7h3.5" />
-                </svg>
-                Itroduction
-              </Link>
-            </li>
-            <li>
-              <Link to={"/apidocs"}>
-                <svg
-                  class="w-6 h-6 text-primary"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  stroke-width="2"
-                  stroke="currentColor"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  {" "}
-                  <path stroke="none" d="M0 0h24v24H0z" />{" "}
-                  <path d="M6 6v6a3 3 0 0 0 3 3h10l-5 -5m0 10l5 -5" />
-                </svg>
-                <svg
-                  class="w-6 h-6 text-primary"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  stroke-width="2"
-                  stroke="currentColor"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  {" "}
-                  <path stroke="none" d="M0 0h24v24H0z" />{" "}
-                  <polyline points="7 8 3 12 7 16" />{" "}
-                  <polyline points="17 8 21 12 17 16" />{" "}
-                  <line x1="14" y1="4" x2="10" y2="20" />
-                </svg>
-                API Usage
-              </Link>
-            </li>
-            <li>
-              <Link to={"/contact"}>
-                <svg
-                  className="w-6 h-6 text-primary"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  strokeWidth="2"
-                  stroke="currentColor"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  {" "}
-                  <path stroke="none" d="M0 0h24v24H0z" />{" "}
-                  <circle cx="12" cy="12" r="9" />{" "}
-                  <line x1="12" y1="17" x2="12" y2="17.01" />{" "}
-                  <path d="M12 13.5a1.5 1.5 0 0 1 1 -1.5a2.6 2.6 0 1 0 -3 -4" />
-                </svg>
-                Help
-              </Link>
-            </li>
           </ul>
         </div>
       )}
