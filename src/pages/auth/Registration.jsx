@@ -20,10 +20,7 @@ function Registration() {
   const [message, setMessage] = useState("");
   const [isOpen, setOpen] = useState(false);
   const validationSchema = Yup.object().shape({
-    firstName: Yup.string().required("Fullname is required"),
-    lastName: Yup.string().required("Fullname is required"),
-    email: Yup.string().required("Email is required").email("Email is invalid"),
-    phone: Yup.string().required("Phone is required"),
+    username: Yup.string().required("Username is required"),
     password: Yup.string()
       .required("Password is required")
       .min(6, "Password must be at least 6 characters")
@@ -76,10 +73,7 @@ function Registration() {
               </h1>
               <Formik
                 initialValues={{
-                  firstName: "",
-                  lastName: "",
-                  email: "",
-                  phone: "",
+                  username: "",
                   password: "",
                   // confirmPassword: "",
                   confirmPassword: "",
@@ -94,10 +88,7 @@ function Registration() {
                   console.log(values);
                   setOpen(true);
                   AuthService.register(
-                    values.firstName,
-                    values.lastName,
-                    values.email,
-                    values.phone,
+                    values.username,
                     values.password.toString()
                   ).then(
                     (resp) => {
@@ -130,101 +121,28 @@ function Registration() {
               >
                 {(props) => (
                   <>
-                   
-
                     {!successful && (
                       <>
-                        <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
-                          <div>
-                            <label
-                              htmlFor="fname"
-                              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                            >
-                              First Name
-                            </label>
-                            <span className="text-sm link-error">
-                              {props.errors.firstName && props.touched.firstName
-                                ? props.errors.firstName
-                                : null}
-                            </span>
-                            <input
-                              type="fname"
-                              name="firstName"
-                              id="fname"
-                              value={props.values.firstName}
-                              onChange={props.handleChange}
-                              className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
-                              placeholder="Lelisa"
-                              required=""
-                            />
-                          </div>
-                          <div>
-                            <label
-                              htmlFor="mname"
-                              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                            >
-                              Middle Name
-                            </label>
-                            <span className="text-sm link-error">
-                              {props.errors.lastName && props.touched.lastName
-                                ? props.errors.lastName
-                                : null}
-                            </span>
-                            <input
-                              type="mname"
-                              name="lastName"
-                              id="mname"
-                              value={props.values.lastName}
-                              onChange={props.handleChange}
-                              className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
-                              placeholder="Abdusemed"
-                              required=""
-                            />
-                          </div>
-                        </div>
                         <div>
                           <label
-                            htmlFor="email"
+                            htmlFor="username"
                             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                           >
-                            Business email
+                            User Name (Email or Phone Number)
                           </label>
                           <span className="text-sm link-error">
-                            {props.errors.email && props.touched.email
-                              ? props.errors.email
+                            {props.errors.username && props.touched.username
+                              ? props.errors.username
                               : null}
                           </span>
                           <input
-                            type="email"
-                            name="email"
-                            id="email"
-                            value={props.values.email}
+                            type="text"
+                            name="username"
+                            id="username"
+                            value={props.values.username}
                             onChange={props.handleChange}
                             className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
-                            placeholder="name@company.com"
-                            required=""
-                          />
-                        </div>
-                        <div>
-                          <label
-                            htmlFor="phone"
-                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                          >
-                            Business Phone
-                          </label>
-                          <span className="text-sm link-error">
-                            {props.errors.phone && props.touched.phone
-                              ? props.errors.phone
-                              : null}
-                          </span>
-                          <input
-                            type="number"
-                            name="phone"
-                            id="phone"
-                            value={props.values.phone}
-                            onChange={props.handleChange}
-                            className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
-                            placeholder="0900000000"
+                            placeholder="Valid email or phone"
                             required=""
                             maxlength="9"
                           />
@@ -276,7 +194,7 @@ function Registration() {
                             required=""
                           />
                         </div>
-                        <div className="flex items-start">
+                        <div className="flex flex-col items-start">
                           <div className="flex items-center h-5">
                             <span className="text-sm link-error">
                               {props.errors.acceptTerms &&
@@ -284,6 +202,8 @@ function Registration() {
                                 ? props.errors.acceptTerms
                                 : null}
                             </span>
+                          </div>
+                          <div className="flex items-center text-sm">
                             <input
                               id="acceptTerms"
                               name="acceptTerms"
@@ -293,13 +213,11 @@ function Registration() {
                               onChange={props.handleChange}
                               className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary dark:ring-offset-gray-800"
                             />
-                          </div>
-                          <div className="ml-3 text-sm">
                             <label
                               htmlFor="terms"
-                              className="font-light text-gray-500 dark:text-gray-300"
+                              className="font-light ml-2 text-gray-500 dark:text-gray-300"
                             >
-                              I accept the{" "}
+                               {" "}Accept the{" "}
                               <Link
                                 className="font-medium text-primary hover:underline dark:text-primary"
                                 to={"/auth/termsandconditions"}

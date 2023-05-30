@@ -1,26 +1,17 @@
 import axios from "axios";
 import jwt from "jwt-decode";
+import { NODE_API } from "../utils/API";
 const user = JSON.parse(localStorage.getItem("user"));
-const register = (fname, lname, email, phone, password) => {
-  return axios
-    .post(
-      process.env.REACT_APP_API_NODE_URLS + "api/user/signup",
-      {
-        fname,
-        lname,
-        email,
-        phone,
-        password,
-      },
-      { withCredentials: true, credentials: "include" }
-    )
-    .then((response) => {
-      // console.log(response.data.message);
-      if (response.data.token) {
-        localStorage.setItem("user", JSON.stringify(response.data));
-      }
-      return response.data;
-    });
+const register = async (username, password) => {
+  const response = await NODE_API.post("/merchant/signup", {
+    username,
+    password,
+  });
+  // console.log(response.data.message);
+  if (response.data.token) {
+    localStorage.setItem("user", JSON.stringify(response.data));
+  }
+  return response.data;
 };
 
 const login = (email, password) => {
@@ -84,9 +75,12 @@ const logout = () => {
 const resetPasswordRequest = (email) => {
   console.log(email);
   return axios
-    .post(process.env.REACT_APP_API_NODE_URLS + "api/auth/resetpasswordRequest", {
-      email,
-    })
+    .post(
+      process.env.REACT_APP_API_NODE_URLS + "api/auth/resetpasswordRequest",
+      {
+        email,
+      }
+    )
     .then((response) => {
       return response.data;
     });
@@ -117,11 +111,13 @@ const generateApiKey = (email, expiryDate) => {
 
 const getGeneratedApiKey = (id) => {
   console.log(id);
-  return axios.get(process.env.REACT_APP_API_NODE_URLS + `api/user/gateApiKey/${id}`).then((response) => {
-    // console.log(response.data);
-    return response.data;
-    // console.log(response.data);
-  });
+  return axios
+    .get(process.env.REACT_APP_API_NODE_URLS + `api/user/gateApiKey/${id}`)
+    .then((response) => {
+      // console.log(response.data);
+      return response.data;
+      // console.log(response.data);
+    });
 };
 
 const resetPassword = (password, token, id) => {
