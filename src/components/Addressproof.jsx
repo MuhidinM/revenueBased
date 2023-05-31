@@ -20,7 +20,7 @@ function Addressproof(props) {
           <div className="flex flex-col items-center justify-center pt-5 pb-6">
             {image ? (
               <>
-                <img src={image} className="h-24" alt={fileName} />
+                <imame=g src={image} classN"h-24" alt={fileName} />
               </>
             ) : (
               <>
