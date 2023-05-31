@@ -18,31 +18,32 @@ const legal_entity_type = [
   { label: "A", value: "A" },
   { label: "B", value: "B" },
 ];
+
+const current = new Date();
 const options = {
-  title: "Demo Title",
   autoHide: true,
-  todayBtn: false,
+  todayBtn: true,
   clearBtn: true,
   maxDate: new Date("2030-01-01"),
   minDate: new Date("1950-01-01"),
   theme: {
-    background: "bg-gray-700 dark:bg-gray-800",
+    background: "bg-gray-50 dark:bg-gray-800",
     todayBtn: "",
     clearBtn: "",
-    icons: "",
+    icons: " border",
     text: "",
-    disabledText: "bg-red-500",
     input: "",
     inputIcon: "",
     selected: "",
   },
   icons: {
-    // () => ReactElement | JSX.Element
     prev: () => <span>Previous</span>,
     next: () => <span>Next</span>,
   },
-  datepickerClassNames: "top-12",
-  defaultDate: new Date("2022-01-01"),
+  datepickerClassNames: "absolute ",
+  defaultDate: new Date(
+    `${current.getFullYear()}-${current.getMonth() + 1}-${current.getDate()}`
+  ),
   language: "en",
 };
 
@@ -243,21 +244,14 @@ function Profile() {
                           Date of Establishment
                         </label>
                         <Datepicker
+                          id="datepicker"
                           options={options}
                           onChange={handleChange}
                           show={show}
                           setShow={handleClose}
-                        />
-                        {/* <Input
-                          label="date_of_establishment"
-                          title="Date of Establishment"
-                          type="text"
-                          name="date_of_establishment"
-                          id="date_of_establishment"
-                          place="kkk"
                           value={props.values.date_of_establishment}
                           handleChange={props.handleChange}
-                        /> */}
+                        />
                       </div>
                       <div className="w-full">
                         <Input
