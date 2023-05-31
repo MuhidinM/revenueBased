@@ -40,7 +40,7 @@ function Login() {
                   //   alert(JSON.stringify(values, null, 2));
                   //   setSubmitting(false);
                   // }, 400);
-                  console.log(values.email);
+                  // console.log(values.email);
 
                   AuthService.login(values.email, values.password).then(
                     () => {
@@ -109,7 +109,7 @@ function Login() {
                         required=""
                       />
                     </div>
-                    
+
                     <button
                       type="submit"
                       onClick={props.handleSubmit}

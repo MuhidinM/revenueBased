@@ -22,6 +22,7 @@ export default function (state = initialState, action) {
       };
     case GET_ADMIN_ALL_DEVICES_ERROR:
       return {
+        ...state,
         loading: false,
         error: action.payload,
       };

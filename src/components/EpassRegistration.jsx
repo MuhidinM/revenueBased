@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import AuthService from "../services/auth.service";
-import Swal from "sweetalert2"; 
+import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 const MySwal = withReactContent(Swal);
 // import { useState } from "react";
@@ -60,7 +60,7 @@ function EpassRegistration() {
                   //   alert(JSON.stringify(values, null, 2));
                   //   setSubmitting(false);
                   // }, 400);
-                  console.log(values);
+                  // console.log(values);
                   setOpen(true);
                   AuthService.register(
                     values.firstName,
@@ -70,7 +70,7 @@ function EpassRegistration() {
                     values.password.toString()
                   ).then(
                     (resp) => {
-                      console.log(resp.message);
+                      // console.log(resp.message);
                       setMessage(resp.message);
                       setSuccessful(true);
                       Swal.fire({
@@ -81,7 +81,7 @@ function EpassRegistration() {
                       });
                       navigate("/auth");
                       window.location.reload();
-                      console.log(successful);
+                      // console.log(successful);
                     },
                     (error) => {
                       const resMessage =

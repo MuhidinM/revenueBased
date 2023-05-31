@@ -32,12 +32,12 @@ const columns = [
   },
   {
     name: "Primary",
-    selector: (row) => (row.primaryAccount == 1 ? "primary" : "secondary"),
+    selector: (row) => (row.primaryAccount === 1 ? "primary" : "secondary"),
     sortable: true,
   },
   {
     name: "Status",
-    selector: (row) => (row.status == 1 ? "activated" : "pending"),
+    selector: (row) => (row.status === 1 ? "activated" : "pending"),
     sortable: true,
   },
 ];
@@ -47,28 +47,28 @@ choose[0] = { label: "Set Primary", value: "1" };
 const MySwal = withReactContent(Swal);
 function Accounts() {
   const AccountListData = useSelector((state) => state.accountsList);
-  console.log(AccountListData);
+  // console.log(AccountListData);
   const { loading, error, bankAccounts } = AccountListData;
-  console.log("Account Numbers:", bankAccounts);
+  // console.log("Account Numbers:", bankAccounts);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getAccounts());
   }, [dispatch]);
 
-  console.log(bankAccounts);
+  // console.log(bankAccounts);
 
   const interpretResponse = (response) => {
-    let actionResponse = JSON.stringify(response);
-    console.log("Action Response Is" + actionResponse.response);
-    console.log(
-      " Response Is" + response.response,
-      response.message + "",
-      response.responseCode
-    );
-    if (response.response === "success" || response.responseCode == 200) {
-      console.log(response);
-      console.log("Rsponse from useEffect is here" + response);
+    // let actionResponse = JSON.stringify(response);
+    // console.log("Action Response Is" + actionResponse.response);
+    // console.log(
+    //   " Response Is" + response.response,
+    //   response.message + "",
+    //   response.responseCode
+    // );
+    if (response.response === "success" || response.responseCode === 200) {
+      // console.log(response);
+      // console.log("Rsponse from useEffect is here" + response);
       Swal.fire({
         icon: "success",
         title: "Account Updated",
@@ -76,7 +76,7 @@ function Accounts() {
         timer: 3000,
       });
     } else if (response.responseCode === 403 && response.respone === "error") {
-      console.log("Un Authorised User ");
+      // console.log("Un Authorised User ");
       Swal.fire({
         icon: "error",
         title: response.message,
@@ -95,7 +95,7 @@ function Accounts() {
 
   const handleChange = (e) => {
     e.preventDefault();
-    console.log(e.target.value);
+    // console.log(e.target.value);
 
     if (e.target.value != "1") {
       return new Promise((resolve, reject) => {
@@ -109,7 +109,7 @@ function Accounts() {
           cancelButtonColor: "#d33",
           confirmButtonText: "Yes!",
         }).then((result) => {
-          console.log(result);
+          // console.log(result);
           if (result.isConfirmed === true) {
             BankAccountServices.sendOtp("+251927355418");
             const value = {
@@ -127,7 +127,7 @@ function Accounts() {
                 <Otp
                   values={value}
                   onSubmit={(values) => {
-                    console.log("Hello from the second swal");
+                    // console.log("Hello from the second swal");
                     // resolve(values);
                     const otp =
                       values.first +
@@ -162,11 +162,11 @@ function Accounts() {
   };
 
   if (bankAccounts) {
-    console.log(bankAccounts);
+    // console.log(bankAccounts);
     for (let index = 0; index < bankAccounts.length; index++) {
       const element = bankAccounts[index];
       // console.log(element);
-      console.log("running");
+      // console.log("running");
       if (choose.length < bankAccounts.length) {
         choose.push({
           label: element.bankName + "-" + element.accountNumber,
@@ -174,7 +174,7 @@ function Accounts() {
         });
       }
     }
-    console.log(choose);
+    // console.log(choose);
     const renderList = bankAccounts.map((item, index) => (
       <tr>
         <th>{item.bankaccount_id}</th>

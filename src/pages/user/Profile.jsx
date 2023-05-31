@@ -61,7 +61,7 @@ function Profile() {
       // setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
     }
   }, []);
-  console.log(currentUser.id);
+  // console.log(currentUser.id);
   const validationSchema = Yup.object().shape({
     fname: Yup.string().required("First Name is required"),
     mname: Yup.string().required("Middle Name is required"),
@@ -80,7 +80,7 @@ function Profile() {
   });
 
   const fileInputTOForm = (e) => {
-    console.log(e.currentTarget.id);
+    // console.log(e.currentTarget.id);
     setidentificationCard(e.target.files[0]);
     // settradeLicenseImageName(e.target.files[0].name);
   };
@@ -121,7 +121,7 @@ function Profile() {
               formData.append("cardType", values.cardType);
               formData.append("user", currentUser.email);
               formData.append("identificationCard", values.identificationCard);
-              console.log(formData);
+              // console.log(formData);
               dispatch(CreateOrUpdate(formData))
                 .then((res) => console.log(res))
                 .catch((e) => console.log(e));

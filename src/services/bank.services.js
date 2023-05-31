@@ -1,7 +1,7 @@
 import axios from "axios";
 import authHeader from "./auth-header";
 
-const API_URL = process.env.REACT_APP_API_NODE_URLS
+const API_URL = process.env.REACT_APP_API_NODE_URLS;
 
 const addBank = async (bankName, bankCode) => {
   console.log(bankName, bankCode);

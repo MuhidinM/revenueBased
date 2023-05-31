@@ -51,7 +51,7 @@ function Success() {
     UserService.BussinessInfoRequest(fd).then(
       (resp) => {
         console.log(resp.message);
-        if (resp[1] == "200") {
+        if (resp[1] === "200") {
           Swal.fire({
             icon: "success",
             title: "Your Request Has been sent ",

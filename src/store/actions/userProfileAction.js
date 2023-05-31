@@ -3,6 +3,9 @@ import {
   CREATE_USER_PROFILE_ERROR,
   LOGGED_IN_USER_DETAIL,
   LOGGED_IN_USER_DETAIL_ERROR,
+  SET_USER_NAME,
+  SET_USER_ID,
+  SET_TOKEN,
 } from "../types";
 import AuthService from "../../services/auth.service";
 import UserService from "../../services/user.service";
@@ -22,9 +25,9 @@ export const CreateOrUpdate = (formData) => async (dispatch) => {
   }
 };
 
-export const retrieveLoggedInUser = () => async (dispatch) => {
+export const retrieveLoggedInUser = () => async (dispatch, token) => {
   try {
-    const userDetail = await AuthService.getLoggedInUser();
+    const userDetail = await AuthService.getLoggedInUser(token);
     console.log("Responded User Detail", userDetail);
     dispatch({
       type: LOGGED_IN_USER_DETAIL,
@@ -37,3 +40,17 @@ export const retrieveLoggedInUser = () => async (dispatch) => {
     });
   }
 };
+
+export const setUserID = (item) => ({
+  type: SET_USER_ID,
+  payload: item,
+});
+
+export const setUsername = (item) => ({
+  type: SET_USER_NAME,
+  payload: item,
+});
+export const setToken = (item) => ({
+  type: SET_TOKEN,
+  payload: item,
+});

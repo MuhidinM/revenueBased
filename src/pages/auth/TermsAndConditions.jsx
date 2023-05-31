@@ -1,11 +1,9 @@
 import React from "react";
 import Footer from "../../components/Footer";
-import Nav from "../home/Nav";
 
 function TermsAndConditions() {
   return (
     <>
-      <Nav />
       <div className="text-center mx-80 mt-36 mb-12">
         {/* <div className="flex flex-col w-full mb-12 text-center"> */}
         <h1 className="max-w-5xl text-2xl m-8 font-bold leading-none tracking-tighter md:text-5xl lg:text-6xl lg:max-w-7xl dark:text-white">

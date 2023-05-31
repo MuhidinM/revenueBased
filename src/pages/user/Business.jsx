@@ -43,12 +43,8 @@ const transaction = [
 ];
 
 function Business(props) {
-  console.log(props);
-  return (
-    <>
-      
-    </>
-  );
+  // console.log(props);
+  return <></>;
 }
 
 export default Business;

@@ -11,7 +11,7 @@ function Nav() {
       // setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
     }
   }, []);
-  console.log(currentUser.client_id);
+  // console.log(currentUser.client_id);
   const logOut = () => {
     AuthService.logout();
   };
@@ -45,12 +45,10 @@ function Nav() {
               tabIndex={0}
               className="p-2 mt-3 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
             >
-              <span className="pt-2 pl-2">
-                client id: sample id here
-              </span>
+              <span className="pt-2 pl-2">client id: sample id here</span>
 
               <div className="divider"></div>
-              
+
               <li>
                 <Link to={"/"} onClick={logOut}>
                   Logout

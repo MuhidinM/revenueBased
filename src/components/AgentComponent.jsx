@@ -9,7 +9,7 @@ function AgentComponent({ onSubmit, values, onCancel }) {
     email: Yup.string().required("Email is required"),
     phoneNumber: Yup.string().required("Phone Number is required"),
   });
-  console.log("value From the Parent:", values);
+  // console.log("value From the Parent:", values);
   return (
     <>
       <Formik

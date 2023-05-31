@@ -11,10 +11,13 @@ import bussinessReducer from "./bussinessReducer";
 import agentReducer from "./agentReducer";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import getInventoryReducer from "./getInventoryReducer";
+import getSalesReducer from "./getSalesReducer";
+import getLoanConfigReducer from "./getLoanConfigReducer";
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["userProfile"],
+  whitelist: ["userProfile", "token"],
 };
 const rootReducer = combineReducers({
   accountsList: bank_accountReducer,
@@ -29,5 +32,8 @@ const rootReducer = combineReducers({
   domain: domainReducer,
   bussinessInfo: bussinessReducer,
   agentInfo: agentReducer,
+  inventoryInfo: getInventoryReducer,
+  salesInfo: getSalesReducer,
+  loanConfigInfo: getLoanConfigReducer,
 });
 export default persistReducer(persistConfig, rootReducer);

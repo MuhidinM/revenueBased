@@ -27,7 +27,7 @@ function Maccounts(props) {
       // setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
     }
   }, []);
-  console.log(currentUser.id);
+  // console.log(currentUser.id);
   const validationSchema = Yup.object().shape({
     accountHolder: Yup.string().required("Account Holder Name is required"),
     accountNumber: Yup.string().required("Account Number is required"),
@@ -58,7 +58,7 @@ function Maccounts(props) {
                   )
                 )
                   .then((res) => {
-                    console.log(res.message);
+                    // console.log(res.message);
                     setMessage(res.message);
                     setSuccessful(true);
                   })

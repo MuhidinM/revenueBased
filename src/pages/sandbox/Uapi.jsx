@@ -6,8 +6,8 @@ function Uapi() {
   const [modaState, setModalState] = useState(false);
 
   const showModal = () => {
-    console.log("show the modal");
-    console.log(modaState);
+    // console.log("show the modal");
+    // console.log(modaState);
     setModalState(true);
   };
 

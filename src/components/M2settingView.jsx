@@ -3,7 +3,7 @@ import UserService from "../services/user.service";
 
 function M2settingView(props) {
   const m2SettingData = props.modal_data;
-  console.log(m2SettingData);
+  // console.log(m2SettingData);
   if (m2SettingData) {
     // setdataId(m2SettingData.bussiness_id);
     // console.log(m2SettingData.bussiness_id);
@@ -20,7 +20,7 @@ function M2settingView(props) {
     // );
     // };
 
-    console.log("Modal Content Has been Called");
+    // console.log("Modal Content Has been Called");
 
     // console.log(m2SettingData.tradeLicense);
 

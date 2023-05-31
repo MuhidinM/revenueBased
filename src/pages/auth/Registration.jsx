@@ -85,14 +85,14 @@ function Registration() {
                   //   alert(JSON.stringify(values, null, 2));
                   //   setSubmitting(false);
                   // }, 400);
-                  console.log(values);
+                  // console.log(values);
                   setOpen(true);
                   AuthService.register(
                     values.username,
                     values.password.toString()
                   ).then(
                     (resp) => {
-                      console.log(resp.message);
+                      // console.log(resp.message);
                       setMessage(resp.message);
                       setSuccessful(true);
                       Swal.fire({
@@ -103,7 +103,7 @@ function Registration() {
                       });
                       navigate("/auth");
                       window.location.reload();
-                      console.log(successful);
+                      // console.log(successful);
                     },
                     (error) => {
                       const resMessage =
@@ -144,7 +144,7 @@ function Registration() {
                             className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
                             placeholder="Valid email or phone"
                             required=""
-                            maxlength="9"
+                            maxlength="200"
                           />
                         </div>
                         <div>
@@ -217,7 +217,8 @@ function Registration() {
                               htmlFor="terms"
                               className="font-light ml-2 text-gray-500 dark:text-gray-300"
                             >
-                               {" "}Accept the{" "}
+                              {" "}
+                              Accept the{" "}
                               <Link
                                 className="font-medium text-primary hover:underline dark:text-primary"
                                 to={"/auth/termsandconditions"}

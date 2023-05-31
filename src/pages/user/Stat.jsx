@@ -41,7 +41,7 @@ function Stat() {
                 <polyline points="17 6 23 6 23 12" />
               </svg>
             </div>
-            <div className="stat-title">Daily Transactions</div>
+            <div className="stat-title">Total Sales</div>
             <div className="stat-value text-secondary">-</div>
             {/* <div className="stat-desc">11% less than yesterday</div> */}
           </div>
@@ -62,7 +62,7 @@ function Stat() {
                 ></path>
               </svg>
             </div>
-            <div className="stat-title">Monthly Transactions</div>
+            <div className="stat-title">Monthly Sales</div>
             <div className="stat-value text-primary">-</div>
             {/* <div className="stat-desc">21% more than last month</div> */}
           </div>
@@ -85,7 +85,7 @@ function Stat() {
                 <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
               </svg>
             </div>
-            <div className="stat-title">Total Accounts</div>
+            <div className="stat-title">Total Items</div>
             <div className="stat-value text-accent">-</div>
           </div>
         </div>

@@ -16,7 +16,7 @@ const ValidationSchema = Yup.object().shape({
   bankCode: Yup.string().required("You Have to Provide Bank Code"),
 });
 function BankModal({ values, onSubmit, onCancel }) {
-  console.log(values);
+  // console.log(values);
   return (
     <>
       <Formik

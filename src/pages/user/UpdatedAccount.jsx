@@ -32,12 +32,12 @@ const columns = [
   },
   {
     name: "Primary",
-    selector: (row) => (row.primaryAccount == 1 ? "primary" : "secondary"),
+    selector: (row) => (row.primaryAccount === 1 ? "primary" : "secondary"),
     sortable: true,
   },
   {
     name: "Status",
-    selector: (row) => (row.status == 1 ? "activated" : "pending"),
+    selector: (row) => (row.status === 1 ? "activated" : "pending"),
     sortable: true,
   },
 ];
@@ -66,7 +66,7 @@ function Accounts() {
       response.message + "",
       response.responseCode
     );
-    if (response.response === "success" || response.responseCode == 200) {
+    if (response.response === "success" || response.responseCode === 200) {
       console.log(response);
       console.log("Rsponse from useEffect is here" + response);
       Swal.fire({

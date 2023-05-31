@@ -21,9 +21,9 @@ export const ModalForm = ({ values, onSubmit, onCancel }) => {
   const [currentBank, setCurrentUser] = useState({});
   const [currentName, setCurrentName] = useState({});
   const dispatch = useDispatch();
-  console.log(AccountListData);
+  // console.log(AccountListData);
   const { loading, error, bankAccounts, criteriaValue } = AccountListData;
-  console.log("The criterial value is:" + criteriaValue);
+  // console.log("The criterial value is:" + criteriaValue);
 
   const dropdown = [];
   dropdown[0] = { label: "Select Bank", value: "Bank Name" };
@@ -41,7 +41,7 @@ export const ModalForm = ({ values, onSubmit, onCancel }) => {
     // console.log("our", bank);
   }, []);
 
-  console.log(currentBank);
+  // console.log(currentBank);
   const queryCustomerName = (e) => {
     if (e.target.value.length === 13) {
       dispatch(nameEnquiryByAccountNumber(e.target.value));

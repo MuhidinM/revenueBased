@@ -12,7 +12,7 @@ function Sidebar() {
       // setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
     }
   }, []);
-  console.log(currentUser.client_id);
+  // console.log(currentUser.client_id);
   return (
     <>
       <div className="shadow-md drawer-side">
@@ -43,7 +43,7 @@ function Sidebar() {
               Dashboard
             </Link>
           </li>
-          {currentUser.secrate_key == null ? (
+          {currentUser.secrate_key === null ? (
             <>
               <li>
                 <Link to={"/sandbox/dashboard/transactions"}>
@@ -110,7 +110,6 @@ function Sidebar() {
                   Accounts
                 </Link>
               </li>
-              
             </>
           ) : (
             ""

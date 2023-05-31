@@ -35,21 +35,21 @@ function ModalFire() {
       // setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
     }
   }, []);
-  console.log("Criteria Value from index" + criteriaValue);
-  console.log("Customer Name " + customerName);
+  // console.log("Criteria Value from index" + criteriaValue);
+  // console.log("Customer Name " + customerName);
   customerName2.current = criteriaValue;
 
   const interpretResponse = (response) => {
-    let actionResponse = JSON.stringify(response);
-    console.log("Action Response Is" + actionResponse.response);
-    console.log(
-      " Response Is" + response.response,
-      response.message + "",
-      response.responseCode
-    );
-    if (response.response === "success" || response.responseCode == 200) {
-      console.log(response);
-      console.log("Rsponse from useEffect is here" + response);
+    // let actionResponse = JSON.stringify(response);
+    // console.log("Action Response Is" + actionResponse.response);
+    // console.log(
+    //   " Response Is" + response.response,
+    //   response.message + "",
+    //   response.responseCode
+    // );
+    if (response.response === "success" || response.responseCode === 200) {
+      // console.log(response);
+      // console.log("Rsponse from useEffect is here" + response);
       Swal.fire({
         icon: "success",
         title: "Account Created",
@@ -57,7 +57,7 @@ function ModalFire() {
         timer: 3000,
       });
     } else if (response.responseCode === 403 && response.respone === "error") {
-      console.log("Un Authorised User ");
+      // console.log("Un Authorised User ");
       Swal.fire({
         icon: "error",
         title: response.message,
@@ -218,9 +218,9 @@ function ModalFire() {
                     <Otp
                       values={value}
                       onSubmit={(values1) => {
-                        console.log("Hello from the second swal");
+                        // console.log("Hello from the second swal");
                         resolve(values);
-                        console.log(values.first);
+                        // console.log(values.first);
                         const otp =
                           values1.first +
                           values1.second +
@@ -234,10 +234,10 @@ function ModalFire() {
                           otp
                         )
                           .then((res) => {
-                            console.log("creating account");
+                            // console.log("creating account");
                             if (res.status === "success") {
-                              console.log("success is responded");
-                              console.log(criteriaValue);
+                              // console.log("success is responded");
+                              // console.log(criteriaValue);
 
                               // dispatch(
                               //   createTutorial({
@@ -254,16 +254,16 @@ function ModalFire() {
                             const bankAccounts = [1, 2];
                             const renderList = bankAccounts.map(
                               (item, index) => (
-                                <div class="flex items-center mb-4">
+                                <div className="flex items-center mb-4">
                                   <input
                                     id="default-checkbox"
                                     type="checkbox"
                                     value=""
-                                    class="w-4 h-4 checkbox checkbox-primary border-gray-300 rounded"
+                                    className="w-4 h-4 checkbox checkbox-primary border-gray-300 rounded"
                                   />
                                   <label
                                     for="default-checkbox"
-                                    class="ml-2 text-sm font-medium text-gray-900"
+                                    className="ml-2 text-sm font-medium text-gray-900"
                                   >
                                     {item}
                                   </label>

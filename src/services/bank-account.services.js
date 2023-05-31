@@ -41,20 +41,25 @@ const sendOtp = async (mobile) => {
 const getBankAccountByPhone = async (mobile) => {
   console.log(mobile);
   return await axios
-    .post(SPRING_ENDPOINT + "" , { mobile })
+    .post(SPRING_ENDPOINT + "", { mobile })
     .then((response) => response.data);
 };
 
 const confirmOtp = async (mobile, text) => {
   console.log(mobile);
   console.log(text);
-  const response = await axios.post(SPRING_ENDPOINT + "otpVerification", { mobile, text });
+  const response = await axios.post(SPRING_ENDPOINT + "otpVerification", {
+    mobile,
+    text,
+  });
   let data = response.data;
   return data;
 };
 const nameEnquiryByAccountNumber = async (criteriaValue) => {
   console.log("Account number:" + criteriaValue);
-  const res = await axios.post(SPRING_ENDPOINT + 'customerNameByAccno', { criteriaValue });
+  const res = await axios.post(SPRING_ENDPOINT + "customerNameByAccno", {
+    criteriaValue,
+  });
   let data = res.data.AccountDetailsResponse.name;
   return data;
 };

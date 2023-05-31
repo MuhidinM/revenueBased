@@ -52,11 +52,13 @@ export default function (state = initialState, action) {
 
     case ACTIVATE_BUSSINESS_ERROR:
       return {
+        ...state,
         loading: false,
         error: action.payload,
       };
     case GET_UN_ACTIVE_BUSSINESS_ERROR:
       return {
+        ...state,
         loading: false,
         error: action.payload,
       };

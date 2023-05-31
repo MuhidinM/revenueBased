@@ -8,7 +8,7 @@ const Resetpassword = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const token = searchParams.get("token");
   const id = searchParams.get("id");
-  console.log(token);
+  // console.log(token);
   const validationSchema = Yup.object().shape({
     password: Yup.string()
       .required("Password is required")
@@ -43,7 +43,7 @@ const Resetpassword = () => {
                   id
                 ).then(
                   (resp) => {
-                    console.log(resp.message);
+                    // console.log(resp.message);
                     navigate("/auth");
                     window.location.reload();
                   },

@@ -1,7 +1,7 @@
 import axios from "axios";
 import authHeader from "./auth-header";
 
-const API_URL = process.env.REACT_APP_API_NODE_URLS
+const API_URL = process.env.REACT_APP_API_NODE_URLS;
 
 const addUrls = async (user_id, name, url) => {
   return await axios

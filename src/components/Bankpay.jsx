@@ -25,7 +25,7 @@ function Bankpay(props) {
   const key = searchParams.get("key");
   const amount = searchParams.get("amount");
   const callBackUrl = searchParams.get("callBackUrl");
-  console.log(clientid, secretKey, amount);
+  // console.log(clientid, secretKey, amount);
   useEffect(() => {}, []);
   const validationSchema = Yup.object().shape({
     accountHolder: Yup.string().required("Account Holder Name is required"),
@@ -86,18 +86,17 @@ function Bankpay(props) {
               //   alert(JSON.stringify(values, null, 2));
               //   setSubmitting(false);
               // }, 400);
-              console.log("hello");
-              console.log(values);
+              // console.log("hello");
+              // console.log(values);
               PaymentServices.verifyPin(values.phoneNumber, values.pin).then(
                 (resp) => {
-                  console.log(resp);
+                  // console.log(resp);
                   setMessage(resp[0]);
                   // setSuccessful(true);
-                  if ((resp[0] == "200")) {
-                    setphoneNumber(values.phoneNumber)
+                  if (resp[0] === "200") {
+                    setphoneNumber(values.phoneNumber);
                     setVerified(1);
-                    setPrimaryAccount(resp[1].accountNumber)
-                    
+                    setPrimaryAccount(resp[1].accountNumber);
                   }
                 },
                 (error) => {
@@ -146,16 +145,16 @@ function Bankpay(props) {
                             onClick={handleToggle}
                           >
                             <svg
-                              class="h-8 w-8 text-white"
+                              className="h-8 w-8 text-white"
                               fill="none"
                               viewBox="0 0 24 24"
                               stroke="currentColor"
                             >
                               {icon === "eyeOff" ? (
                                 <path
-                                  stroke-linecap="round"
-                                  stroke-linejoin="round"
-                                  stroke-width="2"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth="2"
                                   d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"
                                 />
                               ) : (
@@ -207,8 +206,8 @@ function Bankpay(props) {
             debitAccount: "",
           }}
           onSubmit={(val) => {
-            console.log("hello", props.amount);
-            console.log(val);
+            // console.log("hello", props.amount);
+            // console.log(val);
 
             BankAccountServices.sendOtp(phoneNumber);
             const value = {
@@ -226,7 +225,7 @@ function Bankpay(props) {
                 <Otp
                   values={value}
                   onSubmit={(values) => {
-                    console.log("Hello from the second swal");
+                    // console.log("Hello from the second swal");
                     // resolve(values);
                     const otp =
                       values.first +
@@ -238,7 +237,7 @@ function Bankpay(props) {
                     BankAccountServices.confirmOtp(phoneNumber, otp).then(
                       (res) => {
                         // dispatch(setPrimaryAccount(e.target.value));
-                        console.log(val.debitAccount);
+                        // console.log(val.debitAccount);
                         PaymentServices.pay(
                           primaryAccount,
                           props.amount,
@@ -247,7 +246,7 @@ function Bankpay(props) {
                           key
                         ).then(
                           (resp) => {
-                            console.log(resp);
+                            // console.log(resp);
                             setMessage(resp[0]);
                             setSuccessful(true);
                             // setTimeout(3000)
@@ -293,20 +292,20 @@ function Bankpay(props) {
               {!successful && (
                 <>
                   {/* <div className="grid grid-cols-2 gap-2 sm:grid-cols-5"> */}
-                    <div className="w-full">
-                      <input
-                        type="text"
-                        name="debitAccount"
-                        id="debitAccount"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Account Number"
-                        disabled
-                        // required=""
-                        value={primaryAccount}
-                        onChange={props.handleChange}
-                      />
-                    </div>
-                   
+                  <div className="w-full">
+                    <input
+                      type="text"
+                      name="debitAccount"
+                      id="debitAccount"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="Account Number"
+                      disabled
+                      // required=""
+                      value={primaryAccount}
+                      onChange={props.handleChange}
+                    />
+                  </div>
+
                   {/* </div> */}
                   <button
                     // href="/otp"
@@ -318,7 +317,6 @@ function Bankpay(props) {
                   </button>
                 </>
               )}
-              
             </>
           )}
         </Formik>

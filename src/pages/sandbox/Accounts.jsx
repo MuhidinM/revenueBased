@@ -18,12 +18,12 @@ function Accounts() {
   const [modaState, setModalState] = useState(false);
   const [selectedArray, setSelectedArray] = useState();
   const AccountListData = useSelector((state) => state.accountsList);
-  console.log(AccountListData);
+  // console.log(AccountListData);
   const { loading, error, bankAccounts } = AccountListData;
 
   const showModal = () => {
-    console.log("show the modal");
-    console.log(modaState);
+    // console.log("show the modal");
+    // console.log(modaState);
     setModalState(true);
   };
 
@@ -36,21 +36,21 @@ function Accounts() {
     dispatch(getAccounts());
   }, [dispatch]);
 
-  console.log(bankAccounts);
+  // console.log(bankAccounts);
 
   const handleChange = (e) => {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     dispatch(setPrimaryAccount(e.target.value))
       .then((res) => console.log(res))
       .catch((e) => console.log(e));
   };
 
   if (bankAccounts) {
-    console.log(bankAccounts);
+    // console.log(bankAccounts);
     for (let index = 0; index < bankAccounts.length; index++) {
       const element = bankAccounts[index];
       // console.log(element);
-      console.log("running");
+      // console.log("running");
       if (choose.length < bankAccounts.length) {
         choose.push({
           label: element.bankName + "-" + element.accountNumber,
@@ -58,7 +58,7 @@ function Accounts() {
         });
       }
     }
-    console.log(choose);
+    // console.log(choose);
     const renderList = bankAccounts.map((item, index) => (
       <tr>
         <th>{item.bankaccount_id}</th>

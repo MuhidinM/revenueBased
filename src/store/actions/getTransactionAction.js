@@ -6,7 +6,8 @@ export const getTransactionDetail = () => async (dispatch) => {
   try {
     // const user = AuthService.getCurrentUser();
     console.log("running");
-    const transactioDetail = await FetchTransactionServices.getTransaction();
+    const transactioDetail =
+      await FetchTransactionServices.getAllTransactions();
     console.log(transactioDetail);
     dispatch({
       type: GET_TRANSACTION,

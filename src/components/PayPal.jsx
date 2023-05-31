@@ -11,19 +11,18 @@ function PayPal(props) {
   const [data1, setData] = useState({});
   const [searchParams, setSearchParams] = useSearchParams();
   const callBackUrl = searchParams.get("callBackUrl");
-  console.log(callBackUrl);
+  // console.log(callBackUrl);
   useEffect(() => {
     if (success) {
-      console.log("Response Data Is:", responseData)
+      // console.log("Response Data Is:", responseData);
       window.opener.postMessage(
         JSON.stringify(responseData),
         "http://localhost:3001/"
       );
       window.opener.focus();
-
     }
   }, [success]);
-  console.log(data1);
+  // console.log(data1);
 
   const createOrder = (data, actions) => {
     return actions.order
@@ -52,10 +51,10 @@ function PayPal(props) {
   const onApprove = (data, actions) => {
     return actions.order.capture().then(function (details) {
       const { payer } = details;
-      console.log("Details: " + JSON.stringify(details));
-      console.log(
-        "Purchase Units" + JSON.stringify(details.purchase_units[0].payments)
-      );
+      // console.log("Details: " + JSON.stringify(details));
+      // console.log(
+      //   "Purchase Units" + JSON.stringify(details.purchase_units[0].payments)
+      // );
       const orderId = details.id;
       const status = details.status;
       const amountValue =
@@ -94,7 +93,7 @@ function PayPal(props) {
         linksHref: linksHref,
       };
       setresponseData(response_to_Client);
-      console.log("Response to Jiggi", response_to_Client);
+      // console.log("Response to Jiggi", response_to_Client);
 
       PaymentServices.logPayPalResponse(
         orderId,

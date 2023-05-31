@@ -1,9 +1,10 @@
 import axios from "axios";
 const API_URL = process.env.REACT_APP_API_NODE_URLS;
 const SpringUrl = process.env.REACT_APP_API_SPRING_URLS;
-const CoopasEndPoint = "http://10.1.177.125:9000/api/accounts/getPrimaryAccount";
+const CoopasEndPoint =
+  "http://10.1.177.125:9000/api/accounts/getPrimaryAccount";
 const pay = async (debitAccount, debitAmount, clientId, secretKey, key) => {
-  console.log(debitAmount)
+  console.log(debitAmount);
   return await axios
     .post(
       API_URL + "api/payment",
@@ -33,8 +34,9 @@ const verifyPin = async (phoneNumber, passcode) => {
   return await axios
     .post(CoopasEndPoint, { passcode, phoneNumber })
     .then((response) => {
-      return [response.status,response.data];
-    }).catch((error)=>console.log(error));
+      return [response.status, response.data];
+    })
+    .catch((error) => console.log(error));
 };
 
 const logPayPalResponse = async (

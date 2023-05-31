@@ -66,15 +66,15 @@ function Settings() {
       // setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
     }
   }, []);
-  console.log(currentUser.email);
+  // console.log(currentUser.email);
   const file1 = (e) => {
-    console.log("Hello");
+    // console.log("Hello");
     setproofOfAddress(e.target.files[0]);
     setproofOfAddressImageName(e.target.files[0].name);
   };
 
   const fileInputTOForm = (e) => {
-    console.log(e.currentTarget.id);
+    // console.log(e.currentTarget.id);
     settradeLicenseImage(e.target.files[0]);
     settradeLicenseImageName(e.target.files[0].name);
   };
@@ -164,7 +164,7 @@ function Settings() {
               resetForm({ values: "" });
               UserService.BussinessInfoRequest(formData).then(
                 (resp) => {
-                  console.log(resp.message);
+                  // console.log(resp.message);
                   Swal.fire({
                     icon: "success",
                     title: "Your work has been saved",

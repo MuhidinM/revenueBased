@@ -52,12 +52,14 @@ export default function (state = initialState, action) {
 
     case GET_DOMAIN_ERROR:
       return {
+        ...state,
         loading: false,
         error: action.payload,
       };
 
     case ADD_DOMAIN_ERROR:
       return {
+        ...state,
         loading: false,
         error: action.payload,
       };

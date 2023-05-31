@@ -1,39 +1,60 @@
 import React from "react";
-import Input from "../../components/Input";
-import Fileinput from "../../components/Fileinput";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 
-function AddSales({ values, onSubmit, onCancel }) {
+function AddSales({ onSubmit, values, onCancel }) {
+  const ValidationSchema = Yup.object().shape({
+    username: Yup.string().required("username is required"),
+  });
+  // console.log("value From the Parent:", values);
   return (
-    <div className="mb-8 grid grid-cols-1 md:grid-cols-2 gap-2">
-      <div className="">
-        <Input title="First Name" place="First Name" />
-      </div>
-      <div className="">
-        <Input title="Last Name" place="Last Name" />
-      </div>
-      <div className="col-span-2">
-        <Input title="Email" place="email@epay.com" type="email" />
-      </div>
-      <div className="col-span-2">
-        <Input title="Phone" place="0987654321" type="number" />
-      </div>
-      <div className="items-center col-span-2 space-x-4">
-        <button
-          type="submit"
-          onSubmit={onSubmit}
-          className="text-white rounded-md swal2-styled bg-primary"
-        >
-          Create
-        </button>
-        <button
-          type="button"
-          onClick={onCancel}
-          className="swal2-cancel swal2-styled"
-        >
-          Cancel
-        </button>
-      </div>
-    </div>
+    <>
+      <Formik
+        initialValues={values}
+        validationSchema={ValidationSchema}
+        isInitialValid={ValidationSchema.isValidSync(values)}
+        onSubmit={onSubmit}
+      >
+        {(formik) => (
+          <form onSubmit={formik.handleSubmit}>
+            <div className="grid gap-4 mb-4 sm:grid-cols-1 sm:gap-6 sm:mb-5">
+              <div className="w-full">
+                <label
+                  htmlFor="username"
+                  className="mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  username
+                </label>
+                <span className="text-sm link-error">
+                  <ErrorMessage name="username"></ErrorMessage>
+                </span>
+                <input
+                  type="text"
+                  name="username"
+                  id="username"
+                  placeholder="Lelisa"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  value={formik.values.username}
+                  onChange={formik.handleChange}
+                />
+              </div>
+            </div>
+
+            <button onClick={onCancel} className="swal2-cancel swal2-styled">
+              Cancel
+            </button>
+            <button
+              type="submit"
+              onSubmit={onSubmit}
+              style={{ backgroundColor: "#01AFEF" }}
+              className="swal2-confirm swal2-styled"
+            >
+              Register
+            </button>
+          </form>
+        )}
+      </Formik>
+    </>
   );
 }
 

@@ -1,9 +1,16 @@
 import axios from "axios";
 import jwt from "jwt-decode";
-import { NODE_API } from "../utils/API";
+import { LOGIN_NODE_API } from "../utils/API";
+import jwtDecode from "jwt-decode";
+import { useSelector } from "react-redux";
+import {
+  setToken,
+  setUserID,
+  setUsername,
+} from "../store/actions/userProfileAction";
 const user = JSON.parse(localStorage.getItem("user"));
 const register = async (username, password) => {
-  const response = await NODE_API.post("/merchant/signup", {
+  const response = await LOGIN_NODE_API.post("/merchant/register", {
     username,
     password,
   });
@@ -14,45 +21,52 @@ const register = async (username, password) => {
   return response.data;
 };
 
-const login = (email, password) => {
-  return axios
-    .post(
-      process.env.REACT_APP_API_NODE_URLS + "api/user/signin",
+const login = async (username, password, setMessage, navigate, dispatch) => {
+  try {
+    await LOGIN_NODE_API.post(
+      "/merchant/login",
       {
-        email,
+        username,
         password,
-      },
-      { withCredentials: true, credentials: "include" }
-
+      }
       // { withCredentials: true }
-    )
-    .then((response) => {
-      console.log(response);
-      if (response.data.token) {
-        console.log(response.data);
-        const user = jwt(response.data.token);
+    ).then((res) => {
+      console.log("res", res);
+      if (res.data.token) {
+        dispatch(setToken(res?.data?.token));
+        const decoded = jwtDecode(res.data.token);
+        console.log("this if from decoded", decoded);
+        const user = jwt(res.data.token);
+        if (decoded?.role === "admin") {
+          navigate("/admin");
+          window.location.reload();
+        } else if (decoded?.role === "merchant") {
+          dispatch(setUsername(decoded?.email_address));
+          dispatch(setUserID(decoded?.merchant_id));
+          navigate("/users");
+          // window.location.reload();
+        }
         // document.cookie = "token=" + response.data.token;
         localStorage.setItem("user", JSON.stringify(user));
         return user;
       }
-
-      // return response.data;
     });
+  } catch (error) {
+    console.log(error);
+    console.log(error?.response?.data?.message);
+    setMessage(error?.response?.data?.message);
+  }
 };
 
-const getLoggedInUser = () => {
-  return axios
-    .post(
-      process.env.REACT_APP_API_NODE_URLS + "api/user/verifyToken",
-      {},
-      { withCredentials: true, credentials: "include" }
-
-      // { withCredentials: true }
-    )
-    .then((response) => {
-      console.log(response);
-      return response.data.user;
-    });
+const getLoggedInUser = async (token) => {
+  const response = await axios.post(
+    process.env.REACT_APP_API_NODE_URLS + "api/user/verifyToken",
+    {},
+    { headers: { "Content-Type": "application/json" }, "Bearer Token": token }
+    // { withCredentials: true }
+  );
+  console.log(response);
+  return response.data.user;
 };
 
 const logout = () => {
@@ -72,72 +86,64 @@ const logout = () => {
 //     });
 // };
 
-const resetPasswordRequest = (email) => {
+const resetPasswordRequest = async (email) => {
   console.log(email);
-  return axios
-    .post(
-      process.env.REACT_APP_API_NODE_URLS + "api/auth/resetpasswordRequest",
+  const response = await axios.post(
+    process.env.REACT_APP_API_NODE_URLS + "api/auth/resetpasswordRequest",
+    {
+      email,
+    }
+  );
+  return response.data;
+};
+
+const generateApiKey = async (email, expiryDate) => {
+  console.log(email, expiryDate);
+  try {
+    const response = await axios.post(
+      process.env.REACT_APP_API_NODE_URLS + "api/user/generateApiKey",
       {
         email,
+        expiryDate,
       }
-    )
-    .then((response) => {
-      return response.data;
-    });
+    );
+    console.log("Reponse", response.data);
+    return [response.data, response.status];
+  } catch (err) {
+    if (err.response) {
+      console.log(err.response.data);
+    } else if (err.request) {
+      console.log(err.request);
+    } else {
+      console.log("Error", err.message);
+    }
+    console.log(err.config);
+  }
 };
 
-const generateApiKey = (email, expiryDate) => {
-  console.log(email, expiryDate);
-  return axios
-    .post(process.env.REACT_APP_API_NODE_URLS + "api/user/generateApiKey", {
-      email,
-      expiryDate,
-    })
-    .then((response) => {
-      console.log("Reponse", response.data);
-      return [response.data, response.status];
-    })
-    .catch((err) => {
-      if (err.response) {
-        console.log(err.response.data);
-      } else if (err.request) {
-        console.log(err.request);
-      } else {
-        console.log("Error", err.message);
-      }
-      console.log(err.config);
-    });
-};
-
-const getGeneratedApiKey = (id) => {
+const getGeneratedApiKey = async (id) => {
   console.log(id);
-  return axios
-    .get(process.env.REACT_APP_API_NODE_URLS + `api/user/gateApiKey/${id}`)
-    .then((response) => {
-      // console.log(response.data);
-      return response.data;
-      // console.log(response.data);
-    });
+  const response = await axios.get(
+    process.env.REACT_APP_API_NODE_URLS + `api/user/gateApiKey/${id}`
+  );
+  return response.data;
 };
 
-const resetPassword = (password, token, id) => {
+const resetPassword = async (password, token, id) => {
   console.log(password, token, id);
-  return axios
-    .post(
-      process.env.REACT_APP_API_NODE_URLS + `api/auth/resetpassword`,
-      {
-        password,
+  const response = await axios.post(
+    process.env.REACT_APP_API_NODE_URLS + `api/auth/resetpassword`,
+    {
+      password,
+    },
+    {
+      params: {
+        token,
+        id,
       },
-      {
-        params: {
-          token,
-          id,
-        },
-      }
-    )
-    .then((response) => {
-      return response.data;
-    });
+    }
+  );
+  return response.data;
 };
 
 const checkToken = () => {

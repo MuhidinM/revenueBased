@@ -7,7 +7,7 @@ import { getTransactionDetail } from "../../store/actions/getTransactionAction";
 function Transactions() {
   const TransactionList = useSelector((state) => state.transactionDetail);
   // this.setState({data: data.conversations});
-  console.log(TransactionList);
+  // console.log(TransactionList);
   const { loading, error, transactionDetail } = TransactionList;
 
   const dispatch = useDispatch();
@@ -16,7 +16,7 @@ function Transactions() {
     // console.log("useEffect");
     dispatch(getTransactionDetail());
   }, [dispatch]);
-  console.log(transactionDetail);
+  // console.log(transactionDetail);
 
   const renderList = transactionDetail.map((item, index) => (
     <tr>

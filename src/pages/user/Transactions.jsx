@@ -2,10 +2,8 @@ import React, { useMemo, useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
-import { getTransactionDetailAll } from "../../store/actions/adminFetchAllTransactions";
-import AuthService from "../../services/auth.service";
 const MySwal = withReactContent(Swal);
 const columns = [
   {
@@ -116,7 +114,7 @@ function Transactions() {
   function downloadCSV(array) {
     const link = document.createElement("a");
     let csv = convertArrayOfObjectsToCSV(array);
-    if (csv == null) return;
+    if (csv === null) return;
     //Make dynamic the name of file
     let d = new Date();
     // let dformat = `${d.getHours()}-${d.getMinutes()}-${d.getSeconds()}`;
@@ -131,22 +129,10 @@ function Transactions() {
     link.click();
   }
 
-  const [tableData, setTableData] = useState([]);
   const getAllDevices = useSelector((state) => state.transactionDetailAll);
-  console.log("Devices list" + getAllDevices);
+  // console.log("Devices list" + getAllDevices);
   const { loading, error, transactionDetailAll } = getAllDevices;
-  console.log("Fetched devices" + transactionDetailAll);
-  const dispatch = useDispatch();
-  const [currentUser, setCurrentUser] = useState({});
-  useEffect(() => {
-    const user = AuthService.getCurrentUser();
-    if (user) {
-      setCurrentUser(user);
-      console.log("Client Id", user)
-      dispatch(getTransactionDetailAll());
-      setTableData(transactionDetailAll);
-    }
-  }, []);
+  // console.log("Fetched devices" + transactionDetailAll);
 
   const [filterText, setFilterText] = React.useState("");
   const actionsMemo = useMemo(

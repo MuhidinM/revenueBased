@@ -60,7 +60,7 @@ function Registration() {
                   //   alert(JSON.stringify(values, null, 2));
                   //   setSubmitting(false);
                   // }, 400);
-                  console.log(values);
+                  // console.log(values);
                   setOpen(true);
                   AuthService.register(
                     values.firstName,
@@ -70,7 +70,7 @@ function Registration() {
                     values.password.toString()
                   ).then(
                     (resp) => {
-                      console.log(resp.message);
+                      // console.log(resp.message);
                       setMessage(resp.message);
                       setSuccessful(true);
                       Swal.fire({
@@ -81,7 +81,7 @@ function Registration() {
                       });
                       navigate("/auth");
                       window.location.reload();
-                      console.log(successful);
+                      // console.log(successful);
                     },
                     (error) => {
                       const resMessage =
@@ -190,7 +190,7 @@ function Registration() {
                             htmlFor="phone"
                             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                           >
-                            Business Phone  (use : 0900000000)
+                            Business Phone (use : 0900000000)
                           </label>
                           <span className="text-sm link-error">
                             {props.errors.phone && props.touched.phone
@@ -256,7 +256,7 @@ function Registration() {
                             required=""
                           />
                         </div>
-                        
+
                         <button
                           type="submit"
                           onClick={props.handleSubmit}

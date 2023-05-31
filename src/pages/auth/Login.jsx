@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import AuthService from "../../services/auth.service";
+import { useDispatch } from "react-redux";
 // import { PASSWORD } from "../../../../server/configs/db";
 import { Formik } from "formik";
 import * as Yup from "yup";
@@ -8,13 +9,14 @@ function Login() {
   const [successful, setSuccessful] = useState(false);
   const [message, setMessage] = useState("");
   const validationSchema = Yup.object().shape({
-    email: Yup.string().required("Email is required").email("Email is invalid"),
+    username: Yup.string().required("Username is required"),
     password: Yup.string()
       .required("Password is required")
       .min(6, "Password must be at least 6 characters")
       .max(40, "Password must not exceed 40 characters"),
   });
   let navigate = useNavigate();
+  let dispatch = useDispatch();
   return (
     <>
       <div className="relative bg-black">
@@ -72,10 +74,7 @@ function Login() {
                     </h1>
                     <Formik
                       initialValues={{
-                        firstName: "",
-                        lastName: "",
                         username: "",
-                        email: "",
                         password: "",
                         // confirmPassword: "",
                         // acceptTerms: false,
@@ -86,38 +85,14 @@ function Login() {
                         //   alert(JSON.stringify(values, null, 2));
                         //   setSubmitting(false);
                         // }, 400);
-                        console.log(values.email);
+                        // console.log(values.email);
 
-                        AuthService.login(values.email, values.password).then(
-                          (res) => {
-                            console.log("Logged In:" + res.user);
-                            if (res.user.role == "admin") {
-                              navigate("/admin");
-                              window.location.reload();
-                            } else {
-                              navigate("/users");
-                              window.location.reload();
-                            }
-
-                            // if (res.roles[0] === "ROLE_ 2") {
-                            //   navigate("/admin");
-                            // window.location.reload();
-                            // } else {
-                            //   navigate("/users");
-                            //   window.location.reload();
-                            // }
-                          },
-                          (error) => {
-                            const resMessage =
-                              (error.response &&
-                                error.response.data &&
-                                error.response.data.message) ||
-                              error.message ||
-                              error.toString();
-
-                            // setLoading(false);
-                            setMessage(resMessage);
-                          }
+                        AuthService.login(
+                          values.username,
+                          values.password,
+                          setMessage,
+                          navigate,
+                          dispatch
                         );
                       }}
                     >
@@ -125,24 +100,24 @@ function Login() {
                         <>
                           <div>
                             <label
-                              htmlFor="email"
+                              htmlFor="username"
                               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                             >
-                              Your email
+                              Username
                             </label>
                             <span className="text-sm link-error">
-                              {props.errors.email && props.touched.email
+                              {props.errors.username && props.touched.username
                                 ? props.errors.password
                                 : null}
                             </span>
                             <input
-                              type="email"
-                              name="email"
-                              id="email"
-                              value={props.values.email}
+                              type="username"
+                              name="username"
+                              id="username"
+                              value={props.values.username}
                               onChange={props.handleChange}
                               className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                              placeholder="name@company.com"
+                              placeholder="username"
                               required=""
                             />
                           </div>

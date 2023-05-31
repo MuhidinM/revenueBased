@@ -8,7 +8,7 @@ import Msite from "./Msite";
 function Modal({ handleClose, show, children, page }) {
   // console.log(props.page);
   const showHideClassName = show ? "my-modal-4" : "";
-  console.log(page);
+  // console.log(page);
   return (
     <>
       <input type="checkbox" id={showHideClassName} className="modal-toggle" />
@@ -24,7 +24,9 @@ function Modal({ handleClose, show, children, page }) {
           </button>
 
           {/* {props.page === "a" ? <Msite title="Add Site" /> : ""} */}
-          {page === "a" && <Maccounts title="Add Account" handleClose={handleClose} />}
+          {page === "a" && (
+            <Maccounts title="Add Account" handleClose={handleClose} />
+          )}
           {page === "b" && <Mapi title="Generate API" />}
           {/* {window.location.pathname === "/admin/sites" ? (
             <Msite title="Add Site" />

@@ -1,44 +1,65 @@
-import React, { useEffect, useState } from "react";
-import Card from "./Card";
-import Banner from "./Banner";
+import React from "react";
 import Stat from "./Stat";
-import AuthService from "../../services/auth.service";
 import DataTable from "react-data-table-component";
+import { useSelector } from "react-redux";
 
 const columns = [
   {
-    name: "Title",
-    selector: (row) => row.title,
+    name: "Image",
+    cell: (row) => {
+      return (
+        <div className="p-2">
+          <img
+            src={`http://192.168.14.245:5000/pictures/${row.item_pic}`}
+            style={{ width: "40px", height: "40px" }}
+            alt=""
+          />
+        </div>
+      );
+    },
+  },
+  {
+    name: "Name",
+    selector: (row) => row.item_name,
     sortable: true,
   },
   {
-    name: "Year",
-    selector: (row) => row.year,
+    name: "Type",
+    selector: (row) => row.item_type,
+    sortable: true,
+  },
+  {
+    name: "Code",
+    selector: (row) => row.item_code,
+    sortable: true,
+  },
+  {
+    name: "Price",
+    selector: (row) => row.item_price,
+    sortable: true,
+  },
+  {
+    name: "Created At",
+    selector: (row) => new Date(row.createdAt).toISOString().split("T")[0],
     sortable: true,
   },
 ];
 
-const data = [];
-
 function Home() {
-  const [currentUser, setCurrentUser] = useState({});
-  useEffect(() => {
-    const user = AuthService.getCurrentUser();
-    if (user) {
-      setCurrentUser(user);
-    }
-  }, []);
+  const inventoryInfo = useSelector((state) => state.inventoryInfo);
+  // console.log(userData);
+  const { inventoryDetail } = inventoryInfo;
+
   return (
     <>
-      {currentUser.secrate_key == null ? <Banner /> : ""}
-
       <div className="">
         <Stat />
         <div className="grid gap-4 mt-4 md:grid-cols-12 justify-self-auto">
           <div className="col-span-8">
             <DataTable
+              title="New Items"
               columns={columns}
-              data={data}
+              data={inventoryDetail}
               pagination
               // paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
               subHeader
@@ -48,9 +69,6 @@ function Home() {
               highlightOnHover
               // actions={actionsMemo}
             />
-          </div>
-          <div className="flex col-span-4">
-            <Card />
           </div>
         </div>
       </div>
