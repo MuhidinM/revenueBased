@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import AuthService from "../../services/auth.service";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import logo from "./../../assets/images/merchantone1_logo-removebg-preview.png";
 const MySwal = withReactContent(Swal);
 // import { useState } from "react";
 function Registration() {
@@ -36,33 +37,16 @@ function Registration() {
       <section className="bg-gray-50 dark:bg-gray-900 lg:flex">
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:w-1/2 md:h-screen lg:py-0">
           <div className="w-full max-w-xl mb-12 xl:mb-0 xl:pr-16 xl:w-7/12">
-            <img
-              className="w-full mb-4"
-              src="../PaymentGateway.png"
-              alt="front credit card"
-            />
+            <img className="w-full mb-4" src={logo} alt="front credit card" />
             <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold tracking-tight text-black dark:text-white sm:text-4xl sm:leading-none">
-              Smarter Payments. Smarter Business
+              Shop Now, Pay Later
             </h2>
             <p className="max-w-xl mb-4 text-base text-gray-900 md:text-lg dark:text-white">
-              We're a payment gateway platform for online ecommerce sites, and
-              we've got the speed, security, and reliability you need to make
-              sure your customers get what they want.
+              Experience the freedom of shopping with Buy Now, Pay Later. Shop
+              now, pay later, and enjoy the convenience of flexible payments.
+              Join us today and elevate your shopping experience. Indulge in
+              what you love without compromise. 
             </p>
-            <a
-              href="/"
-              aria-label=""
-              className="inline-flex items-center font-semibold tracking-wider transition-colors duration-200 text-primary hover:text-blue-800"
-            >
-              Learn more
-              <svg
-                className="inline-block w-3 ml-2"
-                fill="currentColor"
-                viewBox="0 0 12 12"
-              >
-                <path d="M9.707,5.293l-5-5A1,1,0,0,0,3.293,1.707L7.586,6,3.293,10.293a1,1,0,1,0,1.414,1.414l5-5A1,1,0,0,0,9.707,5.293Z" />
-              </svg>
-            </a>
           </div>
         </div>
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:w-1/2 md:h-screen lg:py-0">
@@ -142,7 +126,7 @@ function Registration() {
                             value={props.values.username}
                             onChange={props.handleChange}
                             className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
-                            placeholder="Valid email or phone"
+                            placeholder="Valid Email or Phone Number"
                             required=""
                             maxlength="200"
                           />
@@ -238,7 +222,7 @@ function Registration() {
                         <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                           Already have an account?{" "}
                           <Link
-                            to={"/auth"}
+                            to={"/"}
                             className="font-medium text-primary hover:underline dark:text-primary"
                           >
                             Login here

@@ -347,7 +347,7 @@ function EpassRegistration() {
                         <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                           Already have an account?{" "}
                           <Link
-                            to={"/auth"}
+                            to={"/"}
                             className="font-medium text-primary hover:underline dark:text-primary"
                           >
                             Login here

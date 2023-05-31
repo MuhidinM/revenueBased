@@ -6,52 +6,60 @@ import Selectinput from "../../components/Selectinput";
 import AuthService from "../../services/auth.service";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import Datepicker from "tailwind-datepicker-react";
 // import { CreateOrUpdate } from "../store/actions/";
 import { CreateOrUpdate } from "../../store/actions/userProfileAction";
 
-const date = [];
-for (let i = 1; i < 13; i++) {
-  date.push({ label: i, value: i });
-}
-const month = [];
-for (let i = 1; i < 30; i++) {
-  month.push({ label: i, value: i });
-}
-const year = [];
-const thisyear = new Date().getFullYear();
-const startyear = thisyear - 100;
-for (let i = startyear; i < thisyear; i++) {
-  year.push({ label: i, value: i });
-}
-
-const idtype = [
-  { label: "Kebele ID", value: "kebeleid" },
-  { label: "Passport", value: "kebeleid" },
-  { label: "Driver Licence", value: "Driverlicence" },
+const business_type = [
+  { label: "A", value: "A" },
+  { label: "B", value: "B" },
 ];
-const gender = [
-  { label: "Male", value: "male" },
-  { label: "Female", value: "female" },
+const legal_entity_type = [
+  { label: "A", value: "A" },
+  { label: "B", value: "B" },
 ];
-const region = [
-  { label: "Afar", value: "af" },
-  { label: "Amhara", value: "am" },
-  { label: "Benishangul", value: "bg" },
-  { label: "Fedral", value: "fd" },
-  { label: "Gambela", value: "gm" },
-  { label: "Harar", value: "hr" },
-  { label: "Oromia", value: "or" },
-  { label: "Sidama", value: "sd" },
-  { label: "Somalia", value: "sm" },
-  { label: "SNNPR", value: "sn" },
-  { label: "Tigray", value: "tg" },
-];
+const options = {
+  title: "Demo Title",
+  autoHide: true,
+  todayBtn: false,
+  clearBtn: true,
+  maxDate: new Date("2030-01-01"),
+  minDate: new Date("1950-01-01"),
+  theme: {
+    background: "bg-gray-700 dark:bg-gray-800",
+    todayBtn: "",
+    clearBtn: "",
+    icons: "",
+    text: "",
+    disabledText: "bg-red-500",
+    input: "",
+    inputIcon: "",
+    selected: "",
+  },
+  icons: {
+    // () => ReactElement | JSX.Element
+    prev: () => <span>Previous</span>,
+    next: () => <span>Next</span>,
+  },
+  datepickerClassNames: "top-12",
+  defaultDate: new Date("2022-01-01"),
+  language: "en",
+};
 
 function Profile() {
+  const [show, setShow] = useState(false);
+  const handleChange = (selectedDate) => {
+    console.log(selectedDate);
+  };
+  const handleClose = (state) => {
+    setShow(state);
+  };
   const [successful, setSuccessful] = useState(false);
   const [message, setMessage] = useState("");
   const [currentUser, setCurrentUser] = useState({});
-  const [identificationCard, setidentificationCard] = useState();
+  const [agrementDoc, setAgrement_doc] = useState();
+  const [businessLicence, setBusinessLicence] = useState();
+  const [validIdentification, setValidIdentification] = useState();
   const dispatch = useDispatch();
   useEffect(() => {
     const user = AuthService.getCurrentUser();
@@ -63,26 +71,32 @@ function Profile() {
   }, []);
   // console.log(currentUser.id);
   const validationSchema = Yup.object().shape({
-    fname: Yup.string().required("First Name is required"),
-    mname: Yup.string().required("Middle Name is required"),
-    lname: Yup.string().required("Last Name is required"),
-    gender: Yup.string().required("Gender is required"),
-    paddress: Yup.string().required("Address is required"),
-    region: Yup.string().required("Region is required"),
-    date: Yup.string().required("Date is required"),
-    month: Yup.string().required("Month is required"),
-    year: Yup.string().required("Year is required"),
-    id: Yup.string().required("ID is required"),
-    cardType: Yup.string().required("You Have to select Card Type"),
-    identificationCard: Yup.string().required(
-      "You Have to provide Identification Card"
+    first_name: Yup.string().required("First Name is required"),
+    last_name: Yup.string().required("Last Name is required"),
+    business_name: Yup.string().required("Business Name is required"),
+    business_type: Yup.string().required("Business Type is required"),
+    tin_number: Yup.string().required("Tin Number is required"),
+    business_address: Yup.string().required("Business Address is required"),
+    website_url: Yup.string().required("Website URL is required"),
+    legal_entity_type: Yup.string().required("Legal Entity Type is required"),
+    date_of_establishment: Yup.string().required(
+      "Date of Establishment is required"
     ),
+    valid_identification: Yup.string().required("Identification is required"),
+    compliance_aml: Yup.string().required("Compliance Aml is required"),
+    business_licence: Yup.string().required("Business Licence is required"),
+    agrement_doc: Yup.string().required("Bank Agrement Document is required"),
+    merchant_status: Yup.string().required("Merchant Status is required"),
   });
 
-  const fileInputTOForm = (e) => {
-    // console.log(e.currentTarget.id);
-    setidentificationCard(e.target.files[0]);
-    // settradeLicenseImageName(e.target.files[0].name);
+  const fileInputTOFormDoc = (e) => {
+    setValidIdentification(e.target.files[0]);
+  };
+  const fileInputTOFormID = (e) => {
+    setValidIdentification(e.target.files[0]);
+  };
+  const fileInputTOFormLicence = (e) => {
+    setValidIdentification(e.target.files[0]);
   };
   let formData = new FormData();
   return (
@@ -91,36 +105,41 @@ function Profile() {
         <div className="max-w-2xl px-4 py-8 mx-auto lg:py-16">
           <Formik
             initialValues={{
-              fname: "",
-              mname: "",
-              lname: "",
-              gender: "",
-              paddress: "",
-              region: "",
-              date: "",
-              month: "",
-              year: "",
-              id: "",
-              cardType: "",
-              identificationCard: "",
+              first_name: "",
+              last_name: "",
+              business_name: "",
+              business_type: "",
+              tin_number: "",
+              business_address: "",
+              website_url: "",
+              legal_entity_type: "",
+              date_of_establishment: "",
+              valid_identification: "",
+              compliance_aml: "",
+              business_licence: "",
+              agrement_doc: "",
+              merchant_status: "",
             }}
             // validationSchema={validationSchema}
             onSubmit={(values) => {
               formData.append("Helo", "hello");
-              formData.append("fname", values.fname);
-              formData.append("mname", values.mname);
-              formData.append("lname", values.lname);
-              formData.append("gender", values.gender);
-              formData.append("paddress", values.paddress);
-              formData.append("region", values.region);
-              formData.append("date", values.date);
-              formData.append("month", values.month);
-              formData.append("year", values.year);
-              formData.append("tradeLicenseImage", identificationCard);
-              formData.append("id", values.id);
-              formData.append("cardType", values.cardType);
-              formData.append("user", currentUser.email);
-              formData.append("identificationCard", values.identificationCard);
+              formData.append("fname", values.first_name);
+              formData.append("last_name", values.last_name);
+              formData.append("business_name", values.business_name);
+              formData.append("business_type", values.business_type);
+              formData.append("tin_number", values.tin_number);
+              formData.append("business_address", values.business_address);
+              formData.append("website_url", values.website_url);
+              formData.append("legal_entity_type", values.legal_entity_type);
+              formData.append(
+                "date_of_establishment",
+                values.date_of_establishment
+              );
+              formData.append("compliance_aml", values.compliance_aml);
+              formData.append("merchant_status", values.merchant_status);
+              formData.append("valid_identification", validIdentification);
+              formData.append("business_licence", businessLicence);
+              formData.append("agrement_doc", agrementDoc);
               // console.log(formData);
               dispatch(CreateOrUpdate(formData))
                 .then((res) => console.log(res))
@@ -133,148 +152,174 @@ function Profile() {
                   <>
                     <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
                       <h2 className="mb-4 text-xl font-bold text-gray-900 sm:col-span-2 dark:text-white">
-                        Pesonal In Formation
+                        Pesonal Information
                       </h2>
                       <div className="w-full">
                         <Input
-                          label="fname"
+                          label="first_name"
                           title="First Name"
                           type="text"
-                          name="fname"
-                          id="fname"
+                          name="first_name"
+                          id="first_name"
                           place="Lelisa"
-                          value={props.values.fname}
+                          value={props.values.first_name}
                           handleChange={props.handleChange}
                         />
                       </div>
                       <div className="w-full">
                         <Input
-                          label="mname"
-                          title="Middle Name"
-                          type="text"
-                          name="mname"
-                          id="mname"
-                          place="Abdusemed"
-                          value={props.values.mname}
-                          handleChange={props.handleChange}
-                        />
-                      </div>
-                      <div className="w-full">
-                        <Input
-                          label="lname"
+                          label="last_name"
                           title="Last Name"
                           type="text"
-                          name="lname"
-                          id="lname"
-                          place="Chera"
-                          value={props.values.lname}
+                          name="last_name"
+                          id="last_name"
+                          place="Abdusemed"
+                          value={props.values.last_name}
                           handleChange={props.handleChange}
                         />
                       </div>
-                      <div>
+                      <div className="w-full">
+                        <Input
+                          label="business_name"
+                          title="Business Name"
+                          type="text"
+                          name="business_name"
+                          id="business_name"
+                          place="Test"
+                          value={props.values.business_name}
+                          handleChange={props.handleChange}
+                        />
+                      </div>
+                      <div className="w-full">
                         <Selectinput
-                          arr={gender}
-                          name="gender"
-                          id="gender"
-                          title="Gender"
-                          value={props.values.gender}
+                          arr={business_type}
+                          id="business_type"
+                          name="business_type"
+                          value={props.values.business_type}
+                          handleChange={props.handleChange}
+                          title="Busines Type"
+                        />
+                      </div>
+                      <div className="w-full">
+                        <Input
+                          label="business_address"
+                          title="Business Address"
+                          type="text"
+                          name="business_address"
+                          id="business_address"
+                          place="Some where..."
+                          value={props.values.business_address}
+                          handleChange={props.handleChange}
+                        />
+                      </div>
+                      <div className="w-full">
+                        <Input
+                          label="tin_number"
+                          title="Tin Number"
+                          type="text"
+                          name="tin_number"
+                          id="tin_number"
+                          place="TN7378987654"
+                          value={props.values.tin_number}
+                          handleChange={props.handleChange}
+                        />
+                      </div>
+
+                      <div className="w-full">
+                        <Selectinput
+                          arr={legal_entity_type}
+                          id="legal_entity_type"
+                          name="legal_entity_type"
+                          value={props.values.legal_entity_type}
+                          handleChange={props.handleChange}
+                          title="Legal Entity Type"
+                        />
+                      </div>
+                      <div className="w-full">
+                        <label
+                          htmlFor={"date"}
+                          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        >
+                          Date of Establishment
+                        </label>
+                        <Datepicker
+                          options={options}
+                          onChange={handleChange}
+                          show={show}
+                          setShow={handleClose}
+                        />
+                        {/* <Input
+                          label="date_of_establishment"
+                          title="Date of Establishment"
+                          type="text"
+                          name="date_of_establishment"
+                          id="date_of_establishment"
+                          place="kkk"
+                          value={props.values.date_of_establishment}
+                          handleChange={props.handleChange}
+                        /> */}
+                      </div>
+                      <div className="w-full">
+                        <Input
+                          label="compliance_aml"
+                          title="Compliance Aml"
+                          type="text"
+                          name="compliance_aml"
+                          id="compliance_aml"
+                          place="Compliance Aml"
+                          value={props.values.compliance_aml}
+                          handleChange={props.handleChange}
+                        />
+                      </div>
+                      <div className="w-full">
+                        <Input
+                          label="merchant_status"
+                          title="Merchant Status"
+                          type="text"
+                          name="merchant_status"
+                          id="merchant_status"
+                          place="Merchant Status"
+                          value={props.values.merchant_status}
                           handleChange={props.handleChange}
                         />
                       </div>
                       <div className="sm:col-span-2">
                         <Input
-                          label="paddress"
-                          title="Address"
+                          label="website_url"
+                          title="Website URL"
                           type="text"
-                          name="paddress"
-                          id="paddress"
-                          place="Some where ..."
-                          value={props.values.paddress}
-                          handleChange={props.handleChange}
-                        />
-                      </div>
-                      <div>
-                        <Selectinput
-                          arr={region}
-                          id="region"
-                          name="region"
-                          title="Region"
-                          value={props.values.region}
-                          handleChange={props.handleChange}
-                        />
-                      </div>
-                      <div className="w-full">
-                        <label
-                          htmlFor="brand"
-                          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                        >
-                          Birth Date
-                        </label>
-                        <div className="grid gap-4 sm:grid-cols-3 sm:gap-6">
-                          <select
-                            id="date"
-                            name="date"
-                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
-                            value={props.values.date}
-                            onChange={props.handleChange}
-                          >
-                            {date.map((arr) => (
-                              <option value={arr.value}>{arr.label}</option>
-                            ))}
-                          </select>
-                          <select
-                            id="month"
-                            name="month"
-                            value={props.values.month}
-                            onChange={props.handleChange}
-                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
-                          >
-                            {month.map((arr) => (
-                              <option value={arr.value}>{arr.label}</option>
-                            ))}
-                          </select>
-                          <select
-                            id="year"
-                            name="year"
-                            value={props.values.year}
-                            onChange={props.handleChange}
-                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
-                          >
-                            {year.map((arr) => (
-                              <option value={arr.value}>{arr.label}</option>
-                            ))}
-                          </select>
-                        </div>
-                      </div>
-                      <div className="w-full">
-                        <Input
-                          label="id"
-                          title="Identification Card Number"
-                          type="text"
-                          name="id"
-                          id="id"
-                          place="TG873/12"
-                          value={props.values.accountHolder}
-                          handleChange={props.handleChange}
-                        />
-                      </div>
-                      <div>
-                        <Selectinput
-                          arr={idtype}
-                          id="kidt"
-                          name="cardType"
-                          title="Identification Card Type"
-                          value={props.values.accountHolder}
+                          name="website_url"
+                          id="website_url"
+                          place="epay.com"
+                          value={props.values.website_url}
                           handleChange={props.handleChange}
                         />
                       </div>
                       <div className="sm:col-span-2">
                         <Fileinput
-                          lable="licence"
-                          title="Identification Card"
-                          name="identificationCard"
-                          fileInputTOForm={fileInputTOForm}
-                          value={identificationCard}
+                          lable="valid_identification"
+                          title="Valid Identification"
+                          name="valid_identification"
+                          fileInputTOForm={fileInputTOFormID}
+                          value={validIdentification}
+                        />
+                      </div>
+                      <div className="sm:col-span-2">
+                        <Fileinput
+                          lable="business_licence"
+                          title="Business Licence"
+                          name="business_licence"
+                          fileInputTOForm={fileInputTOFormLicence}
+                          value={businessLicence}
+                        />
+                      </div>
+                      <div className="sm:col-span-2">
+                        <Fileinput
+                          lable="agrement_doc"
+                          title="Bank Agrement Document"
+                          name="agrement_doc"
+                          fileInputTOForm={fileInputTOFormDoc}
+                          value={agrementDoc}
                         />
                       </div>
                     </div>
@@ -305,57 +350,6 @@ function Profile() {
               </>
             )}
           </Formik>
-
-          <htmlForm action="#"></htmlForm>
-          <htmlForm>
-            <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
-              <h2 className="mt-8 mb-4 text-xl font-bold text-gray-900 sm:col-span-2 dark:text-white">
-                Security
-              </h2>
-              <div className="w-full">
-                <Input
-                  label=""
-                  title="Old Password"
-                  type="password"
-                  name=""
-                  id=""
-                  place="••••••••"
-                  required=""
-                />
-              </div>
-              <div className="w-full"></div>
-              <div className="w-full">
-                <Input
-                  label=""
-                  title="New Password"
-                  type="password"
-                  name=""
-                  id=""
-                  place="••••••••"
-                  required=""
-                />
-              </div>
-              <div className="w-full"></div>
-              <div className="w-full">
-                <Input
-                  label=""
-                  title="Repeat Password"
-                  type="password"
-                  name=""
-                  id=""
-                  place="••••••••"
-                  required=""
-                />
-              </div>
-              <div className="w-full"></div>
-            </div>
-            <button
-              type="submit"
-              className="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary rounded-lg focus:ring-4 focus:ring-primary dark:focus:ring-primary hover:bg-primary"
-            >
-              Change
-            </button>
-          </htmlForm>
         </div>
       </section>
     </>
