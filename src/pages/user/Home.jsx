@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Stat from "./Stat";
 import DataTable from "react-data-table-component";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getInventoryDetail } from "../../store/actions/getInventoryAction";
 
 const columns = [
   {
@@ -10,7 +11,7 @@ const columns = [
       return (
         <div className="p-2">
           <img
-            src={`http://192.168.14.245:5000/pictures/${row.item_pic}`}
+            src={`http://192.168.14.245:5000/image/${row.item_pic}`}
             style={{ width: "40px", height: "40px" }}
             alt=""
           />
@@ -46,20 +47,36 @@ const columns = [
 ];
 
 function Home() {
+  const dispatch = useDispatch();
+  const userData = useSelector((state) => state.userProfile);
+  // console.log(userData);
+  const { userID } = userData;
   const inventoryInfo = useSelector((state) => state.inventoryInfo);
   // console.log(userData);
   const { inventoryDetail } = inventoryInfo;
 
+  useEffect(() => {
+    if (userID) {
+      dispatch(getInventoryDetail(userID));
+    }
+  }, [userID, dispatch]);
+
+  const filteredInventory = inventoryDetail.filter(
+    (item) =>
+      new Date(item.createdAt).toISOString().split[0] ===
+      new Date().toISOString().split[0]
+  );
+
   return (
     <>
       <div className="">
-        <Stat />
+        <Stat items={inventoryDetail} />
         <div className="grid gap-4 mt-4 md:grid-cols-12 justify-self-auto">
           <div className="col-span-8">
             <DataTable
-              title="New Items"
+              title="Today Items"
               columns={columns}
-              data={inventoryDetail}
+              data={filteredInventory}
               pagination
               // paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
               subHeader

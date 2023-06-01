@@ -18,7 +18,7 @@ const AssignInventory = async (item_id, sales_id, merchant_id) => {
 };
 
 const getAllInventory = async (sales_id) => {
-  return await NODE_API.get(`/sales/getAll?id=${sales_id}`).then(
+  return await NODE_API.get(`/items/getAll?id=${sales_id}`).then(
     (response) => response.data
   );
 };

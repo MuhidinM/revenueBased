@@ -20,7 +20,7 @@ function Addressproof(props) {
           <div className="flex flex-col items-center justify-center pt-5 pb-6">
             {image ? (
               <>
-                <imame=g src={image} classN"h-24" alt={fileName} />
+                <img src={image} className="h-24" alt={fileName} />
               </>
             ) : (
               <>
@@ -53,13 +53,19 @@ function Addressproof(props) {
             type="file"
             id="file"
             accept="image/*"
-            onChange={props.fileInput}
+            onChange={props.fileInputTOForm}
             onInput={({ target: { files } }) => {
               files[0] && setFilename(files[0].name);
               if (files) {
                 setImage(URL.createObjectURL(files[0]));
               }
             }}
+            // onInput={({ target: { files } }) => {
+            //   files[0] && setFilename(files[0].name);
+            //   if (files) {
+            //     setImage(URL.createObjectURL(files[0]));
+            //   }
+            // }}
           />
         </label>
       </div>

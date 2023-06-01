@@ -30,6 +30,7 @@ function AddInventory({ onSubmit, values, onCancel }) {
     item_price: Yup.string().required("Price is required"),
     item_name: Yup.string().required("Name is required"),
     item_type: Yup.string().required("Type is required"),
+    loan_limit: Yup.string().required("Loan Limit is required"),
   });
   // console.log("value From the Parent:", values);
   return (
@@ -42,7 +43,7 @@ function AddInventory({ onSubmit, values, onCancel }) {
       >
         {(formik) => (
           <form onSubmit={formik.handleSubmit}>
-            <div className="grid gap-4 mb-4 sm:grid-cols-1 sm:gap-6 sm:mb-5">
+            <div className="grid gap-4 mb-4 grid-cols-1 sm:gap-6 sm:mb-5">
               <div className="w-full">
                 <label
                   htmlFor="item_name"
@@ -120,6 +121,28 @@ function AddInventory({ onSubmit, values, onCancel }) {
                   placeholder="Code"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   value={formik.values.item_code}
+                  onChange={formik.handleChange}
+                />
+              </div>
+              <div className="w-full">
+                <label
+                  htmlFor="loan_limit"
+                  className="mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  Loan Limit(%)
+                </label>
+                <span className="text-sm link-error">
+                  <ErrorMessage name="loan_limit"></ErrorMessage>
+                </span>
+                <input
+                  type="text"
+                  name="loan_limit"
+                  id="loan_limit"
+                  min={0}
+                  max={100}
+                  placeholder="Code"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  value={formik.values.loan_limit}
                   onChange={formik.handleChange}
                 />
               </div>

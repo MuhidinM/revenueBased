@@ -1,6 +1,6 @@
 import React from "react";
 
-function Stat() {
+function Stat({ items }) {
   return (
     <>
       <div className="mt-2 dark:bg-gray-900">
@@ -86,7 +86,7 @@ function Stat() {
               </svg>
             </div>
             <div className="stat-title">Total Items</div>
-            <div className="stat-value text-accent">-</div>
+            <div className="stat-value text-accent">{items.length}</div>
           </div>
         </div>
       </div>
