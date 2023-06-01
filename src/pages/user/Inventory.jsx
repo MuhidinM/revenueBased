@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import InventoryService from "../../services/inventory.service";
 import { getInventoryDetail } from "../../store/actions/getInventoryAction";
 import AssignInventory from "./AssignInventory";
+import AssignLoan from "./AssignLoan";
 const MySwal = withReactContent(Swal);
 
 const columns = [
@@ -131,6 +132,33 @@ function Inventory() {
       });
     });
   };
+  const showAssignLoanForm = (values) => {
+    return new Promise((resolve, reject) => {
+      MySwal.fire({
+        title: "Assign Loan",
+        html: (
+          <AssignLoan
+            values={values}
+            // onSubmit={(values) => {
+            //   dispatch(
+            //     InventoryService.AssignInventory(
+            //       values.item_id,
+            //       values.sales_id,
+            //       userID
+            //     )
+            //   );
+            // }}
+            onCancel={() => MySwal.close()}
+          />
+        ),
+        onClose: () => reject(),
+        onCancel: () => Swal.close(),
+        showConfirmButton: false,
+        showCancelButton: false,
+        confirmButtonColor: "#01AFEF",
+      });
+    });
+  };
 
   const showModal = () => {
     showFormModal({
@@ -154,6 +182,15 @@ function Inventory() {
       .then((values) => console.log(values))
       .catch(() => console.log("Modal closed"));
   };
+  const showAssignLoan = () => {
+    showAssignLoanForm({
+      item_id: "",
+      loan_id: "",
+      merchant_id: userID,
+    })
+      .then((values) => console.log(values))
+      .catch(() => console.log("Modal closed"));
+  };
 
   return (
     <div>
@@ -170,6 +207,13 @@ function Inventory() {
         onClick={showAssignModal}
       >
         Assign Inventory
+      </button>
+      <button
+        type="button"
+        className="mb-4 ml-2 btn btn-outline btn-primary"
+        onClick={showAssignLoan}
+      >
+        Assign Loan
       </button>
       <DataTable
         columns={columns}
