@@ -90,7 +90,7 @@ const Loans = () => {
     <div>
       <div className="container mx-auto">
         <div className="my-4">
-          <div className="flex">
+          <div className="flex-wrap">
             <button
               className={`px-6 py-2 rounded-tl-lg ${
                 activeTab === "all" ? "bg-cyan-500 text-white" : "bg-gray-200"

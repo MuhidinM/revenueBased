@@ -43,7 +43,7 @@ function AddInventory({ onSubmit, values, onCancel }) {
       >
         {(formik) => (
           <form onSubmit={formik.handleSubmit}>
-            <div className="grid gap-4 mb-4 grid-cols-1 sm:gap-6 sm:mb-5">
+            <div className="grid gap-4 mb-4 grid-cols-2 sm:gap-6 sm:mb-5">
               <div className="w-full">
                 <label
                   htmlFor="item_name"
@@ -124,7 +124,7 @@ function AddInventory({ onSubmit, values, onCancel }) {
                   onChange={formik.handleChange}
                 />
               </div>
-              <div className="w-full">
+              <div className="col-span-2">
                 <label
                   htmlFor="loan_limit"
                   className="mb-2 text-sm font-medium text-gray-900 dark:text-white"

@@ -14,55 +14,17 @@ const business_type = [
   { label: "Partnership", value: "Partnership" },
   { label: "Coorporation", value: "Coorporation" },
 ];
-// const legal_entity_type = [
-//   { label: "A", value: "A" },
-//   { label: "B", value: "B" },
-// ];
-
-const current = new Date();
-const options = {
-  autoHide: true,
-  todayBtn: true,
-  clearBtn: true,
-  maxDate: new Date("2030-01-01"),
-  minDate: new Date("1950-01-01"),
-  theme: {
-    background: "bg-gray-50 dark:bg-gray-800",
-    todayBtn: "",
-    clearBtn: "",
-    icons: " border",
-    text: "",
-    input: "",
-    inputIcon: "",
-    selected: "",
-  },
-  icons: {
-    prev: () => <span>Previous</span>,
-    next: () => <span>Next</span>,
-  },
-  datepickerClassNames: "absolute ",
-  defaultDate: new Date(
-    `${current.getFullYear()}-${current.getMonth() + 1}-${current.getDate()}`
-  ),
-  language: "en",
-};
 
 function Profile() {
   const userData = useSelector((state) => state.userProfile);
   const { userID } = userData;
-  const [show, setShow] = useState(false);
-  const handleChange = (selectedDate) => {
-    console.log(selectedDate);
-  };
-  const handleClose = (state) => {
-    setShow(state);
-  };
   const [successful, setSuccessful] = useState(false);
   const [message, setMessage] = useState("");
   const [currentUser, setCurrentUser] = useState({});
   const [agrementDoc, setAgrement_doc] = useState();
   const [businessLicence, setBusinessLicence] = useState();
   const [validIdentification, setValidIdentification] = useState();
+  const [activeKYC, setActiveKYC] = useState(false); // set this to true if they are active
   const dispatch = useDispatch();
   useEffect(() => {
     const user = AuthService.getCurrentUser();
@@ -162,70 +124,81 @@ function Profile() {
                         <Input
                           label="first_name"
                           title="First Name"
-                          type="text"
                           name="first_name"
                           id="first_name"
                           place="Fist Name"
                           value={props.values.first_name}
                           handleChange={props.handleChange}
+                          disabled={activeKYC ? true : false}
                         />
                       </div>
                       <div className="w-full">
                         <Input
                           label="last_name"
                           title="Last Name"
-                          type="text"
                           name="last_name"
                           id="last_name"
                           place="Last Name"
                           value={props.values.last_name}
                           handleChange={props.handleChange}
+                          disabled={activeKYC ? true : false}
                         />
                       </div>
                       <div className="w-full">
                         <Input
                           label="Business Name"
                           title="Business Name"
-                          type="text"
                           name="business_name"
                           id="business_name"
                           place="Business Name"
                           value={props.values.business_name}
                           handleChange={props.handleChange}
+                          disabled={activeKYC ? true : false}
                         />
                       </div>
                       <div className="w-full">
-                        <Selectinput
-                          arr={business_type}
-                          id="business_type"
-                          name="business_type"
-                          value={props.values.business_type}
-                          handleChange={props.handleChange}
-                          title="Busines Type"
-                        />
+                        {activeKYC ? (
+                          <Input
+                            label="business_type"
+                            title="Business Type"
+                            name="business_type"
+                            id="business_type"
+                            value={props.values.business_type}
+                            disabled={true}
+                          />
+                        ) : (
+                          <Selectinput
+                            arr={business_type}
+                            id="business_type"
+                            name="business_type"
+                            value={props.values.business_type}
+                            handleChange={props.handleChange}
+                            title="Busines Type"
+                          />
+                        )}
                       </div>
                       <div className="w-full">
                         <Input
                           label="business_address"
                           title="Business Address"
-                          type="text"
                           name="business_address"
                           id="business_address"
                           place="Some where..."
                           value={props.values.business_address}
                           handleChange={props.handleChange}
+                          disabled={activeKYC ? true : false}
                         />
                       </div>
                       <div className="w-full">
                         <Input
                           label="tin_number"
                           title="Tin Number"
-                          type="text"
                           name="tin_number"
                           id="tin_number"
                           place="TN7378987654"
                           value={props.values.tin_number}
                           handleChange={props.handleChange}
+                          disabled={activeKYC ? true : false}
                         />
                       </div>
 
@@ -233,105 +206,143 @@ function Profile() {
                         <Input
                           label="legal_entity_type"
                           title="Legal Entity Type"
-                          type="text"
                           name="legal_entity_type"
                           id="legal_entity_type"
                           place="legal entity type"
                           value={props.values.legal_entity_type}
                           handleChange={props.handleChange}
+                          disabled={activeKYC ? true : false}
                         />
                       </div>
                       <div className="w-full">
-                        <label
-                          htmlFor={"date"}
-                          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                        >
-                          Date of Establishment
-                        </label>
-                        <input
-                          type="date"
-                          id="datepicker"
-                          name="date_of_establishment"
-                          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
-                          options={options}
-                          show={show}
-                          setShow={handleClose}
-                          value={props.values.date_of_establishment}
-                          onChange={props.handleChange}
-                        />
+                        {activeKYC ? (
+                          <Input
+                            label="datepicker"
+                            title="Date of Establishment"
+                            name="datepicker"
+                            id="datepicker"
+                            value={props.values.datepicker}
+                            disabled={true}
+                          />
+                        ) : (
+                          <div className="">
+                            <label
+                              htmlFor={"date"}
+                              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                            >
+                              Date of Establishment
+                            </label>
+                            <input
+                              type="date"
+                              id="datepicker"
+                              name="date_of_establishment"
+                              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
+                              value={props.values.date_of_establishment}
+                              onChange={props.handleChange}
+                            />
+                          </div>
+                        )}
                       </div>
                       <div className="w-full">
                         <Input
                           label="compliance_aml"
-                          title="Compliance Aml"
-                          type="text"
+                          title="Compliance Anti Money Laundary"
                           name="compliance_aml"
                           id="compliance_aml"
-                          place="Compliance Aml"
+                          place="Compliance Anti Money Laundary"
                           value={props.values.compliance_aml}
                           handleChange={props.handleChange}
+                          disabled={activeKYC ? true : false}
                         />
                       </div>
                       <div className="w-full">
                         <Input
                           label="merchant_status"
                           title="Merchant Status"
-                          type="text"
                           name="merchant_status"
                           id="merchant_status"
                           place="Merchant Status"
                           value={props.values.merchant_status}
                           handleChange={props.handleChange}
+                          disabled={activeKYC ? true : false}
                         />
                       </div>
                       <div className="sm:col-span-2">
                         <Input
                           label="website_url"
                           title="Website URL"
-                          type="text"
                           name="website_url"
                           id="website_url"
                           place="epay.com"
                           value={props.values.website_url}
                           handleChange={props.handleChange}
+                          disabled={activeKYC ? true : false}
                         />
                       </div>
-                      <div className="sm:col-span-2">
-                        <Fileinput
-                          lable="valid_identification"
-                          title="Valid Identification"
-                          name="valid_identification"
-                          fileInputTOForm={fileInputTOFormID}
-                          value={validIdentification}
-                        />
-                      </div>
-                      <div className="sm:col-span-2">
-                        <Fileinput
-                          lable="business_licence"
-                          title="Business Licence"
-                          name="business_licence"
-                          fileInputTOForm={fileInputTOFormLicence}
-                          value={businessLicence}
-                        />
-                      </div>
-                      <div className="sm:col-span-2">
-                        <Fileinput
-                          lable="agrement_doc"
-                          title="Bank Agrement Document"
-                          name="agrement_doc"
-                          fileInputTOForm={fileInputTOFormDoc}
-                          value={agrementDoc}
-                        />
-                      </div>
+                      {activeKYC ? (
+                        <>
+                          <div className="">
+                            <img
+                              src="https://dummyimage.com/1240x1752/d1d1d1/000000"
+                              alt="lka"
+                            />
+                          </div>
+                          <div className="">
+                            <img
+                              src="https://dummyimage.com/1240x1752/d1d1d1/000000"
+                              alt="lka"
+                            />
+                          </div>
+                          <div className="">
+                            <img
+                              src="https://dummyimage.com/1240x1752/d1d1d1/000000"
+                              alt="lka"
+                            />
+                          </div>
+                        </>
+                      ) : (
+                        <div className="sm:col-span-2">
+                          <div className="">
+                            <Fileinput
+                              lable="valid_identification"
+                              title="Valid Identification"
+                              name="valid_identification"
+                              fileInputTOForm={fileInputTOFormID}
+                              value={validIdentification}
+                            />
+                          </div>
+                          <div className="">
+                            <Fileinput
+                              lable="business_licence"
+                              title="Business Licence"
+                              name="business_licence"
+                              fileInputTOForm={fileInputTOFormLicence}
+                              value={businessLicence}
+                            />
+                          </div>
+                          <div className="">
+                            <Fileinput
+                              lable="agrement_doc"
+                              title="Bank Agrement Document"
+                              name="agrement_doc"
+                              fileInputTOForm={fileInputTOFormDoc}
+                              value={agrementDoc}
+                            />
+                          </div>
+                        </div>
+                      )}
                     </div>
-
-                    <button
-                      type="submit"
-                      onClick={props.handleSubmit}
-                      className="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary rounded-lg focus:ring-4 focus:ring-primary dark:focus:ring-primary hover:bg-primary"
-                    >
-                      Submit
-                    </button>
+                    {activeKYC ? (
+                      ""
+                    ) : (
+                      <button
+                        type="submit"
+                        onClick={props.handleSubmit}
+                        className="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary rounded-lg focus:ring-4 focus:ring-primary dark:focus:ring-primary hover:bg-primary"
+                      >
+                        Submit
+                      </button>
+                    )}
                   </>
                 )}
                 {message && (

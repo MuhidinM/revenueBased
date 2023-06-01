@@ -104,7 +104,7 @@ function Configuration() {
   return (
     <div>
       <div>
-        <form onSubmit={handleSubmit} className="flex space-x-4 items-center">
+        <form onSubmit={handleSubmit} className="md:flex md:space-x-4 mb-4 items-center">
           <div className="grid flex-grow gap-6 mb-4 grid-cols-4 sm:mb-5">
             <div className="w-full col-span-2">
               <label
