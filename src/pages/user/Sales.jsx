@@ -13,12 +13,12 @@ const MySwal = withReactContent(Swal);
 const columns = [
   {
     name: "Title",
-    selector: (row) => row.title,
+    selector: (row) => row.phone_number,
     sortable: true,
   },
   {
     name: "Year",
-    selector: (row) => row.year,
+    selector: (row) => row.email_address,
     sortable: true,
   },
 ];
@@ -38,6 +38,7 @@ function Sales() {
   const salesData = useSelector((state) => state.salesInfo);
   // console.log(userData);
   const { salesDetail } = salesData;
+  console.log(salesDetail);
   // const showFormModal = (values) => {
   //   return new Promise((resolve, reject) => {
   //     MySwal.fire({

@@ -104,7 +104,7 @@ const CreateSales = async (username, merchant_id) => {
 };
 
 const getAllSales = async (merchant_id) => {
-  return await NODE_API.get(`/items/getAll?id=${merchant_id}`).then(
+  return await NODE_API.get(`/sales/getAll?id=${merchant_id}`).then(
     (response) => response.data
   );
 };

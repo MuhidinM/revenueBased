@@ -2,7 +2,13 @@ import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
-function AssignInventory({ onSubmit, values, onCancel }) {
+function AssignInventory({
+  onSubmit,
+  values,
+  onCancel,
+  salesDetail,
+  inventoryDetail,
+}) {
   const ValidationSchema = Yup.object().shape({
     item_id: Yup.string().required("Item is required"),
     sales_id: Yup.string().required("Sales is required"),
@@ -38,8 +44,11 @@ function AssignInventory({ onSubmit, values, onCancel }) {
                   <option disabled selected>
                     Select Item
                   </option>
-                  <option value="Admin">S21</option>
-                  <option value="Approval">A32</option>
+                  {inventoryDetail?.map((item, index) => (
+                    <option key={index} value={item.item_id}>
+                      {item.item_name}
+                    </option>
+                  ))}
                 </select>
               </div>
               <div className="">
@@ -61,8 +70,13 @@ function AssignInventory({ onSubmit, values, onCancel }) {
                   <option disabled selected>
                     Select Sales
                   </option>
-                  <option value="Admin">Yared</option>
-                  <option value="Approval">Muhaddin</option>
+                  {salesDetail?.map((item, index) => (
+                    <option key={index} value={item.sales_id}>
+                      {item.email_address
+                        ? item.email_address
+                        : item.phone_number}
+                    </option>
+                  ))}
                 </select>
               </div>
             </div>

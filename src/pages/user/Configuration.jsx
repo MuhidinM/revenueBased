@@ -10,12 +10,17 @@ import { getLoanConfigDetail } from "../../store/actions/getLoanConfigAction";
 const columns = [
   {
     name: "Title",
-    selector: (row) => row.title,
+    selector: (row) => row.interest_rate,
     sortable: true,
   },
   {
     name: "Year",
-    selector: (row) => row.year,
+    selector: (row) => row.duration,
+    sortable: true,
+  },
+  {
+    name: "Year",
+    selector: (row) => new Date(row.createdAt)?.toISOString().split("T")[0],
     sortable: true,
   },
 ];

@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import InventoryService from "../../services/inventory.service";
 import { getInventoryDetail } from "../../store/actions/getInventoryAction";
 import AssignInventory from "./AssignInventory";
+import { getLoanConfigDetail } from "../../store/actions/getLoanConfigAction";
+import { getSalesDetail } from "../../store/actions/getSalesAction";
 const MySwal = withReactContent(Swal);
 
 const columns = [
@@ -58,15 +60,35 @@ function Inventory() {
   // console.log(userData);
   const { userID } = userData;
 
+  useEffect(() => {
+    if (userID) {
+      dispatch(getInventoryDetail(userID));
+    }
+  }, [userID, dispatch]);
+
   const inventoryInfo = useSelector((state) => state.inventoryInfo);
   // console.log(userData);
   const { inventoryDetail } = inventoryInfo;
 
   useEffect(() => {
     if (userID) {
-      dispatch(getInventoryDetail(userID));
+      dispatch(getLoanConfigDetail(userID));
     }
   }, [userID, dispatch]);
+
+  const loanConfigData = useSelector((state) => state.loanConfigInfo);
+  // console.log(userData);
+  const { loanConfigDetail } = loanConfigData;
+
+  useEffect(() => {
+    if (userID) {
+      dispatch(getSalesDetail(userID));
+    }
+  }, [userID, dispatch]);
+
+  const salesData = useSelector((state) => state.salesInfo);
+  // console.log(userData);
+  const { salesDetail } = salesData;
 
   const showFormModal = (values) => {
     return new Promise((resolve, reject) => {
@@ -109,6 +131,8 @@ function Inventory() {
         html: (
           <AssignInventory
             values={values}
+            inventoryDetail={inventoryDetail}
+            salesDetail={salesDetail}
             // onSubmit={(values) => {
             //   console.log("Value From The Child:", values);
 
