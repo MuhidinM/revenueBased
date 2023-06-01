@@ -1,23 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Fileinput from "../../components/Fileinput";
 import Input from "../../components/Input";
 import Selectinput from "../../components/Selectinput";
 import AuthService from "../../services/auth.service";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import Datepicker from "tailwind-datepicker-react";
 // import { CreateOrUpdate } from "../store/actions/";
-import { CreateOrUpdate } from "../../store/actions/userProfileAction";
+import KYCService from "../../services/kyc.service";
+import Addressproof from "../../components/Addressproof";
 
 const business_type = [
-  { label: "A", value: "A" },
-  { label: "B", value: "B" },
+  { label: "Sole Proprietorship", value: "Sole Proprietorship" },
+  { label: "Partnership", value: "Partnership" },
+  { label: "Coorporation", value: "Coorporation" },
 ];
-const legal_entity_type = [
-  { label: "A", value: "A" },
-  { label: "B", value: "B" },
-];
+// const legal_entity_type = [
+//   { label: "A", value: "A" },
+//   { label: "B", value: "B" },
+// ];
 
 const current = new Date();
 const options = {
@@ -48,6 +49,8 @@ const options = {
 };
 
 function Profile() {
+  const userData = useSelector((state) => state.userProfile);
+  const { userID } = userData;
   const [show, setShow] = useState(false);
   const handleChange = (selectedDate) => {
     console.log(selectedDate);
@@ -91,13 +94,13 @@ function Profile() {
   });
 
   const fileInputTOFormDoc = (e) => {
-    setValidIdentification(e.target.files[0]);
+    setAgrement_doc(e.target.files[0]);
   };
   const fileInputTOFormID = (e) => {
     setValidIdentification(e.target.files[0]);
   };
   const fileInputTOFormLicence = (e) => {
-    setValidIdentification(e.target.files[0]);
+    setBusinessLicence(e.target.files[0]);
   };
   let formData = new FormData();
   return (
@@ -120,17 +123,17 @@ function Profile() {
               business_licence: "",
               agrement_doc: "",
               merchant_status: "",
+              merchant_id: userID,
             }}
             // validationSchema={validationSchema}
             onSubmit={(values) => {
-              formData.append("Helo", "hello");
-              formData.append("fname", values.first_name);
+              formData.append("first_name", values.first_name);
               formData.append("last_name", values.last_name);
               formData.append("business_name", values.business_name);
               formData.append("business_type", values.business_type);
+              formData.append("website_url", values.website_url);
               formData.append("tin_number", values.tin_number);
               formData.append("business_address", values.business_address);
-              formData.append("website_url", values.website_url);
               formData.append("legal_entity_type", values.legal_entity_type);
               formData.append(
                 "date_of_establishment",
@@ -139,10 +142,11 @@ function Profile() {
               formData.append("compliance_aml", values.compliance_aml);
               formData.append("merchant_status", values.merchant_status);
               formData.append("valid_identification", validIdentification);
-              formData.append("business_licence", businessLicence);
-              formData.append("agrement_doc", agrementDoc);
+              formData.append("business_license", businessLicence);
+              formData.append("agreement_doc", agrementDoc);
+              formData.append("merchant_id", userID);
               // console.log(formData);
-              dispatch(CreateOrUpdate(formData))
+              dispatch(KYCService.CreateKYC(formData))
                 .then((res) => console.log(res))
                 .catch((e) => console.log(e));
             }}
@@ -162,7 +166,7 @@ function Profile() {
                           type="text"
                           name="first_name"
                           id="first_name"
-                          place="Lelisa"
+                          place="Fist Name"
                           value={props.values.first_name}
                           handleChange={props.handleChange}
                         />
@@ -174,19 +178,19 @@ function Profile() {
                           type="text"
                           name="last_name"
                           id="last_name"
-                          place="Abdusemed"
+                          place="Last Name"
                           value={props.values.last_name}
                           handleChange={props.handleChange}
                         />
                       </div>
                       <div className="w-full">
                         <Input
-                          label="business_name"
+                          label="Business Name"
                           title="Business Name"
                           type="text"
                           name="business_name"
                           id="business_name"
-                          place="Test"
+                          place="Business Name"
                           value={props.values.business_name}
                           handleChange={props.handleChange}
                         />
@@ -227,13 +231,15 @@ function Profile() {
                       </div>
 
                       <div className="w-full">
-                        <Selectinput
-                          arr={legal_entity_type}
-                          id="legal_entity_type"
+                        <Input
+                          label="legal_entity_type"
+                          title="Legal Entity Type"
+                          type="text"
                           name="legal_entity_type"
+                          id="legal_entity_type"
+                          place="legal entity type"
                           value={props.values.legal_entity_type}
                           handleChange={props.handleChange}
-                          title="Legal Entity Type"
                         />
                       </div>
                       <div className="w-full">
@@ -243,14 +249,16 @@ function Profile() {
                         >
                           Date of Establishment
                         </label>
-                        <Datepicker
+                        <input
+                          type="date"
                           id="datepicker"
+                          name="date_of_establishment"
+                          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
                           options={options}
-                          onChange={handleChange}
                           show={show}
                           setShow={handleClose}
                           value={props.values.date_of_establishment}
-                          handleChange={props.handleChange}
+                          onChange={props.handleChange}
                         />
                       </div>
                       <div className="w-full">

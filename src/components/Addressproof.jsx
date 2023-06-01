@@ -53,13 +53,19 @@ function Addressproof(props) {
             type="file"
             id="file"
             accept="image/*"
-            onChange={props.fileInput}
+            onChange={props.fileInputTOForm}
             onInput={({ target: { files } }) => {
               files[0] && setFilename(files[0].name);
               if (files) {
                 setImage(URL.createObjectURL(files[0]));
               }
             }}
+            // onInput={({ target: { files } }) => {
+            //   files[0] && setFilename(files[0].name);
+            //   if (files) {
+            //     setImage(URL.createObjectURL(files[0]));
+            //   }
+            // }}
           />
         </label>
       </div>

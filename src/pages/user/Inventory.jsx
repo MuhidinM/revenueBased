@@ -17,7 +17,7 @@ const columns = [
       return (
         <div className="p-2">
           <img
-            src={`http://192.168.14.245:5000/pictures/${row.item_pic}`}
+            src={`http://192.168.14.245:5000/image/${row.item_pic}`}
             style={{ width: "40px", height: "40px" }}
             alt=""
           />
@@ -85,6 +85,7 @@ function Inventory() {
               formData.append("item_price", values.item_price);
               formData.append("item_code", values.item_code);
               formData.append("picture", values.picture);
+              formData.append("loan_limit", values.loan_limit);
               formData.append("merchant_id", userID);
               resetForm({ values: "" });
 
@@ -167,6 +168,7 @@ function Inventory() {
       item_code: "",
       item_price: "",
       item_name: "",
+      loan_limit: "",
       merchant_id: userID,
     })
       .then((values) => console.log(values))
