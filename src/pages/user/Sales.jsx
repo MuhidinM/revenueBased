@@ -12,13 +12,19 @@ const MySwal = withReactContent(Swal);
 
 const columns = [
   {
-    name: "Title",
-    selector: (row) => row.phone_number,
+    name: "Sales Id",
+    selector: (row) => row.sales_id,
     sortable: true,
   },
   {
-    name: "Year",
-    selector: (row) => row.email_address,
+    name: "Username",
+    selector: (row) =>
+      row.phone_number ? row.phone_number : row.email_address,
+    sortable: true,
+  },
+  {
+    name: "Status",
+    selector: (row) => row.emailStatus,
     sortable: true,
   },
 ];

@@ -10,6 +10,7 @@ import AssignInventory from "./AssignInventory";
 import { getLoanConfigDetail } from "../../store/actions/getLoanConfigAction";
 import { getSalesDetail } from "../../store/actions/getSalesAction";
 import AssignLoan from "./AssignLoan";
+import LoanConfigService from "../../services/loanConfig.service";
 const MySwal = withReactContent(Swal);
 
 const columns = [
@@ -128,7 +129,7 @@ function Inventory() {
   const showAssignFormModal = (values) => {
     return new Promise((resolve, reject) => {
       MySwal.fire({
-        title: "Assign Item",
+        title: "Assign Sales",
         html: (
           <AssignInventory
             values={values}
@@ -138,6 +139,7 @@ function Inventory() {
             //   console.log("Value From The Child:", values);
 
             onSubmit={(values) => {
+              console.log("running");
               dispatch(
                 InventoryService.AssignInventory(
                   values.item_id,
@@ -163,16 +165,18 @@ function Inventory() {
         title: "Assign Loan",
         html: (
           <AssignLoan
+            inventoryDetail={inventoryDetail}
+            loanConfigDetail={loanConfigDetail}
             values={values}
-            // onSubmit={(values) => {
-            //   dispatch(
-            //     InventoryService.AssignInventory(
-            //       values.item_id,
-            //       values.sales_id,
-            //       userID
-            //     )
-            //   );
-            // }}
+            onSubmit={(values) => {
+              dispatch(
+                LoanConfigService.AssignLoanConfig(
+                  values.item_id,
+                  values.loan_conf_id,
+                  userID
+                )
+              );
+            }}
             onCancel={() => MySwal.close()}
           />
         ),
@@ -211,7 +215,7 @@ function Inventory() {
   const showAssignLoan = () => {
     showAssignLoanForm({
       item_id: "",
-      loan_id: "",
+      loan_conf_id: "",
       merchant_id: userID,
     })
       .then((values) => console.log(values))
@@ -232,7 +236,7 @@ function Inventory() {
         className="mb-4 ml-2 btn btn-outline btn-primary"
         onClick={showAssignModal}
       >
-        Assign Inventory
+        Assign Sales
       </button>
       <button
         type="button"

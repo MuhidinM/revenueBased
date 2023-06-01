@@ -1,6 +1,7 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import Selectinput from "../../components/Selectinput";
 
 function AssignInventory({
   onSubmit,
@@ -13,7 +14,17 @@ function AssignInventory({
     item_id: Yup.string().required("Item is required"),
     sales_id: Yup.string().required("Sales is required"),
   });
-  // console.log("value From the Parent:", values);
+
+  const item_option = inventoryDetail.map((item) => ({
+    value: item.item_id,
+    label: item.item_name,
+  }));
+
+  const sales_option = salesDetail.map((item) => ({
+    value: item.sales_id,
+    label: item.email_address ? item.email_address : item.phone_number,
+  }));
+
   return (
     <>
       <Formik
@@ -25,59 +36,25 @@ function AssignInventory({
         {(formik) => (
           <form onSubmit={formik.handleSubmit}>
             <div className="grid gap-4 mb-4 grid-cols-2 sm:gap-6 sm:mb-5">
-              <div className="">
-                <label
-                  htmlFor="phone"
-                  className="mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Item
-                </label>
-                <span className="text-sm link-error">
-                  <ErrorMessage name="role" />
-                </span>
-                <select
-                  name="roleName"
+              <div className="w-full">
+                <Selectinput
+                  arr={item_option}
+                  id="item_id"
+                  name="item_id"
                   value={formik.values.item_id}
-                  onChange={formik.handleChange}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                >
-                  <option disabled selected>
-                    Select Item
-                  </option>
-                  {inventoryDetail?.map((item, index) => (
-                    <option key={index} value={item.item_id}>
-                      {item.item_name}
-                    </option>
-                  ))}
-                </select>
+                  handleChange={formik.handleChange}
+                  title="Select Item"
+                />
               </div>
-              <div className="">
-                <label
-                  htmlFor="phone"
-                  className="mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Sales
-                </label>
-                <span className="text-sm link-error">
-                  <ErrorMessage name="role" />
-                </span>
-                <select
-                  name="roleName"
+              <div className="w-full">
+                <Selectinput
+                  arr={sales_option}
+                  id="sales_id"
+                  name="sales_id"
                   value={formik.values.sales_id}
-                  onChange={formik.handleChange}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                >
-                  <option disabled selected>
-                    Select Sales
-                  </option>
-                  {salesDetail?.map((item, index) => (
-                    <option key={index} value={item.sales_id}>
-                      {item.email_address
-                        ? item.email_address
-                        : item.phone_number}
-                    </option>
-                  ))}
-                </select>
+                  handleChange={formik.handleChange}
+                  title="Select Sales"
+                />
               </div>
             </div>
 
@@ -86,7 +63,7 @@ function AssignInventory({
             </button>
             <button
               type="submit"
-              onSubmit={onSubmit}
+              // onClick={onSubmit}
               style={{ backgroundColor: "#01AFEF" }}
               className="swal2-confirm swal2-styled"
             >
