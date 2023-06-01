@@ -7,24 +7,6 @@ import { useState } from "react";
 import LoanConfigService from "../../services/loanConfig.service";
 import { getLoanConfigDetail } from "../../store/actions/getLoanConfigAction";
 
-const columns = [
-  {
-    name: "Title",
-    selector: (row) => row.interest_rate,
-    sortable: true,
-  },
-  {
-    name: "Year",
-    selector: (row) => row.duration,
-    sortable: true,
-  },
-  {
-    name: "Year",
-    selector: (row) => new Date(row.createdAt)?.toISOString().split("T")[0],
-    sortable: true,
-  },
-];
-
 function Configuration() {
   const userData = useSelector((state) => state.userProfile);
   // console.log(userData);
@@ -41,11 +23,64 @@ function Configuration() {
   // console.log(userData);
   const { loanConfigDetail } = loanConfigData;
 
+  const [isEdit, setIsEdit] = useState(false);
+
   const [data, setData] = useState({
     interest_rate: "",
     duration: "",
     merchant_id: userID,
   });
+
+  const handleEdit = (row) => {
+    setData({
+      ...data,
+      loan_conf_id: row.loan_conf_id,
+      interest_rate: row.interest_rate,
+      duration: row.duration,
+      merchant_id: userID,
+    });
+    setIsEdit(true);
+  };
+
+  const columns = [
+    {
+      name: "Title",
+      selector: (row) => row.interest_rate,
+      sortable: true,
+    },
+    {
+      name: "Year",
+      selector: (row) => row.duration,
+      sortable: true,
+    },
+    {
+      name: "Year",
+      selector: (row) => new Date(row.createdAt)?.toISOString().split("T")[0],
+      sortable: true,
+    },
+    {
+      name: "Actions",
+      cell: (row) => (
+        <svg
+          className="cursor-pointer h-6 w-6 text-orange-500"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          onClick={() => handleEdit(row)}
+        >
+          {" "}
+          <path stroke="none" d="M0 0h24v24H0z" />{" "}
+          <path d="M9 7 h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" />{" "}
+          <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" />{" "}
+          <line x1="16" y1="5" x2="19" y2="8" />
+        </svg>
+      ),
+      sortable: true,
+    },
+  ];
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -57,7 +92,13 @@ function Configuration() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(LoanConfigService.CreateLoanConfig(data));
+    try {
+      isEdit
+        ? dispatch(LoanConfigService.EditLoanConfig(data))
+        : dispatch(LoanConfigService.CreateLoanConfig(data));
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -114,7 +155,7 @@ function Configuration() {
               style={{ backgroundColor: "#01AFEF" }}
               className="swal2-confirm h-10 flex items-center swal2-styled"
             >
-              Register
+              {isEdit ? "Update" : "Register"}
             </button>
           </div>
         </form>

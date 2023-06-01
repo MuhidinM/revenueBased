@@ -8,7 +8,6 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 // import { CreateOrUpdate } from "../store/actions/";
 import KYCService from "../../services/kyc.service";
-import Addressproof from "../../components/Addressproof";
 
 const business_type = [
   { label: "Sole Proprietorship", value: "Sole Proprietorship" },

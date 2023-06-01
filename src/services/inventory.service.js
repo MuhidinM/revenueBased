@@ -9,6 +9,16 @@ const CreateInventory = async (formData) => {
     (response) => response
   );
 };
+
+const EditInventory = async (formData) => {
+  // formData.forEach((element) => {
+  //   console.log(element);
+  // });
+  return await NODE_API.put("/items/editItem", formData, headers).then(
+    (response) => response
+  );
+};
+
 const AssignInventory = async (item_id, sales_id, merchant_id) => {
   return await NODE_API.post("/items/assigntoSales", {
     item_id,
@@ -27,6 +37,7 @@ const InventoryService = {
   CreateInventory,
   getAllInventory,
   AssignInventory,
+  EditInventory,
 };
 
 export default InventoryService;

@@ -17,12 +17,15 @@ function Selectinput(props) {
         onChange={props.handleChange}
         placeholder="select"
         // onInput={props.selectName}
+        value={props.value} // Assuming `props.value` is the value of the select option
       >
-        <option value="" disabled selected>
+        <option value="" disabled>
           Select
         </option>
         {props.arr.map((arr) => (
-          <option value={arr.value}>{arr.label}</option>
+          <option value={arr.value ? arr.value : props.value && props.value}>
+            {arr.label}
+          </option>
         ))}
       </select>
       <span className="text-sm link-error">

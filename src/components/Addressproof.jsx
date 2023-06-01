@@ -18,9 +18,17 @@ function Addressproof(props) {
           className="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
         >
           <div className="flex flex-col items-center justify-center pt-5 pb-6">
-            {image ? (
+            {image || props.picture ? (
               <>
-                <img src={image} className="h-24" alt={fileName} />
+                <img
+                  src={
+                    image
+                      ? image
+                      : `http://192.168.14.245:5000/image/${props.picture}`
+                  }
+                  className="h-24"
+                  alt={fileName}
+                />
               </>
             ) : (
               <>
@@ -53,19 +61,13 @@ function Addressproof(props) {
             type="file"
             id="file"
             accept="image/*"
-            onChange={props.fileInputTOForm}
+            onChange={props.fileInput}
             onInput={({ target: { files } }) => {
               files[0] && setFilename(files[0].name);
               if (files) {
                 setImage(URL.createObjectURL(files[0]));
               }
             }}
-            // onInput={({ target: { files } }) => {
-            //   files[0] && setFilename(files[0].name);
-            //   if (files) {
-            //     setImage(URL.createObjectURL(files[0]));
-            //   }
-            // }}
           />
         </label>
       </div>
