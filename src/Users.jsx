@@ -12,6 +12,7 @@ import Sales from "./pages/user/Sales";
 import Inventory from "./pages/user/Inventory";
 import Loan from "./pages/user/Loan";
 import Configuration from "./pages/user/Configuration";
+import Settings from "./pages/user/Settings";
 function Users() {
   return (
     <>
@@ -31,7 +32,7 @@ function Users() {
               <Route path="loan" element={<Loan />}></Route>
               <Route path="configuration" element={<Configuration />}></Route>
               <Route path="profile" element={<Profile />}></Route>
-              <Route path="setting" element={<MultiStepForm />}></Route>
+              <Route path="setting" element={<Settings />}></Route>
               <Route path="*" element={<E404 />}></Route>
             </Routes>
           </div>
