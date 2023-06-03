@@ -6,15 +6,18 @@ import {
   SET_USER_NAME,
   SET_USER_ID,
   SET_TOKEN,
+  GET_EKY_DETAIL,
+  LOADING,
 } from "../types";
 
 const initialState = {
   userProfile: {},
   userDetail: {},
-  loading: true,
+  loading: false,
   userID: null,
   username: null,
   token: null,
+  kyc: null,
 };
 
 export default function (state = initialState, action) {
@@ -61,6 +64,17 @@ export default function (state = initialState, action) {
         ...state,
         loading: false,
         error: action.payload,
+      };
+    case LOADING:
+      return {
+        ...state,
+        loading: true,
+      };
+    case GET_EKY_DETAIL:
+      return {
+        ...state,
+        kyc: action.payload,
+        loading: false,
       };
     default:
       return state;

@@ -71,9 +71,9 @@ const BussinessInfoRequest = async (formData) => {
 
 const CreateUserProfile = async (formData) => {
   // console.log(formData);
-  for (const value of formData.values()) {
-    console.log(value);
-  }
+  // for (const value of formData.values()) {
+  //   console.log(value);
+  // }
   return await axios
     .post(API_URL + "api/user/updateProfile", formData, headers)
     .then((response) => response.data);
@@ -108,6 +108,30 @@ const getAllSales = async (merchant_id) => {
     (response) => response.data
   );
 };
+const getEkyDetail = async (merchant_id) => {
+  return await NODE_API.get(`/eky/getKyc?merchant_id=${merchant_id}`).then(
+    (response) => response.data
+  );
+};
+
+const getSalesKycDetail = async (merchant_id) => {
+  return await NODE_API.get(`/sales/getAllKyc?merchant_id=${merchant_id}`).then(
+    (response) => response.data
+  );
+};
+
+const approveSales = async (sales_kyc_id, merchant_id) => {
+  return await NODE_API.put(`/sales/approveKyc`, {
+    sales_kyc_id,
+    merchant_id,
+  }).then((response) => response.data);
+};
+const rejectSales = async (sales_kyc_id, merchant_id) => {
+  return await NODE_API.put(`/sales/rejectKyc`, {
+    sales_kyc_id,
+    merchant_id,
+  }).then((response) => response.data);
+};
 
 const UserService = {
   getPublicContent,
@@ -121,6 +145,10 @@ const UserService = {
   CreateUserProfile,
   CreateSales,
   getAllSales,
+  getEkyDetail,
+  getSalesKycDetail,
+  approveSales,
+  rejectSales,
 };
 
 export default UserService;

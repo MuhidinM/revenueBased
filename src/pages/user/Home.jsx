@@ -51,15 +51,16 @@ function Home() {
   const userData = useSelector((state) => state.userProfile);
   // console.log(userData);
   const { userID } = userData;
-  const inventoryInfo = useSelector((state) => state.inventoryInfo);
-  // console.log(userData);
-  const { inventoryDetail } = inventoryInfo;
 
   useEffect(() => {
     if (userID) {
       dispatch(getInventoryDetail(userID));
     }
   }, [userID, dispatch]);
+
+  const inventoryInfo = useSelector((state) => state.inventoryInfo);
+  // console.log(userData);
+  const { inventoryDetail } = inventoryInfo;
 
   const filteredInventory = inventoryDetail.filter(
     (item) =>

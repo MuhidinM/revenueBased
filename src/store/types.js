@@ -53,3 +53,6 @@ export const SET_USER_NAME = "SET_USER_NAME";
 export const SET_INVENTORY = "SET_INVENTORY";
 export const SET_SALES = "SET_SALES";
 export const SET_LOAN_CONFIG = "SET_LOAN_CONFIG";
+export const GET_EKY_DETAIL = "GET_EKY_DETAIL";
+export const LOADING = "LOADING";
+export const GET_SALES_KYC = "GET_SALES_KYC";

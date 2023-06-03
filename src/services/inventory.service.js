@@ -18,6 +18,16 @@ const EditInventory = async (formData) => {
     (response) => response
   );
 };
+const ToggleStatus = async (row, setToggeled, toggeled) => {
+  return await NODE_API.put("/items/editItemStatus", {
+    item_id: row.item_id,
+    merchant_id: row.merchant_id,
+    status: !row.status,
+  }).then((response) => {
+    setToggeled(!toggeled);
+    return response;
+  });
+};
 
 const AssignInventory = async (item_id, sales_id, merchant_id) => {
   return await NODE_API.post("/items/assigntoSales", {
@@ -38,6 +48,7 @@ const InventoryService = {
   getAllInventory,
   AssignInventory,
   EditInventory,
+  ToggleStatus,
 };
 
 export default InventoryService;

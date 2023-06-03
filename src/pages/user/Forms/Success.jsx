@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 import UserService from "../../../services/user.service";
 import AuthService from "../../../services/auth.service";
 import { useDispatch, useSelector } from "react-redux";
-import { retrieveLoggedInUser } from "../../../store/actions/userProfileAction";
+// import { retrieveLoggedInUser } from "../../../store/actions/userProfileAction";
 function Success() {
   const { activeStepIndex, setActiveStepIndex, formData, setFormData } =
     useContext(FormContext);
@@ -16,14 +16,14 @@ function Success() {
   const dispatch = useDispatch();
   let navigate = useNavigate();
   console.log(userDetail);
-  useEffect(() => {
-    // const user = AuthService.getCurrentUser();
+  // useEffect(() => {
+  //   // const user = AuthService.getCurrentUser();
 
-    // setCurrentUser(user);
-    dispatch(retrieveLoggedInUser());
-    // setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
-    // setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
-  }, []);
+  //   // setCurrentUser(user);
+  //   dispatch(retrieveLoggedInUser());
+  //   // setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
+  //   // setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
+  // }, []);
   const sendDataToBackend = () => {
     console.log("your Button is got Clicked");
     console.log(typeof formData);

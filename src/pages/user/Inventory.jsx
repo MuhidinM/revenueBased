@@ -13,6 +13,8 @@ import AssignLoan from "./AssignLoan";
 import LoanConfigService from "../../services/loanConfig.service";
 import CustomizedMenus from "./OptionDropdown";
 import EditInventory from "./EditInventory";
+import { useState } from "react";
+import { useMemo } from "react";
 const MySwal = withReactContent(Swal);
 
 function Inventory() {
@@ -57,6 +59,18 @@ function Inventory() {
       sortable: true,
     },
     {
+      name: "Status",
+      cell: (row) => (
+        <input
+          onChange={() => handleToggleEdit(row)}
+          type="checkbox"
+          className="toggle toggle-info"
+          checked={row.status}
+        />
+      ),
+      sortable: true,
+    },
+    {
       name: "Actions",
       cell: (row) => (
         <CustomizedMenus
@@ -72,6 +86,7 @@ function Inventory() {
   let formData = new FormData();
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.userProfile);
+  const [toggeled, setToggeled] = useState(false);
   // console.log(userData);
   const { userID } = userData;
 
@@ -79,7 +94,7 @@ function Inventory() {
     if (userID) {
       dispatch(getInventoryDetail(userID));
     }
-  }, [userID, dispatch]);
+  }, [userID, toggeled, dispatch]);
 
   const inventoryInfo = useSelector((state) => state.inventoryInfo);
   // console.log(userData);
@@ -89,7 +104,11 @@ function Inventory() {
     if (userID) {
       dispatch(getLoanConfigDetail(userID));
     }
-  }, [userID, dispatch]);
+  }, [userID, toggeled, dispatch]);
+
+  const handleToggleEdit = async (row) => {
+    dispatch(InventoryService.ToggleStatus(row, setToggeled, toggeled));
+  };
 
   const loanConfigData = useSelector((state) => state.loanConfigInfo);
   // console.log(userData);
@@ -99,7 +118,7 @@ function Inventory() {
     if (userID) {
       dispatch(getSalesDetail(userID));
     }
-  }, [userID, dispatch]);
+  }, [userID, toggeled, dispatch]);
 
   const salesData = useSelector((state) => state.salesInfo);
   // console.log(userData);
@@ -289,6 +308,14 @@ function Inventory() {
       .catch(() => console.log("Modal closed"));
   };
 
+  const sortedData = useMemo(
+    () =>
+      [...inventoryDetail].sort((a, b) =>
+        a.item_name.localeCompare(b.item_name)
+      ),
+    [inventoryDetail]
+  );
+
   return (
     <div>
       <button
@@ -314,7 +341,7 @@ function Inventory() {
       </button>
       <DataTable
         columns={columns}
-        data={inventoryDetail}
+        data={sortedData}
         pagination
         persistTableHeadstriped
         highlightOnHover

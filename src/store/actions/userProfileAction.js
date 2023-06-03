@@ -1,13 +1,13 @@
 import {
   CREATE_USER_PROFILE,
   CREATE_USER_PROFILE_ERROR,
-  LOGGED_IN_USER_DETAIL,
-  LOGGED_IN_USER_DETAIL_ERROR,
   SET_USER_NAME,
   SET_USER_ID,
   SET_TOKEN,
+  LOADING,
+  GET_EKY_DETAIL,
 } from "../types";
-import AuthService from "../../services/auth.service";
+// import AuthService from "../../services/auth.service";
 import UserService from "../../services/user.service";
 export const CreateOrUpdate = (formData) => async (dispatch) => {
   try {
@@ -25,19 +25,36 @@ export const CreateOrUpdate = (formData) => async (dispatch) => {
   }
 };
 
-export const retrieveLoggedInUser = () => async (dispatch, token) => {
+// export const retrieveLoggedInUser = () => async (dispatch, token) => {
+//   try {
+//     const userDetail = await AuthService.getLoggedInUser(token);
+//     // console.log("Responded User Detail", userDetail);
+//     dispatch({
+//       type: LOGGED_IN_USER_DETAIL,
+//       payload: userDetail,
+//     });
+//   } catch (error) {
+//     dispatch({
+//       type: LOGGED_IN_USER_DETAIL_ERROR,
+//       payload: error,
+//     });
+//   }
+// };
+
+export const getEkyInfo = (user) => async (dispatch) => {
   try {
-    const userDetail = await AuthService.getLoggedInUser(token);
-    console.log("Responded User Detail", userDetail);
     dispatch({
-      type: LOGGED_IN_USER_DETAIL,
-      payload: userDetail,
+      type: LOADING,
+      payload: true,
+    });
+    const ekyDetail = await UserService.getEkyDetail(user);
+    // console.log("Responded User Detail", ekyDetail);
+    dispatch({
+      type: GET_EKY_DETAIL,
+      payload: ekyDetail,
     });
   } catch (error) {
-    dispatch({
-      type: LOGGED_IN_USER_DETAIL_ERROR,
-      payload: error,
-    });
+    console.log(error);
   }
 };
 

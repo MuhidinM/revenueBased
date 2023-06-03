@@ -1,16 +1,41 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import AuthService from "../../services/auth.service";
+import { useEffect } from "react";
+import { useState } from "react";
+import { getEkyInfo } from "../../store/actions/userProfileAction";
 
 function Nav() {
   // const [currentUser, setCurrentUser] = useState({});
   const userData = useSelector((state) => state.userProfile);
   const { username } = userData;
 
+  const [firstChar, setFirstChar] = useState("");
+
   const logOut = () => {
     AuthService.logout();
   };
+  // console.log(userData);
+  const { userID } = userData;
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (userID) {
+      dispatch(getEkyInfo(userID));
+    }
+  }, [userID, dispatch]);
+
+  // console.log(userData);
+  const { kyc } = userData;
+
+  useEffect(() => {
+    kyc &&
+      setFirstChar(
+        kyc.first_name?.charAt(0)?.toUpperCase() +
+          kyc.last_name?.charAt(0)?.toUpperCase()
+      );
+  }, [kyc]);
 
   return (
     <>
@@ -33,11 +58,11 @@ function Nav() {
         </div>
         <div className="flex-none">
           <div className="dropdown dropdown-end">
-            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-              <div className="w-10 rounded-full">
-                <img src="" alt="Profile" />
+            <div tabIndex={0} className="avatar placeholder  cursor-pointer">
+              <div className="bg-cyan-500 text-white text-xl rounded-full w-11">
+                <span>{firstChar ? firstChar : "M"}</span>
               </div>
-            </label>
+            </div>
             <ul
               tabIndex={0}
               className="p-2 mt-3 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52 dark:text-black"
