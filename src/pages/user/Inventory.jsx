@@ -76,7 +76,7 @@ function Inventory() {
         <CustomizedMenus
           data={row}
           showEditModal={showEditModal}
-          showAssignModal={showAssignModal}
+          showDetailModal={showDetailModal}
           showAssignLoan={showAssignLoan}
         />
       ),
@@ -244,11 +244,11 @@ function Inventory() {
     });
   };
 
-  const showAssignFormModal = (values) => {
+  const showSingleItemDetail = (values) => {
     console.log(values);
     return new Promise((resolve, reject) => {
       MySwal.fire({
-        title: "Assign Sales",
+        title: "Item Details",
         html: (
           <AssignInventory
             values={values}
@@ -299,6 +299,7 @@ function Inventory() {
       });
     });
   };
+
   const showAssignLoanForm = (values) => {
     return new Promise((resolve, reject) => {
       MySwal.fire({
@@ -380,8 +381,8 @@ function Inventory() {
       .catch(() => console.log("Modal closed"));
   };
 
-  const showAssignModal = (data) => {
-    showAssignFormModal({
+  const showDetailModal = (data) => {
+    showSingleItemDetail({
       item_id: data.item_id ? data?.item_id : "",
       sales_id: "",
       merchant_id: userID,
@@ -416,13 +417,13 @@ function Inventory() {
       >
         Add Inventory
       </button>
-      <button
+      {/* <button
         type="button"
         className="mb-4 ml-2 btn btn-outline btn-primary"
         onClick={showAssignModal}
       >
         Assign Sales
-      </button>
+      </button> */}
       <button
         type="button"
         className="mb-4 ml-2 btn btn-outline btn-primary"

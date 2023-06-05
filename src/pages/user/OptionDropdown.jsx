@@ -9,7 +9,8 @@ import EditIcon from "@mui/icons-material/Edit";
 // import FileCopyIcon from "@mui/icons-material/FileCopy";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 // import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import SupportAgentIcon from "@mui/icons-material/SupportAgent";
+// import SupportAgentIcon from "@mui/icons-material/SupportAgent";
+import InfoIcon from "@mui/icons-material/Info";
 import CreditScoreIcon from "@mui/icons-material/CreditScore";
 
 const StyledMenu = styled((props) => (
@@ -57,7 +58,7 @@ const StyledMenu = styled((props) => (
 
 export default function CustomizedMenus({
   data,
-  showAssignModal,
+  showDetailModal,
   showAssignLoan,
   showEditModal,
 }) {
@@ -105,13 +106,13 @@ export default function CustomizedMenus({
         </MenuItem>
         <MenuItem
           onClick={() => {
-            showAssignModal(data);
+            showDetailModal(data);
             handleClose();
           }}
           disableRipple
         >
-          <SupportAgentIcon />
-          Assign Sales
+          <InfoIcon />
+          Details
         </MenuItem>
         {/* <Divider sx={{ my: 0.5 }} /> */}
         <MenuItem
