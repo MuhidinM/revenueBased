@@ -16,6 +16,10 @@ const business_type = [
   { label: "Partnership", value: "Partnership" },
   { label: "Coorporation", value: "Coorporation" },
 ];
+const compliance_aml = [
+  { label: "No", value: "No" },
+  { label: "Yes", value: "Yes" },
+];
 
 function Profile() {
   const dispatch = useDispatch();
@@ -166,9 +170,19 @@ function Profile() {
                   {!successful && (
                     <>
                       <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
-                        <h2 className="mb-4 text-xl font-bold text-gray-900 sm:col-span-2 dark:text-white">
+                        <h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-white">
                           Pesonal Information
                         </h2>
+                        <div className="">
+                          <label className="cursor-pointer label">
+                            <span className="label-text">Acitve</span>
+                            <input
+                              type="checkbox"
+                              className="toggle toggle-primary"
+                              checked
+                            />
+                          </label>
+                        </div>
                         <div className="w-full">
                           <Input
                             label="first_name"
@@ -252,18 +266,6 @@ function Profile() {
                         </div>
 
                         <div className="w-full">
-                          <Input
-                            label="legal_entity_type"
-                            title="Legal Entity Type"
-                            name="legal_entity_type"
-                            id="legal_entity_type"
-                            place="legal entity type"
-                            value={props.values.legal_entity_type}
-                            handleChange={props.handleChange}
-                            disabled={activeKYC ? true : false}
-                          />
-                        </div>
-                        <div className="w-full">
                           <div className="">
                             <label
                               htmlFor={"date"}
@@ -282,17 +284,27 @@ function Profile() {
                             />
                           </div>
                         </div>
+
                         <div className="w-full">
-                          <Input
-                            label="compliance_aml"
-                            title="Compliance Anti Money Laundary"
-                            name="compliance_aml"
-                            id="compliance_aml"
-                            place="Compliance Anti Money Laundary"
-                            value={props.values.compliance_aml}
-                            handleChange={props.handleChange}
-                            disabled={activeKYC ? true : false}
-                          />
+                          {activeKYC ? (
+                            <Input
+                              label="compliance_aml"
+                              title="Compliance Anti Money Laundary"
+                              name="compliance_aml"
+                              id="compliance_aml"
+                              value={props.values.compliance_aml}
+                              disabled={true}
+                            />
+                          ) : (
+                            <Selectinput
+                              arr={compliance_aml}
+                              id="compliance_aml"
+                              name="compliance_aml"
+                              value={props.values.compliance_aml}
+                              handleChange={props.handleChange}
+                              title="Compliance Anti Money Laundary"
+                            />
+                          )}
                         </div>
                         <div className="w-full">
                           <Input
@@ -306,7 +318,7 @@ function Profile() {
                             disabled={activeKYC ? true : false}
                           />
                         </div>
-                        <div className="sm:col-span-2">
+                        <div className="">
                           <Input
                             label="website_url"
                             title="Website URL"
@@ -383,7 +395,7 @@ function Profile() {
                             <div className="">
                               <Fileinput
                                 lable="valid_identification"
-                                title="Valid Identification"
+                                title="Valid Identification (ID, TIN OR MEMORANDUM OF AGREEMENT)"
                                 name="valid_identification"
                                 fileInputTOForm={fileInputTOFormID}
                                 value={validIdentification}

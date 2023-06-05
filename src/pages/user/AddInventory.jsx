@@ -129,7 +129,7 @@ function AddInventory({ onSubmit, values, onCancel }) {
                   htmlFor="loan_limit"
                   className="mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Loan Limit(%)
+                  Max Loan Limit(%)
                 </label>
                 <span className="text-sm link-error">
                   <ErrorMessage name="loan_limit"></ErrorMessage>
