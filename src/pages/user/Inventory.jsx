@@ -328,13 +328,6 @@ function Inventory() {
       <button
         type="button"
         className="mb-4 ml-2 btn btn-outline btn-primary"
-        onClick={showAssignModal}
-      >
-        Assign Sales
-      </button>
-      <button
-        type="button"
-        className="mb-4 ml-2 btn btn-outline btn-primary"
         onClick={showAssignLoan}
       >
         Assign Loan

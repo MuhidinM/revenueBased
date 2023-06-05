@@ -3,6 +3,7 @@ import Stat from "./Stat";
 import DataTable from "react-data-table-component";
 import { useDispatch, useSelector } from "react-redux";
 import { getInventoryDetail } from "../../store/actions/getInventoryAction";
+import Banner from "./Banner";
 
 const columns = [
   {
@@ -71,6 +72,7 @@ function Home() {
   return (
     <>
       <div className="">
+        <Banner />
         <Stat items={inventoryDetail} />
         <div className="grid gap-4 mt-4 md:grid-cols-12 justify-self-auto">
           <div className="col-span-8">

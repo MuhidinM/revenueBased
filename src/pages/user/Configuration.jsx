@@ -8,6 +8,7 @@ import LoanConfigService from "../../services/loanConfig.service";
 import { getLoanConfigDetail } from "../../store/actions/getLoanConfigAction";
 
 function Configuration() {
+  const [activeTab, setActiveTab] = useState("loan");
   const userData = useSelector((state) => state.userProfile);
   // console.log(userData);
   const { userID } = userData;
@@ -103,70 +104,171 @@ function Configuration() {
 
   return (
     <div>
-      <div>
-        <form onSubmit={handleSubmit} className="md:flex md:space-x-4 mb-4 items-center">
-          <div className="grid flex-grow gap-6 mb-4 grid-cols-4 sm:mb-5">
-            <div className="w-full col-span-2">
-              <label
-                htmlFor="interest_rate"
-                className="mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >
-                Interest Rate
-              </label>
-              <span className="text-sm link-error">
-                {/* <ErrorMessage name="interest_rate"></ErrorMessage> */}
-              </span>
-              <input
-                type="number"
-                name="interest_rate"
-                id="interest_rate"
-                placeholder="Lelisa"
-                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                value={data.interest_rate}
-                onChange={handleChange}
-                required
+      <div className="my-4">
+        <div className="flex-wrap">
+          <button
+            className={`px-6 py-2 rounded-tl-lg ${
+              activeTab === "loan" ? "bg-cyan-500 text-white" : "bg-gray-200"
+            }`}
+            onClick={() => setActiveTab("loan")}
+          >
+            Loan Config
+          </button>
+          <button
+            className={`px-6 py-2 ${
+              activeTab === "category"
+                ? "bg-cyan-500 text-white"
+                : "bg-gray-200"
+            }`}
+            onClick={() => setActiveTab("category")}
+          >
+            Item Category
+          </button>
+        </div>
+        <div className="bg-white rounded-b-lg shadow p-4">
+          {activeTab === "loan" ? (
+            <div className="">
+              <div>
+                <form
+                  onSubmit={handleSubmit}
+                  className="md:flex md:space-x-4 mb-4 items-center"
+                >
+                  <div className="grid flex-grow gap-6 mb-4 grid-cols-4 sm:mb-5">
+                    <div className="w-full col-span-2">
+                      <label
+                        htmlFor="interest_rate"
+                        className="mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      >
+                        Interest Rate
+                      </label>
+                      <span className="text-sm link-error">
+                        {/* <ErrorMessage name="interest_rate"></ErrorMessage> */}
+                      </span>
+                      <input
+                        type="number"
+                        name="interest_rate"
+                        id="interest_rate"
+                        placeholder="Percent"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        value={data.interest_rate}
+                        onChange={handleChange}
+                        required
+                      />
+                    </div>
+                    <div className="w-full col-span-2">
+                      <label
+                        htmlFor="duration"
+                        className="mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      >
+                        Duration
+                      </label>
+                      <span className="text-sm link-error">
+                        {/* <ErrorMessage name="duration"></ErrorMessage> */}
+                      </span>
+                      <input
+                        type="number"
+                        name="duration"
+                        id="duration"
+                        placeholder="Month"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        value={data.duration}
+                        onChange={handleChange}
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div className="">
+                    <button
+                      type="submit"
+                      style={{ backgroundColor: "#01AFEF" }}
+                      className="swal2-confirm h-10 flex items-center swal2-styled"
+                    >
+                      {isEdit ? "Update" : "Register"}
+                    </button>
+                  </div>
+                </form>
+              </div>
+              <DataTable
+                columns={columns}
+                data={loanConfigDetail}
+                pagination
+                persistTableHeadstriped
+                highlightOnHover
               />
             </div>
-            <div className="w-full col-span-2">
-              <label
-                htmlFor="duration"
-                className="mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >
-                Duration
-              </label>
-              <span className="text-sm link-error">
-                {/* <ErrorMessage name="duration"></ErrorMessage> */}
-              </span>
-              <input
-                type="number"
-                name="duration"
-                id="duration"
-                placeholder="Lelisa"
-                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                value={data.duration}
-                onChange={handleChange}
-                required
+          ) : (
+            <div className="">
+              <div>
+                <form
+                  onSubmit={handleSubmit}
+                  className="md:flex md:space-x-4 mb-4 items-center"
+                >
+                  <div className="grid flex-grow gap-6 mb-4 grid-cols-4 sm:mb-5">
+                    <div className="w-full col-span-2">
+                      <label
+                        htmlFor="interest_rate"
+                        className="mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      >
+                        Item Type
+                      </label>
+                      <span className="text-sm link-error">
+                        {/* <ErrorMessage name="interest_rate"></ErrorMessage> */}
+                      </span>
+                      <input
+                        type="number"
+                        name="item_type"
+                        id="item_type"
+                        placeholder="Mobile"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        value={data.item_type}
+                        onChange={handleChange}
+                        required
+                      />
+                    </div>
+                    <div className="w-full col-span-2">
+                      <label
+                        htmlFor="duration"
+                        className="mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      >
+                        Item Code
+                      </label>
+                      <span className="text-sm link-error">
+                        {/* <ErrorMessage name="duration"></ErrorMessage> */}
+                      </span>
+                      <input
+                        type="number"
+                        name="item_code"
+                        id="item_code"
+                        placeholder="2234"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        value={data.item_code}
+                        onChange={handleChange}
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div className="">
+                    <button
+                      type="submit"
+                      style={{ backgroundColor: "#01AFEF" }}
+                      className="swal2-confirm h-10 flex items-center swal2-styled"
+                    >
+                      {isEdit ? "Update" : "Add"}
+                    </button>
+                  </div>
+                </form>
+              </div>
+              <DataTable
+                columns={columns}
+                // data={loanConfigDetail}
+                pagination
+                persistTableHeadstriped
+                highlightOnHover
               />
             </div>
-          </div>
-          <div className="">
-            <button
-              type="submit"
-              style={{ backgroundColor: "#01AFEF" }}
-              className="swal2-confirm h-10 flex items-center swal2-styled"
-            >
-              {isEdit ? "Update" : "Register"}
-            </button>
-          </div>
-        </form>
+          )}
+        </div>
       </div>
-      <DataTable
-        columns={columns}
-        data={loanConfigDetail}
-        pagination
-        persistTableHeadstriped
-        highlightOnHover
-      />
     </div>
   );
 }
