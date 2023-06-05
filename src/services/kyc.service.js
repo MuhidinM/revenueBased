@@ -4,9 +4,12 @@ const headers = {
   "Content-Type": "multipart/form-data",
 };
 
-const CreateKYC = async (formData) => {
+const CreateKYC = async (formData, setUpdated, updated) => {
   return await NODE_API.post("/eky/create", formData, headers).then(
-    (response) => response
+    (response) => {
+      setUpdated(!updated);
+      return response;
+    }
   );
 };
 // const AssignInventory = async (item_id, sales_id, merchant_id) => {

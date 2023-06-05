@@ -4,18 +4,24 @@ const headers = {
   "Content-Type": "multipart/form-data",
 };
 
-const CreateInventory = async (formData) => {
+const CreateInventory = async (formData, setUpdated, updated) => {
   return await NODE_API.post("/items/create", formData, headers).then(
-    (response) => response
+    (response) => {
+      setUpdated(!updated);
+      return response;
+    }
   );
 };
 
-const EditInventory = async (formData) => {
+const EditInventory = async (formData, setUpdated, updated) => {
   // formData.forEach((element) => {
   //   console.log(element);
   // });
   return await NODE_API.put("/items/editItem", formData, headers).then(
-    (response) => response
+    (response) => {
+      setUpdated(!updated);
+      return response;
+    }
   );
 };
 const ToggleStatus = async (row, setToggeled, toggeled) => {

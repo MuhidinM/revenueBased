@@ -45,7 +45,7 @@ function Registration() {
               Experience the freedom of shopping with Buy Now, Pay Later. Shop
               now, pay later, and enjoy the convenience of flexible payments.
               Join us today and elevate your shopping experience. Indulge in
-              what you love without compromise. 
+              what you love without compromise.
             </p>
           </div>
         </div>
@@ -85,7 +85,7 @@ function Registration() {
                         icon: "success",
                         confirmButtonText: "Cool",
                       });
-                      navigate("/auth");
+                      navigate("/");
                       window.location.reload();
                       // console.log(successful);
                     },

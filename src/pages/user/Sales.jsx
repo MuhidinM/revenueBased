@@ -36,6 +36,7 @@ const columns = [
 
 function Sales() {
   const userData = useSelector((state) => state.userProfile);
+  const [updated, setUpdated] = useState(true);
   // console.log(userData);
   const { userID } = userData;
   const dispatch = useDispatch();
@@ -106,7 +107,7 @@ function Sales() {
       dispatch(getSalesDetail(userID));
       dispatch(getSalesKyc(userID));
     }
-  }, [userID, dispatch]);
+  }, [userID, updated, dispatch]);
 
   const salesData = useSelector((state) => state.salesInfo);
   // console.log(userData);
@@ -155,7 +156,34 @@ function Sales() {
             onSubmit={(values) => {
               console.log("Value From The Child:", values.username);
 
-              dispatch(UserService.CreateSales(values.username, userID));
+              dispatch(
+                UserService.CreateSales(
+                  values.username,
+                  userID,
+                  setUpdated,
+                  updated
+                )
+                  .then(
+                    (response) =>
+                      response &&
+                      Swal.fire({
+                        icon: "success",
+                        title: "Sales Created Successfully",
+                        showConfirmButton: false,
+                        timer: 3000,
+                      })
+                  )
+                  .catch(
+                    (error) =>
+                      error &&
+                      Swal.fire({
+                        icon: "error",
+                        title: `Something went wrong`,
+                        showConfirmButton: false,
+                        timer: 3000,
+                      })
+                  )
+              );
             }}
             onCancel={() => MySwal.close()}
           />
@@ -187,7 +215,13 @@ function Sales() {
           content: "custom-content-class", // Add a custom class to the content
         },
         html: (
-          <SalesKycApprove sales={row} userID={userID} dispatch={dispatch} />
+          <SalesKycApprove
+            sales={row}
+            userID={userID}
+            dispatch={dispatch}
+            setUpdated={setUpdated}
+            updated={updated}
+          />
         ),
         onClose: () => reject(),
         onCancel: () => Swal.close(),

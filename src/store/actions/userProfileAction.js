@@ -6,6 +6,7 @@ import {
   SET_TOKEN,
   LOADING,
   GET_EKY_DETAIL,
+  GET_EKY_DETAIL_ERROR,
 } from "../types";
 // import AuthService from "../../services/auth.service";
 import UserService from "../../services/user.service";
@@ -54,7 +55,10 @@ export const getEkyInfo = (user) => async (dispatch) => {
       payload: ekyDetail,
     });
   } catch (error) {
-    console.log(error);
+    dispatch({
+      type: GET_EKY_DETAIL_ERROR,
+      payload: false,
+    });
   }
 };
 

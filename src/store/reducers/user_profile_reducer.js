@@ -8,6 +8,7 @@ import {
   SET_TOKEN,
   GET_EKY_DETAIL,
   LOADING,
+  GET_EKY_DETAIL_ERROR,
 } from "../types";
 
 const initialState = {
@@ -75,6 +76,12 @@ export default function (state = initialState, action) {
         ...state,
         kyc: action.payload,
         loading: false,
+      };
+    case GET_EKY_DETAIL_ERROR:
+      return {
+        ...state,
+        loading: false,
+        kyc: null,
       };
     default:
       return state;

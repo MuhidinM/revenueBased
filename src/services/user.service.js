@@ -95,12 +95,15 @@ const CreateBankAccount = async (
     .then((response) => response.data);
 };
 
-const CreateSales = async (username, merchant_id) => {
+const CreateSales = async (username, merchant_id, setUpdated, updated) => {
   // console.log("username", username);
   return await NODE_API.post("/sales/register", {
     username,
     merchant_id,
-  }).then((response) => console.log("success"));
+  }).then((response) => {
+    setUpdated(!updated);
+    return response;
+  });
 };
 
 const getAllSales = async (merchant_id) => {
@@ -120,17 +123,23 @@ const getSalesKycDetail = async (merchant_id) => {
   );
 };
 
-const approveSales = async (sales_kyc_id, merchant_id) => {
+const approveSales = async (sales_kyc_id, merchant_id, setUpdated, updated) => {
   return await NODE_API.put(`/sales/approveKyc`, {
     sales_kyc_id,
     merchant_id,
-  }).then((response) => response.data);
+  }).then((response) => {
+    setUpdated(updated);
+    return response.data;
+  });
 };
-const rejectSales = async (sales_kyc_id, merchant_id) => {
+const rejectSales = async (sales_kyc_id, merchant_id, setUpdated, updated) => {
   return await NODE_API.put(`/sales/rejectKyc`, {
     sales_kyc_id,
     merchant_id,
-  }).then((response) => response.data);
+  }).then((response) => {
+    setUpdated(updated);
+    return response.data;
+  });
 };
 
 const UserService = {

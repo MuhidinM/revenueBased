@@ -87,6 +87,7 @@ function Inventory() {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.userProfile);
   const [toggeled, setToggeled] = useState(false);
+  const [updated, setUpdated] = useState(true);
   // console.log(userData);
   const { userID } = userData;
 
@@ -94,7 +95,7 @@ function Inventory() {
     if (userID) {
       dispatch(getInventoryDetail(userID));
     }
-  }, [userID, toggeled, dispatch]);
+  }, [userID, toggeled, updated, dispatch]);
 
   const inventoryInfo = useSelector((state) => state.inventoryInfo);
   // console.log(userData);
@@ -144,7 +145,29 @@ function Inventory() {
               formData.append("merchant_id", userID);
               resetForm({ values: "" });
 
-              dispatch(InventoryService.CreateInventory(formData));
+              dispatch(
+                InventoryService.CreateInventory(formData, setUpdated, updated)
+                  .then(
+                    (response) =>
+                      response &&
+                      Swal.fire({
+                        icon: "success",
+                        title: "Inventory Created Successfully",
+                        showConfirmButton: false,
+                        timer: 3000,
+                      })
+                  )
+                  .catch(
+                    (error) =>
+                      error &&
+                      Swal.fire({
+                        icon: "error",
+                        title: `Something went wrong`,
+                        showConfirmButton: false,
+                        timer: 3000,
+                      })
+                  )
+              );
             }}
             onCancel={() => MySwal.close()}
           />
@@ -180,7 +203,34 @@ function Inventory() {
               formData.append("item_id", data.item_id);
               resetForm({ values: "" });
 
-              dispatch(InventoryService.EditInventory(formData, data));
+              dispatch(
+                InventoryService.EditInventory(
+                  formData,
+                  data,
+                  setUpdated,
+                  updated
+                )
+                  .then(
+                    (response) =>
+                      response &&
+                      Swal.fire({
+                        icon: "success",
+                        title: "Inventory Edited Successfully",
+                        showConfirmButton: false,
+                        timer: 3000,
+                      })
+                  )
+                  .catch(
+                    (error) =>
+                      error &&
+                      Swal.fire({
+                        icon: "error",
+                        title: `Something went wrong`,
+                        showConfirmButton: false,
+                        timer: 3000,
+                      })
+                  )
+              );
             }}
             onCancel={() => MySwal.close()}
           />
@@ -215,6 +265,27 @@ function Inventory() {
                   values.sales_id,
                   userID
                 )
+
+                  .then(
+                    (response) =>
+                      response &&
+                      Swal.fire({
+                        icon: "success",
+                        title: "Inventory Assigned Successfully",
+                        showConfirmButton: false,
+                        timer: 3000,
+                      })
+                  )
+                  .catch(
+                    (error) =>
+                      error &&
+                      Swal.fire({
+                        icon: "error",
+                        title: `Something went wrong`,
+                        showConfirmButton: false,
+                        timer: 3000,
+                      })
+                  )
               );
             }}
             onCancel={() => MySwal.close()}
@@ -244,6 +315,26 @@ function Inventory() {
                   values.loan_conf_id,
                   userID
                 )
+                  .then(
+                    (response) =>
+                      response &&
+                      Swal.fire({
+                        icon: "success",
+                        title: "Item Assigned to Loan Successfully",
+                        showConfirmButton: false,
+                        timer: 3000,
+                      })
+                  )
+                  .catch(
+                    (error) =>
+                      error &&
+                      Swal.fire({
+                        icon: "error",
+                        title: `Something went wrong`,
+                        showConfirmButton: false,
+                        timer: 3000,
+                      })
+                  )
               );
             }}
             onCancel={() => MySwal.close()}

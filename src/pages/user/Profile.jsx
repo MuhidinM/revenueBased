@@ -9,6 +9,7 @@ import * as Yup from "yup";
 // import { CreateOrUpdate } from "../store/actions/";
 import KYCService from "../../services/kyc.service";
 import { getEkyInfo } from "../../store/actions/userProfileAction";
+import Swal from "sweetalert2";
 
 const business_type = [
   { label: "Sole Proprietorship", value: "Sole Proprietorship" },
@@ -18,6 +19,8 @@ const business_type = [
 
 function Profile() {
   const dispatch = useDispatch();
+  const [updated, setUpdated] = useState(true);
+
   const userData = useSelector((state) => state.userProfile);
   // console.log(userData);
   const { userID } = userData;
@@ -25,7 +28,7 @@ function Profile() {
     if (userID) {
       dispatch(getEkyInfo(userID));
     }
-  }, [userID, dispatch]);
+  }, [userID, updated, dispatch]);
 
   // console.log(userData);
   const { kyc, loading } = userData;
@@ -78,7 +81,7 @@ function Profile() {
   return (
     <>
       {loading ? (
-        <span>hello</span>
+        <span>Loading</span>
       ) : (
         <section className="m-8 bg-white dark:bg-gray-900">
           <div className="max-w-2xl px-4 py-8 mx-auto lg:py-16">
@@ -133,9 +136,29 @@ function Profile() {
                 formData.append("agreement_doc", agrementDoc);
                 formData.append("merchant_id", userID);
                 // console.log(formData);
-                dispatch(KYCService.CreateKYC(formData))
-                  .then((res) => console.log(res))
-                  .catch((e) => console.log(e));
+                dispatch(
+                  KYCService.CreateKYC(formData, setUpdated, updated)
+                    .then(
+                      (response) =>
+                        response &&
+                        Swal.fire({
+                          icon: "success",
+                          title: "kyc Created Successfully",
+                          showConfirmButton: false,
+                          timer: 3000,
+                        })
+                    )
+                    .catch(
+                      (error) =>
+                        error &&
+                        Swal.fire({
+                          icon: "error",
+                          title: `Something went wrong`,
+                          showConfirmButton: false,
+                          timer: 3000,
+                        })
+                    )
+                );
               }}
             >
               {(props) => (
