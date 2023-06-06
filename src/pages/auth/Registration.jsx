@@ -34,10 +34,10 @@ function Registration() {
   let navigate = useNavigate();
   return (
     <>
-      <section className="bg-gray-50 dark:bg-gray-900 lg:flex">
+      <section className="bg-gray-50 lg:mx-32 dark:bg-gray-900 lg:flex">
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:w-1/2 md:h-screen lg:py-0">
-          <div className="w-full max-w-xl mb-12 xl:mb-0 xl:pr-16 xl:w-7/12">
-            <img className="w-full mb-4" src={logo} alt="front credit card" />
+          <div className="w-full max-w-xl mb-12 xl:mb-0 xl:pr-16 xl:w-full">
+            <img className="w-full mb-2" src={logo} alt="front credit card" />
             <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold tracking-tight text-black dark:text-white sm:text-4xl sm:leading-none">
               Shop Now, Pay Later
             </h2>
@@ -53,7 +53,7 @@ function Registration() {
           <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                Create and account
+                Create <span className="text-primary">Merchant</span> Account
               </h1>
               <Formik
                 initialValues={{

@@ -1,4 +1,17 @@
 import React, { useState, useEffect } from "react";
+import Swal from "sweetalert2";
+import BankAccountServices from "../../services/bank-account.services";
+import AuthService from "../../services/auth.service";
+import Modal from "../../components/Modal";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getAccounts,
+  setPrimaryAccount,
+} from "../../store/actions/bank_accountAction";
+import Selectinput from "../../components/Selectinput";
+import ModalFire from "../../components/index";
+import Otp from "../../components/Otp";
+import withReactContent from "sweetalert2-react-content";
 import DataTable from "react-data-table-component";
 
 const columns = [
@@ -29,97 +42,155 @@ const columns = [
   },
 ];
 
-// const MySwal = withReactContent(Swal);
+// const choose = [];
+// choose[0] = { label: "Set Primary", value: "1" };
+const MySwal = withReactContent(Swal);
 function Accounts() {
-  const [data, setData] = useState({
-    accountNumber: "",
-    accountHolder: "",
-  });
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const AccountListData = useSelector((state) => state.accountsList);
+  console.log(AccountListData);
+  const { loading, error, bankAccounts } = AccountListData;
+  console.log("Account Numbers:", bankAccounts);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAccounts());
+  }, [dispatch]);
+
+  console.log(bankAccounts);
+
+  const interpretResponse = (response) => {
+    let actionResponse = JSON.stringify(response);
+    console.log("Action Response Is" + actionResponse.response);
+    console.log(
+      " Response Is" + response.response,
+      response.message + "",
+      response.responseCode
+    );
+    if (response.response === "success" || response.responseCode == 200) {
+      console.log(response);
+      console.log("Rsponse from useEffect is here" + response);
+      Swal.fire({
+        icon: "success",
+        title: "Account Updated",
+        showConfirmButton: false,
+        timer: 3000,
+      });
+    } else if (response.responseCode === 403 && response.respone === "error") {
+      console.log("Un Authorised User ");
+      Swal.fire({
+        icon: "error",
+        title: response.message,
+        showConfirmButton: false,
+        timer: 3000,
+      });
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Account Is Not Updated",
+        showConfirmButton: false,
+        timer: 3000,
+      });
+    }
   };
+
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setData({
-      data,
-      [name]: value,
-    });
+    e.preventDefault();
+
+    if (e.target.value != "1") {
+      return new Promise((resolve, reject) => {
+        MySwal.fire({
+          title: "Are you sure?",
+          text: `You want to set ${e.target.value}Your Primary Account?`,
+          icon: "warning",
+          // dangerMode: true,
+          showCancelButton: true,
+          confirmButtonColor: "#01ADED",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes!",
+        }).then((result) => {
+          console.log(result);
+          if (result.isConfirmed === true) {
+            const user = localStorage.getItem("user");
+            BankAccountServices.sendOtp();
+            const value = {
+              first: "",
+              second: "",
+              third: "",
+              fourth: "",
+              fifth: "",
+              sixth: "",
+            };
+
+            MySwal.fire({
+              title: "",
+              html: (
+                <Otp
+                  values={value}
+                  onSubmit={(values) => {
+                    console.log("Hello from the second swal");
+                    // resolve(values);
+                    const otp =
+                      values.first +
+                      values.second +
+                      values.third +
+                      values.fourth +
+                      values.fifth +
+                      values.sixth;
+
+                    BankAccountServices.confirmOtp(user.user.phone_number, otp);
+                  }}
+                  onCancel={() => MySwal.close()}
+                ></Otp>
+              ),
+
+              // onClose: () => reject(),
+              showConfirmButton: false,
+            });
+            <Otp></Otp>;
+          }
+        });
+      });
+    }
   };
+
+  // if (bankAccounts) {
+  //   console.log("Accounts",bankAccounts);
+  //   for (let index = 0; index < bankAccounts.length; index++) {
+  //     const element = bankAccounts[index];
+  //     // console.log(element);
+  //     console.log("running");
+  //     // if (choose.length < bankAccounts.length) {
+  //       choose = bankAccounts.map((element) =>({
+  //         label: element.bankName + "-" + element.accountNumber,
+  //         value: element.bankaccount_id,
+  //       // }));
+  //     }
+  //   }
+  const choose = bankAccounts.map((element) => ({
+    label: element.bankName + "-" + element.accountNumber,
+    value: element.bankaccount_id,
+  }));
+  const renderList = bankAccounts.map((item, index) => (
+    <tr>
+      <th>{item.bankaccount_id}</th>
+      <td>{item.accountHolderName}</td>
+      <td>{item.accountNumber}</td>
+      <td>{item.bankName}</td>
+      <td>{item.primaryAccount === "1" ? "primary" : "secondary"}</td>
+      <td>{item.status === "0" ? "pending" : "activated"}</td>
+    </tr>
+  ));
   return (
     <>
       <div className="grid gap-4 md:grid-cols-12 justify-self-auto">
         <div className="col-span-12">
           <div className="grid grid-cols-2 gap-2 sm:grid-cols-12">
             <div className="col-span-9 mt-6">
-              <form onSubmit={handleSubmit}>
-                <div className="grid gap-2 sm:grid-cols-6 sm:gap-6 sm:mb-5">
-                  <div className="col-span-2">
-                    <span className="text-sm link-error"></span>
-                    <label
-                      htmlFor="pno"
-                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                    >
-                      Account Number
-                    </label>
-                    <input
-                      type="number"
-                      name="accountNumber"
-                      id="accountNumber"
-                      value={data.accountNumber}
-                      onChange={handleChange}
-                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5"
-                      placeholder="account number"
-                      required
-                    />
-                  </div>
-                  <div className="col-span-2">
-                    <span className="text-sm link-error"></span>
-                    <label
-                      htmlFor="pno"
-                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                    >
-                      Account Holder Name
-                    </label>
-                    <input
-                      type="text"
-                      name="accountHolder"
-                      id="accountHolder"
-                      value={data.accountHolder}
-                      // onChange={h}
-                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5"
-                      placeholder="Name"
-                      disabled
-                    />
-                  </div>
-                  <div className="col-span-2 mt-5">
-                    {data?.accountHolder?.length > 0 ? (
-                      <button
-                        type="submit"
-                        className="swal2-confirm swal2-styled btn-primary"
-                      >
-                        Submit
-                      </button>
-                    ) : (
-                      <button
-                        // type="submit"
-                        onClick={() =>
-                          setData({
-                            ...data,
-                            accountHolder: "Yared Mesele Tefera",
-                          })
-                        }
-                        className="swal2-confirm swal2-styled btn-primary text-xl"
-                      >
-                        verify
-                      </button>
-                    )}
-                  </div>
-                </div>
-              </form>
+              <ModalFire></ModalFire>
             </div>
             {/* <div className="col-span-3">
               <Selectinput
-                arr={[]}
+                arr={choose}
                 id="choose"
                 name="choose"
                 handleChange={handleChange}
@@ -132,7 +203,7 @@ function Accounts() {
             <DataTable
               title="Account List"
               columns={columns}
-              data={[]}
+              data={bankAccounts}
               pagination
               // paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
               subHeader

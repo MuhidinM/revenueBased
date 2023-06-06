@@ -1,15 +1,38 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Input from "../../components/Input";
-import Selectinput from "../../components/Selectinput";
+// import Selectinput from "../../components/Selectinput";
 import Pdfinput from "./Pdfinput";
 import { useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
+import {
+  generateLoanDetailPdf,
+  // getLoanRequestDetail,
+} from "../../store/actions/getLoanConfigAction";
 
 function LoanRequestForm() {
-  const handleDownload = (event) => {
-    event.preventDefault();
-    const url = event.target.href;
-    window.open(url, "_blank");
+  const dispatch = useDispatch();
+  const userData = useSelector((state) => state.userProfile);
+  // console.log(userData);
+  const { userID } = userData;
+
+  // useEffect(() => {
+  //   if (userID) {
+  //     dispatch(getLoanRequestDetail(userID));
+  //   }
+  // }, [userID, dispatch]);
+
+  // const loanData = useSelector((state) => state.loanConfigInfo);
+  // // console.log(userData);
+  // const { loanPdf } = loanData;
+  const [loanPdf, setLoanPdf] = useState("");
+
+  const handleDownload = () => {
+    const link = document.createElement("a");
+    link.href = loanPdf;
+    link.target = "_blank";
+    link.download = "filename.pdf"; // Set the desired file name
+    link.click();
   };
 
   const location = useLocation();
@@ -31,8 +54,10 @@ function LoanRequestForm() {
   const interest_rate = new URLSearchParams(location.search).get(
     "interest_rate"
   );
+  const loan_req_id = new URLSearchParams(location.search).get("loan_req_id");
 
   const [data, setData] = useState({
+    loan_req_id: loan_req_id ? loan_req_id : "",
     national_id: national_id ? national_id : "",
     first_name: first_name ? first_name : "",
     middle_name: middle_name ? middle_name : "",
@@ -41,11 +66,12 @@ function LoanRequestForm() {
     customer_phone_number: customer_phone_number ? customer_phone_number : "",
     item_id: item_id ? item_id : "",
     loan_amount: loan_amount ? loan_amount : "",
-    repayment_term: repayment_term ? repayment_term : "",
+    duration: repayment_term ? repayment_term : "",
     interest_rate: interest_rate ? interest_rate : "",
     loan_purpose: "",
     agreement_form: "",
   });
+  console.log("DFDFDFD", loanPdf);
   return (
     <div className="bg-white p-6">
       <div className="grid gap-4 grid-cols-6 sm:gap-6 bg-white p-6">
@@ -54,14 +80,35 @@ function LoanRequestForm() {
         </h2>
         <div className="w-full col-span-4">
           <div className="flex justify-end whitespace-nowrap items-center">
-            <span className="mr-5">Download Pdf from here :-</span>
-            <a
-              href="https://example.com/path-to-pdf"
-              className="text-cyan-500"
-              onClick={handleDownload}
-            >
-              Download PDF
-            </a>
+            <span className="mr-5 flex">Download Pdf from here :-</span>
+            {loanPdf?.length > 0 ? (
+              <a
+                onClick={handleDownload}
+                className="text-cyan-500 cursor-pointer"
+              >
+                Download PDF
+              </a>
+            ) : (
+              <span
+                className="text-cyan-500 cursor-pointer"
+                onClick={(e) =>
+                  dispatch(
+                    generateLoanDetailPdf(
+                      userID,
+                      data.loan_req_id,
+                      data.first_name,
+                      data.last_name,
+                      data.interest_rate,
+                      data.duration,
+                      10000,
+                      setLoanPdf
+                    )
+                  )
+                }
+              >
+                Generate PDF
+              </span>
+            )}
           </div>
         </div>
 
@@ -174,11 +221,11 @@ function LoanRequestForm() {
         <div className="w-full col-span-2">
           <span className="text-sm link-error"></span>
           <Input
-            label="repayment_term"
+            label="duration"
             title="Repayment Term"
             type="text"
-            value={data.repayment_term}
-            name="repayment_term"
+            value={data.duration}
+            name="duration"
             place="Repayment Term"
             required=""
           />

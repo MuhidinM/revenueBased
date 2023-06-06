@@ -25,7 +25,7 @@ function Inventory() {
         return (
           <div className="p-2">
             <img
-              src={`http://192.168.14.154:5000/image/${row.item_pic}`}
+              src={`http://192.168.2.173:5000/image/${row.item_pic}`}
               style={{ width: "40px", height: "40px" }}
               alt=""
             />
@@ -87,6 +87,7 @@ function Inventory() {
   const userData = useSelector((state) => state.userProfile);
   const [toggeled, setToggeled] = useState(false);
   const [updated, setUpdated] = useState(true);
+  const [toggleInput, setToggleInput] = useState(true);
   // console.log(userData);
   const { userID } = userData;
 
@@ -432,10 +433,10 @@ function Inventory() {
         name: "Status",
         cell: (row) => (
           <input
-            onChange={() => console.log("toggeled")}
+            onChange={() => setToggleInput(!toggleInput)}
             type="checkbox"
             className="toggle toggle-info"
-            checked={true}
+            checked={toggleInput}
           />
         ),
       },

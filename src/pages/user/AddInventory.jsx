@@ -6,7 +6,7 @@ import Fileinput from "../../components/Fileinput";
 import Addressproof from "../../components/Addressproof";
 
 function AddInventory({ onSubmit, values, onCancel }) {
-  const FILE_SIZE = 160 * 1024;
+  const FILE_SIZE = 1600 * 1024;
   const SUPPORTED_FORMATS = [
     "image/jpg",
     "image/jpeg",

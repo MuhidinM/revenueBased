@@ -1,4 +1,5 @@
 import axios from "axios";
+import { NODE_API } from "../utils/API";
 const API_URL = process.env.REACT_APP_API_NODE_URLS;
 const SPRING_ENDPOINT = process.env.REACT_APP_API_SPRING_URLS;
 const getBankAccountById = async (id) => {
@@ -34,15 +35,15 @@ const activateAccount = async (id, acId) => {
 
 const sendOtp = async (mobile) => {
   console.log(mobile);
-  return await axios
-    .post(SPRING_ENDPOINT + "sendOtp", { mobile })
-    .then((response) => response.data);
+  return await NODE_API.post(`/merchant/sendOtp`, {
+    mobile,
+  }).then((response) => response.data);
 };
 const getBankAccountByPhone = async (mobile) => {
   console.log(mobile);
-  return await axios
-    .post(SPRING_ENDPOINT + "", { mobile })
-    .then((response) => response.data);
+  return await NODE_API.get(`/merchant/userInfo?phoneNumber=${mobile}`).then(
+    (response) => response.data
+  );
 };
 
 const confirmOtp = async (mobile, text) => {
