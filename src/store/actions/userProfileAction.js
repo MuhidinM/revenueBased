@@ -6,6 +6,8 @@ import {
   SET_TOKEN,
   LOADING,
   GET_EKY_DETAIL,
+  GET_EKY_DETAIL_ERROR,
+  SET_ROLE,
 } from "../types";
 // import AuthService from "../../services/auth.service";
 import UserService from "../../services/user.service";
@@ -54,7 +56,10 @@ export const getEkyInfo = (user) => async (dispatch) => {
       payload: ekyDetail,
     });
   } catch (error) {
-    console.log(error);
+    dispatch({
+      type: GET_EKY_DETAIL_ERROR,
+      payload: false,
+    });
   }
 };
 
@@ -69,5 +74,9 @@ export const setUsername = (item) => ({
 });
 export const setToken = (item) => ({
   type: SET_TOKEN,
+  payload: item,
+});
+export const setRole = (item) => ({
+  type: SET_ROLE,
   payload: item,
 });

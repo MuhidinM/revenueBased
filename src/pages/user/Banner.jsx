@@ -24,17 +24,27 @@ const Banner = () => {
               </span>
               <p className="ml-3 font-medium text-white truncate">
                 <span className="inline">
-                  Please Update your business information to start receiving
-                  payments.
+                  Please Update your information to start receiving service.
                 </span>
               </p>
             </div>
+            <span className="text-white font-bold">Profile Completed</span>
+            <div
+              className="radial-progress text-white mx-2"
+              style={{
+                "--value": "70",
+                "--size": "3rem",
+                "--thickness": "5px",
+              }}
+            >
+              70%
+            </div>
             <div className="flex-shrink-0 order-3 w-full mt-2 sm:order-2 sm:mt-0 sm:w-auto">
               <a
-                href="users/setting"
+                href="users/profile"
                 className="flex items-center justify-center px-4 py-2 text-sm font-medium text-primary bg-white border border-transparent rounded-md shadow-sm hover:bg-indigo-50"
               >
-                Go to Settings
+                Go to Profile
               </a>
             </div>
           </div>

@@ -2,13 +2,15 @@ import React from "react";
 import DataTable from "react-data-table-component";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { getSalesDetail } from "../../store/actions/getSalesAction";
+// import { getSalesDetail } from "../../store/actions/getSalesAction";
 import { useState } from "react";
 import LoanConfigService from "../../services/loanConfig.service";
 import { getLoanConfigDetail } from "../../store/actions/getLoanConfigAction";
+import Swal from "sweetalert2";
 
 function Configuration() {
   const [activeTab, setActiveTab] = useState("loan");
+  const [updated, setUpdated] = useState();
   const userData = useSelector((state) => state.userProfile);
   // console.log(userData);
   const { userID } = userData;
@@ -18,7 +20,7 @@ function Configuration() {
     if (userID) {
       dispatch(getLoanConfigDetail(userID));
     }
-  }, [userID, dispatch]);
+  }, [userID, updated, dispatch]);
 
   const loanConfigData = useSelector((state) => state.loanConfigInfo);
   // console.log(userData);
@@ -29,6 +31,11 @@ function Configuration() {
   const [data, setData] = useState({
     interest_rate: "",
     duration: "",
+    merchant_id: userID,
+  });
+  const [categorydata, setCategoryData] = useState({
+    item_type: "",
+    item_code: "",
     merchant_id: userID,
   });
 
@@ -42,6 +49,16 @@ function Configuration() {
     });
     setIsEdit(true);
   };
+  const handleCategoryEdit = (row) => {
+    setCategoryData({
+      ...categorydata,
+      category_id: row.category_id,
+      item_type: row.item_type,
+      item_code: row.item_code,
+      merchant_id: userID,
+    });
+    setIsEdit(true);
+  };
 
   const columns = [
     {
@@ -50,12 +67,12 @@ function Configuration() {
       sortable: true,
     },
     {
-      name: "Year",
+      name: "Duration",
       selector: (row) => row.duration,
       sortable: true,
     },
     {
-      name: "Year",
+      name: "Created At",
       selector: (row) => new Date(row.createdAt)?.toISOString().split("T")[0],
       sortable: true,
     },
@@ -90,13 +107,68 @@ function Configuration() {
       [name]: value,
     });
   };
+  const handleCategoryChange = (e) => {
+    const { name, value } = e.target;
+    setCategoryData({
+      ...categorydata,
+      [name]: value,
+    });
+  };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     try {
       isEdit
-        ? dispatch(LoanConfigService.EditLoanConfig(data))
-        : dispatch(LoanConfigService.CreateLoanConfig(data));
+        ? dispatch(
+            LoanConfigService.EditLoanConfig(data)
+              .then((response) => {
+                setUpdated(!updated);
+                return (
+                  response &&
+                  Swal.fire({
+                    icon: "success",
+                    title: "Edited Successfully",
+                    showConfirmButton: false,
+                    timer: 3000,
+                  })
+                );
+              })
+              .catch((error) => {
+                setUpdated(!updated);
+                return (
+                  error &&
+                  Swal.fire({
+                    icon: "error",
+                    title: `Something went wrong`,
+                    showConfirmButton: false,
+                    timer: 3000,
+                  })
+                );
+              })
+          )
+        : dispatch(
+            LoanConfigService.CreateLoanConfig(data)
+              .then(
+                (response) =>
+                  response &&
+                  Swal.fire({
+                    icon: "success",
+                    title: "Created Successfully",
+                    showConfirmButton: false,
+                    timer: 3000,
+                  })
+              )
+              .catch(
+                (error) =>
+                  error &&
+                  Swal.fire({
+                    icon: "error",
+                    title: `Something went wrong`,
+                    showConfirmButton: false,
+                    timer: 3000,
+                  })
+              )
+          );
     } catch (error) {
       console.log(error);
     }
@@ -139,7 +211,7 @@ function Configuration() {
                         htmlFor="interest_rate"
                         className="mb-2 text-sm font-medium text-gray-900 dark:text-white"
                       >
-                        Interest Rate
+                        Interest Rate (%):
                       </label>
                       <span className="text-sm link-error">
                         {/* <ErrorMessage name="interest_rate"></ErrorMessage> */}
@@ -160,7 +232,7 @@ function Configuration() {
                         htmlFor="duration"
                         className="mb-2 text-sm font-medium text-gray-900 dark:text-white"
                       >
-                        Duration
+                        Duration (months):
                       </label>
                       <span className="text-sm link-error">
                         {/* <ErrorMessage name="duration"></ErrorMessage> */}
@@ -220,8 +292,8 @@ function Configuration() {
                         id="item_type"
                         placeholder="Mobile"
                         className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        value={data.item_type}
-                        onChange={handleChange}
+                        value={categorydata.item_type}
+                        onChange={handleCategoryChange}
                         required
                       />
                     </div>
@@ -241,8 +313,8 @@ function Configuration() {
                         id="item_code"
                         placeholder="2234"
                         className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        value={data.item_code}
-                        onChange={handleChange}
+                        value={categorydata.item_code}
+                        onChange={handleCategoryChange}
                         required
                       />
                     </div>

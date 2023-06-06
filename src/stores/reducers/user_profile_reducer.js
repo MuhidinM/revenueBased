@@ -1,3 +1,4 @@
+import { GET_EKY_DETAIL } from "../../store/types";
 import {
   CREATE_USER_PROFILE,
   CREATE_USER_PROFILE_ERROR,
@@ -57,6 +58,12 @@ export default function (state = initialState, action) {
         token: action.payload,
       };
     case LOGGED_IN_USER_DETAIL_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+    case GET_EKY_DETAIL:
       return {
         ...state,
         loading: false,

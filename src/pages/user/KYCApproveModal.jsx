@@ -1,9 +1,10 @@
 import React from "react";
 import UserService from "../../services/user.service";
+import Swal from "sweetalert2";
 // import { useDispatch } from "react-redux";
 // import LoanService from "../../services/loan.service";
 
-function SalesKycApprove({ sales, dispatch, userID }) {
+function SalesKycApprove({ sales, dispatch, userID, setUpdated, updated }) {
   //   console.log("loan", loan);
   //   const dispatch = useDispatch();
   return (
@@ -123,7 +124,29 @@ function SalesKycApprove({ sales, dispatch, userID }) {
           type="submit"
           className="bg-orange-500 mr-3 h-8 w-28 text-white rounded"
           onClick={() =>
-            dispatch(UserService.rejectSales(sales.kyc_id, userID))
+            dispatch(
+              UserService.rejectSales(sales.kyc_id, userID, setUpdated, updated)
+                .then(
+                  (response) =>
+                    response &&
+                    Swal.fire({
+                      icon: "error",
+                      title: "Rejected",
+                      showConfirmButton: false,
+                      timer: 3000,
+                    })
+                )
+                .catch(
+                  (error) =>
+                    error &&
+                    Swal.fire({
+                      icon: "error",
+                      title: `Something went wrong`,
+                      showConfirmButton: false,
+                      timer: 3000,
+                    })
+                )
+            )
           }
         >
           REJECT
@@ -131,7 +154,34 @@ function SalesKycApprove({ sales, dispatch, userID }) {
         <button
           type="submit"
           onClick={() =>
-            dispatch(UserService.approveSales(sales.kyc_id, userID))
+            dispatch(
+              UserService.approveSales(
+                sales.kyc_id,
+                userID,
+                setUpdated,
+                updated
+              )
+                .then(
+                  (response) =>
+                    response &&
+                    Swal.fire({
+                      icon: "success",
+                      title: "Approved Successfully",
+                      showConfirmButton: false,
+                      timer: 3000,
+                    })
+                )
+                .catch(
+                  (error) =>
+                    error &&
+                    Swal.fire({
+                      icon: "error",
+                      title: `Something went wrong`,
+                      showConfirmButton: false,
+                      timer: 3000,
+                    })
+                )
+            )
           }
           className="bg-cyan-500 h-8 w-28 text-white rounded"
         >

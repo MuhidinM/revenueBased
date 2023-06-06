@@ -68,7 +68,6 @@ function Inventory() {
           checked={row.status}
         />
       ),
-      sortable: true,
     },
     {
       name: "Actions",
@@ -76,7 +75,7 @@ function Inventory() {
         <CustomizedMenus
           data={row}
           showEditModal={showEditModal}
-          showAssignModal={showAssignModal}
+          showDetailModal={showDetailModal}
           showAssignLoan={showAssignLoan}
         />
       ),
@@ -87,6 +86,7 @@ function Inventory() {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.userProfile);
   const [toggeled, setToggeled] = useState(false);
+  const [updated, setUpdated] = useState(true);
   // console.log(userData);
   const { userID } = userData;
 
@@ -94,7 +94,7 @@ function Inventory() {
     if (userID) {
       dispatch(getInventoryDetail(userID));
     }
-  }, [userID, toggeled, dispatch]);
+  }, [userID, toggeled, updated, dispatch]);
 
   const inventoryInfo = useSelector((state) => state.inventoryInfo);
   // console.log(userData);
@@ -104,7 +104,7 @@ function Inventory() {
     if (userID) {
       dispatch(getLoanConfigDetail(userID));
     }
-  }, [userID, toggeled, dispatch]);
+  }, [userID, toggeled, updated, dispatch]);
 
   const handleToggleEdit = async (row) => {
     dispatch(InventoryService.ToggleStatus(row, setToggeled, toggeled));
@@ -144,7 +144,29 @@ function Inventory() {
               formData.append("merchant_id", userID);
               resetForm({ values: "" });
 
-              dispatch(InventoryService.CreateInventory(formData));
+              dispatch(
+                InventoryService.CreateInventory(formData, setUpdated, updated)
+                  .then(
+                    (response) =>
+                      response &&
+                      Swal.fire({
+                        icon: "success",
+                        title: "Inventory Created Successfully",
+                        showConfirmButton: false,
+                        timer: 3000,
+                      })
+                  )
+                  .catch(
+                    (error) =>
+                      error &&
+                      Swal.fire({
+                        icon: "error",
+                        title: `Something went wrong`,
+                        showConfirmButton: false,
+                        timer: 3000,
+                      })
+                  )
+              );
             }}
             onCancel={() => MySwal.close()}
           />
@@ -180,7 +202,34 @@ function Inventory() {
               formData.append("item_id", data.item_id);
               resetForm({ values: "" });
 
-              dispatch(InventoryService.EditInventory(formData, data));
+              dispatch(
+                InventoryService.EditInventory(
+                  formData,
+                  data,
+                  setUpdated,
+                  updated
+                )
+                  .then(
+                    (response) =>
+                      response &&
+                      Swal.fire({
+                        icon: "success",
+                        title: "Inventory Edited Successfully",
+                        showConfirmButton: false,
+                        timer: 3000,
+                      })
+                  )
+                  .catch(
+                    (error) =>
+                      error &&
+                      Swal.fire({
+                        icon: "error",
+                        title: `Something went wrong`,
+                        showConfirmButton: false,
+                        timer: 3000,
+                      })
+                  )
+              );
             }}
             onCancel={() => MySwal.close()}
           />
@@ -194,11 +243,11 @@ function Inventory() {
     });
   };
 
-  const showAssignFormModal = (values) => {
+  const showSingleItemDetail = (values) => {
     console.log(values);
     return new Promise((resolve, reject) => {
       MySwal.fire({
-        title: "Assign Sales",
+        title: "Item Details",
         html: (
           <AssignInventory
             values={values}
@@ -215,6 +264,29 @@ function Inventory() {
                   values.sales_id,
                   userID
                 )
+
+                  .then((response) => {
+                    setUpdated(!updated);
+                    return (
+                      response &&
+                      Swal.fire({
+                        icon: "success",
+                        title: "Inventory Assigned Successfully",
+                        showConfirmButton: false,
+                        timer: 3000,
+                      })
+                    );
+                  })
+                  .catch(
+                    (error) =>
+                      error &&
+                      Swal.fire({
+                        icon: "error",
+                        title: `Something went wrong`,
+                        showConfirmButton: false,
+                        timer: 3000,
+                      })
+                  )
               );
             }}
             onCancel={() => MySwal.close()}
@@ -228,6 +300,7 @@ function Inventory() {
       });
     });
   };
+
   const showAssignLoanForm = (values) => {
     return new Promise((resolve, reject) => {
       MySwal.fire({
@@ -244,6 +317,28 @@ function Inventory() {
                   values.loan_conf_id,
                   userID
                 )
+                  .then((response) => {
+                    setUpdated(!updated);
+                    return (
+                      response &&
+                      Swal.fire({
+                        icon: "success",
+                        title: "Item Assigned to Loan Successfully",
+                        showConfirmButton: false,
+                        timer: 3000,
+                      })
+                    );
+                  })
+                  .catch(
+                    (error) =>
+                      error &&
+                      Swal.fire({
+                        icon: "error",
+                        title: `Something went wrong`,
+                        showConfirmButton: false,
+                        timer: 3000,
+                      })
+                  )
               );
             }}
             onCancel={() => MySwal.close()}
@@ -289,8 +384,8 @@ function Inventory() {
       .catch(() => console.log("Modal closed"));
   };
 
-  const showAssignModal = (data) => {
-    showAssignFormModal({
+  const showDetailModal = (data) => {
+    showSingleItemDetail({
       item_id: data.item_id ? data?.item_id : "",
       sales_id: "",
       merchant_id: userID,
@@ -316,6 +411,55 @@ function Inventory() {
     [inventoryDetail]
   );
 
+  const ExpandableTableComponent = ({ data }) => {
+    const loanColumns = [
+      {
+        name: "Interest Rate",
+        selector: (row) => row.interest_rate,
+        sortable: true,
+      },
+      {
+        name: "Duration",
+        selector: (row) => row.duration,
+        sortable: true,
+      },
+      {
+        name: "totalAmountWithInterest",
+        selector: (row) => row?.items_loan?.totalAmountWithInterest,
+        sortable: true,
+      },
+      {
+        name: "Status",
+        cell: (row) => (
+          <input
+            onChange={() => console.log("toggeled")}
+            type="checkbox"
+            className="toggle toggle-info"
+            checked={true}
+          />
+        ),
+      },
+    ];
+    // Render the additional table component here
+    console.log("DFD", data);
+    return (
+      <div className="bg-gray-50">
+        <div className="m-2 mx-12 border-x-2 border-cyan-500">
+          <DataTable
+            columns={loanColumns}
+            data={data?.loanConfs}
+            // pagination
+            dense
+            persistTableHeadstriped
+            highlightOnHover
+            // expandableRows
+            // expandableRowsComponent={ExpandableTableComponent}
+          />
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div>
       <button
@@ -325,6 +469,13 @@ function Inventory() {
       >
         Add Inventory
       </button>
+      {/* <button
+        type="button"
+        className="mb-4 ml-2 btn btn-outline btn-primary"
+        onClick={showAssignModal}
+      >
+        Assign Sales
+      </button> */}
       <button
         type="button"
         className="mb-4 ml-2 btn btn-outline btn-primary"
@@ -338,6 +489,9 @@ function Inventory() {
         pagination
         persistTableHeadstriped
         highlightOnHover
+        expandableRows
+        dense
+        expandableRowsComponent={ExpandableTableComponent}
       />
     </div>
   );
