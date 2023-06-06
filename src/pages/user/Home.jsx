@@ -12,7 +12,7 @@ const columns = [
       return (
         <div className="p-2">
           <img
-            src={`http://192.168.14.245:5000/image/${row.item_pic}`}
+            src={`http://192.168.14.154:5000/image/${row.item_pic}`}
             style={{ width: "40px", height: "40px" }}
             alt=""
           />

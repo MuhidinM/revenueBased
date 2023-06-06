@@ -30,6 +30,11 @@ const columns = [
     sortable: true,
   },
   {
+    name: "Middle Name",
+    selector: (row) => row.middle_name,
+    sortable: true,
+  },
+  {
     name: "Last Name",
     selector: (row) => row.last_name,
     sortable: true,
@@ -48,6 +53,7 @@ const columns = [
     name: "Item",
     selector: (row) => row.item_id,
     sortable: true,
+    width: "80px",
   },
   {
     name: "Loan Amount",
@@ -80,13 +86,14 @@ const columns = [
         className="btn btn-outline  btn-xs w-24 btn-accent"
       >
         <Link
-          to={`/sales/request-form?national_id=${row?.national_id}&first_name=${row?.first_name}&last_name=${row?.last_name}&customer_account=${row?.customer_account}&customer_phone_number=${row?.customer_phone_number}&item_id=${row?.item_id}&loan_amount=${row?.loan_amount}&repayment_term=${row?.repayment_term}&interest_rate=${row?.interest_rate}`}
+          to={`/sales/request-form?national_id=${row?.national_id}&first_name=${row?.first_name}&middle_name=${row?.middle_name}&last_name=${row?.last_name}&customer_account=${row?.customer_account}&customer_phone_number=${row?.customer_phone_number}&item_id=${row?.item_id}&loan_amount=${row?.loan_amount}&repayment_term=${row?.repayment_term}&interest_rate=${row?.interest_rate}`}
         >
           Proceed
         </Link>
       </div>
     ),
     sortable: true,
+    width: "160px",
   },
 ];
 
@@ -94,6 +101,7 @@ const data = [
   {
     national_id: "1002",
     first_name: "Muhidin",
+    middle_name: "Jemal",
     last_name: "Misbah",
     customer_account: "100024822",
     customer_phone_number: "0935252353",
@@ -106,6 +114,7 @@ const data = [
   {
     national_id: "1004",
     first_name: "Abdi",
+    middle_name: "Jemal",
     last_name: "Tiruneh",
     customer_account: "1000251252",
     customer_phone_number: "0912512352",
@@ -118,6 +127,7 @@ const data = [
   {
     national_id: "1005",
     first_name: "Yared",
+    middle_name: "Jemal",
     last_name: "Mesele",
     customer_account: "1000254252",
     customer_phone_number: "09852525225",

@@ -15,6 +15,7 @@ function LoanRequestForm() {
   const location = useLocation();
   const national_id = new URLSearchParams(location.search).get("national_id");
   const first_name = new URLSearchParams(location.search).get("first_name");
+  const middle_name = new URLSearchParams(location.search).get("middle_name");
   const last_name = new URLSearchParams(location.search).get("last_name");
   const customer_account = new URLSearchParams(location.search).get(
     "customer_account"
@@ -34,6 +35,7 @@ function LoanRequestForm() {
   const [data, setData] = useState({
     national_id: national_id ? national_id : "",
     first_name: first_name ? first_name : "",
+    middle_name: middle_name ? middle_name : "",
     last_name: last_name ? last_name : "",
     customer_account: customer_account ? customer_account : "",
     customer_phone_number: customer_phone_number ? customer_phone_number : "",
@@ -88,6 +90,18 @@ function LoanRequestForm() {
             type="text"
             value={data.first_name}
             name="first_name"
+            place="Customer First Name"
+            required=""
+          />
+        </div>
+        <div className="w-full col-span-2">
+          <span className="text-sm link-error"></span>
+          <Input
+            label="middle_name"
+            title="Middle Name"
+            type="text"
+            value={data.middle_name}
+            name="middle_name"
             place="Customer First Name"
             required=""
           />
