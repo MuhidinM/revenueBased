@@ -104,7 +104,7 @@ export default function CustomizedMenus({
           <EditIcon />
           Edit
         </MenuItem>
-        <MenuItem
+        {/* <MenuItem
           onClick={() => {
             showDetailModal(data);
             handleClose();
@@ -113,7 +113,7 @@ export default function CustomizedMenus({
         >
           <InfoIcon />
           Details
-        </MenuItem>
+        </MenuItem> */}
         {/* <Divider sx={{ my: 0.5 }} /> */}
         <MenuItem
           onClick={() => {

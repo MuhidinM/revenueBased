@@ -8,6 +8,7 @@ import OTP from "./pages/auth/OTP";
 import PrivateRoiutes from "./pages/auth/PrivateRoutes";
 import AuthService from "./services/auth.service";
 import Sales from "./Sales";
+import RequireAuth from "./pages/auth/RequireAuth";
 
 function App() {
   const user = AuthService.getCurrentUser();
@@ -34,10 +35,12 @@ function App() {
       <Routes>
         <Route path="/*" element={<Auth />}></Route>
         <Route path="/otp" element={<OTP />}></Route>
-        <Route element={<PrivateRoiutes />}>
-          <Route path="/users/*" element={<Users />}></Route>
-          <Route path="/sales/*" element={<Sales />}></Route>
-        </Route>
+        {/* <Route element={<RequireAuth allowedRoles={"merchant"} />}> */}
+        <Route path="/users/*" element={<Users />}></Route>
+        {/* </Route>
+        <Route element={<RequireAuth allowedRoles={"sales"} />}> */}
+        <Route path="/sales/*" element={<Sales />}></Route>
+        {/* </Route> */}
         <Route path="*" element={<Error />}></Route>
       </Routes>
     </>

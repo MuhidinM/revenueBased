@@ -51,7 +51,7 @@ function Home() {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.userProfile);
   // console.log(userData);
-  const { userID } = userData;
+  const { userID, kyc } = userData;
 
   useEffect(() => {
     if (userID) {
@@ -72,7 +72,7 @@ function Home() {
   return (
     <>
       <div className="">
-        <Banner />
+        {!kyc && <Banner />}
         <Stat items={inventoryDetail} />
         <div className="grid gap-4 mt-4 md:grid-cols-12 justify-self-auto">
           <div className="col-span-8">

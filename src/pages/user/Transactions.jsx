@@ -12,11 +12,6 @@ const columns = [
     sortable: true,
   },
   {
-    name: "Message ID",
-    selector: (row) => row.messageId,
-    sortable: true,
-  },
-  {
     name: "Credit Account",
     selector: (row) => row.CREDITACCTNO,
     sortable: true,
@@ -42,14 +37,48 @@ const columns = [
     sortable: true,
   },
   {
-    name: "PROCESSINGDATE",
-    selector: (row) => row.PROCESSINGDATE,
-    sortable: true,
-  },
-  {
     name: "TRANSACTIONTYPE",
     selector: (row) => row.TRANSACTIONTYPE,
     sortable: true,
+  },
+];
+
+const data = [
+  {
+    transactionID: "101",
+    CREDITACCTNO: 10003258466,
+    DEBITACCTNO: 10000254637,
+    STATUS: "Success",
+    DEBITAMOUNT: 5500,
+    TRANSACTION_DATE: "20/5/2023",
+    TRANSACTIONTYPE: "FT",
+  },
+  {
+    transactionID: "102",
+    CREDITACCTNO: 10003258466,
+    DEBITACCTNO: 10000254637,
+    STATUS: "Success",
+    DEBITAMOUNT: 2100,
+    TRANSACTION_DATE: "20/5/2023",
+    TRANSACTIONTYPE: "FT",
+  },
+  {
+    transactionID: "103",
+    CREDITACCTNO: 10003258466,
+    DEBITACCTNO: 10000254637,
+    STATUS: "Success",
+    DEBITAMOUNT: 7000,
+    TRANSACTION_DATE: "20/5/2023",
+    TRANSACTIONTYPE: "FT",
+  },
+  {
+    transactionID: "104",
+    CREDITACCTNO: 10003258466,
+    DEBITACCTNO: 10000254637,
+    STATUS: "Success",
+    DEBITAMOUNT: 1300,
+    TRANSACTION_DATE: "20/5/2023",
+    TRANSACTIONTYPE: "FT",
   },
 ];
 
@@ -141,10 +170,10 @@ function Transactions() {
   );
   const [resetPaginationToggle, setResetPaginationToggle] =
     React.useState(false);
-  const filteredItems = transactionDetailAll.filter(
+  const filteredItems = data.filter(
     (item) =>
       item.transactionID &&
-      item.transactionID.toLowerCase().includes(filterText.toLowerCase())
+      item.transactionID?.toLowerCase().includes(filterText.toLowerCase())
   );
 
   const subHeaderComponentMemo = React.useMemo(() => {

@@ -68,7 +68,6 @@ function Inventory() {
           checked={row.status}
         />
       ),
-      sortable: true,
     },
     {
       name: "Actions",
@@ -105,7 +104,7 @@ function Inventory() {
     if (userID) {
       dispatch(getLoanConfigDetail(userID));
     }
-  }, [userID, toggeled, dispatch]);
+  }, [userID, toggeled, updated, dispatch]);
 
   const handleToggleEdit = async (row) => {
     dispatch(InventoryService.ToggleStatus(row, setToggeled, toggeled));
@@ -266,8 +265,9 @@ function Inventory() {
                   userID
                 )
 
-                  .then(
-                    (response) =>
+                  .then((response) => {
+                    setUpdated(!updated);
+                    return (
                       response &&
                       Swal.fire({
                         icon: "success",
@@ -275,7 +275,8 @@ function Inventory() {
                         showConfirmButton: false,
                         timer: 3000,
                       })
-                  )
+                    );
+                  })
                   .catch(
                     (error) =>
                       error &&
@@ -316,8 +317,9 @@ function Inventory() {
                   values.loan_conf_id,
                   userID
                 )
-                  .then(
-                    (response) =>
+                  .then((response) => {
+                    setUpdated(!updated);
+                    return (
                       response &&
                       Swal.fire({
                         icon: "success",
@@ -325,7 +327,8 @@ function Inventory() {
                         showConfirmButton: false,
                         timer: 3000,
                       })
-                  )
+                    );
+                  })
                   .catch(
                     (error) =>
                       error &&
@@ -408,6 +411,55 @@ function Inventory() {
     [inventoryDetail]
   );
 
+  const ExpandableTableComponent = ({ data }) => {
+    const loanColumns = [
+      {
+        name: "Interest Rate",
+        selector: (row) => row.interest_rate,
+        sortable: true,
+      },
+      {
+        name: "Duration",
+        selector: (row) => row.duration,
+        sortable: true,
+      },
+      {
+        name: "totalAmountWithInterest",
+        selector: (row) => row?.items_loan?.totalAmountWithInterest,
+        sortable: true,
+      },
+      {
+        name: "Status",
+        cell: (row) => (
+          <input
+            onChange={() => console.log("toggeled")}
+            type="checkbox"
+            className="toggle toggle-info"
+            checked={true}
+          />
+        ),
+      },
+    ];
+    // Render the additional table component here
+    console.log("DFD", data);
+    return (
+      <div className="bg-gray-50">
+        <div className="m-2 mx-12 border-x-2 border-cyan-500">
+          <DataTable
+            columns={loanColumns}
+            data={data?.loanConfs}
+            // pagination
+            dense
+            persistTableHeadstriped
+            highlightOnHover
+            // expandableRows
+            // expandableRowsComponent={ExpandableTableComponent}
+          />
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div>
       <button
@@ -437,6 +489,9 @@ function Inventory() {
         pagination
         persistTableHeadstriped
         highlightOnHover
+        expandableRows
+        dense
+        expandableRowsComponent={ExpandableTableComponent}
       />
     </div>
   );

@@ -5,8 +5,9 @@ import { Route, Routes } from "react-router-dom";
 import Sidebar from "./pages/sales/Sidebar";
 import Nav from "./pages/sales/Nav";
 import Inventory from "./pages/sales/Inventory";
-import LoanRequest from "./pages/sales/LoanRequest";
 import LoanList from "./pages/sales/LoanList";
+import LoanRequest from "./pages/sales/LoanRequest";
+import LoanRequestForm from "./pages/sales/LoanRequestForm";
 
 function Sales() {
   return (
@@ -20,6 +21,7 @@ function Sales() {
             <Routes>
               <Route index element={<Home />}></Route>
               <Route path="/inventory" element={<Inventory />}></Route>
+              <Route path="/request-form" element={<LoanRequestForm />}></Route>
               <Route path="/request" element={<LoanRequest />}></Route>
               <Route path="/loan" element={<LoanList />}></Route>
               <Route path="*" element={<E404 />}></Route>

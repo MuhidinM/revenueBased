@@ -40,7 +40,7 @@ function Sales() {
   // console.log(userData);
   const { userID } = userData;
   const dispatch = useDispatch();
-  const [activeTab, setActiveTab] = useState("all");
+  const [activeTab, setActiveTab] = useState("registered");
   const [filteredData, setFilteredData] = useState([]);
 
   const kycCol = [
@@ -248,7 +248,7 @@ function Sales() {
         Add New Sales
       </button>
       <div className="tabs tabs-boxed">
-        <a
+        {/* <a
           className={`tab ${activeTab === "all" && "tab-active"}`}
           onClick={() => setActiveTab("all")}
           style={{
@@ -289,7 +289,7 @@ function Sales() {
           onClick={() => setActiveTab("rejected")}
         >
           Rejected KYC
-        </a>
+        </a> */}
         <a
           className={`tab ${activeTab === "registered" && "tab-active"}`}
           onClick={() => setActiveTab("registered")}

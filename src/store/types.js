@@ -57,3 +57,4 @@ export const GET_EKY_DETAIL = "GET_EKY_DETAIL";
 export const LOADING = "LOADING";
 export const GET_SALES_KYC = "GET_SALES_KYC";
 export const GET_EKY_DETAIL_ERROR = "GET_EKY_DETAIL_ERROR";
+export const SET_ROLE = "SET_ROLE";

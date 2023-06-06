@@ -4,6 +4,7 @@ import { LOGIN_NODE_API } from "../utils/API";
 import jwtDecode from "jwt-decode";
 import { useSelector } from "react-redux";
 import {
+  setRole,
   setToken,
   setUserID,
   setUsername,
@@ -37,12 +38,16 @@ const login = async (username, password, setMessage, navigate, dispatch) => {
         const decoded = jwtDecode(res.data.token);
         console.log("this if from decoded", decoded);
         const user = jwt(res.data.token);
-        if (decoded?.role === "admin") {
+        if (decoded?.role === "sales") {
+          dispatch(setUsername(decoded?.email_address));
+          dispatch(setUserID(decoded?.sales_id));
+          dispatch(setRole(decoded?.role));
           navigate("/admin");
           window.location.reload();
         } else if (decoded?.role === "merchant") {
           dispatch(setUsername(decoded?.email_address));
           dispatch(setUserID(decoded?.merchant_id));
+          dispatch(setRole(decoded?.role));
           navigate("/users");
           // window.location.reload();
         }

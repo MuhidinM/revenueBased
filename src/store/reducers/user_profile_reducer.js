@@ -9,6 +9,7 @@ import {
   GET_EKY_DETAIL,
   LOADING,
   GET_EKY_DETAIL_ERROR,
+  SET_ROLE,
 } from "../types";
 
 const initialState = {
@@ -19,6 +20,7 @@ const initialState = {
   username: null,
   token: null,
   kyc: null,
+  roles: null,
 };
 
 export default function (state = initialState, action) {
@@ -82,6 +84,12 @@ export default function (state = initialState, action) {
         ...state,
         loading: false,
         kyc: null,
+      };
+    case SET_ROLE:
+      return {
+        ...state,
+        loading: false,
+        roles: action.payload,
       };
     default:
       return state;

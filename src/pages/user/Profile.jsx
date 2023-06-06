@@ -61,7 +61,6 @@ function Profile() {
     tin_number: Yup.string().required("Tin Number is required"),
     business_address: Yup.string().required("Business Address is required"),
     website_url: Yup.string().required("Website URL is required"),
-    legal_entity_type: Yup.string().required("Legal Entity Type is required"),
     date_of_establishment: Yup.string().required(
       "Date of Establishment is required"
     ),
@@ -85,7 +84,7 @@ function Profile() {
   return (
     <>
       {loading ? (
-        <span>Loading</span>
+        <span>Loading...</span>
       ) : (
         <section className="m-8 bg-white dark:bg-gray-900">
           <div className="max-w-2xl px-4 py-8 mx-auto lg:py-16">
@@ -100,9 +99,6 @@ function Profile() {
                   ? kyc?.business_address
                   : "",
                 website_url: kyc?.website_url ? kyc?.website_url : "",
-                legal_entity_type: kyc?.legal_entity_type
-                  ? kyc?.legal_entity_type
-                  : "",
                 date_of_establishment: kyc?.date_of_establishment
                   ? kyc?.date_of_establishment
                   : "",
@@ -134,7 +130,6 @@ function Profile() {
                   values.date_of_establishment
                 );
                 formData.append("compliance_aml", values.compliance_aml);
-                formData.append("merchant_status", values.merchant_status);
                 formData.append("valid_identification", validIdentification);
                 formData.append("business_license", businessLicence);
                 formData.append("agreement_doc", agrementDoc);
@@ -170,19 +165,21 @@ function Profile() {
                   {!successful && (
                     <>
                       <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
-                        <h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-white">
+                        <h2 className="mb-4 text-xl col-span-2 font-bold text-gray-900 dark:text-white">
                           Pesonal Information
                         </h2>
-                        <div className="">
+                        {/* <div className="">
                           <label className="cursor-pointer label">
                             <span className="label-text">Acitve</span>
                             <input
+                              onChange={props.handleChange}
                               type="checkbox"
-                              className="toggle toggle-primary"
-                              checked
+                              className="toggle toggle-info"
+                              checked={props?.values?.merchant_status}
                             />
                           </label>
-                        </div>
+                        </div> */}
+                        {/* <div></div> */}
                         <div className="w-full">
                           <Input
                             label="first_name"
@@ -306,7 +303,7 @@ function Profile() {
                             />
                           )}
                         </div>
-                        <div className="w-full">
+                        {/* <div className="w-full">
                           <Input
                             label="merchant_status"
                             title="Merchant Status"
@@ -317,8 +314,8 @@ function Profile() {
                             handleChange={props.handleChange}
                             disabled={activeKYC ? true : false}
                           />
-                        </div>
-                        <div className="">
+                        </div> */}
+                        <div className="col-span-2">
                           <Input
                             label="website_url"
                             title="Website URL"
