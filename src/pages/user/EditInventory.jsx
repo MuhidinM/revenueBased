@@ -1,18 +1,18 @@
 import React from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, ErrorMessage } from "formik";
 import * as Yup from "yup";
 // import Input from "../../components/Input";
-import Fileinput from "../../components/Fileinput";
+// import Fileinput from "../../components/Fileinput";
 import Addressproof from "../../components/Addressproof";
 
 function EditInventory({ onSubmit, values, onCancel, data }) {
-  const FILE_SIZE = 160 * 1024;
-  const SUPPORTED_FORMATS = [
-    "image/jpg",
-    "image/jpeg",
-    "image/gif",
-    "image/png",
-  ];
+  // const FILE_SIZE = 160 * 1024;
+  // const SUPPORTED_FORMATS = [
+  //   "image/jpg",
+  //   "image/jpeg",
+  //   "image/gif",
+  //   "image/png",
+  // ];
   const ValidationSchema = Yup.object().shape({
     item_code: Yup.string().required("Item Code is required"),
     item_price: Yup.string().required("Price is required"),

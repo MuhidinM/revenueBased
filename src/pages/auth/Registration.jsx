@@ -4,9 +4,9 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import AuthService from "../../services/auth.service";
 import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
+// import withReactContent from "sweetalert2-react-content";
 import logo from "./../../assets/images/merchantone1_logo-removebg-preview.png";
-const MySwal = withReactContent(Swal);
+// const MySwal = withReactContent(Swal);
 // import { useState } from "react";
 function Registration() {
   // const form = useRef();
@@ -19,7 +19,7 @@ function Registration() {
   // const [password, setPassword] = useState("");
   const [successful, setSuccessful] = useState(false);
   const [message, setMessage] = useState("");
-  const [isOpen, setOpen] = useState(false);
+  // const [open, setOpen] = useState(false);
   const validationSchema = Yup.object().shape({
     username: Yup.string().required("Username is required"),
     password: Yup.string()
@@ -70,7 +70,7 @@ function Registration() {
                   //   setSubmitting(false);
                   // }, 400);
                   // console.log(values);
-                  setOpen(true);
+                  // setOpen(true);
                   AuthService.register(
                     values.username,
                     values.password.toString()

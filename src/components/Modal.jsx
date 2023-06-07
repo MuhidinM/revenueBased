@@ -1,9 +1,9 @@
 import React from "react";
-import { useState } from "react";
+// import { useState } from "react";
 import Maccounts from "./Maccounts";
 import Mapi from "./Mapi";
-import Mbank from "./Mbank";
-import Msite from "./Msite";
+// import Mbank from "./Mbank";
+// import Msite from "./Msite";
 
 function Modal({ handleClose, show, children, page }) {
   // console.log(props.page);

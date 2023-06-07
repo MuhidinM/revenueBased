@@ -39,7 +39,7 @@ export const generateApiKey =
           email,
           expiryDate
         );
-        if (generateNewApiKey[1] == 200) {
+        if (generateNewApiKey[1] === 200) {
           // dispatch(satResponse("success"));
           console.log("Your Endpoint is created ");
           interpretResponse({
@@ -47,7 +47,7 @@ export const generateApiKey =
             response: "success",
             responseCode: generateNewApiKey[1],
           });
-        } else if (generateNewApiKey[1] == 403) {
+        } else if (generateNewApiKey[1] === 403) {
           interpretResponse({
             message: generateNewApiKey[0].message,
             response: "error",

@@ -16,14 +16,14 @@ export const addBank =
       const addedBank = await BankServices.addBank(bankName, bankCode);
       console.log(addedBank[0]);
       // eslint-disable-next-line eqeqeq
-      if (addedBank[1] == "200") {
+      if (addedBank[1] === "200") {
         // dispatch(satResponse("success"));
         interpretResponse({
           message: addedBank[0].message,
           response: "error",
           responseCode: addedBank[1],
         });
-      } else if (addedBank[1] == "403") {
+      } else if (addedBank[1] === "403") {
         interpretResponse({
           message: addedBank[0].message,
           response: "error",

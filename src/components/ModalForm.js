@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import Input from "./Input";
 import Selectinput from "./Selectinput";
 import BankServices from "../services/bank.services";
-import BankAccountServices from "../services/bank-account.services";
+// import BankAccountServices from "../services/bank-account.services";
 import {
   nameEnquiryByAccountNumber,
-  setPrimaryAccount,
+  // setPrimaryAccount,
 } from "../store/actions/bank_accountAction";
 const ValidationSchema = Yup.object().shape({
   // accountHolder: Yup.string().required("Account Holder Name is required"),
@@ -19,10 +19,10 @@ const ValidationSchema = Yup.object().shape({
 export const ModalForm = ({ values, onSubmit, onCancel }) => {
   const AccountListData = useSelector((state) => state.accountsList);
   const [currentBank, setCurrentUser] = useState({});
-  const [currentName, setCurrentName] = useState({});
+  // const [currentName, setCurrentName] = useState({});
   const dispatch = useDispatch();
   // console.log(AccountListData);
-  const { loading, error, bankAccounts, criteriaValue } = AccountListData;
+  const {  criteriaValue } = AccountListData;
   // console.log("The criterial value is:" + criteriaValue);
 
   const dropdown = [];
@@ -34,7 +34,7 @@ export const ModalForm = ({ values, onSubmit, onCancel }) => {
   }
 
   useEffect(() => {
-    const bank = BankServices.getBank().then((res) => {
+     BankServices.getBank().then((res) => {
       setCurrentUser(res);
     });
 

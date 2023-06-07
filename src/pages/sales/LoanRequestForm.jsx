@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Input from "../../components/Input";
 // import Selectinput from "../../components/Selectinput";
 import Pdfinput from "./Pdfinput";
@@ -72,6 +72,13 @@ function LoanRequestForm() {
     agreement_form: "",
   });
   console.log("DFDFDFD", loanPdf);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setData({
+      ...data,
+      [name]: value,
+    });
+  };
   return (
     <div className="bg-white p-6">
       <div className="grid gap-4 grid-cols-6 sm:gap-6 bg-white p-6">
@@ -82,12 +89,12 @@ function LoanRequestForm() {
           <div className="flex justify-end whitespace-nowrap items-center">
             <span className="mr-5 flex">Download Pdf from here :-</span>
             {loanPdf?.length > 0 ? (
-              <a
+              <span
                 onClick={handleDownload}
                 className="text-cyan-500 cursor-pointer"
               >
                 Download PDF
-              </a>
+              </span>
             ) : (
               <span
                 className="text-cyan-500 cursor-pointer"
@@ -123,6 +130,7 @@ function LoanRequestForm() {
             title="National Id"
             type="text"
             value={data.national_id}
+            onchange={() => handleChange}
             name="national_id"
             place="Customer National Id"
             required=""

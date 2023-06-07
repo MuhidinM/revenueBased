@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import DataTable from "react-data-table-component";
 import { useDispatch, useSelector } from "react-redux";
-import { getInventoryDetail } from "../../store/actions/getInventoryAction";
+// import { getInventoryDetail } from "../../store/actions/getInventoryAction";
 import { Link } from "react-router-dom";
 import { getLoanRequestDetail } from "../../store/actions/getLoanConfigAction";
 

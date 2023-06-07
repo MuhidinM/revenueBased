@@ -1,26 +1,26 @@
-import { ErrorMessage, Field, Form, Formik } from "formik";
+import { Formik } from "formik";
 import React, { useContext, useState } from "react";
 import { FormContext } from "../MultiStepForm";
 import Input from "../../../components/Input";
 import Selectinput from "../../../components/Selectinput";
-import Fileinput from "../../../components/Fileinput";
-import Textarea from "../../../components/Textarea";
-import Addressproof from "../../../components/Addressproof";
+// import Fileinput from "../../../components/Fileinput";
+// import Textarea from "../../../components/Textarea";
+// import Addressproof from "../../../components/Addressproof";
 import * as Yup from "yup";
 
-const region = [
-  { label: "Afar", value: "af" },
-  { label: "Amhara", value: "am" },
-  { label: "Benishangul", value: "bg" },
-  { label: "Fedral", value: "fd" },
-  { label: "Gambela", value: "gm" },
-  { label: "Harar", value: "hr" },
-  { label: "Oromia", value: "or" },
-  { label: "Sidama", value: "sd" },
-  { label: "Somalia", value: "sm" },
-  { label: "SNNPR", value: "sn" },
-  { label: "Tigray", value: "tg" },
-];
+// const region = [
+//   { label: "Afar", value: "af" },
+//   { label: "Amhara", value: "am" },
+//   { label: "Benishangul", value: "bg" },
+//   { label: "Fedral", value: "fd" },
+//   { label: "Gambela", value: "gm" },
+//   { label: "Harar", value: "hr" },
+//   { label: "Oromia", value: "or" },
+//   { label: "Sidama", value: "sd" },
+//   { label: "Somalia", value: "sm" },
+//   { label: "SNNPR", value: "sn" },
+//   { label: "Tigray", value: "tg" },
+// ];
 const incorporation = [
   { label: "A", value: "A" },
   { label: "B", value: "B" },
@@ -47,7 +47,7 @@ const transaction = [
 ];
 
 function Basic() {
-  const [successful, setSuccessful] = useState(false);
+  const [successful] = useState(false);
 
   const { activeStepIndex, setActiveStepIndex, formData, setFormData } =
     useContext(FormContext);

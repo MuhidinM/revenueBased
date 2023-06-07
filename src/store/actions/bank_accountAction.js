@@ -64,14 +64,14 @@ export const setPrimaryAccount =
           value
         );
         console.log(setPrimaryAccount);
-        if (setPrimaryAccount[1] == "200") {
+        if (setPrimaryAccount[1] === "200") {
           // dispatch(satResponse("success"));
           interpretResponse({
             message: "Updated",
             response: "success",
             responseCode: setPrimaryAccount[1],
           });
-        } else if (setPrimaryAccount[1] == "403") {
+        } else if (setPrimaryAccount[1] === "403") {
           interpretResponse({
             message: "Not Updated",
             response: "error",
@@ -108,14 +108,14 @@ export const createTutorial =
         id
       );
       console.log(res);
-      if (res[1] == "200") {
+      if (res[1] === "200") {
         // dispatch(satResponse("success"));
         interpretResponse({
           message: res[0].message,
           response: "success",
           responseCode: res[1],
         });
-      } else if (res[1] == "403") {
+      } else if (res[1] === "403") {
         interpretResponse({
           message: res[0].message,
           response: "error",
@@ -144,14 +144,14 @@ export const getAccountByPhone =
     try {
       const res = await BankAccountServices.getBankAccountByPhone(phoneNumber);
       console.log(res);
-      if (res[1] == "200") {
+      if (res[1] === "200") {
         // dispatch(satResponse("success"));
         interpretResponse({
           message: res[0].message,
           response: "success",
           responseCode: res[1],
         });
-      } else if (res[1] == "403") {
+      } else if (res[1] === "403") {
         interpretResponse({
           message: res[0].message,
           response: "error",

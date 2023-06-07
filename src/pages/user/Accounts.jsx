@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from "react";
-import Swal from "sweetalert2";
-import BankAccountServices from "../../services/bank-account.services";
-import AuthService from "../../services/auth.service";
-import Modal from "../../components/Modal";
+import React, { useEffect } from "react";
+// import Swal from "sweetalert2";
+// import BankAccountServices from "../../services/bank-account.services";
+// import AuthService from "../../services/auth.service";
+// import Modal from "../../components/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getAccounts,
-  setPrimaryAccount,
+  // setPrimaryAccount,
 } from "../../store/actions/bank_accountAction";
-import Selectinput from "../../components/Selectinput";
+// import Selectinput from "../../components/Selectinput";
 import ModalFire from "../../components/index";
-import Otp from "../../components/Otp";
-import withReactContent from "sweetalert2-react-content";
+// import Otp from "../../components/Otp";
+// import withReactContent from "sweetalert2-react-content";
 import DataTable from "react-data-table-component";
 
 const columns = [
@@ -32,23 +32,23 @@ const columns = [
   },
   {
     name: "Primary",
-    selector: (row) => (row.primaryAccount == 1 ? "primary" : "secondary"),
+    selector: (row) => (row.primaryAccount === 1 ? "primary" : "secondary"),
     sortable: true,
   },
   {
     name: "Status",
-    selector: (row) => (row.status == 1 ? "activated" : "pending"),
+    selector: (row) => (row.status === 1 ? "activated" : "pending"),
     sortable: true,
   },
 ];
 
 // const choose = [];
 // choose[0] = { label: "Set Primary", value: "1" };
-const MySwal = withReactContent(Swal);
+// const MySwal = withReactContent(Swal);
 function Accounts() {
   const AccountListData = useSelector((state) => state.accountsList);
   console.log(AccountListData);
-  const { loading, error, bankAccounts } = AccountListData;
+  const { bankAccounts } = AccountListData;
   console.log("Account Numbers:", bankAccounts);
   const dispatch = useDispatch();
 
@@ -58,100 +58,100 @@ function Accounts() {
 
   console.log(bankAccounts);
 
-  const interpretResponse = (response) => {
-    let actionResponse = JSON.stringify(response);
-    console.log("Action Response Is" + actionResponse.response);
-    console.log(
-      " Response Is" + response.response,
-      response.message + "",
-      response.responseCode
-    );
-    if (response.response === "success" || response.responseCode == 200) {
-      console.log(response);
-      console.log("Rsponse from useEffect is here" + response);
-      Swal.fire({
-        icon: "success",
-        title: "Account Updated",
-        showConfirmButton: false,
-        timer: 3000,
-      });
-    } else if (response.responseCode === 403 && response.respone === "error") {
-      console.log("Un Authorised User ");
-      Swal.fire({
-        icon: "error",
-        title: response.message,
-        showConfirmButton: false,
-        timer: 3000,
-      });
-    } else {
-      Swal.fire({
-        icon: "error",
-        title: "Account Is Not Updated",
-        showConfirmButton: false,
-        timer: 3000,
-      });
-    }
-  };
+  // const interpretResponse = (response) => {
+  //   let actionResponse = JSON.stringify(response);
+  //   console.log("Action Response Is" + actionResponse.response);
+  //   console.log(
+  //     " Response Is" + response.response,
+  //     response.message + "",
+  //     response.responseCode
+  //   );
+  //   if (response.response === "success" || response.responseCode === 200) {
+  //     console.log(response);
+  //     console.log("Rsponse from useEffect is here" + response);
+  //     Swal.fire({
+  //       icon: "success",
+  //       title: "Account Updated",
+  //       showConfirmButton: false,
+  //       timer: 3000,
+  //     });
+  //   } else if (response.responseCode === 403 && response.respone === "error") {
+  //     console.log("Un Authorised User ");
+  //     Swal.fire({
+  //       icon: "error",
+  //       title: response.message,
+  //       showConfirmButton: false,
+  //       timer: 3000,
+  //     });
+  //   } else {
+  //     Swal.fire({
+  //       icon: "error",
+  //       title: "Account Is Not Updated",
+  //       showConfirmButton: false,
+  //       timer: 3000,
+  //     });
+  //   }
+  // };
 
-  const handleChange = (e) => {
-    e.preventDefault();
+  // const handleChange = (e) => {
+  //   e.preventDefault();
 
-    if (e.target.value != "1") {
-      return new Promise((resolve, reject) => {
-        MySwal.fire({
-          title: "Are you sure?",
-          text: `You want to set ${e.target.value}Your Primary Account?`,
-          icon: "warning",
-          // dangerMode: true,
-          showCancelButton: true,
-          confirmButtonColor: "#01ADED",
-          cancelButtonColor: "#d33",
-          confirmButtonText: "Yes!",
-        }).then((result) => {
-          console.log(result);
-          if (result.isConfirmed === true) {
-            const user = localStorage.getItem("user");
-            BankAccountServices.sendOtp();
-            const value = {
-              first: "",
-              second: "",
-              third: "",
-              fourth: "",
-              fifth: "",
-              sixth: "",
-            };
+  //   if (e.target.value != "1") {
+  //     return new Promise((resolve, reject) => {
+  //       MySwal.fire({
+  //         title: "Are you sure?",
+  //         text: `You want to set ${e.target.value}Your Primary Account?`,
+  //         icon: "warning",
+  //         // dangerMode: true,
+  //         showCancelButton: true,
+  //         confirmButtonColor: "#01ADED",
+  //         cancelButtonColor: "#d33",
+  //         confirmButtonText: "Yes!",
+  //       }).then((result) => {
+  //         console.log(result);
+  //         if (result.isConfirmed === true) {
+  //           const user = localStorage.getItem("user");
+  //           BankAccountServices.sendOtp();
+  //           const value = {
+  //             first: "",
+  //             second: "",
+  //             third: "",
+  //             fourth: "",
+  //             fifth: "",
+  //             sixth: "",
+  //           };
 
-            MySwal.fire({
-              title: "",
-              html: (
-                <Otp
-                  values={value}
-                  onSubmit={(values) => {
-                    console.log("Hello from the second swal");
-                    // resolve(values);
-                    const otp =
-                      values.first +
-                      values.second +
-                      values.third +
-                      values.fourth +
-                      values.fifth +
-                      values.sixth;
+  //           MySwal.fire({
+  //             title: "",
+  //             html: (
+  //               <Otp
+  //                 values={value}
+  //                 onSubmit={(values) => {
+  //                   console.log("Hello from the second swal");
+  //                   // resolve(values);
+  //                   const otp =
+  //                     values.first +
+  //                     values.second +
+  //                     values.third +
+  //                     values.fourth +
+  //                     values.fifth +
+  //                     values.sixth;
 
-                    BankAccountServices.confirmOtp(user.user.phone_number, otp);
-                  }}
-                  onCancel={() => MySwal.close()}
-                ></Otp>
-              ),
+  //                   BankAccountServices.confirmOtp(user.user.phone_number, otp);
+  //                 }}
+  //                 onCancel={() => MySwal.close()}
+  //               ></Otp>
+  //             ),
 
-              // onClose: () => reject(),
-              showConfirmButton: false,
-            });
-            <Otp></Otp>;
-          }
-        });
-      });
-    }
-  };
+  //             // onClose: () => reject(),
+  //             showConfirmButton: false,
+  //           });
+  //           <Otp></Otp>;
+  //         }
+  //       });
+  //     });
+  //   }
+  // };
 
   // if (bankAccounts) {
   //   console.log("Accounts",bankAccounts);
@@ -166,20 +166,20 @@ function Accounts() {
   //       // }));
   //     }
   //   }
-  const choose = bankAccounts.map((element) => ({
-    label: element.bankName + "-" + element.accountNumber,
-    value: element.bankaccount_id,
-  }));
-  const renderList = bankAccounts.map((item, index) => (
-    <tr>
-      <th>{item.bankaccount_id}</th>
-      <td>{item.accountHolderName}</td>
-      <td>{item.accountNumber}</td>
-      <td>{item.bankName}</td>
-      <td>{item.primaryAccount === "1" ? "primary" : "secondary"}</td>
-      <td>{item.status === "0" ? "pending" : "activated"}</td>
-    </tr>
-  ));
+  // const choose = bankAccounts.map((element) => ({
+  //   label: element.bankName + "-" + element.accountNumber,
+  //   value: element.bankaccount_id,
+  // }));
+  // const renderList = bankAccounts.map((item, index) => (
+  //   <tr>
+  //     <th>{item.bankaccount_id}</th>
+  //     <td>{item.accountHolderName}</td>
+  //     <td>{item.accountNumber}</td>
+  //     <td>{item.bankName}</td>
+  //     <td>{item.primaryAccount === "1" ? "primary" : "secondary"}</td>
+  //     <td>{item.status === "0" ? "pending" : "activated"}</td>
+  //   </tr>
+  // ));
   return (
     <>
       <div className="grid gap-4 md:grid-cols-12 justify-self-auto">

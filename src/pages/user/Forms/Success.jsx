@@ -1,19 +1,18 @@
-import React, { useContext, useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { FormContext } from "../MultiStepForm";
 import Swal from "sweetalert2";
 import UserService from "../../../services/user.service";
-import AuthService from "../../../services/auth.service";
-import { useDispatch, useSelector } from "react-redux";
+// import AuthService from "../../../services/auth.service";
+import { useSelector } from "react-redux";
 // import { retrieveLoggedInUser } from "../../../store/actions/userProfileAction";
 function Success() {
-  const { activeStepIndex, setActiveStepIndex, formData, setFormData } =
-    useContext(FormContext);
-  const [currentUser, setCurrentUser] = useState({});
+  const { formData } = useContext(FormContext);
+  // const [currentUser, setCurrentUser] = useState({});
   const userData = useSelector((state) => state.userProfile);
   console.log(userData);
-  const { loading, error, userProfile, userDetail } = userData;
-  const dispatch = useDispatch();
+  const { userDetail } = userData;
+  // const dispatch = useDispatch();
   let navigate = useNavigate();
   console.log(userDetail);
   // useEffect(() => {
@@ -62,10 +61,9 @@ function Success() {
         }
       },
       (error) => {
-        const resMessage =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
           error.message ||
           error.toString();
       }

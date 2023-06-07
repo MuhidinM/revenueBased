@@ -1,22 +1,22 @@
-import { ErrorMessage, Field, Form, Formik } from "formik";
-import React, { useContext, useState } from "react";
+import { Formik } from "formik";
+import React, { useContext } from "react";
 import { FormContext } from "../MultiStepForm";
 import Input from "../../../components/Input";
-import Selectinput from "../../../components/Selectinput";
+// import Selectinput from "../../../components/Selectinput";
 import Fileinput from "../../../components/Fileinput";
 import Textarea from "../../../components/Textarea";
-import Addressproof from "../../../components/Addressproof";
+// import Addressproof from "../../../components/Addressproof";
 import * as Yup from "yup";
 
 function Basic2() {
-  const [successful, setSuccessful] = useState(false);
+  // const [successful, setSuccessful] = useState(false);
 
   const { activeStepIndex, setActiveStepIndex, formData, setFormData } =
     useContext(FormContext);
 
-  const renderError = (message) => (
-    <p className="italic text-red-600">{message}</p>
-  );
+  // const renderError = (message) => (
+  //   <p className="italic text-red-600">{message}</p>
+  // );
 
   const FILE_SIZE = 160 * 1024;
   const SUPPORTED_FORMATS = [

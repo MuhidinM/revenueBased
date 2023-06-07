@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import DataTable from "react-data-table-component";
-import { useDispatch, useSelector } from "react-redux";
+// import { useDispatch } from "react-redux";
 // import {
 //   getLoanDetail,
 //   // setLoanToApprove,
@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Loans = () => {
   const [activeTab, setActiveTab] = useState("all");
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   // const [currentPage, setCurrentPage] = useState(1);
   // const pageSize = 10; // Number of items per page
@@ -251,7 +251,9 @@ const Loans = () => {
     // console.log("DFD", data);
     return (
       <div className="bg-gray-50">
-        <span className="ml-2 py-1 text-xl text-cyan-500 font-semibold">Payment Schedule</span>
+        <span className="ml-2 py-1 text-xl text-cyan-500 font-semibold">
+          Payment Schedule
+        </span>
         <div className="m-2 mx-12 border-x-2 border-cyan-500">
           <DataTable
             columns={loanColumns}
@@ -273,7 +275,7 @@ const Loans = () => {
       <div className="container mx-auto">
         <div className="my-4">
           <div className="tabs tabs-boxed">
-            <a
+            <span
               className={`tab ${activeTab === "all" && "tab-active"}`}
               onClick={() => setActiveTab("all")}
               style={{
@@ -282,8 +284,8 @@ const Loans = () => {
               }}
             >
               All
-            </a>
-            <a
+            </span>
+            <span
               className={`tab ${activeTab === "pending" && "tab-active"}`}
               onClick={() => setActiveTab("pending")}
               style={{
@@ -292,8 +294,8 @@ const Loans = () => {
               }}
             >
               Pending
-            </a>
-            <a
+            </span>
+            <span
               className={`tab ${
                 activeTab === "approved" && "tab-active text-white"
               }`}
@@ -304,8 +306,8 @@ const Loans = () => {
               }}
             >
               Accepted
-            </a>
-            <a
+            </span>
+            <span
               className={`tab ${activeTab === "rejected" && "tab-active"}`}
               style={{
                 color: activeTab === "rejected" ? "white" : null,
@@ -314,7 +316,7 @@ const Loans = () => {
               onClick={() => setActiveTab("rejected")}
             >
               Rejected
-            </a>
+            </span>
           </div>
 
           <div className="bg-white rounded-b-lg shadow p-4">

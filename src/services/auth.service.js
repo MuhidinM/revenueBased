@@ -2,14 +2,14 @@ import axios from "axios";
 import jwt from "jwt-decode";
 import { LOGIN_NODE_API } from "../utils/API";
 import jwtDecode from "jwt-decode";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import {
   setRole,
   setToken,
   setUserID,
   setUsername,
 } from "../store/actions/userProfileAction";
-const user = JSON.parse(localStorage.getItem("user"));
+// const user = JSON.parse(localStorage.getItem("user"));
 const register = async (username, password) => {
   const response = await LOGIN_NODE_API.post("/merchant/register", {
     username,
@@ -151,9 +151,9 @@ const resetPassword = async (password, token, id) => {
   return response.data;
 };
 
-const checkToken = () => {
-  return localStorage.getItem(user.token);
-};
+// const checkToken = () => {
+//   return localStorage.getItem(user.token);
+// };
 
 const getCurrentUser = () => {
   return JSON.parse(localStorage.getItem("user"));

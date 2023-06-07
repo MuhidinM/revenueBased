@@ -1,8 +1,8 @@
 import React from "react";
-import Fileinput from "../../components/Fileinput";
-import Input from "../../components/Input";
-import Selectinput from "../../components/Selectinput";
-import Textarea from "../../components/Textarea";
+// import Fileinput from "../../components/Fileinput";
+// import Input from "../../components/Input";
+// import Selectinput from "../../components/Selectinput";
+// import Textarea from "../../components/Textarea";
 
 const region = [
   { label: "Afar", value: "af" },

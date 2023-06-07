@@ -17,7 +17,7 @@ export const addDomain =
     try {
       const addedUrls = await DomainServices.addUrls(user_id, name, url);
       console.log(addedUrls);
-      if (addedUrls[1] == 200) {
+      if (addedUrls[1] === 200) {
         // dispatch(satResponse("success"));
         console.log("Your Endpoint is created ");
         interpretResponse({
@@ -25,13 +25,13 @@ export const addDomain =
           response: "success",
           responseCode: addedUrls[1],
         });
-      } else if (addedUrls[1] == 403) {
+      } else if (addedUrls[1] === 403) {
         interpretResponse({
           message: addedUrls[0].message,
           response: "error",
           responseCode: addedUrls[1],
         });
-      } else if (addedUrls[1] == 401) {
+      } else if (addedUrls[1] === 401) {
         interpretResponse({
           message: addedUrls[0].message,
           response: "error",
@@ -72,7 +72,7 @@ export const getDomain = (id) => async (dispatch) => {
   }
 };
 export const satResponse = (response) => async (dispatch) => {
-  if (response == "success") {
+  if (response === "success") {
     dispatch({
       type: SUCCESS_RESPONSE_SETTER,
       payload: response,

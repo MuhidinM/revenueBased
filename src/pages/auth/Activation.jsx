@@ -1,17 +1,17 @@
-import React, { useState, useRef } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import React from "react";
+// import { useNavigate } from "react-router-dom";
 import AuthService from "../../services/auth.service";
 // import { PASSWORD } from "../../../../server/configs/db";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
 function Activation() {
-  const [successful, setSuccessful] = useState(false);
-  const [message, setMessage] = useState("");
+  // const [successful, setSuccessful] = useState(false);
+  // const [message, setMessage] = useState("");
   const validationSchema = Yup.object().shape({
     email: Yup.string().required("Email is required").email("Email is invalid"),
   });
-  let navigate = useNavigate();
+  // let navigate = useNavigate();
 
   return (
     <>
@@ -41,15 +41,14 @@ function Activation() {
                     // console.log("successfully reseted");
                   },
                   (error) => {
-                    const resMessage =
-                      (error.response &&
-                        error.response.data &&
-                        error.response.data.message) ||
+                    (error.response &&
+                      error.response.data &&
+                      error.response.data.message) ||
                       error.message ||
                       error.toString();
 
                     // setLoading(false);
-                    setMessage(resMessage);
+                    // setMessage(resMessage);
                   }
                 );
               }}

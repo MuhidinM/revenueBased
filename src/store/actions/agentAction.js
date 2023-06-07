@@ -20,14 +20,14 @@ export const addAgent =
         phoneNumber
       );
 
-      if (addedAgent[1] == "200") {
+      if (addedAgent[1] === "200") {
         // dispatch(satResponse("success"));
         interpretResponse({
           message: addedAgent[0].message,
           response: "success",
           responseCode: addedAgent[1],
         });
-      } else if (addedAgent[1] == "403") {
+      } else if (addedAgent[1] === "403") {
         interpretResponse({
           message: addedAgent[0].message,
           response: "error",

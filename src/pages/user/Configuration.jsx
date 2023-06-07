@@ -49,16 +49,16 @@ function Configuration() {
     });
     setIsEdit(true);
   };
-  const handleCategoryEdit = (row) => {
-    setCategoryData({
-      ...categorydata,
-      category_id: row.category_id,
-      item_type: row.item_type,
-      item_code: row.item_code,
-      merchant_id: userID,
-    });
-    setIsEdit(true);
-  };
+  // const handleCategoryEdit = (row) => {
+  //   setCategoryData({
+  //     ...categorydata,
+  //     category_id: row.category_id,
+  //     item_type: row.item_type,
+  //     item_code: row.item_code,
+  //     merchant_id: userID,
+  //   });
+  //   setIsEdit(true);
+  // };
 
   const columns = [
     {

@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import Fileinput from "../../components/Fileinput";
 import Input from "../../components/Input";
 import Selectinput from "../../components/Selectinput";
-import AuthService from "../../services/auth.service";
+// import AuthService from "../../services/auth.service";
 import { Formik } from "formik";
-import * as Yup from "yup";
+// import * as Yup from "yup";
 // import { CreateOrUpdate } from "../store/actions/";
 import KYCService from "../../services/kyc.service";
 import { getEkyInfo } from "../../store/actions/userProfileAction";
@@ -37,39 +37,39 @@ function Profile() {
   // console.log(userData);
   const { kyc, loading } = userData;
 
-  const [successful, setSuccessful] = useState(false);
-  const [message, setMessage] = useState("");
-  const [currentUser, setCurrentUser] = useState({});
+  const [successful] = useState(false);
+  const [message] = useState("");
+  // const [currentUser, setCurrentUser] = useState({});
   const [agrementDoc, setAgrement_doc] = useState();
   const [businessLicence, setBusinessLicence] = useState();
   const [validIdentification, setValidIdentification] = useState();
-  const [activeKYC, setActiveKYC] = useState(kyc ? true : false); // set this to true if they are active
-  useEffect(() => {
-    const user = AuthService.getCurrentUser();
-    if (user) {
-      setCurrentUser(user);
-      // setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
-      // setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
-    }
-  }, []);
+  const [activeKYC] = useState(kyc ? true : false); // set this to true if they are active
+  // useEffect(() => {
+  //   const user = AuthService.getCurrentUser();
+  //   if (user) {
+  //     setCurrentUser(user);
+  //     // setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
+  //     // setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
+  //   }
+  // }, []);
   // console.log(currentUser.id);
-  const validationSchema = Yup.object().shape({
-    first_name: Yup.string().required("First Name is required"),
-    last_name: Yup.string().required("Last Name is required"),
-    business_name: Yup.string().required("Business Name is required"),
-    business_type: Yup.string().required("Business Type is required"),
-    tin_number: Yup.string().required("Tin Number is required"),
-    business_address: Yup.string().required("Business Address is required"),
-    website_url: Yup.string().required("Website URL is required"),
-    date_of_establishment: Yup.string().required(
-      "Date of Establishment is required"
-    ),
-    valid_identification: Yup.string().required("Identification is required"),
-    compliance_aml: Yup.string().required("Compliance Aml is required"),
-    business_licence: Yup.string().required("Business Licence is required"),
-    agrement_doc: Yup.string().required("Bank Agrement Document is required"),
-    merchant_status: Yup.string().required("Merchant Status is required"),
-  });
+  // const validationSchema = Yup.object().shape({
+  //   first_name: Yup.string().required("First Name is required"),
+  //   last_name: Yup.string().required("Last Name is required"),
+  //   business_name: Yup.string().required("Business Name is required"),
+  //   business_type: Yup.string().required("Business Type is required"),
+  //   tin_number: Yup.string().required("Tin Number is required"),
+  //   business_address: Yup.string().required("Business Address is required"),
+  //   website_url: Yup.string().required("Website URL is required"),
+  //   date_of_establishment: Yup.string().required(
+  //     "Date of Establishment is required"
+  //   ),
+  //   valid_identification: Yup.string().required("Identification is required"),
+  //   compliance_aml: Yup.string().required("Compliance Aml is required"),
+  //   business_licence: Yup.string().required("Business Licence is required"),
+  //   agrement_doc: Yup.string().required("Bank Agrement Document is required"),
+  //   merchant_status: Yup.string().required("Merchant Status is required"),
+  // });
 
   const fileInputTOFormDoc = (e) => {
     setAgrement_doc(e.target.files[0]);

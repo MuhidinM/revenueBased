@@ -1,10 +1,10 @@
-import React, { useMemo, useEffect, useState } from "react";
+import React, { useMemo } from "react";
 import DataTable from "react-data-table-component";
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
+// import Swal from "sweetalert2";
+// import withReactContent from "sweetalert2-react-content";
 import { useSelector } from "react-redux";
 
-const MySwal = withReactContent(Swal);
+// const MySwal = withReactContent(Swal);
 const columns = [
   {
     name: "Transaction ID",
@@ -145,7 +145,7 @@ function Transactions() {
     let csv = convertArrayOfObjectsToCSV(array);
     if (csv === null) return;
     //Make dynamic the name of file
-    let d = new Date();
+    // let d = new Date();
     // let dformat = `${d.getHours()}-${d.getMinutes()}-${d.getSeconds()}`;
     const filename = "TransactionMomo3.csv";
 
@@ -160,13 +160,14 @@ function Transactions() {
 
   const getAllDevices = useSelector((state) => state.transactionDetailAll);
   // console.log("Devices list" + getAllDevices);
-  const { loading, error, transactionDetailAll } = getAllDevices;
+  const { transactionDetailAll } = getAllDevices;
   // console.log("Fetched devices" + transactionDetailAll);
 
   const [filterText, setFilterText] = React.useState("");
   const actionsMemo = useMemo(
     () => <Export onExport={() => downloadCSV(transactionDetailAll)} />,
-    []
+    // eslint-disable-next-line
+    [transactionDetailAll]
   );
   const [resetPaginationToggle, setResetPaginationToggle] =
     React.useState(false);
@@ -193,45 +194,45 @@ function Transactions() {
     );
   }, [filterText, resetPaginationToggle]);
 
-  const showFormModal = (values) => {
-    return new Promise((resolve, reject) => {
-      MySwal.fire({
-        title: "Register Your Domain",
-        html: (
-          <div className="p-8">
-            <div>
-              <label
-                htmlFor="id"
-                className="mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >
-                Device Id
-              </label>
-              <span className="text-sm link-error"></span>
-              <input
-                type="text"
-                name="id"
-                id="id"
-                placeholder="COOP-00-000"
-                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                //   value={props.values.text}
-                //   onChange={props.handleChange}
-              />
-            </div>
-          </div>
-        ),
-        onClose: () => reject(),
-        onCancel: () => Swal.close(),
-        showConfirmButton: true,
-        showCancelButton: true,
-        confirmButtonColor: "#01AFEF",
-      });
-    });
-  };
-  const showModal = () => {
-    showFormModal({})
-      .then((values) => console.log(values))
-      .catch(() => console.log("Modal closed"));
-  };
+  // const showFormModal = (values) => {
+  //   return new Promise((resolve, reject) => {
+  //     MySwal.fire({
+  //       title: "Register Your Domain",
+  //       html: (
+  //         <div className="p-8">
+  //           <div>
+  //             <label
+  //               htmlFor="id"
+  //               className="mb-2 text-sm font-medium text-gray-900 dark:text-white"
+  //             >
+  //               Device Id
+  //             </label>
+  //             <span className="text-sm link-error"></span>
+  //             <input
+  //               type="text"
+  //               name="id"
+  //               id="id"
+  //               placeholder="COOP-00-000"
+  //               className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+  //               //   value={props.values.text}
+  //               //   onChange={props.handleChange}
+  //             />
+  //           </div>
+  //         </div>
+  //       ),
+  //       onClose: () => reject(),
+  //       onCancel: () => Swal.close(),
+  //       showConfirmButton: true,
+  //       showCancelButton: true,
+  //       confirmButtonColor: "#01AFEF",
+  //     });
+  //   });
+  // };
+  // const showModal = () => {
+  //   showFormModal({})
+  //     .then((values) => console.log(values))
+  //     .catch(() => console.log("Modal closed"));
+  // };
 
   return (
     <div className="">

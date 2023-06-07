@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import AuthService from "../../services/auth.service";
 import { useDispatch } from "react-redux";
@@ -7,7 +7,7 @@ import { Formik } from "formik";
 import souq from "../../assets/images/Souq.png";
 import * as Yup from "yup";
 function Login() {
-  const [successful, setSuccessful] = useState(false);
+  const [successful] = useState(false);
   const [message, setMessage] = useState("");
   const validationSchema = Yup.object().shape({
     username: Yup.string().required("Username is required"),

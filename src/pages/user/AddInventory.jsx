@@ -1,8 +1,8 @@
 import React from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, ErrorMessage } from "formik";
 import * as Yup from "yup";
 // import Input from "../../components/Input";
-import Fileinput from "../../components/Fileinput";
+// import Fileinput from "../../components/Fileinput";
 import Addressproof from "../../components/Addressproof";
 
 function AddInventory({ onSubmit, values, onCancel }) {

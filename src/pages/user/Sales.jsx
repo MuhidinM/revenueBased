@@ -290,7 +290,7 @@ function Sales() {
         >
           Rejected KYC
         </a> */}
-        <a
+        <span
           className={`tab ${activeTab === "registered" && "tab-active"}`}
           onClick={() => setActiveTab("registered")}
           style={{
@@ -299,7 +299,7 @@ function Sales() {
           }}
         >
           Registered Sales
-        </a>
+        </span>
       </div>
       <DataTable
         columns={activeTab === "registered" ? columns : kycCol}

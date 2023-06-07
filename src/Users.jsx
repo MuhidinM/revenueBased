@@ -7,7 +7,7 @@ import Accounts from "./pages/user/Accounts";
 import Transactions from "./pages/user/Transactions";
 import Sidebar from "./pages/user/Sidebar";
 import Profile from "./pages/user/Profile";
-import MultiStepForm from "./pages/user/MultiStepForm";
+// import MultiStepForm from "./pages/user/MultiStepForm";
 import Sales from "./pages/user/Sales";
 import Inventory from "./pages/user/Inventory";
 import Loan from "./pages/user/Loan";

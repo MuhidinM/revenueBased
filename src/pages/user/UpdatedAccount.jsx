@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import Swal from "sweetalert2";
 import BankAccountServices from "../../services/bank-account.services";
-import AuthService from "../../services/auth.service";
-import Modal from "../../components/Modal";
+// import AuthService from "../../services/auth.service";
+// import Modal from "../../components/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getAccounts,

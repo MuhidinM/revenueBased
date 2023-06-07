@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import React, { useState } from "react";
+// import { Link } from "react-router-dom";
+import { Formik } from "formik";
 import * as Yup from "yup";
-import AuthService from "../services/auth.service";
+// import AuthService from "../services/auth.service";
 function Otp({ onSubmit, values }) {
   const [otp, setOtp] = useState(new Array(4).fill(""));
 
@@ -17,11 +17,11 @@ function Otp({ onSubmit, values }) {
     }
   };
 
-  function ClickEvent(first, last) {
-    if (first.value) {
-      document.getElementById(last).focus();
-    }
-  }
+  // function ClickEvent(first, last) {
+  //   if (first.value) {
+  //     document.getElementById(last).focus();
+  //   }
+  // }
   const ValidationSchema = Yup.object().shape({
     first: Yup.string().required("First Number is required"),
     second: Yup.string().required("Second Number is required"),
