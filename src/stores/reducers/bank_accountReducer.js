@@ -6,7 +6,7 @@ import {
   NAME_ENQ_BY_ACCNO,
   NAME_ENQ_BY_ACCNO_ERROR,
   GET_ACCOUNTS_BY_PHONE,
-  GET_ACCOUNTS_BY_PHONE_ERROR,
+  // GET_ACCOUNTS_BY_PHONE_ERROR,
 } from "../types";
 
 const initialState = {

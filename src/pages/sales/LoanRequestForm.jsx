@@ -9,6 +9,8 @@ import {
   generateLoanDetailPdf,
   // getLoanRequestDetail,
 } from "../../store/actions/getLoanConfigAction";
+import LoanConfigService from "../../services/loanConfig.service";
+import Swal from "sweetalert2";
 
 function LoanRequestForm() {
   const dispatch = useDispatch();
@@ -57,6 +59,7 @@ function LoanRequestForm() {
   const loan_req_id = new URLSearchParams(location.search).get("loan_req_id");
 
   const [data, setData] = useState({
+    sales_id: userID,
     loan_req_id: loan_req_id ? loan_req_id : "",
     national_id: national_id ? national_id : "",
     first_name: first_name ? first_name : "",
@@ -71,7 +74,7 @@ function LoanRequestForm() {
     loan_purpose: "",
     agreement_form: "",
   });
-  console.log("DFDFDFD", loanPdf);
+  // console.log("DFDFDFD", loanPdf);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setData({
@@ -79,217 +82,224 @@ function LoanRequestForm() {
       [name]: value,
     });
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log("submitted");
+    return await LoanConfigService.createLoanRequest(data)
+      .then(
+        (response) =>
+          response &&
+          Swal.fire({
+            icon: "success",
+            title: "Loan Requested Successfully",
+            showConfirmButton: false,
+            timer: 2000,
+          })
+      )
+      .catch(
+        (error) =>
+          error &&
+          Swal.fire({
+            icon: "error",
+            title: `Something went wrong`,
+            showConfirmButton: false,
+            timer: 2000,
+          })
+      );
+  };
+
   return (
     <div className="bg-white p-6">
-      <div className="grid gap-4 grid-cols-6 sm:gap-6 bg-white p-6">
-        <h2 className="text-xl font-bold text-gray-900 sm:col-span-2 dark:text-white">
-          Loan Request Form
-        </h2>
-        <div className="w-full col-span-4">
-          <div className="flex justify-end whitespace-nowrap items-center">
-            <span className="mr-5 flex">Download Pdf from here :-</span>
-            {loanPdf?.length > 0 ? (
-              <span
-                onClick={handleDownload}
-                className="text-cyan-500 cursor-pointer"
-              >
-                Download PDF
-              </span>
-            ) : (
-              <span
-                className="text-cyan-500 cursor-pointer"
-                onClick={(e) =>
-                  dispatch(
-                    generateLoanDetailPdf(
-                      userID,
-                      data.loan_req_id,
-                      data.first_name,
-                      data.last_name,
-                      data.interest_rate,
-                      data.duration,
-                      10000,
-                      setLoanPdf
+      <form action="" onSubmit={handleSubmit}>
+        <div className="grid gap-4 grid-cols-6 sm:gap-6 bg-white p-6">
+          <h2 className="text-xl font-bold text-gray-900 sm:col-span-2 dark:text-white">
+            Loan Request Form
+          </h2>
+          <div className="w-full col-span-4">
+            <div className="flex justify-end whitespace-nowrap items-center">
+              <span className="mr-5 flex">Download Pdf from here :-</span>
+              {loanPdf?.length > 0 ? (
+                <span
+                  onClick={handleDownload}
+                  className="text-cyan-500 cursor-pointer"
+                >
+                  Download PDF
+                </span>
+              ) : (
+                <span
+                  className="text-cyan-500 cursor-pointer"
+                  onClick={(e) =>
+                    dispatch(
+                      generateLoanDetailPdf(
+                        userID,
+                        data.loan_req_id,
+                        data.first_name,
+                        data.last_name,
+                        data.interest_rate,
+                        data.duration,
+                        10000,
+                        setLoanPdf
+                      )
                     )
-                  )
-                }
-              >
-                Generate PDF
-              </span>
-            )}
+                  }
+                >
+                  Generate PDF
+                </span>
+              )}
+            </div>
+          </div>
+
+          <div className="divider col-span-6 text-cyan-500 text-lg">
+            Customer Information
+          </div>
+
+          <div className="w-full col-span-2">
+            <span className="text-sm link-error"></span>
+            <Input
+              label="national_id"
+              title="National Id"
+              type="text"
+              value={data.national_id}
+              onchange={() => handleChange}
+              name="national_id"
+              place="Customer National Id"
+              required=""
+            />
+          </div>
+
+          <div className="w-full col-span-2">
+            <span className="text-sm link-error"></span>
+            <Input
+              label="first_name"
+              title="First Name"
+              type="text"
+              value={data.first_name}
+              name="first_name"
+              place="Customer First Name"
+              required=""
+            />
+          </div>
+          <div className="w-full col-span-2">
+            <span className="text-sm link-error"></span>
+            <Input
+              label="middle_name"
+              title="Middle Name"
+              type="text"
+              value={data.middle_name}
+              name="middle_name"
+              place="Customer First Name"
+              required=""
+            />
+          </div>
+          <div className="w-full col-span-2">
+            <span className="text-sm link-error"></span>
+            <Input
+              label="last_name"
+              title="Last Name"
+              type="text"
+              value={data.last_name}
+              name="last_name"
+              place="Customer Last Name"
+              required=""
+            />
+          </div>
+
+          <div className="w-full col-span-2">
+            <span className="text-sm link-error"></span>
+            <Input
+              label="customer_account"
+              title="Customer Account Number"
+              type="text"
+              value={data.customer_account}
+              name="customer_account"
+              place="Account Number"
+              required=""
+            />
+          </div>
+          <div className="w-full col-span-2">
+            <span className="text-sm link-error"></span>
+            <Input
+              label="customer_phone_number"
+              title="Phone Number"
+              type="text"
+              value={data.customer_phone_number}
+              name="customer_phone_number"
+              place="Customer Mobile Number"
+              required=""
+            />
+          </div>
+          <div className="divider col-span-6 text-cyan-500 text-lg">
+            Other Information
+          </div>
+
+          <div className="w-full col-span-2">
+            <span className="text-sm link-error"></span>
+            <Input
+              label="loan_amount"
+              title="Loan Amount"
+              type="text"
+              value={data.loan_amount}
+              name="loan_amount"
+              place="Loan Amount"
+              required=""
+            />
+          </div>
+          <div className="w-full col-span-2">
+            <span className="text-sm link-error"></span>
+            <Input
+              label="loan_purpose"
+              title="Loan Purpose"
+              type="text"
+              value={data.loan_purpose}
+              name="loan_purpose"
+              place="Loan Purpose"
+              required=""
+            />
+          </div>
+          <div className="w-full col-span-2">
+            <span className="text-sm link-error"></span>
+            <Input
+              label="duration"
+              title="Repayment Term"
+              type="text"
+              value={data.duration}
+              name="duration"
+              place="Repayment Term"
+              required=""
+            />
+          </div>
+          <div className="w-full col-span-2">
+            <span className="text-sm link-error"></span>
+            <Input
+              label="interest_rate"
+              title="Interest Rate"
+              type="text"
+              value={data.interest_rate}
+              name="interest_rate"
+              place="Interest Rate"
+              required=""
+            />
+          </div>
+          <div className="col-span-2">
+            <Pdfinput
+              lable="loan_request"
+              title="Loan Request (PDF)"
+              name="loan_request"
+              // fileInputTOForm={fileInputTOFormDoc}
+              // value={agrementDoc}
+            />
           </div>
         </div>
-
-        <div className="divider col-span-6 text-cyan-500 text-lg">
-          Customer Information
+        <div className="flex items-center justify-end">
+          <button
+            type="submit"
+            className=" text-white bg-primary hover:bg-primary focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary dark:hover:bg-primary dark:focus:ring-primary"
+          >
+            Submit Request
+          </button>
         </div>
-
-        <div className="w-full col-span-2">
-          <span className="text-sm link-error"></span>
-          <Input
-            label="national_id"
-            title="National Id"
-            type="text"
-            value={data.national_id}
-            onchange={() => handleChange}
-            name="national_id"
-            place="Customer National Id"
-            required=""
-          />
-        </div>
-
-        <div className="w-full col-span-2">
-          <span className="text-sm link-error"></span>
-          <Input
-            label="first_name"
-            title="First Name"
-            type="text"
-            value={data.first_name}
-            name="first_name"
-            place="Customer First Name"
-            required=""
-          />
-        </div>
-        <div className="w-full col-span-2">
-          <span className="text-sm link-error"></span>
-          <Input
-            label="middle_name"
-            title="Middle Name"
-            type="text"
-            value={data.middle_name}
-            name="middle_name"
-            place="Customer First Name"
-            required=""
-          />
-        </div>
-        <div className="w-full col-span-2">
-          <span className="text-sm link-error"></span>
-          <Input
-            label="last_name"
-            title="Last Name"
-            type="text"
-            value={data.last_name}
-            name="last_name"
-            place="Customer Last Name"
-            required=""
-          />
-        </div>
-
-        <div className="w-full col-span-2">
-          <span className="text-sm link-error"></span>
-          <Input
-            label="customer_account"
-            title="Customer Account Number"
-            type="text"
-            value={data.customer_account}
-            name="customer_account"
-            place="Account Number"
-            required=""
-          />
-        </div>
-        <div className="w-full col-span-2">
-          <span className="text-sm link-error"></span>
-          <Input
-            label="customer_phone_number"
-            title="Phone Number"
-            type="text"
-            value={data.customer_phone_number}
-            name="customer_phone_number"
-            place="Customer Mobile Number"
-            required=""
-          />
-        </div>
-        <div className="divider col-span-6 text-cyan-500 text-lg">
-          Other Information
-        </div>
-
-        <div className="w-full col-span-2">
-          <span className="text-sm link-error"></span>
-          <Input
-            label="loan_amount"
-            title="Loan Amount"
-            type="text"
-            value={data.loan_amount}
-            name="loan_amount"
-            place="Loan Amount"
-            required=""
-          />
-        </div>
-        <div className="w-full col-span-2">
-          <span className="text-sm link-error"></span>
-          <Input
-            label="loan_purpose"
-            title="Loan Purpose"
-            type="text"
-            value={data.loan_purpose}
-            name="loan_purpose"
-            place="Loan Purpose"
-            required=""
-          />
-        </div>
-        <div className="w-full col-span-2">
-          <span className="text-sm link-error"></span>
-          <Input
-            label="duration"
-            title="Repayment Term"
-            type="text"
-            value={data.duration}
-            name="duration"
-            place="Repayment Term"
-            required=""
-          />
-        </div>
-        <div className="w-full col-span-2">
-          <span className="text-sm link-error"></span>
-          <Input
-            label="interest_rate"
-            title="Interest Rate"
-            type="text"
-            value={data.interest_rate}
-            name="interest_rate"
-            place="Interest Rate"
-            required=""
-          />
-        </div>
-        <div className="col-span-2">
-          <Pdfinput
-            lable="loan_request"
-            title="Loan Request (PDF)"
-            name="loan_request"
-            // fileInputTOForm={fileInputTOFormDoc}
-            // value={agrementDoc}
-          />
-        </div>
-        {/* <div className="w-full col-span-2">
-          <span className="text-sm link-error"></span>
-          <Input
-            label="cumulative_interest"
-            title="Comulative Interest"
-            type="text"
-            name="cumulative_interest"
-            place="Comulative Interest"
-            required=""
-          />
-        </div> */}
-        {/* <div className="w-full col-span-2">
-          <span className="text-sm link-error"></span>
-          <Input
-            label="total_repayment"
-            title="Total Repayment"
-            type="text"
-            name="total_repayment"
-            place="Total Repayment"
-            required=""
-          />
-        </div> */}
-      </div>
-      <div className="flex items-center justify-end">
-        <button
-          type="submit"
-          className=" text-white bg-primary hover:bg-primary focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary dark:hover:bg-primary dark:focus:ring-primary"
-        >
-          Submit Request
-        </button>
-      </div>
+      </form>
     </div>
   );
 }

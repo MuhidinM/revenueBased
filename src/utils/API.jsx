@@ -3,11 +3,11 @@ import store from "./../store/store";
 
 // Create a new instance of axios with the token in the header
 export const LOGIN_NODE_API = axios.create({
-  baseURL: "http://192.168.2.173:5000/api",
+  baseURL: "http://192.168.2.228:5000/api",
 });
 
 export const NODE_API = axios.create({
-  baseURL: "http://192.168.2.173:5000/api",
+  baseURL: "http://192.168.2.228:5000/api",
 });
 
 // Request interceptor to update Authorization header with the token

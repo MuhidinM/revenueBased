@@ -23,7 +23,7 @@ const AssignLoanConfig = async (item_id, loan_conf_id, merchant_id) => {
 };
 
 const createLoanRequest = async (data) => {
-  return await NODE_API.post("/loans/loan-request", {
+  return await NODE_API.post("/loanprocess/newLoanRequest", {
     data,
   }).then((response) => response);
 };
@@ -33,6 +33,7 @@ const getLoanRequest = async (sales_id) => {
     `/loanprocess/getLoanReq?sales_id=${sales_id}`
   ).then((response) => response?.data?.customer_loan_request);
 };
+
 const generateLoanPdf = async (
   sales_id,
   loan_req_id,
