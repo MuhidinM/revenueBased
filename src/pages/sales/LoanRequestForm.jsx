@@ -82,11 +82,23 @@ function LoanRequestForm() {
       [name]: value,
     });
   };
+  const [agrementDoc, setAgrement_doc] = useState();
+  const fileInputTOFormDoc = (e) => {
+    setAgrement_doc(e.target.files[0]);
+  };
+
+  let formData = new FormData();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("submitted");
-    return await LoanConfigService.createLoanRequest(data)
+    // console.log("submitted");
+    formData.append("sales_id", data.sales_id);
+    formData.append("merchant_id", 1);
+    formData.append("loan_req_id", data.loan_req_id);
+    formData.append("loan_purpose", data.loan_purpose);
+    formData.append("agreementDocument", agrementDoc);
+    formData.append("item_id", data.item_id);
+    return await LoanConfigService.createLoanRequest(formData)
       .then(
         (response) =>
           response &&
@@ -286,8 +298,8 @@ function LoanRequestForm() {
               lable="loan_request"
               title="Loan Request (PDF)"
               name="loan_request"
-              // fileInputTOForm={fileInputTOFormDoc}
-              // value={agrementDoc}
+              fileInputTOForm={fileInputTOFormDoc}
+              value={agrementDoc}
             />
           </div>
         </div>
