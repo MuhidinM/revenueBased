@@ -25,7 +25,7 @@ function Inventory() {
         return (
           <div className="p-2">
             <img
-              src={`http://192.168.2.173:5000/image/${row.item_pic}`}
+              src={`http://10.1.177.130:5004/image/${row.item_pic}`}
               style={{ width: "40px", height: "40px" }}
               alt=""
             />
