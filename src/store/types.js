@@ -60,3 +60,4 @@ export const GET_EKY_DETAIL_ERROR = "GET_EKY_DETAIL_ERROR";
 export const SET_ROLE = "SET_ROLE";
 export const SET_LOAN_REQUEST = "SET_LOAN_REQUEST";
 export const SET_LOAN_PDF = "SET_LOAN_PDF";
+export const LOG_OUT = "LOG_OUT";

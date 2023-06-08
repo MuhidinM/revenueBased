@@ -8,6 +8,7 @@ import {
   GET_EKY_DETAIL,
   GET_EKY_DETAIL_ERROR,
   SET_ROLE,
+  LOG_OUT,
 } from "../types";
 // import AuthService from "../../services/auth.service";
 import UserService from "../../services/user.service";
@@ -79,4 +80,7 @@ export const setToken = (item) => ({
 export const setRole = (item) => ({
   type: SET_ROLE,
   payload: item,
+});
+export const setlogOut = (item) => ({
+  type: LOG_OUT,
 });

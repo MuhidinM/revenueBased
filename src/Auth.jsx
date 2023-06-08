@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes, useParams } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import First from "./pages/auth/First";
 import Login from "./pages/auth/Login";
 import Recovery from "./pages/auth/Recovery";
@@ -23,7 +23,10 @@ function Auth() {
         <Route path="auth/resetpassword" element={<Resetpassword />}></Route>
         <Route path="auth/recover" element={<Recovery />}></Route>
         <Route path="auth/activate" element={<Activation />}></Route>
-        <Route path="auth/termsandconditions" element={<TermsAndConditions />}></Route>
+        <Route
+          path="auth/termsandconditions"
+          element={<TermsAndConditions />}
+        ></Route>
         <Route
           path="activateAccount/"
           element={<ActivatePrimaryAccount />}

@@ -17,8 +17,8 @@ const business_type = [
   { label: "Coorporation", value: "Coorporation" },
 ];
 const compliance_aml = [
-  { label: "No", value: "No" },
   { label: "Yes", value: "Yes" },
+  { label: "No", value: "No" },
 ];
 
 function Profile() {
@@ -81,6 +81,8 @@ function Profile() {
     setBusinessLicence(e.target.files[0]);
   };
   let formData = new FormData();
+  const substring = "uploads/merchantKyc";
+  // result = url.replace(substring, "")
   return (
     <>
       {loading ? (
@@ -336,7 +338,10 @@ function Profile() {
                                 className="mb-3"
                                 src={
                                   kyc.valid_identification
-                                    ? kyc.valid_identification
+                                    ? kyc.valid_identification.replace(
+                                        substring,
+                                        ""
+                                      )
                                     : "https://dummyimage.com/1240x1752/d1d1d1/000000"
                                 }
                                 alt="ID Card"
@@ -355,7 +360,10 @@ function Profile() {
                                 className="mb-3"
                                 src={
                                   kyc.business_licnense
-                                    ? kyc.business_licnense
+                                    ? kyc.business_licnense.replace(
+                                        substring,
+                                        ""
+                                      )
                                     : "https://dummyimage.com/1240x1752/d1d1d1/000000"
                                 }
                                 alt="Business Lisence"
@@ -374,7 +382,7 @@ function Profile() {
                                 className="mb-3"
                                 src={
                                   kyc.agreement_doc
-                                    ? kyc.agreement_doc
+                                    ? kyc.agreement_doc.replace(substring, "")
                                     : "https://dummyimage.com/1240x1752/d1d1d1/000000"
                                 }
                                 alt="Agreement Document"
