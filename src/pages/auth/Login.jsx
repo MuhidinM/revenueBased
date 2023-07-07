@@ -4,7 +4,7 @@ import AuthService from "../../services/auth.service";
 import { useDispatch } from "react-redux";
 // import { PASSWORD } from "../../../../server/configs/db";
 import { Formik } from "formik";
-import souq from "../../assets/images/Souq.png";
+import souq from "../../assets/images/loginBg.png";
 import * as Yup from "yup";
 function Login() {
   const [successful] = useState(false);

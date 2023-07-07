@@ -82,7 +82,7 @@ function Basic2() {
                   value={props.values.waddress}
                   handleChange={props.handleChange}
                   id="waddress"
-                  place="Epay.com"
+                  place="souqpass.com"
                   required=""
                 />
               </div>

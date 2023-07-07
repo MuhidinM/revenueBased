@@ -1,33 +1,8 @@
 import React, { useState } from "react";
 import DataTable from "react-data-table-component";
-// import { useDispatch } from "react-redux";
-// import {
-//   getLoanDetail,
-//   // setLoanToApprove,
-// } from "../../store/actions/loanAction";
-// import Swal from "sweetalert2";
-// import withReactContent from "sweetalert2-react-content";
-// import "./alert.css";
-
-// const MySwal = withReactContent(Swal);
 
 const Loans = () => {
   const [activeTab, setActiveTab] = useState("all");
-  // const dispatch = useDispatch();
-
-  // const [currentPage, setCurrentPage] = useState(1);
-  // const pageSize = 10; // Number of items per page
-
-  // const userData = useSelector((state) => state.userProfile);
-  // // const { username } = userData;
-
-  // useEffect(() => {
-  //   dispatch(getLoanDetail(currentPage - 1));
-  // }, [currentPage, dispatch]);
-
-  // const loanData = useSelector((state) => state.loanInfo);
-  // const { loans } = loanData;
-
   const loans = [
     {
       salesId: 1,
@@ -140,20 +115,20 @@ const Loans = () => {
         return (
           <div>
             {row?.approvalStatus === "PENDING" ? (
-              <div className="border flex items-center justify-center rounded-lg bg-gray-300 w-24 h-6">
+              <div className="flex items-center justify-center w-24 h-6 bg-gray-300 border rounded-lg">
                 <span className="text-black">PENDING</span>
               </div>
             ) : row?.approvalStatus === "IN_PROCESS" ? (
-              <div className="border flex items-center justify-center rounded-lg bg-green-500 w-24 h-6">
+              <div className="flex items-center justify-center w-24 h-6 bg-green-500 border rounded-lg">
                 <span className="text-white">IN_PROCESS</span>
               </div>
             ) : row?.approvalStatus === "REJECTED" ? (
-              <div className="border flex items-center justify-center rounded-lg bg-orange-500 w-24 h-6">
+              <div className="flex items-center justify-center w-24 h-6 bg-orange-500 border rounded-lg">
                 <span className="text-white">REJECTED</span>
               </div>
             ) : (
               row?.approvalStatus === "APPROVED" && (
-                <div className="border flex items-center justify-center rounded-lg bg-cyan-500 w-24 h-6">
+                <div className="flex items-center justify-center w-24 h-6 border rounded-lg bg-cyan-500">
                   <span className="text-white">APPROVED</span>
                 </div>
               )
@@ -251,7 +226,7 @@ const Loans = () => {
     // console.log("DFD", data);
     return (
       <div className="bg-gray-50">
-        <span className="ml-2 py-1 text-xl text-cyan-500 font-semibold">
+        <span className="py-1 ml-2 text-xl font-semibold text-cyan-500">
           Payment Schedule
         </span>
         <div className="m-2 mx-12 border-x-2 border-cyan-500">
@@ -319,7 +294,7 @@ const Loans = () => {
             </span>
           </div>
 
-          <div className="bg-white rounded-b-lg shadow p-4">
+          <div className="p-4 bg-white rounded-b-lg shadow">
             <DataTable
               columns={columns}
               data={filteredData}

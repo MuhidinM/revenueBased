@@ -11,11 +11,11 @@ function TermsAndConditions() {
         </h1>
         <h1 className="text-2xl m-4 text-black">1. Introduction</h1>
         <p className="text-lg text-gray-500">
-          Welcome to Epay, a payment gateway website that allows customers,
+          Welcome to Souqpass, a payment gateway website that allows customers,
           merchants, and agents to send and receive payments securely and
           efficiently. By using our Services, you agree to these Terms and
           Conditions ("Terms"), which form a binding agreement between you and
-          Epay. Please read these Terms carefully before using our Services.
+          Souqpass. Please read these Terms carefully before using our Services.
         </p>
         <h1 className="text-2xl m-4 text-black">2. Definitions</h1>
         <p className="text-lg text-gray-500">
@@ -24,7 +24,8 @@ function TermsAndConditions() {
         </p>
         <p className="text-lg text-gray-500">
           "Merchant" means any individual or entity that uses our Services to
-          receive payments and has registered for a merchant account with Epay.
+          receive payments and has registered for a merchant account with
+          Souqpass.
         </p>
         <p className="text-lg text-gray-500">
           "Agent" means any individual or entity that uses our Services on
@@ -32,7 +33,7 @@ function TermsAndConditions() {
         </p>
         <p className="text-lg text-gray-500">
           "Services" means the payment gateway and related services provided by
-          Epay.
+          Souqpass.
         </p>
         <h1 className="text-2xl m-4 text-black">3. Use of the Services</h1>
         <h1 className="text-xl m-4 text-black">3.1 Customers</h1>
@@ -45,7 +46,7 @@ function TermsAndConditions() {
         <h1 className="text-xl m-4 text-black">3.2 Merchants</h1>
 
         <p className="text-lg text-gray-500">
-          Merchants must register for a merchant account with Epay before
+          Merchants must register for a merchant account with Souqpass before
           incorporating our payment gateway on their site. By registering for an
           account, you represent and warrant that you have the authority to
           enter into this agreement and to use our Services.
@@ -61,14 +62,14 @@ function TermsAndConditions() {
         <h1 className="text-xl m-4 text-black">4.1 Payment Processing Fees</h1>
 
         <p className="text-lg text-gray-500">
-          Epay charges a processing fee for each transaction made through our
-          Services. The processing fee is deducted from the payment amount
+          Souqpass charges a processing fee for each transaction made through
+          our Services. The processing fee is deducted from the payment amount
           before it is sent to the recipient.
         </p>
         <h1 className="text-xl m-4 text-black">4.2 Payment Processing Time</h1>
 
         <p className="text-lg text-gray-500">
-          Epay processes payments as quickly as possible, but we cannot
+          Souqpass processes payments as quickly as possible, but we cannot
           guarantee instant processing. The time it takes to process a payment
           may vary depending on the payment method, the recipient's bank, and
           other factors beyond our control.
@@ -77,9 +78,9 @@ function TermsAndConditions() {
         <h1 className="text-xl m-4 text-black">5.1 Account Responsibility</h1>
 
         <p className="text-lg text-gray-500">
-          You are responsible for maintaining the security of your Epay account,
-          including your login credentials and any other sensitive information
-          associated with your account.
+          You are responsible for maintaining the security of your Souqpass
+          account, including your login credentials and any other sensitive
+          information associated with your account.
         </p>
         <h1 className="text-xl m-4 text-black">5.2 Unauthorized Use</h1>
 
@@ -90,17 +91,17 @@ function TermsAndConditions() {
         </p>
         <h1 className="text-2xl m-4 text-black">6. Limitation of Liability</h1>
         <p className="text-lg text-gray-500">
-          Epay and its officers, directors, employees, and agents will not be
-          liable for any direct, indirect, incidental, special, consequential,
-          or punitive damages arising out of or in any way related to the use of
-          our Services, even if we have been advised of the possibility of such
-          damages.
+          Souqpass and its officers, directors, employees, and agents will not
+          be liable for any direct, indirect, incidental, special,
+          consequential, or punitive damages arising out of or in any way
+          related to the use of our Services, even if we have been advised of
+          the possibility of such damages.
         </p>
         <h1 className="text-2xl m-4 text-black">
           7. Modifications to the Services or Terms
         </h1>
         <p className="text-lg text-gray-500">
-          Epay reserves the right to modify or discontinue, temporarily or
+          Souqpass reserves the right to modify or discontinue, temporarily or
           permanently, any part of our Services or these Terms at any time and
           for any reason, without notice or liability to you.
         </p>
@@ -117,10 +118,10 @@ function TermsAndConditions() {
         <h1 className="text-xl m-4 text-black">9.1 Entire Agreement</h1>
 
         <p className="text-lg text-gray-500">
-          These Terms constitute the entire agreement between you and Epay
+          These Terms constitute the entire agreement between you and Souqpass
           regarding the use of our Services and supersede all prior or
           contemporaneous communications and proposals, whether oral or written,
-          between you and Epay.
+          between you and Souqpass.
         </p>
         <h1 className="text-xl m-4 text-black">9.2 Severability</h1>
 
@@ -132,10 +133,10 @@ function TermsAndConditions() {
         <h1 className="text-xl m-4 text-black">9.3 Waiver</h1>
 
         <p className="text-lg text-gray-500">
-          The failure of Epay to enforce any right or provision of these Terms
-          shall not constitute a waiver of such right or provision.
+          The failure of Souqpass to enforce any right or provision of these
+          Terms shall not constitute a waiver of such right or provision.
         </p>
-        <p className="text-lg text-gray-500">Thank you for using Epay!</p>
+        <p className="text-lg text-gray-500">Thank you for using Souqpass!</p>
       </div>
       <Footer />
     </>

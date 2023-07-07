@@ -38,7 +38,7 @@ function Sidebar() {
               Dashboard
             </Link>
           </li>
-          {kyc && (
+          {!kyc && ( 
             <>
               <li className="mb-1">
                 <Link to="/users/accounts">
@@ -87,7 +87,7 @@ function Sidebar() {
               <li className="mb-1">
                 <Link to="/users/sales">
                   <svg
-                    className="h-6 w-6 text-primary"
+                    className="w-6 h-6 text-primary"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -126,7 +126,7 @@ function Sidebar() {
               <li className="mb-1">
                 <Link to="/users/inventory">
                   <svg
-                    className="h-6 w-6 text-primary"
+                    className="w-6 h-6 text-primary"
                     width="24"
                     height="16"
                     viewBox="0 0 24 24"
@@ -148,7 +148,7 @@ function Sidebar() {
               <li className="mb-1">
                 <Link to="loan">
                   <svg
-                    className="h-6 w-6 text-primary"
+                    className="w-6 h-6 text-primary"
                     width="24"
                     height="16"
                     viewBox="0 0 24 24"
