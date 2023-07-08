@@ -17,16 +17,13 @@ function Auth() {
     <>
       <Routes>
         <Route index element={<Login />}></Route>
-        <Route path="auth/registration" element={<Registration />}></Route>
-        <Route path="auth/epass" element={<EpassRegistration />}></Route>
-        <Route path="auth/first" element={<First />}></Route>
-        <Route path="auth/resetpassword" element={<Resetpassword />}></Route>
-        <Route path="auth/recover" element={<Recovery />}></Route>
-        <Route path="auth/activate" element={<Activation />}></Route>
-        <Route
-          path="auth/termsandconditions"
-          element={<TermsAndConditions />}
-        ></Route>
+        <Route path="registration" element={<Registration />}></Route>
+        <Route path="epass" element={<EpassRegistration />}></Route>
+        <Route path="first" element={<First />}></Route>
+        <Route path="resetpassword" element={<Resetpassword />}></Route>
+        <Route path="recover" element={<Recovery />}></Route>
+        <Route path="activate" element={<Activation />}></Route>
+        <Route path="termsandconditions" element={<TermsAndConditions />}></Route>
         <Route
           path="activateAccount/"
           element={<ActivatePrimaryAccount />}

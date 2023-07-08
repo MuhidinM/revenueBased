@@ -36,7 +36,7 @@ function DomainComponent({ onSubmit, values, onCancel }) {
                     type="text"
                     name="name"
                     id="name"
-                    placeholder="Epay"
+                    placeholder="Souqpass"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     value={formik.values.name}
                     onChange={formik.handleChange}
@@ -55,7 +55,7 @@ function DomainComponent({ onSubmit, values, onCancel }) {
                     type="text"
                     name="url"
                     id="url"
-                    placeholder="epay.com"
+                    placeholder="souqpass.com"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     value={formik.values.url}
                     onChange={formik.handleChange}

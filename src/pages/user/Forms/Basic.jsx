@@ -105,7 +105,7 @@ function Basic() {
                     handleChange={props.handleChange}
                     // onChange={props.handleChange}
 
-                    place="Epay S.C"
+                    place="Souqpass S.C"
                     required=""
                   />
                 </div>

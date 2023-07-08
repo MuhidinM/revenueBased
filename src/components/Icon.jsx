@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "./../assets/images/merchantone1_logo-removebg-preview.png";
+import logo from "./../assets/images/logo.png";
 
 function Icon(props) {
   return (

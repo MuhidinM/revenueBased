@@ -323,7 +323,7 @@ function Profile() {
                             title="Website URL"
                             name="website_url"
                             id="website_url"
-                            place="epay.com"
+                            place="souqpass.com"
                             value={props.values.website_url}
                             handleChange={props.handleChange}
                             disabled={activeKYC ? true : false}

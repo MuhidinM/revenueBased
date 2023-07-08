@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import AuthService from "../../services/auth.service";
 import Swal from "sweetalert2";
 // import withReactContent from "sweetalert2-react-content";
-import logo from "./../../assets/images/merchantone1_logo-removebg-preview.png";
+import logo from "./../../assets/images/logo.png";
 // const MySwal = withReactContent(Swal);
 // import { useState } from "react";
 function Registration() {
@@ -222,7 +222,7 @@ function Registration() {
                         <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                           Already have an account?{" "}
                           <Link
-                            to={"/"}
+                            to={"/auth"}
                             className="font-medium text-primary hover:underline dark:text-primary"
                           >
                             Login here

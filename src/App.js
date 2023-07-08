@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { useIdleTimer } from "react-idle-timer";
 import { Route, Routes } from "react-router-dom";
+import Home from "./pages/home/Index"
 import Auth from "./Auth";
 import Error from "./Error";
 import Users from "./Users";
+import Sandbox from "./Sandbox";
 import OTP from "./pages/auth/OTP";
 // import PrivateRoiutes from "./pages/auth/PrivateRoutes";
 import AuthService from "./services/auth.service";
@@ -33,8 +35,10 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/*" element={<Auth />}></Route>
+        <Route path="/*" element={<Home />}></Route>{" "}
+        <Route path="/auth/*" element={<Auth />}></Route>
         <Route path="/otp" element={<OTP />}></Route>
+        <Route path="/sandbox/*" element={<Sandbox />}></Route>
         {/* <Route element={<RequireAuth allowedRoles={"merchant"} />}> */}
         <Route path="/users/*" element={<Users />}></Route>
         {/* </Route>
