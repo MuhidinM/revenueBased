@@ -38,8 +38,8 @@ function Sidebar() {
               Dashboard
             </Link>
           </li>
-          {!kyc && ( 
-            <>
+          <>
+            {kyc && kyc.merchant_status === "Accepted" && (
               <li className="mb-1">
                 <Link to="/users/accounts">
                   <svg
@@ -60,6 +60,8 @@ function Sidebar() {
                   Accounts
                 </Link>
               </li>
+            )}
+            {kyc && kyc.merchant_status === "Accepted" && (
               <li className="mb-1">
                 <Link to={"/users/transactions"}>
                   <svg
@@ -84,6 +86,8 @@ function Sidebar() {
                   Transaction
                 </Link>
               </li>
+            )}
+            {kyc && kyc.merchant_status === "Accepted" && (
               <li className="mb-1">
                 <Link to="/users/sales">
                   <svg
@@ -102,6 +106,8 @@ function Sidebar() {
                   Sales
                 </Link>
               </li>
+            )}
+            {kyc && kyc.merchant_status === "Accepted" && (
               <li className="mb-1">
                 <Link to="configuration">
                   <svg
@@ -123,6 +129,8 @@ function Sidebar() {
                   Configuration
                 </Link>
               </li>
+            )}
+            {kyc && kyc.merchant_status === "Accepted" && (
               <li className="mb-1">
                 <Link to="/users/inventory">
                   <svg
@@ -145,6 +153,8 @@ function Sidebar() {
                   Inventory(Item)
                 </Link>
               </li>
+            )}
+            {kyc && kyc.merchant_status === "Accepted" && (
               <li className="mb-1">
                 <Link to="loan">
                   <svg
@@ -167,8 +177,8 @@ function Sidebar() {
                   Loan List
                 </Link>
               </li>
-            </>
-          )}
+            )}
+          </>
         </ul>
       </div>
     </>

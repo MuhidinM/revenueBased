@@ -10,6 +10,7 @@ import {
   LOADING,
   GET_EKY_DETAIL_ERROR,
   SET_ROLE,
+  LOG_OUT,
 } from "../types";
 
 const initialState = {
@@ -90,6 +91,17 @@ export default function (state = initialState, action) {
         ...state,
         loading: false,
         roles: action.payload,
+      };
+    case LOG_OUT:
+      return {
+        userProfile: {},
+        userDetail: {},
+        loading: false,
+        userID: null,
+        username: null,
+        token: null,
+        kyc: null,
+        roles: null,
       };
     default:
       return state;

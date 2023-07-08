@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes, useParams } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import First from "./pages/auth/First";
 import Login from "./pages/auth/Login";
 import Recovery from "./pages/auth/Recovery";

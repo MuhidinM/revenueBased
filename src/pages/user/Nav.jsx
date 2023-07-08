@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import AuthService from "../../services/auth.service";
 import { useEffect } from "react";
 import { useState } from "react";
-import { getEkyInfo } from "../../store/actions/userProfileAction";
+import { getEkyInfo, setlogOut } from "../../store/actions/userProfileAction";
+import UserService from "../../services/user.service";
 
 function Nav() {
   // const [currentUser, setCurrentUser] = useState({});
@@ -14,7 +15,7 @@ function Nav() {
   const [firstChar, setFirstChar] = useState("");
 
   const logOut = () => {
-    AuthService.logout();
+    setlogOut();
   };
   // console.log(userData);
   const { userID } = userData;
@@ -91,7 +92,7 @@ function Nav() {
                 </Link>
               </li>
               <li>
-                <Link to={"/"} onClick={logOut}>
+                <Link to={"/"} onClick={() => logOut}>
                   Logout
                 </Link>
               </li>

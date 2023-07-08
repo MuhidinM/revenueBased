@@ -32,12 +32,12 @@ const Banner = () => {
             <div
               className="radial-progress text-white mx-2"
               style={{
-                "--value": "70",
+                "--value": "2",
                 "--size": "3rem",
                 "--thickness": "5px",
               }}
             >
-              70%
+              2%
             </div>
             <div className="flex-shrink-0 order-3 w-full mt-2 sm:order-2 sm:mt-0 sm:w-auto">
               <a
