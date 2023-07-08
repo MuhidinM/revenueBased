@@ -171,7 +171,11 @@ function AddInventory({ onSubmit, values, onCancel }) {
               </div>
             </div>
 
-            <button onClick={onCancel} className="swal2-cancel swal2-styled">
+            <button
+              type="button"
+              onClick={onCancel}
+              className="swal2-cancel swal2-styled"
+            >
               Cancel
             </button>
             <button

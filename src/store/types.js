@@ -61,3 +61,4 @@ export const SET_ROLE = "SET_ROLE";
 export const SET_LOAN_REQUEST = "SET_LOAN_REQUEST";
 export const SET_LOAN_PDF = "SET_LOAN_PDF";
 export const LOG_OUT = "LOG_OUT";
+export const GET_TOKEN = "GET_TOKEN";
