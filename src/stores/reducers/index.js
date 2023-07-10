@@ -6,6 +6,14 @@ import getInventoryReducer from "./getInventoryReducer";
 import bank_accountReducer from "./bank_accountReducer";
 import getTransactionDetailReducer from "./getTransactionDetailReducer";
 import adminFetchAllTransactions from "./adminFetchAllTransactions";
+
+import generate_api_key_reducer from "./generateApiKeyReducer";
+import bankReducer from "./bankReducer";
+import deviceManagementReducer from "./deviceManagementReducer";
+import domainReducer from "./domainReducer";
+import bussinessReducer from "./bussinessReducer";
+import agentReducer from "./agentReducer";
+
 const persistConfig = {
   key: "root",
   storage,
@@ -18,5 +26,13 @@ const rootReducer = combineReducers({
   transactionByTransactionId: getTransactionDetailReducer,
   transactionDetailAll: adminFetchAllTransactions,
   inventoryInfo: getInventoryReducer,
+
+  apiKey: generate_api_key_reducer,
+  deviceDetail: deviceManagementReducer,
+  registerDevice: deviceManagementReducer,
+  bankInfo: bankReducer,
+  domain: domainReducer,
+  bussinessInfo: bussinessReducer,
+  agentInfo: agentReducer,
 });
 export default persistReducer(persistConfig, rootReducer);

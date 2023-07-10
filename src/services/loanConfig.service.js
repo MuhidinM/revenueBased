@@ -22,9 +22,9 @@ const AssignLoanConfig = async (item_id, loan_conf_id, merchant_id) => {
   }).then((response) => response);
 };
 
-const createLoanRequest = async (data) => {
+const createLoanRequest = async (formData) => {
   return await NODE_API.post("/loanprocess/newLoanRequest", {
-    data,
+    formData,
   }).then((response) => response);
 };
 

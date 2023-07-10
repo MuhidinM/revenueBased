@@ -14,6 +14,7 @@ import storage from "redux-persist/lib/storage";
 import getInventoryReducer from "./getInventoryReducer";
 import getSalesReducer from "./getSalesReducer";
 import getLoanConfigReducer from "./getLoanConfigReducer";
+import tokenReducer from "./token.reducer";
 const persistConfig = {
   key: "root",
   storage,
@@ -35,5 +36,6 @@ const rootReducer = combineReducers({
   inventoryInfo: getInventoryReducer,
   salesInfo: getSalesReducer,
   loanConfigInfo: getLoanConfigReducer,
+  tokenInfo: tokenReducer,
 });
 export default persistReducer(persistConfig, rootReducer);

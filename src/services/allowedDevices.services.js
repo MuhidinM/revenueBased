@@ -1,18 +1,24 @@
-import axios from "axios";
+import { NODE_API } from "../utils/API";
 const getAllRegisteredDevices = async (id) => {
   // console.log("calling endpoint");
-  console.log("User Id Is: ", id);
-  return await axios
-    .get(process.env.REACT_APP_API_NODE_URLS + `device/all/${id}`)
-    .then((response) => {
-      // console.log("text" + response.data);
-      console.log(response.data);
-      return response.data.allDevices;
-    });
+  // console.log("User Id Is: ", id);
+  return await NODE_API.get(`/device/all?user_id=${id}`).then((response) => {
+    console.log(response.data);
+    return response.data.allDevices;
+  });
+};
+const getAllDevices = async () => {
+  // console.log("calling endpoint");
+  // console.log("User Id Is: ", id);
+  return await NODE_API.get(`/device/allDevices`).then((response) => {
+    console.log(response.data);
+    return response.data;
+  });
 };
 
 const RegisteredDeviceServices = {
   getAllRegisteredDevices,
+  getAllDevices,
 };
 
 export default RegisteredDeviceServices;

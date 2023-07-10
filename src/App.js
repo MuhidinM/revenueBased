@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useIdleTimer } from "react-idle-timer";
 import { Route, Routes } from "react-router-dom";
-import Home from "./pages/home/Index"
+import Home from "./pages/home/Index";
 import Auth from "./Auth";
 import Error from "./Error";
 import Users from "./Users";
@@ -10,6 +10,7 @@ import OTP from "./pages/auth/OTP";
 // import PrivateRoiutes from "./pages/auth/PrivateRoutes";
 import AuthService from "./services/auth.service";
 import Sales from "./Sales";
+import Gateway from "./components/Gateway";
 // import RequireAuth from "./pages/auth/RequireAuth";
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
     <>
       <Routes>
         <Route path="/*" element={<Home />}></Route>{" "}
+        <Route path="/gateway/*" element={<Gateway />}></Route>
         <Route path="/auth/*" element={<Auth />}></Route>
         <Route path="/otp" element={<OTP />}></Route>
         <Route path="/sandbox/*" element={<Sandbox />}></Route>

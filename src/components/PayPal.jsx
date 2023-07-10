@@ -2,26 +2,47 @@ import React, { useState, useEffect } from "react";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { useParams, useSearchParams } from "react-router-dom";
 import PaymentServices from "../services/payment.service";
+import Swal from "sweetalert2";
 function PayPal(props) {
   const [show, setShow] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [verified, setVerified] = useState(false);
   const [responseData, setresponseData] = useState({});
   const [ErrorMessage, setErrorMessage] = useState("");
   const [orderID, setOrderID] = useState(false);
   const [data1, setData] = useState({});
   const [searchParams, setSearchParams] = useSearchParams();
   const callBackUrl = searchParams.get("callBackUrl");
-  // console.log(callBackUrl);
-  useEffect(() => {
-    if (success) {
-      // console.log("Response Data Is:", responseData);
-      window.opener.postMessage(
-        JSON.stringify(responseData),
-        "http://localhost:3001/"
-      );
-      window.opener.focus();
-    }
-  }, [success]);
+  const clientId = searchParams.get("clientId");
+  const secratekey = searchParams.get("secretKey");
+  const key = searchParams.get("key");
+  console.log(callBackUrl);
+  // useEffect(() => {
+  //   console.log("Credentials To be Sent Is: ", clientId, secratekey);
+  //   console.log("Key:", key);
+  //   PaymentServices.checkCredentials(clientId, secratekey, key)
+  //     .then((response) => {
+  //       if (response[0] == 200) {
+  //         setVerified(true);
+  //         console.log("Response Status is:", response[1]);
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log("Error Is:", err);
+  //     });
+  //   if (success) {
+  //     const paymentData = {
+  //       paymentStatus: 'success',
+  //       transactionDetails: {
+  //         // Replace with any relevant transaction details
+  //       },
+  //     };
+  //     // PaymentServices.sendPaymentResponse("http://localhost:6000", paymentData).then((response=>{console.log(response.status)})).catch((err)=>{})
+  //     window.opener.postMessage(JSON.stringify(responseData), "*");
+  //     window.opener.focus();
+
+  //   }
+  // }, [success]);
   // console.log(data1);
 
   const createOrder = (data, actions) => {
@@ -51,10 +72,10 @@ function PayPal(props) {
   const onApprove = (data, actions) => {
     return actions.order.capture().then(function (details) {
       const { payer } = details;
-      // console.log("Details: " + JSON.stringify(details));
-      // console.log(
-      //   "Purchase Units" + JSON.stringify(details.purchase_units[0].payments)
-      // );
+      console.log("Details: " + JSON.stringify(details));
+      console.log(
+        "Purchase Units" + JSON.stringify(details.purchase_units[0].payments)
+      );
       const orderId = details.id;
       const status = details.status;
       const amountValue =
@@ -73,8 +94,10 @@ function PayPal(props) {
       const payer_id = details.payer.payer_id;
       const payerCountry_code = details.payer.address.country_code;
       const linksHref = details.links[0].href;
+      const paymentId = props.paymentId;
       const clientOrderId = props.orderId;
       const response_to_Client = {
+        paymentId: props.paymentId,
         clientOrderId: clientOrderId,
         paypalOrderId: orderId,
         status: status,
@@ -93,9 +116,10 @@ function PayPal(props) {
         linksHref: linksHref,
       };
       setresponseData(response_to_Client);
-      // console.log("Response to Jiggi", response_to_Client);
+      console.log("Response to Jiggi", response_to_Client);
 
       PaymentServices.logPayPalResponse(
+        paymentId,
         orderId,
         status,
         amountValue,
@@ -112,7 +136,21 @@ function PayPal(props) {
         payer_id,
         payerCountry_code,
         linksHref
-      );
+      )
+        .then((response) => {
+          Swal.fire({
+            text: "Paid Successfully!",
+            position: "top-end",
+            timer: 2000,
+            timerProgressBar: true,
+            showConfirmButton: false,
+          });
+          setInterval(() => {
+            window.location.replace(response.returnUrl);
+          }, 2000);
+          return response;
+        })
+        .catch((error) => console.error(error));
 
       setSuccess(true);
 
@@ -120,7 +158,8 @@ function PayPal(props) {
     });
   };
   //capture likely error
-  return (
+
+  return props.status === "PENDING" ? (
     <PayPalScriptProvider
       options={{
         "client-id":
@@ -133,6 +172,8 @@ function PayPal(props) {
         onApprove={onApprove}
       />
     </PayPalScriptProvider>
+  ) : (
+    props.status === "COMPLETED" && <span>Already Paid</span>
   );
 }
 export default PayPal;

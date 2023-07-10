@@ -1,19 +1,19 @@
 import axios from "axios";
 import authHeader from "./auth-header";
+import { NODE_API } from "../utils/API";
 
 const API_URL = process.env.REACT_APP_API_NODE_URLS;
 
 const addUrls = async (user_id, name, url) => {
-  return await axios
-    .post(
-      API_URL + "api/createurl",
-      {
-        user_id,
-        name,
-        url,
-      },
-      { withCredentials: true, credentials: "include" }
-    )
+  return await NODE_API.post(
+    "/createurl",
+    {
+      user_id,
+      name,
+      url,
+    },
+    { withCredentials: true, credentials: "include" }
+  )
     .then((response) => {
       console.log(response.data);
       return [response.data, response.status];
@@ -30,20 +30,18 @@ const addUrls = async (user_id, name, url) => {
     });
 };
 const getDomain = async (id) => {
-  return await axios
-    .get(
-      API_URL + `api/getdomain/${id}`,
+  return await NODE_API.get(
+    `/getdomain?user_id=${id}`,
 
-      {
-        withCredentials: true,
-        credentials: "include",
-      }
-    )
-    .then((response) => {
-      console.log(response.data);
-      console.log(response.data.bankDetail);
-      return response.data.urlDetail;
-    });
+    {
+      withCredentials: true,
+      credentials: "include",
+    }
+  ).then((response) => {
+    console.log(response.data);
+    console.log(response.data.bankDetail);
+    return response.data.url;
+  });
 };
 const DomainServices = {
   addUrls,

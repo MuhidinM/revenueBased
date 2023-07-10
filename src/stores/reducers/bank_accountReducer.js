@@ -6,7 +6,7 @@ import {
   NAME_ENQ_BY_ACCNO,
   NAME_ENQ_BY_ACCNO_ERROR,
   GET_ACCOUNTS_BY_PHONE,
-  // GET_ACCOUNTS_BY_PHONE_ERROR,
+  GET_ACCOUNTS_BY_PHONE_ERROR,
 } from "../types";
 
 const initialState = {
@@ -57,13 +57,11 @@ export default function (state = initialState, action) {
       };
     case ACCOUNTS_ERROR:
       return {
-        ...state,
         loading: false,
         error: action.payload,
       };
     case NAME_ENQ_BY_ACCNO_ERROR:
       return {
-        ...state,
         loading: false,
         error: action.payload,
       };

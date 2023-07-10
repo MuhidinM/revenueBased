@@ -338,7 +338,7 @@ function Profile() {
                                 className="mb-3"
                                 src={
                                   kyc.valid_identification
-                                    ? kyc.valid_identification.replace(
+                                    ? kyc.valid_identification?.replace(
                                         substring,
                                         ""
                                       )
@@ -360,7 +360,7 @@ function Profile() {
                                 className="mb-3"
                                 src={
                                   kyc.business_licnense
-                                    ? kyc.business_licnense.replace(
+                                    ? kyc.business_licnense?.replace(
                                         substring,
                                         ""
                                       )
@@ -382,7 +382,7 @@ function Profile() {
                                 className="mb-3"
                                 src={
                                   kyc.agreement_doc
-                                    ? kyc.agreement_doc.replace(substring, "")
+                                    ? kyc.agreement_doc?.replace(substring, "")
                                     : "https://dummyimage.com/1240x1752/d1d1d1/000000"
                                 }
                                 alt="Agreement Document"

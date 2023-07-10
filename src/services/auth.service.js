@@ -173,10 +173,3 @@ const AuthService = {
 
 export default AuthService;
 
-// class GatewayServices(){
-//     register(){
-
-//     }
-
-// }
-// export default new GatewayServices()
