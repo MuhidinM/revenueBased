@@ -22,12 +22,12 @@ function IntroSection() {
         </div>
         <div className="grid grid-cols-2 gap-4 mt-8">
           <img
-            className="w-full rounded-lg"
+            className="w-full border rounded-lg"
             src={intro1}
             alt="office content 1"
           />
           <img
-            className="w-full mt-4 rounded-lg lg:mt-10"
+            className="w-full mt-4 border rounded-lg lg:mt-10"
             src={intro2}
             alt="office content 2"
           />

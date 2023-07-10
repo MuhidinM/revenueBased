@@ -1,4 +1,4 @@
-import introDots from "../../../../assets/images/introDots.png"
+import introDots from "../../../../assets/images/introDots.png";
 
 export const IntroFeature = () => {
   return (
@@ -40,9 +40,9 @@ export const IntroFeature = () => {
             for merchants to accept payments from customers around the world.
           </p>
         </div>
-        <div className="mb-4 transition-shadow duration-300 hover:shadow-xl lg:mb-6">
+        <div className="mb-4 lg:mb-6">
           <img
-            className="object-cover w-full h-56 rounded shadow-lg sm:h-64 md:h-80 lg:h-96"
+            className="object-cover w-full h-56 rounded sm:h-64 md:h-80 lg:h-96"
             src={introDots}
             alt=""
           />

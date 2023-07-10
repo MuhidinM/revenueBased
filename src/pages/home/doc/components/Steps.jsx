@@ -1,4 +1,4 @@
-import steps from "../../../../assets/images/steps.jpeg"
+import steps from "../../../../assets/images/steps.png"
 
 function Steps() {
   return (
@@ -230,7 +230,7 @@ function Steps() {
         </div>
         <div className="relative">
           <img
-            className="inset-0 object-cover object-bottom w-full rounded shadow-lg h-96 lg:absolute lg:h-full"
+            className="inset-0 object-cover object-bottom w-full rounded h-96 lg:absolute lg:h-full"
             src={steps}
             alt=""
           />
