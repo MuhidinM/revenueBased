@@ -22,6 +22,16 @@ const columns = [
     sortable: true,
   },
   {
+    name: "First Name",
+    selector: "firstName",
+    sortable: true,
+  },
+  {
+    name: "Last Name",
+    selector: "lastName",
+    sortable: true,
+  },
+  {
     name: "Username",
     selector: (row) =>
       row.phone_number ? row.phone_number : row.email_address,
@@ -159,6 +169,8 @@ function Sales() {
               dispatch(
                 UserService.CreateSales(
                   values.username,
+                  values.firstName,
+                  values.lastName,
                   userID,
                   setUpdated,
                   updated
@@ -200,6 +212,8 @@ function Sales() {
   const showModalSales = () => {
     showFormModalSales({
       username: "",
+      firstName: "",
+      lastName: "",
       merchant_id: userID,
     })
       .then((values) => console.log(values))

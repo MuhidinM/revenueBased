@@ -57,9 +57,44 @@ const login = async (username, password, setMessage, navigate, dispatch) => {
       }
     });
   } catch (error) {
-    console.log(error);
-    console.log(error?.response?.data?.message);
-    setMessage(error?.response?.data?.message);
+    try {
+      console.log(error?.response?.data?.message);
+      setMessage(error?.response?.data?.message);
+      error?.response?.data?.message === "In active Account"
+        ? setMessage(error?.response?.data?.message)
+        : await LOGIN_NODE_API.post("/sales/login", {
+            username,
+            password,
+          }).then((res) => {
+            console.log("res", res);
+            if (res.data.token) {
+              dispatch(setToken(res?.data?.token));
+              const decoded = jwtDecode(res.data.token);
+              console.log("this if from decoded", decoded);
+              const user = jwt(res.data.token);
+              if (decoded?.role === "sales") {
+                // dispatch(setUsername(decoded?.email_address));
+                dispatch(setUserID(decoded?.sales_id));
+                dispatch(setRole(decoded?.role));
+                navigate("/sales");
+                window.location.reload();
+              } else if (decoded?.role === "merchant") {
+                dispatch(setUsername(decoded?.email_address));
+                dispatch(setUserID(decoded?.merchant_id));
+                dispatch(setRole(decoded?.role));
+                navigate("/users");
+                // window.location.reload();
+              }
+              // document.cookie = "token=" + response.data.token;
+              localStorage.setItem("user", JSON.stringify(user));
+              return user;
+            }
+          });
+    } catch (error) {
+      console.log(error);
+      console.log(error?.response?.data?.message);
+      setMessage(error?.response?.data?.message);
+    }
   }
 };
 
@@ -172,4 +207,3 @@ const AuthService = {
 };
 
 export default AuthService;
-

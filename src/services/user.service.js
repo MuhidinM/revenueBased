@@ -95,10 +95,19 @@ const CreateBankAccount = async (
     .then((response) => response.data);
 };
 
-const CreateSales = async (username, merchant_id, setUpdated, updated) => {
+const CreateSales = async (
+  username,
+  firstName,
+  lastName,
+  merchant_id,
+  setUpdated,
+  updated
+) => {
   // console.log("username", username);
   return await NODE_API.post("/sales/register", {
     username,
+    firstName,
+    lastName,
     merchant_id,
   }).then((response) => {
     setUpdated(!updated);

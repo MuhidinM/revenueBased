@@ -20,6 +20,7 @@ import jwtDecode from "jwt-decode";
 import { useSelector } from "react-redux";
 import BNPLHome from "./pages/user/BNPLHome";
 import TransactionList from "./pages/user/PPTransactions";
+import Home from "./pages/user/Home";
 function Users() {
   const tokenInfo = useSelector((state) => state.userProfile);
   const { token } = tokenInfo;
@@ -36,6 +37,7 @@ function Users() {
           <Nav />
           <div className="m-4">
             <Routes>
+              {!service_name && <Route index element={<Home />}></Route>}
               {service_name?.includes("BNPL") ? (
                 <Route index element={<BNPLHome />}></Route>
               ) : (
