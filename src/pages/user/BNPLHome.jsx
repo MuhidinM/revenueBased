@@ -47,7 +47,7 @@ const columns = [
   },
 ];
 
-function Home() {
+function BNPLHome() {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.userProfile);
   // console.log(userData);
@@ -96,4 +96,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default BNPLHome;

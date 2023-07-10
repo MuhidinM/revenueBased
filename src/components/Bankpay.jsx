@@ -19,13 +19,15 @@ function Bankpay(props) {
   const [phoneNumber, setphoneNumber] = useState("");
   const [primaryAccount, setPrimaryAccount] = useState();
   const [currentUser, setCurrentUser] = useState({});
+  const [loadingOtp, setLoadingOtp] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const clientid = searchParams.get("secretKey");
   const secretKey = searchParams.get("secretKey");
   const key = searchParams.get("key");
   const amount = searchParams.get("amount");
   const callBackUrl = searchParams.get("callBackUrl");
-  // console.log(clientid, secretKey, amount);
+  console.log(clientid, secretKey, amount);
+  console.log(props);
   useEffect(() => {}, []);
   const validationSchema = Yup.object().shape({
     accountHolder: Yup.string().required("Account Holder Name is required"),
@@ -34,7 +36,7 @@ function Bankpay(props) {
   });
 
   const PinvalidationSchema = Yup.object().shape({
-    phoneNumber: Yup.string().required("Phone Number is required"),
+    // phoneNumber: Yup.string().required("Phone Number is required"),
     pin: Yup.string().required("Pin is required"),
     // bankName: Yup.string().required("You Have to select Bank"),
   });
@@ -76,7 +78,7 @@ function Bankpay(props) {
         <>
           <Formik
             initialValues={{
-              phoneNumber: "",
+              phoneNumber: props.phoneNumber,
               pin: "",
               // bankName: "",
             }}
@@ -86,34 +88,28 @@ function Bankpay(props) {
               //   alert(JSON.stringify(values, null, 2));
               //   setSubmitting(false);
               // }, 400);
-              // console.log("hello");
-              // console.log(values);
-              PaymentServices.verifyPin(values.phoneNumber, values.pin).then(
-                (resp) => {
-                  // console.log(resp);
-                  setMessage(resp[0]);
+              console.log("hello");
+              console.log(values);
+              PaymentServices.verifyPin(props.phoneNumber, values.pin)
+                .then((resp) => {
+                  console.log("fdfffffffffffffffffffffffffff", resp);
+                  console.log(resp);
                   // setSuccessful(true);
-                  if (resp[0] === "200") {
-                    setphoneNumber(values.phoneNumber);
+                  if (resp[0] == "200") {
+                    setphoneNumber(props.phoneNumber);
                     setVerified(1);
                     setPrimaryAccount(resp[1].accountNumber);
+                  } else {
+                    setMessage(resp);
                   }
-                },
-                (error) => {
-                  const resMessage =
-                    (error.response &&
-                      error.response.data &&
-                      error.response.data.message) ||
-                    error.message ||
-                    error.toString();
-
-                  setMessage(resMessage);
-                  setSuccessful(false);
-                }
-              );
+                })
+                .catch((error) => {
+                  console.log("fdfffffffffffffffffffffffffff");
+                  setMessage(error);
+                });
             }}
           >
-            {(props) => (
+            {(prop) => (
               <>
                 <div>
                   <div className="grid grid-cols-2 gap-2 sm:grid-cols-5">
@@ -124,9 +120,10 @@ function Bankpay(props) {
                         id="phoneNumber"
                         className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Phone Number"
+                        disabled
                         // required=""
-                        value={props.values.phoneNumber}
-                        onChange={props.handleChange}
+                        value={props.phoneNumber}
+                        onChange={prop.handleChange}
                       />
                     </div>
                     <div className="w-full col-span-2">
@@ -135,8 +132,8 @@ function Bankpay(props) {
                           <input
                             type={type}
                             name="pin"
-                            value={props.values.pin}
-                            onChange={props.handleChange}
+                            value={prop.values.pin}
+                            onChange={prop.handleChange}
                             className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="••••••"
                           />
@@ -153,7 +150,7 @@ function Bankpay(props) {
                               {icon === "eyeOff" ? (
                                 <path
                                   strokeLinecap="round"
-                                  strokeLinejoin="round"
+                                  stroke-linejoin="round"
                                   strokeWidth="2"
                                   d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"
                                 />
@@ -179,22 +176,23 @@ function Bankpay(props) {
                     </div>
                   </div>
                 </div>
+                <span className="text-orange-500">{message}</span>
                 <div className="flex items-center">
                   <button
                     // href="/otp"
                     type="submit"
                     // onClick={changeState}
-                    onClick={props.handleSubmit}
-                    className="w-1/2 text-white rounded-md swal2-styled bg-primary"
+                    onClick={prop.handleSubmit}
+                    className="w-full text-white rounded-md swal2-styled bg-primary"
                   >
                     Verify
                   </button>
-                  <button
+                  {/* <button
                     className="w-1/2 text-white rounded-md swal2-styled bg-primary"
                     onClick={handleClick}
                   >
                     SignUp
-                  </button>
+                  </button> */}
                 </div>
               </>
             )}
@@ -206,10 +204,8 @@ function Bankpay(props) {
             debitAccount: "",
           }}
           onSubmit={(val) => {
-            // console.log("hello", props.amount);
-            // console.log(val);
-
-            BankAccountServices.sendOtp(phoneNumber);
+            console.log("hello", props.amount);
+            setLoadingOtp(true);
             const value = {
               first: "",
               second: "",
@@ -218,76 +214,63 @@ function Bankpay(props) {
               fifth: "",
               sixth: "",
             };
+            BankAccountServices.sendOtp(props.phoneNumber).then((res) => {
+              res.status === "Success" && setLoadingOtp(false);
+              return (
+                res.status === "Success" &&
+                MySwal.fire({
+                  title: "",
+                  html: (
+                    <Otp
+                      values={value}
+                      onSubmit={(values) => {
+                        console.log("Hello from the second swal");
+                        // resolve(values);
+                        const otp =
+                          values.first +
+                          values.second +
+                          values.third +
+                          values.fourth +
+                          values.fifth +
+                          values.sixth;
+                        BankAccountServices.confirmOtp(
+                          props.phoneNumber,
+                          otp
+                        ).then((res) => {
+                          // dispatch(setPrimaryAccount(e.target.value));
+                          console.log(primaryAccount);
+                          console.log(props.paymentId);
+                          res === "ok" &&
+                            PaymentServices.pay(
+                              primaryAccount,
+                              props.paymentId
+                            ).then((res) => {
+                              res[0] === 201 &&
+                                Swal.fire({
+                                  icon: "success",
+                                  title: "Successfully Paid",
+                                  showConfirmButton: false,
+                                  timer: 2000,
+                                });
+                              setInterval(() => {
+                                navigate(res[1]);
+                              }, 2000);
+                            });
+                        });
+                      }}
+                      onCancel={() => MySwal.close()}
+                    ></Otp>
+                  ),
 
-            MySwal.fire({
-              title: "",
-              html: (
-                <Otp
-                  values={value}
-                  onSubmit={(values) => {
-                    // console.log("Hello from the second swal");
-                    // resolve(values);
-                    const otp =
-                      values.first +
-                      values.second +
-                      values.third +
-                      values.fourth +
-                      values.fifth +
-                      values.sixth;
-                    BankAccountServices.confirmOtp(phoneNumber, otp).then(
-                      (res) => {
-                        // dispatch(setPrimaryAccount(e.target.value));
-                        // console.log(val.debitAccount);
-                        PaymentServices.pay(
-                          primaryAccount,
-                          props.amount,
-                          clientid,
-                          secretKey,
-                          key
-                        ).then(
-                          (resp) => {
-                            // console.log(resp);
-                            setMessage(resp[0]);
-                            setSuccessful(true);
-                            // setTimeout(3000)
-                            // if (resp[0]) {
-
-                            // }
-                            if (resp[0] === "Success") {
-                              window.opener.postMessage(resp[0], callBackUrl);
-                              window.opener.focus();
-                              window.close();
-                            } else {
-                              window.opener.postMessage(resp[0], callBackUrl);
-                              window.opener.focus();
-                              window.close();
-                            }
-                          },
-                          (error) => {
-                            const resMessage =
-                              (error.response &&
-                                error.response.data &&
-                                error.response.data.message) ||
-                              error.message ||
-                              error.toString();
-
-                            setMessage(resMessage);
-                            setSuccessful(false);
-                          }
-                        );
-                      }
-                    );
-                  }}
-                  onCancel={() => MySwal.close()}
-                ></Otp>
-              ),
-
-              // onClose: () => reject(),
-              showConfirmButton: false,
+                  // onClose: () => reject(),
+                  showConfirmButton: false,
+                })
+              );
             });
+            // .catch((e) => setLoadingOtp(false));
           }}
         >
-          {(props) => (
+          {(pro) => (
             <>
               {!successful && (
                 <>
@@ -302,7 +285,7 @@ function Bankpay(props) {
                       disabled
                       // required=""
                       value={primaryAccount}
-                      onChange={props.handleChange}
+                      onChange={pro.handleChange}
                     />
                   </div>
 
@@ -310,10 +293,11 @@ function Bankpay(props) {
                   <button
                     // href="/otp"
                     type="submit"
-                    onClick={props.handleSubmit}
+                    onClick={pro.handleSubmit}
+                    disabled={loadingOtp}
                     className="w-full text-white bg-primary hover:bg-primary focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary dark:hover:bg-primary dark:focus:ring-primary"
                   >
-                    Pay now
+                    {loadingOtp ? "Loading..." : "Pay Now"}
                   </button>
                 </>
               )}

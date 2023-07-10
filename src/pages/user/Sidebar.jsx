@@ -180,7 +180,7 @@ function Sidebar() {
                   </Link>
                 </li>
               )}
-              {service_name?.includes("Payment Processor") && (
+              {service_name?.includes("PaymentProcess") && (
                 <li>
                   <Link to="/users/uapi">
                     <svg
@@ -203,7 +203,7 @@ function Sidebar() {
                   </Link>
                 </li>
               )}
-              {service_name?.includes("Payment Processor") && (
+              {service_name?.includes("PaymentProcess") && (
                 <li>
                   <Link to="/users/domains">
                     <svg
@@ -223,7 +223,7 @@ function Sidebar() {
                   </Link>
                 </li>
               )}
-              {service_name?.includes("Payment Processor") && (
+              {service_name?.includes("PaymentProcess") && (
                 <li>
                   <Link to="/users/devices">
                     <svg

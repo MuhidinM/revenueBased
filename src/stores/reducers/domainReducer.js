@@ -1,20 +1,17 @@
 import {
-  GET_ACCOUNTS,
-  ACCOUNTS_ERROR,
-  CREATE_BAK_ACCOUNT,
-  SET_PRIMARY,
-  NAME_ENQ_BY_ACCNO,
-  NAME_ENQ_BY_ACCNO_ERROR,
-  GET_ACCOUNTS_BY_PHONE,
-  GET_ACCOUNTS_BY_PHONE_ERROR,
+  ADD_DOMAIN,
+  ADD_DOMAIN_ERROR,
+  GET_DOMAIN,
+  GET_DOMAIN_ERROR,
+  SUCCESS_RESPONSE_SETTER,
+  ERROR_RESPONSE_SETTER,
 } from "../types";
 
 const initialState = {
-  bankAccounts: [],
-  accounts: [],
-  message: "",
-  accountMessage: "",
-  criteriaValue: "",
+  domain: {},
+  domains: [],
+  message: {},
+  response: "",
   loading: true,
 };
 
@@ -22,45 +19,44 @@ export default function (state = initialState, action) {
   //   console.log(state);
   console.log(action.payload);
   switch (action.type) {
-    case GET_ACCOUNTS:
+    case ADD_DOMAIN:
       //   console.log(action.payload);
       return {
         ...state,
-        bankAccounts: action.payload,
+        domain: action.payload,
+        loading: false,
+      };
+    case GET_DOMAIN:
+      //   console.log(action.payload);
+      return {
+        ...state,
+        domains: action.payload,
         loading: false,
       };
 
-    case CREATE_BAK_ACCOUNT:
+    case SUCCESS_RESPONSE_SETTER:
+      //   console.log(action.payload);
       return {
         ...state,
-        message: action.payload,
+        response: action.payload,
         loading: false,
       };
 
-    case SET_PRIMARY:
+    case ERROR_RESPONSE_SETTER:
+      //   console.log(action.payload);
       return {
         ...state,
-        accountMessage: action.payload,
+        response: action.payload,
         loading: false,
       };
-    case NAME_ENQ_BY_ACCNO:
-      return {
-        ...state,
-        criteriaValue: action.payload,
-        loading: false,
-      };
-    case GET_ACCOUNTS_BY_PHONE:
-      return {
-        ...state,
-        accounts: action.payload,
-        loading: false,
-      };
-    case ACCOUNTS_ERROR:
+
+    case GET_DOMAIN_ERROR:
       return {
         loading: false,
         error: action.payload,
       };
-    case NAME_ENQ_BY_ACCNO_ERROR:
+
+    case ADD_DOMAIN_ERROR:
       return {
         loading: false,
         error: action.payload,

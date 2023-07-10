@@ -2,17 +2,21 @@ import axios from "axios";
 import { NODE_API } from "../utils/API";
 const API_URL = process.env.REACT_APP_API_NODE_URLS;
 const SPRING_ENDPOINT = process.env.REACT_APP_API_SPRING_URLS;
+const accountByPhoneEndpoint = "http://192.168.14.136:7090/userinfo";
+const otpEndpoint = "http://192.168.14.43:8081/payment/v1/";
 const getBankAccountById = async (id) => {
   console.log(id);
-  return await axios
-    .get(API_URL + `api/banckAccount/accountById/${id}`)
-    .then((response) => response.data.bankAccounts);
+  return await NODE_API.get(`/banckAccount/accountById/${id}`).then(
+    (response) => response.data.bankAccounts
+  );
 };
 
 const setPrimaryAccount = async (userId, account_id) => {
   console.log(account_id, userId);
-  return await axios
-    .patch(API_URL + `api/banckAccount/setPrimary/`, { account_id, userId })
+  return await NODE_API.patch(`/banckAccount/setPrimary`, {
+    account_id,
+    userId,
+  })
     .then((response) => [response.data.bankAccounts, response.status])
     .catch((err) => {
       if (err.response) {
@@ -35,23 +39,23 @@ const activateAccount = async (id, acId) => {
 
 const sendOtp = async (mobile) => {
   console.log(mobile);
-  return await NODE_API.post(`/merchant/sendOtp`, {
-    mobile,
-  }).then((response) => response.data);
+  return await NODE_API.post("/user/sendOtp", { Mobile: mobile }).then(
+    (response) => response.data
+  );
 };
 const getBankAccountByPhone = async (mobile) => {
   console.log(mobile);
-  return await NODE_API.get(`/merchant/userInfo?phoneNumber=${mobile}`).then(
-    (response) => response.data
-  );
+  return await axios
+    .post(process.env.REACT_APP_API_USER_INFO + "", { mobile })
+    .then((response) => response.data);
 };
 
 const confirmOtp = async (mobile, text) => {
   console.log(mobile);
   console.log(text);
-  const response = await axios.post(SPRING_ENDPOINT + "otpVerification", {
-    mobile,
-    text,
+  const response = await NODE_API.post("/user/verifyOtp", {
+    Mobile: mobile,
+    Text: text,
   });
   let data = response.data;
   return data;
@@ -64,6 +68,11 @@ const nameEnquiryByAccountNumber = async (criteriaValue) => {
   let data = res.data.AccountDetailsResponse.name;
   return data;
 };
+const accountByPhone = async (phoneNumber) => {
+  const res = await NODE_API.post("/user/userinfo", { phoneNumber });
+  console.log(res.data.userInfo.accounts);
+  return [res.status, res.data.userInfo.accounts];
+};
 
 const CreateBankAccount = async (
   accountHolderName,
@@ -71,14 +80,19 @@ const CreateBankAccount = async (
   bankName,
   userId
 ) => {
-  console.log(userId);
-  return await axios
-    .post(API_URL + "create", {
-      accountHolderName,
-      accountNumber,
-      bankName,
-      userId,
-    })
+  console.log(
+    "create bank Account Parametre",
+    accountHolderName,
+    accountNumber,
+    bankName,
+    userId
+  );
+  return await NODE_API.post("/banckAccount/create", {
+    accountHolderName,
+    accountNumber,
+    bankName,
+    userId,
+  })
     .then((response) => {
       console.log("Your Response IS:", response.data);
       return [response.data, response.status];
@@ -105,6 +119,7 @@ const BankAccountServices = {
   activateAccount,
   nameEnquiryByAccountNumber,
   getBankAccountByPhone,
+  accountByPhone,
 };
 
 export default BankAccountServices;

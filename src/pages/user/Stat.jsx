@@ -86,7 +86,7 @@ function Stat({ items }) {
               </svg>
             </div>
             <div className="stat-title">Total Items</div>
-            <div className="stat-value text-accent">{items.length}</div>
+            <div className="stat-value text-accent">{items?.length}</div>
           </div>
         </div>
       </div>

@@ -1,22 +1,26 @@
-import { GET_TRANSACTION, GET_TRANSACTION_ERROR } from "../types";
+import {
+  GET_ADMIN_ALL_DEVICES,
+  GET_ADMIN_ALL_DEVICES_ERROR,
+  // REGISTER_DEVICES,
+  // REGISTER_DEVICES_ERROR,
+} from "../types";
 
 const initialState = {
-  transactionDetail: [],
+  deviceDetail: [],
   loading: true,
 };
-
 export default function (state = initialState, action) {
   //   console.log(state);
-  console.log(action.payload);
+  console.log("heloo" + action.payload);
   switch (action.type) {
-    case GET_TRANSACTION:
+    case GET_ADMIN_ALL_DEVICES:
       //   console.log(action.payload);
       return {
         ...state,
-        transactionDetail: action.payload,
+        deviceDetail: action.payload,
         loading: false,
       };
-    case GET_TRANSACTION_ERROR:
+    case GET_ADMIN_ALL_DEVICES_ERROR:
       return {
         loading: false,
         error: action.payload,

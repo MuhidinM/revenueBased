@@ -5,15 +5,16 @@ import {
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
+import PaymentServices from "../services/payment.service";
 
-export default function CheckoutForm() {
+export default function CheckoutForm(props) {
   const stripe = useStripe();
   const elements = useElements();
-
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-
+  console.log("paymentId", props.paymentId);
+  console.log("paymentId", props.returnUrl);
   useEffect(() => {
     if (!stripe) {
       return;
@@ -27,22 +28,42 @@ export default function CheckoutForm() {
       return;
     }
 
-    stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
-      switch (paymentIntent.status) {
-        case "succeeded":
-          setMessage("Payment succeeded!");
-          break;
-        case "processing":
-          setMessage("Your payment is processing.");
-          break;
-        case "requires_payment_method":
-          setMessage("Your payment was not successful, please try again.");
-          break;
-        default:
-          setMessage("Something went wrong.");
-          break;
-      }
-    });
+    // const paymentVerification = async ()=>{
+    //   await PaymentServices.verifyStripePayment({paymentId:props.paymentId, data:paymentIntent}).then((res)=>{
+    //     localStorage.setItem("Response", res)
+    //   })
+    // }
+
+    stripe
+      .retrievePaymentIntent(clientSecret)
+      .then(({ paymentIntent }) => {
+        // console.log(paymentIntent)
+        console.log("intent", paymentIntent);
+        localStorage.setItem("Intent", JSON.parse(paymentIntent));
+        switch (paymentIntent.status) {
+          case "succeeded":
+            localStorage.setItem("transaction", JSON.stringify(paymentIntent));
+
+            setMessage("Payment succeeded!");
+            break;
+          case "processing":
+            localStorage.setItem("processing", "processing");
+            setMessage("Your payment is processing.");
+            break;
+          case "requires_payment_method":
+            localStorage.setItem("notsuccess", "failure");
+            setMessage("Your payment was not successful, please try again.");
+            break;
+          default:
+            localStorage.setItem("responseData", JSON.stringify(paymentIntent));
+            setMessage("Something went wrong.");
+            break;
+        }
+      })
+      .then(({ paymentIntent }) => {
+        if (paymentIntent.status == "succeeded") {
+        }
+      });
   }, [stripe]);
 
   const handleSubmit = async (e) => {
@@ -55,25 +76,44 @@ export default function CheckoutForm() {
     }
 
     setIsLoading(true);
-
-    const { error } = await stripe.confirmPayment({
+    console.log("elements", elements);
+    const { error, paymentIntent } = await stripe.confirmPayment({
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
         // return_url: "http://localhost:3000/",
-        return_url: "http://localhost:3000/gateway/?clientId=2fec3ae8-b7d8-4c44-8a43-7e37617741a5&secretKey=ccf2313b-8d29-42fb-9fb6-d9cf65c3e4e4&key=11cf1af5-b33a-42e7-85e8-d39e6d4c9a8e&callBackUrl=http://192.168.231.76:3000/&currency=USD&orderId=id123456&amount=59.99",
+        // return_url: props.returnUrl,
       },
+      redirect: "if_required",
     });
-
+    console.log("payment Intent Is", paymentIntent);
+    if (paymentIntent.status == "succeeded") {
+      fetch("https://10.1.151.51:5000/api/verify-stripe-payment", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          transactionId: paymentIntent.id,
+          paymentId: props.paymentId,
+          paymentIntent: paymentIntent,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          window.location.replace(data.returnUrl);
+        })
+        .catch((error) => console.error(error));
+    }
     // This point will only be reached if there is an immediate error when
     // confirming the payment. Otherwise, your customer will be redirected to
     // your `return_url`. For some payment methods like iDEAL, your customer will
     // be redirected to an intermediate site first to authorize the payment, then
     // redirected to the `return_url`.
-    if (error.type === "card_error" || error.type === "validation_error") {
+    if (error === "card_error" || error === "validation_error") {
       setMessage(error.message);
     } else {
-      setMessage("An unexpected error occurred.");
+      setMessage("Succeed.");
     }
 
     setIsLoading(false);

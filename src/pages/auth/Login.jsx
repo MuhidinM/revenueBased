@@ -91,7 +91,7 @@ function Login() {
                                 : null}
                             </span>
                             <input
-                              type="username"
+                              type="text"
                               name="username"
                               id="username"
                               value={props.values.username}

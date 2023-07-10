@@ -6,23 +6,20 @@ import {
   NAME_ENQ_BY_ACCNO,
   NAME_ENQ_BY_ACCNO_ERROR,
   GET_ACCOUNTS_BY_PHONE,
-  // GET_ACCOUNTS_BY_PHONE_ERROR,
+  GET_ACCOUNTS_BY_PHONE_ERROR,
 } from "../types";
 import AuthService from "../../services/auth.service";
 import BankAccountServices from "../../services/bank-account.services";
-export const getAccounts = () => async (dispatch) => {
+export const getAccounts = (user_id) => async (dispatch) => {
   try {
-    const user = AuthService.getCurrentUser();
-    if (user) {
-      const bankAccountByID = await BankAccountServices.getBankAccountById(
-        user.user.user_id
-      );
-      // console.log(bankAccountByID);
-      dispatch({
-        type: GET_ACCOUNTS,
-        payload: bankAccountByID,
-      });
-    }
+    const bankAccountByID = await BankAccountServices.getBankAccountById(
+      user_id
+    );
+    console.log(bankAccountByID);
+    dispatch({
+      type: GET_ACCOUNTS,
+      payload: bankAccountByID,
+    });
   } catch (error) {
     dispatch({
       type: ACCOUNTS_ERROR,
@@ -33,12 +30,12 @@ export const getAccounts = () => async (dispatch) => {
 
 export const nameEnquiryByAccountNumber =
   (criteriaValue) => async (dispatch) => {
-    // console.log(criteriaValue);
+    console.log(criteriaValue);
     try {
       const nameResponse = await BankAccountServices.nameEnquiryByAccountNumber(
         criteriaValue
       );
-      // console.log(nameResponse);
+      console.log(nameResponse);
       dispatch({
         type: NAME_ENQ_BY_ACCNO,
         payload: nameResponse,
@@ -52,41 +49,37 @@ export const nameEnquiryByAccountNumber =
   };
 
 export const setPrimaryAccount =
-  ({ value, interpretResponse }) =>
+  ({ user_id, value, interpretResponse }) =>
   async (dispatch) => {
     // console.log(account_id);
     try {
-      const user = AuthService.getCurrentUser();
-      if (user) {
-        // console.log(user.user.user_id);
-        const setPrimaryAccount = await BankAccountServices.setPrimaryAccount(
-          user.user.user_id,
-          value
-        );
-        // console.log(setPrimaryAccount);
-        if (setPrimaryAccount[1] === "200") {
-          // dispatch(satResponse("success"));
-          interpretResponse({
-            message: "Updated",
-            response: "success",
-            responseCode: setPrimaryAccount[1],
-          });
-        } else if (setPrimaryAccount[1] === "403") {
-          interpretResponse({
-            message: "Not Updated",
-            response: "error",
-            responseCode: setPrimaryAccount[1],
-          });
-        } else {
-          // dispatch(satResponse("error"));
-          interpretResponse({ response: "error" });
-        }
-        dispatch(getAccounts());
-        dispatch({
-          type: SET_PRIMARY,
-          payload: setPrimaryAccount,
+      const setPrimaryAccount = await BankAccountServices.setPrimaryAccount(
+        user_id,
+        value
+      );
+      console.log(setPrimaryAccount);
+      if (setPrimaryAccount[1] == "200") {
+        // dispatch(satResponse("success"));
+        interpretResponse({
+          message: "Updated",
+          response: "success",
+          responseCode: setPrimaryAccount[1],
         });
+      } else if (setPrimaryAccount[1] == "403") {
+        interpretResponse({
+          message: "Not Updated",
+          response: "error",
+          responseCode: setPrimaryAccount[1],
+        });
+      } else {
+        // dispatch(satResponse("error"));
+        interpretResponse({ response: "error" });
       }
+      dispatch(getAccounts(user_id));
+      dispatch({
+        type: SET_PRIMARY,
+        payload: setPrimaryAccount,
+      });
     } catch (error) {
       dispatch({
         type: ACCOUNTS_ERROR,
@@ -98,8 +91,8 @@ export const setPrimaryAccount =
 export const createTutorial =
   ({ current, accountNumber, bankName, id, interpretResponse }) =>
   async (dispatch) => {
-    // console.log("in redux");
-    // console.log("redux " + current, accountNumber, bankName, id);
+    console.log("in redux");
+    console.log("redux " + current, accountNumber, bankName, id);
     try {
       const res = await BankAccountServices.CreateBankAccount(
         current,
@@ -107,15 +100,21 @@ export const createTutorial =
         bankName,
         id
       );
-      // console.log(res);
-      if (res[1] === "200") {
+      console.log(res);
+      if (res[1] == "200") {
         // dispatch(satResponse("success"));
         interpretResponse({
           message: res[0].message,
           response: "success",
           responseCode: res[1],
         });
-      } else if (res[1] === "403") {
+      } else if (res[1] == "403") {
+        interpretResponse({
+          message: res[0].message,
+          response: "error",
+          responseCode: res[1],
+        });
+      } else if (res[1] == "409") {
         interpretResponse({
           message: res[0].message,
           response: "error",
@@ -125,7 +124,7 @@ export const createTutorial =
         // dispatch(satResponse("error"));
         interpretResponse({ response: "error" });
       }
-      dispatch(getAccounts());
+      dispatch(getAccounts(id));
       dispatch({
         type: CREATE_BAK_ACCOUNT,
         payload: res,
@@ -139,19 +138,19 @@ export const createTutorial =
 export const getAccountByPhone =
   ({ phoneNumber, interpretResponse }) =>
   async (dispatch) => {
-    // console.log("in redux");
-    // console.log("redux " + phoneNumber);
+    console.log("in redux");
+    console.log("redux " + phoneNumber);
     try {
       const res = await BankAccountServices.getBankAccountByPhone(phoneNumber);
-      // console.log(res);
-      if (res[1] === "200") {
+      console.log(res);
+      if (res[1] == "200") {
         // dispatch(satResponse("success"));
         interpretResponse({
           message: res[0].message,
           response: "success",
           responseCode: res[1],
         });
-      } else if (res[1] === "403") {
+      } else if (res[1] == "403") {
         interpretResponse({
           message: res[0].message,
           response: "error",

@@ -2,7 +2,6 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import E404 from "./pages/error/E404";
 import Nav from "./pages/user/Nav";
-import Home from "./pages/user/Home";
 import Accounts from "./pages/user/Accounts";
 import Transactions from "./pages/user/Transactions";
 import Sidebar from "./pages/user/Sidebar";
@@ -13,7 +12,20 @@ import Inventory from "./pages/user/Inventory";
 import Loan from "./pages/user/Loan";
 import Configuration from "./pages/user/Configuration";
 import Settings from "./pages/user/Settings";
+import DomainList from "./pages/user/DomainList";
+import Devices from "./pages/user/Devices";
+import Uapi from "./pages/user/Uapi";
+import PaymentPHome from "./pages/user/PaymentPHome";
+import jwtDecode from "jwt-decode";
+import { useSelector } from "react-redux";
+import BNPLHome from "./pages/user/BNPLHome";
+import TransactionList from "./pages/user/PPTransactions";
 function Users() {
+  const tokenInfo = useSelector((state) => state.userProfile);
+  const { token } = tokenInfo;
+  const user_token = jwtDecode(token);
+  const service_name = user_token?.service_name;
+
   return (
     <>
       {/* <Modal /> */}
@@ -24,13 +36,32 @@ function Users() {
           <Nav />
           <div className="m-4">
             <Routes>
-              <Route index element={<Home />}></Route>
+              {service_name?.includes("BNPL") ? (
+                <Route index element={<BNPLHome />}></Route>
+              ) : (
+                service_name?.includes("PaymentProcess") && (
+                  <Route index element={<PaymentPHome />}></Route>
+                )
+              )}
+              {service_name?.includes("BNPL") ? (
+                <Route path="transactions" element={<Transactions />}></Route>
+              ) : (
+                service_name?.includes("PaymentProcess") && (
+                  <Route
+                    path="transactions"
+                    element={<TransactionList />}
+                  ></Route>
+                )
+              )}
               <Route path="transactions" element={<Transactions />}></Route>
               <Route path="accounts" element={<Accounts />}></Route>
               <Route path="sales" element={<Sales />}></Route>
               <Route path="inventory" element={<Inventory />}></Route>
               <Route path="loan" element={<Loan />}></Route>
               <Route path="configuration" element={<Configuration />}></Route>
+              <Route path="domains" element={<DomainList />}></Route>
+              <Route path="uapi" element={<Uapi />}></Route>
+              <Route path="devices" element={<Devices />}></Route>
               <Route path="profile" element={<Profile />}></Route>
               <Route path="setting" element={<Settings />}></Route>
               <Route path="*" element={<E404 />}></Route>
