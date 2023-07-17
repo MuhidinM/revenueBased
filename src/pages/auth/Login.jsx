@@ -6,8 +6,10 @@ import { useDispatch } from "react-redux";
 import { Formik } from "formik";
 import souq from "../../assets/images/loginBg.png";
 import * as Yup from "yup";
+import Spinner from "../../components/Spinner/Spinner";
 function Login() {
   const [successful] = useState(false);
+  const [Loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const validationSchema = Yup.object().shape({
     username: Yup.string().required("Username is required"),
@@ -48,7 +50,12 @@ function Login() {
               <div className="w-full max-w-xl mb-12 xl:mb-0 xl:pr-16 xl:w-7/12"></div>
               <div className="w-full max-w-xl xl:w-5/12">
                 <div className="bg-white rounded shadow-2xl p-7 sm:p-10 dark:bg-gray-800">
-                  <div className="space-y-4 md:space-y-4">
+                  <div className={`space-y-4 relative  md:space-y-4`}>
+                    {Loading && (
+                      <div className="absolute flex w-full items-center justify-center h-full z-[100]">
+                        <Spinner />
+                      </div>
+                    )}
                     <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                       Sign in to your account
                     </h1>
@@ -66,11 +73,12 @@ function Login() {
                         //   setSubmitting(false);
                         // }, 400);
                         // console.log(values.email);
-
+                        setLoading(true);
                         AuthService.login(
                           values.username,
                           values.password,
                           setMessage,
+                          setLoading,
                           navigate,
                           dispatch
                         );

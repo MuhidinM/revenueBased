@@ -174,15 +174,15 @@ function TransactionList() {
   const tokenInfo = useSelector((state) => state.userProfile);
   const { token } = tokenInfo;
   const user_token = jwtDecode(token);
-  const user_id = user_token?.user_id;
+  const merchant_id = user_token?.merchant_id;
 
   const dispatch = useDispatch();
   useEffect(() => {
-    user_id && dispatch(getAllPaypalTransactionById(user_id));
-    user_id && dispatch(getCoopassPaymentById(user_id));
-    user_id && dispatch(getStripePaymentById(user_id));
-    user_id && dispatch(getEbirrTransactionById(user_id));
-    user_id && dispatch(getChappaTransactionById(user_id));
+    merchant_id && dispatch(getAllPaypalTransactionById(merchant_id));
+    merchant_id && dispatch(getCoopassPaymentById(merchant_id));
+    merchant_id && dispatch(getStripePaymentById(merchant_id));
+    merchant_id && dispatch(getEbirrTransactionById(merchant_id));
+    merchant_id && dispatch(getChappaTransactionById(merchant_id));
   }, []);
 
   const transactionData = useSelector((state) => state.transactionDetailAll);

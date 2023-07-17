@@ -20,7 +20,9 @@ function Selectinput(props) {
           Select
         </option>
         {props.arr?.map((arr) => (
-          <option value={arr.value}>{arr.label}</option>
+          <option data-phone-number={arr.phone} value={arr.value}>
+            {arr.label}
+          </option>
         ))}
       </select>
     </>

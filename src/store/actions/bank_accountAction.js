@@ -7,6 +7,7 @@ import {
   NAME_ENQ_BY_ACCNO_ERROR,
   GET_ACCOUNTS_BY_PHONE,
   GET_ACCOUNTS_BY_PHONE_ERROR,
+  SET_OTP,
 } from "../types";
 import AuthService from "../../services/auth.service";
 import BankAccountServices from "../../services/bank-account.services";
@@ -49,16 +50,16 @@ export const nameEnquiryByAccountNumber =
   };
 
 export const setPrimaryAccount =
-  ({ user_id, value, interpretResponse }) =>
+  ({ merchant_id, value, interpretResponse }) =>
   async (dispatch) => {
     // console.log(account_id);
     try {
       const setPrimaryAccount = await BankAccountServices.setPrimaryAccount(
-        user_id,
+        merchant_id,
         value
       );
       console.log(setPrimaryAccount);
-      if (setPrimaryAccount[1] == "200") {
+      if (setPrimaryAccount[1] == "201") {
         // dispatch(satResponse("success"));
         interpretResponse({
           message: "Updated",
@@ -75,7 +76,7 @@ export const setPrimaryAccount =
         // dispatch(satResponse("error"));
         interpretResponse({ response: "error" });
       }
-      dispatch(getAccounts(user_id));
+      dispatch(getAccounts(merchant_id));
       dispatch({
         type: SET_PRIMARY,
         payload: setPrimaryAccount,
@@ -89,19 +90,33 @@ export const setPrimaryAccount =
   };
 
 export const createTutorial =
-  ({ current, accountNumber, bankName, id, interpretResponse }) =>
+  ({
+    current,
+    accountNumber,
+    bankName,
+    merchant_id,
+    phone_number,
+    interpretResponse,
+  }) =>
   async (dispatch) => {
     console.log("in redux");
-    console.log("redux " + current, accountNumber, bankName, id);
+    console.log(
+      "redux " + current,
+      accountNumber,
+      bankName,
+      merchant_id,
+      phone_number
+    );
     try {
       const res = await BankAccountServices.CreateBankAccount(
         current,
         accountNumber,
         bankName,
-        id
+        merchant_id,
+        phone_number
       );
       console.log(res);
-      if (res[1] == "200") {
+      if (res[1] == "201") {
         // dispatch(satResponse("success"));
         interpretResponse({
           message: res[0].message,
@@ -124,7 +139,7 @@ export const createTutorial =
         // dispatch(satResponse("error"));
         interpretResponse({ response: "error" });
       }
-      dispatch(getAccounts(id));
+      dispatch(getAccounts(merchant_id));
       dispatch({
         type: CREATE_BAK_ACCOUNT,
         payload: res,
@@ -171,3 +186,8 @@ export const getAccountByPhone =
       return Promise.reject(err);
     }
   };
+
+export const setOtp = (item) => ({
+  type: SET_OTP,
+  payload: item,
+});

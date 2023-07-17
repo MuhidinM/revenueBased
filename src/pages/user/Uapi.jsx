@@ -14,40 +14,39 @@ function Uapi() {
   const tokenInfo = useSelector((state) => state.userProfile);
   const { token } = tokenInfo;
   const user_token = jwtDecode(token);
-  const user_id = user_token?.user_id;
+  const merchant_id = user_token?.merchant_id;
 
   const dispatch = useDispatch();
   useEffect(() => {
     // setCurrentUser(user.user);
-    dispatch(getGeneratedApiKey(user_id));
+    dispatch(getGeneratedApiKey(merchant_id));
     // const generatedApiKey = AuthService.getGeneratedApiKey(1);
     // console.log(generatedApiKey);
-    dispatch(getAccounts(user_id));
+    dispatch(getAccounts(merchant_id));
 
     console.log("Bank Accounts:" + bankAccounts);
 
     // setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
     // setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
   }, []);
+  
 
   // if (bankAccounts) {
   for (let index = 0; index < bankAccounts?.length; index++) {
     const element = bankAccounts[index];
     console.log(element.primaryAccount);
-    if (element.primaryAccount === "1") {
-      primaryAccount.push(element.accountNumber);
+    if (element.account_level === "Primary") {
+      primaryAccount.push(element.account_number);
     }
   }
-  console.log(primaryAccount);
-  console.log(generatedApiKey.credentialDetail);
   return (
     <>
       <div className="grid gap-4 md:grid-cols-12 justify-self-auto">
         <div className="col-span-8">
           <GenerateApiModal accountNumber={primaryAccount}></GenerateApiModal>
           <div className="col-span-4 mt-16">
-            {generatedApiKey.credentialDetail ? (
-              <Code generatedCredential={generatedApiKey.credentialDetail} />
+            {generatedApiKey ? (
+              <Code generatedCredential={generatedApiKey} />
             ) : (
               ""
             )}
@@ -58,6 +57,7 @@ function Uapi() {
     </>
   );
   // }
+  
 }
 
 export default Uapi;

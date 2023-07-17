@@ -17,7 +17,7 @@ function GenerateApiModal(props) {
   const tokenInfo = useSelector((state) => state.userProfile);
   const { token } = tokenInfo;
   const user_token = jwtDecode(token);
-  const user_id = user_token?.user_id;
+  const merchant_id = user_token?.merchant_id;
 
   const interpretResponse = (response) => {
     let actionResponse = JSON.stringify(response);
@@ -66,7 +66,7 @@ function GenerateApiModal(props) {
               console.log(currentUser);
               dispatch(
                 generateApiKey({
-                  user_id: user_id,
+                  merchant_id: merchant_id,
                   expiryDate: values.expiryDate,
                   interpretResponse,
                 })

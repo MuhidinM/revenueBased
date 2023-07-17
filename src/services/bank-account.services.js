@@ -6,16 +6,16 @@ const accountByPhoneEndpoint = "http://192.168.14.136:7090/userinfo";
 const otpEndpoint = "http://192.168.14.43:8081/payment/v1/";
 const getBankAccountById = async (id) => {
   console.log(id);
-  return await NODE_API.get(`/banckAccount/accountById/${id}`).then(
-    (response) => response.data.bankAccounts
+  return await NODE_API.get(`/eky/account?merchant_id=${id}`).then(
+    (response) => response.data.account_number
   );
 };
 
-const setPrimaryAccount = async (userId, account_id) => {
-  console.log(account_id, userId);
-  return await NODE_API.patch(`/banckAccount/setPrimary`, {
-    account_id,
-    userId,
+const setPrimaryAccount = async (merchant_id, bank_account_id) => {
+  console.log(merchant_id, bank_account_id);
+  return await NODE_API.patch(`/eky/setPrimaryAccount`, {
+    merchant_id,
+    bank_account_id,
   })
     .then((response) => [response.data.bankAccounts, response.status])
     .catch((err) => {
@@ -50,12 +50,12 @@ const getBankAccountByPhone = async (mobile) => {
     .then((response) => response.data);
 };
 
-const confirmOtp = async (mobile, text) => {
+const confirmOtp = async (mobile, otpValue) => {
   console.log(mobile);
-  console.log(text);
+  console.log(otpValue);
   const response = await NODE_API.post("/user/verifyOtp", {
     Mobile: mobile,
-    Text: text,
+    Text: otpValue,
   });
   let data = response.data;
   return data;
@@ -78,20 +78,23 @@ const CreateBankAccount = async (
   accountHolderName,
   accountNumber,
   bankName,
-  userId
+  merchant_id,
+  phone_number
 ) => {
   console.log(
     "create bank Account Parametre",
     accountHolderName,
     accountNumber,
     bankName,
-    userId
+    merchant_id,
+    phone_number
   );
-  return await NODE_API.post("/banckAccount/create", {
+  return await NODE_API.post("/eky/account", {
     accountHolderName,
-    accountNumber,
+    account_number: accountNumber,
     bankName,
-    userId,
+    merchant_id,
+    phone_number,
   })
     .then((response) => {
       console.log("Your Response IS:", response.data);

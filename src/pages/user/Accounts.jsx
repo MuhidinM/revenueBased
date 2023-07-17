@@ -13,6 +13,8 @@ import withReactContent from "sweetalert2-react-content";
 import DataTable from "react-data-table-component";
 import jwtDecode from "jwt-decode";
 import Spinner from "../../components/Spinner/Spinner";
+import { useRef } from "react";
+import OTP from "../auth/OTP";
 
 const CustomLoader = () => (
   <div>
@@ -51,22 +53,27 @@ const customStyles = {
 const columns = [
   {
     name: "Account Holder",
-    selector: (row) => row.accountHolderName,
+    selector: (row) => row?.merchant?.email_address,
     sortable: true,
   },
   {
     name: "Account Number",
-    selector: (row) => row.accountNumber,
+    selector: (row) => row.account_number,
     sortable: true,
   },
   {
-    name: "Bank Name",
-    selector: (row) => row.bankName,
+    name: "Phone Number",
+    selector: (row) => row.phone_number,
+    sortable: true,
+  },
+  {
+    name: "Account Number",
+    selector: (row) => row.account_number,
     sortable: true,
   },
   {
     name: "Primary",
-    selector: (row) => (row.primaryAccount === "1" ? "primary" : "secondary"),
+    selector: (row) => row.account_level,
     sortable: true,
   },
   {
@@ -81,20 +88,22 @@ const columns = [
 const MySwal = withReactContent(Swal);
 function Accounts() {
   const AccountListData = useSelector((state) => state.accountsList);
+  const [phoneNumber, setPhoneNumber] = useState("");
   console.log(AccountListData);
   const { loading, error, bankAccounts } = AccountListData;
   console.log("Account Numbers:", bankAccounts);
   const dispatch = useDispatch();
 
+  const otp2 = useRef("");
   const tokenInfo = useSelector((state) => state.userProfile);
   const { token } = tokenInfo;
   const user_token = jwtDecode(token);
-  const user_id = user_token?.user_id;
+  const merchant_id = user_token?.merchant_id;
   const userData = useSelector((state) => state.userProfile);
   const { phone_number } = userData?.userDetail;
 
   useEffect(() => {
-    dispatch(getAccounts(user_id));
+    dispatch(getAccounts(merchant_id));
   }, [dispatch]);
 
   console.log(bankAccounts);
@@ -134,9 +143,31 @@ function Accounts() {
     }
   };
 
+  const handleOtpSubmit = (e) => {
+    BankAccountServices.confirmOtp(
+      e.target.options[e.target.selectedIndex].getAttribute(
+        "data-phone-number"
+      ),
+      otp2.current
+    ).then((res) => {
+      dispatch(
+        setPrimaryAccount({
+          merchant_id,
+          value: e.target.value,
+          interpretResponse,
+        })
+      );
+    });
+  };
+
   const handleChange = (e) => {
     e.preventDefault();
-    console.log("target", e.target.value);
+    console.log("bank_account_id", e.target.value);
+    console.log(
+      "phone_number",
+      e.target.options[e.target.selectedIndex].getAttribute("data-phone-number")
+    );
+    console.log("target", e.target);
 
     return new Promise((resolve, reject) => {
       MySwal.fire({
@@ -151,7 +182,11 @@ function Accounts() {
       }).then((result) => {
         console.log(result);
         if (result.isConfirmed === true) {
-          BankAccountServices.sendOtp(phone_number);
+          BankAccountServices.sendOtp(
+            e.target.options[e.target.selectedIndex].getAttribute(
+              "data-phone-number"
+            )
+          );
           const value = {
             first: "",
             second: "",
@@ -164,32 +199,33 @@ function Accounts() {
           MySwal.fire({
             title: "",
             html: (
-              <Otp
+              <OTP
                 values={value}
+                dispatch={dispatch}
+                otp2={otp2}
                 onSubmit={(values) => {
+                  values.preventDefault();
                   console.log("Hello from the second swal");
+                  console.log("otp1: ", otp2.current);
                   // resolve(values);
-                  const otp =
-                    values.first +
-                    values.second +
-                    values.third +
-                    values.fourth +
-                    values.fifth +
-                    values.sixth;
-                  BankAccountServices.confirmOtp(phone_number, otp).then(
-                    (res) => {
-                      dispatch(
-                        setPrimaryAccount({
-                          user_id: user_id,
-                          value: e.target.value,
-                          interpretResponse,
-                        })
-                      );
-                    }
-                  );
+                  // BankAccountServices.confirmOtp(
+                  //   e.target.options[e.target.selectedIndex].getAttribute(
+                  //     "data-phone-number"
+                  //   ),
+                  //   otp2
+                  // ).then((res) => {
+                  //   dispatch(
+                  //     setPrimaryAccount({
+                  //       merchant_id,
+                  //       value: e.target.value,
+                  //       interpretResponse,
+                  //     })
+                  //   );
+                  // });
+                  handleOtpSubmit(e);
                 }}
                 onCancel={() => MySwal.close()}
-              ></Otp>
+              ></OTP>
             ),
 
             // onClose: () => reject(),
@@ -202,34 +238,11 @@ function Accounts() {
   };
 
   const choose = bankAccounts?.map((element) => ({
-    label: element.bankName + "-" + element.accountNumber,
-    value: element.bankaccount_id,
+    label: element.account_number,
+    value: element.bank_account_id,
+    phone: element.phone_number,
   }));
 
-  // if (bankAccounts) {
-  //   console.log(bankAccounts);
-  //   for (let index = 0; index < bankAccounts.length; index++) {
-  //     const element = bankAccounts[index];
-  //     // console.log(element);
-  //     console.log("running");
-  //     if (choose.length < bankAccounts.length) {
-  //       choose.push({
-  //         label: element.bankName + "-" + element.accountNumber,
-  //         value: element.bankaccount_id,
-  //       });
-  //     }
-  //   }
-  // console.log("choose", choose);
-  // const renderList = bankAccounts.map((item, index) => (
-  //   <tr>
-  //     <th>{item.bankaccount_id}</th>
-  //     <td>{item.accountHolderName}</td>
-  //     <td>{item.accountNumber}</td>
-  //     <td>{item.bankName}</td>
-  //     <td>{item.primaryAccount === "1" ? "primary" : "secondary"}</td>
-  //     <td>{item.status === "0" ? "pending" : "activated"}</td>
-  //   </tr>
-  // ));
   return (
     <>
       <div className="grid gap-4 md:grid-cols-12 justify-self-auto">

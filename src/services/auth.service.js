@@ -1,6 +1,6 @@
 import axios from "axios";
 import jwt from "jwt-decode";
-import { LOGIN_NODE_API } from "../utils/API";
+import { LOGIN_NODE_API, NODE_API } from "../utils/API";
 import jwtDecode from "jwt-decode";
 // import { useSelector } from "react-redux";
 import {
@@ -22,7 +22,14 @@ const register = async (username, password) => {
   return response.data;
 };
 
-const login = async (username, password, setMessage, navigate, dispatch) => {
+const login = async (
+  username,
+  password,
+  setMessage,
+  setLoading,
+  navigate,
+  dispatch
+) => {
   try {
     await LOGIN_NODE_API.post(
       "/merchant/login",
@@ -42,12 +49,14 @@ const login = async (username, password, setMessage, navigate, dispatch) => {
           dispatch(setUsername(decoded?.email_address));
           dispatch(setUserID(decoded?.sales_id));
           dispatch(setRole(decoded?.role));
+          setLoading(false);
           navigate("/admin");
           window.location.reload();
         } else if (decoded?.role === "merchant") {
           dispatch(setUsername(decoded?.email_address));
           dispatch(setUserID(decoded?.merchant_id));
           dispatch(setRole(decoded?.role));
+          setLoading(false);
           navigate("/users");
           // window.location.reload();
         }
@@ -76,12 +85,14 @@ const login = async (username, password, setMessage, navigate, dispatch) => {
                 // dispatch(setUsername(decoded?.email_address));
                 dispatch(setUserID(decoded?.sales_id));
                 dispatch(setRole(decoded?.role));
+                setLoading(false);
                 navigate("/sales");
                 window.location.reload();
               } else if (decoded?.role === "merchant") {
                 dispatch(setUsername(decoded?.email_address));
                 dispatch(setUserID(decoded?.merchant_id));
                 dispatch(setRole(decoded?.role));
+                setLoading(false);
                 navigate("/users");
                 // window.location.reload();
               }
@@ -93,6 +104,7 @@ const login = async (username, password, setMessage, navigate, dispatch) => {
     } catch (error) {
       console.log(error);
       console.log(error?.response?.data?.message);
+      setLoading(false);
       setMessage(error?.response?.data?.message);
     }
   }
@@ -137,16 +149,13 @@ const resetPasswordRequest = async (email) => {
   return response.data;
 };
 
-const generateApiKey = async (email, expiryDate) => {
-  console.log(email, expiryDate);
+const generateApiKey = async (merchant_id, expiryDate) => {
+  console.log(merchant_id, expiryDate);
   try {
-    const response = await axios.post(
-      process.env.REACT_APP_API_NODE_URLS + "api/user/generateApiKey",
-      {
-        email,
-        expiryDate,
-      }
-    );
+    const response = await NODE_API.post("/apiKey/generate", {
+      merchant_id,
+      expiryDate,
+    });
     console.log("Reponse", response.data);
     return [response.data, response.status];
   } catch (err) {
@@ -161,11 +170,9 @@ const generateApiKey = async (email, expiryDate) => {
   }
 };
 
-const getGeneratedApiKey = async (id) => {
-  console.log(id);
-  const response = await axios.get(
-    process.env.REACT_APP_API_NODE_URLS + `api/user/gateApiKey/${id}`
-  );
+const getGeneratedApiKey = async (merchant_id) => {
+  console.log(merchant_id);
+  const response = await NODE_API.get(`apiKey/get?id=${merchant_id}`);
   return response.data;
 };
 

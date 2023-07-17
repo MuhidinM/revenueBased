@@ -1,9 +1,12 @@
 import { useEffect, useRef } from "react";
 import Button from "../../components/Button";
-import { handleInputChange, handlePaste } from "./utils/otpUtils";
+import { setOtp } from "../../store/actions/bank_accountAction";
+// import { handleInputChange, handlePaste } from "./utils/otpUtils";
 
-function OTP() {
+const OTP = ({ onSubmit, dispatch, otp2, setOpt1 }) => {
   const inputRefs = useRef([]);
+
+  // const dispatch = useDispatch();
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -26,6 +29,53 @@ function OTP() {
     };
   }, []);
 
+  const handleInputChange = (index, inputRefs, event) => {
+    const otp = event.target.value;
+    if (isNaN(otp)) {
+      return;
+    }
+
+    inputRefs.current.forEach((input, i) => {
+      if (i === index) {
+        input.value = otp;
+      } else if (i > index) {
+        input.value = "";
+      }
+    });
+
+    if (index < inputRefs.current.length - 1 && otp) {
+      inputRefs.current[index + 1].focus();
+    }
+
+    const otpArray = inputRefs.current.map((input) => input.value);
+    const otpString = otpArray.join("");
+    otpString && dispatch(setOtp(otpString));
+    // setOpt1(otpString);
+    otp2.current = otpString;
+  };
+
+  const handlePaste = (inputRefs, event, setOtpValue) => {
+    event.preventDefault();
+    const pastedText = event.clipboardData.getData("text/plain");
+    const otpCode = pastedText.slice(0, 6);
+
+    inputRefs.current.forEach((input, i) => {
+      if (i < otpCode.length) {
+        input.value = otpCode[i];
+      } else {
+        input.value = "";
+      }
+    });
+
+    if (otpCode.length > 0) {
+      inputRefs.current[otpCode.length - 1].focus();
+    }
+
+    otpCode && dispatch(setOtp(otpCode));
+    // setOpt1(otpCode);
+    otp2.current = otpCode;
+  };
+
   return (
     <>
       <section className="text-center bg-gray-50 dark:bg-gray-900">
@@ -40,7 +90,10 @@ function OTP() {
               <b> Note:</b> This token can be used only once and would expire in
               5 minutes.
             </p>
-            <form className="mt-4 space-y-4 lg:mt-5 md:space-y-5" action="#">
+            <form
+              className="mt-4 space-y-4 lg:mt-5 md:space-y-5"
+              onSubmit={onSubmit}
+            >
               <div>
                 <label
                   htmlFor="otp"
@@ -98,6 +151,6 @@ function OTP() {
       </section>
     </>
   );
-}
+};
 
 export default OTP;

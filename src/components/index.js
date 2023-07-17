@@ -13,10 +13,12 @@ import Input from "./Input";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import jwtDecode from "jwt-decode";
+import OTP from "../pages/auth/OTP";
 const MySwal = withReactContent(Swal);
 
 function ModalFire() {
   const [customerName, setcustomerName] = useState("");
+  const [trys, setTry] = useState(true);
   // const [phoneNumber, setPhoneNumber] = useState();
   const [accountNumber, setAccountNumber] = useState();
   const loggedInuser = useSelector((state) => state.userProfile);
@@ -25,13 +27,22 @@ function ModalFire() {
   const [dependency, setdependency] = useState(false);
   const AccountListData = useSelector((state) => state.accountsList);
   const dispatch = useDispatch();
-  const { bankAccounts, message, accountMessage, criteriaValue, loading } =
-    AccountListData;
+  const {
+    bankAccounts,
+    message,
+    otpValue,
+    accountMessage,
+    criteriaValue,
+    loading,
+  } = AccountListData;
 
+  const [otp1, setOpt1] = useState("");
+
+  const otp2 = useRef("");
   const tokenInfo = useSelector((state) => state.userProfile);
   const { token } = tokenInfo;
   const user_token = jwtDecode(token);
-  const user_id = user_token?.user_id;
+  const merchant_id = user_token?.merchant_id;
 
   console.log("Criteria Value from index" + criteriaValue);
   console.log("Customer Name " + customerName);
@@ -78,133 +89,89 @@ function ModalFire() {
       });
     }
   };
-
-  const createAccount = () => {
-    console.log("Account Detail", customerName, accountNumber);
-    dispatch(
-      createTutorial({
-        current: customerName,
-        accountNumber: accountNumber,
-        bankName: "CBO",
-        id: user_id,
-        interpretResponse,
-      })
-    );
+  useEffect(() => {
+    console.log("try_this", otp1);
+    otp1.length === 6 && setOpt1(otp1);
+  }, [otp1, trys]);
+  const readState = () => {
+    return otp1;
   };
+  const handleOtpSubmit = (values, res, reject, readState) => {
+    console.log(
+      otp2.current,
+      dependency,
+      values.phoneNumber,
+      values,
+      readState
+    );
+    BankAccountServices.confirmOtp(values.phoneNumber, otp2.current)
+      .then((re) => {
+        let accNo = "";
+        let custName = "";
 
-  // const showFormModal = (values) => {
-  //   return new Promise((resolve, reject) => {
-  //     MySwal.fire({
-  //       title: "ADD ACCOUNTS",
-  //       html: (
-  //         <Provider store={store}>
-  //           <ModalForm
-  //             values={values}
-  //             // sendNameToParent={sendNameToParent}
-  //             onSubmit={(values) => {
-  //               console.log("Hello");
-  //               console.log(values);
-  //               // let crtVal = getcriterialVal();
-  //               // console.log(crtVal);
-  //               const {
-  //                 bankAccounts,
-  //                 message,
-  //                 accountMessage,
-  //                 criteriaValue,
-  //                 loading,
-  //               } = AccountListData;
-
-  //               console.log("Criteria Value 2 " + customerName2.current);
-  //               // console.log("Id is" + currentUser.id);
-  //               // console.log(customerName);
-  //               // dispatch(
-  //               //   createTutorial(
-  //               //     customerName2.current,
-  //               //     values.accountNumber,
-  //               //     values.bankName,
-  //               //     currentUser.id
-  //               //   )
-  //               // );
-
-  // const value = {
-  //   first: "",
-  //   second: "",
-  //   third: "",
-  //   fourth: "",
-  //   fifth: "",
-  //   sixth: "",
-  // };
-
-  //               BankAccountServices.sendOtp("0925825012").then((res) => {
-  //                 MySwal.fire({
-  //                   title: "",
-  //                   html: (
-  //                     <Otp
-  //                       values={value}
-  //                       onSubmit={(values1) => {
-  //                         console.log("Hello from the second swal");
-  //                         resolve(values);
-  //                         console.log(values.first);
-  //                         const otp =
-  //                           values1.first +
-  //                           values1.second +
-  //                           values1.third +
-  //                           values1.fourth +
-  //                           values1.fifth +
-  //                           values1.sixth;
-
-  //                         const confirmedOtp = BankAccountServices.confirmOtp(
-  //                           "0925825012",
-  //                           otp
-  //                         ).then((res) => {
-  //                           console.log("creating account");
-  //                           if (res.status === "success") {
-  //                             console.log("success is responded");
-  //                             console.log(criteriaValue);
-  //                             dispatch(
-  //                               createTutorial({
-  //                                 current: customerName2.current,
-  //                                 accountNumber: values.accountNumber,
-  //                                 bankName: values.bankName,
-  //                                 id: currentUser.user.user_id,
-  //                                 interpretResponse,
-  //                               })
-  //                             );
-  //                           }
-  //                         });
-  //                       }}
-  //                     ></Otp>
-  //                   ),
-  //                   onClose: () => reject(),
-  //                   showConfirmButton: false,
-  //                 });
-  //               });
-  //               resolve(values);
-
-  //               MySwal.close();
-  //               Swal.close();
-  //             }}
-  //             onCancel={() => {
-  //               Swal.close();
-  //             }}
-  //           />
-  //         </Provider>
-  //       ),
-
-  //       onClose: () => reject(),
-  //       showConfirmButton: false,
-  //     });
-  //   });
-  // };
-
-  // const showModal = () => {
-  //   showFormModal({
-  //     accountNumber: "",
-  //     bankName: "",
-  //   })
-  //     .then((values) => console.log(values))
-  //     .catch(() => console.log("Modal closed"));
-  // };
+        const renderList = res[1].map((item, index) => (
+          <div className="flex items-center mb-4">
+            <input
+              type="radio"
+              name="radio-2"
+              className="radio radio-primary"
+              value={item.accountNumber}
+              onChange={(e) => {
+                accNo = e.target.value;
+                custName = item.accountTitle;
+                // setAccountNumber(e.target.value)
+                // setcustomerName(item.accountTitle)
+                // console.log(e.target.value)
+              }}
+            />
+            <label
+              for="default-checkbox"
+              className="ml-2 text-sm font-medium text-gray-900"
+            >
+              {item.accountNumber}
+            </label>
+            {/* <p>{item.accountTitle}</p> */}
+          </div>
+        ));
+        MySwal.fire({
+          title: "Choose Account",
+          html: (
+            <div className="">
+              {renderList}
+              {/* <button type="button" onClick={createAccount}>submit</button> */}
+              <div className="col-span-2 mt-5">
+                <button
+                  type="button"
+                  onClick={() => {
+                    console.log("Heloo");
+                    console.log("Acoount Number", accNo, custName);
+                    dispatch(
+                      createTutorial({
+                        current: custName,
+                        accountNumber: accNo,
+                        bankName: "CBO",
+                        merchant_id,
+                        phone_number: values.phoneNumber,
+                        interpretResponse,
+                      })
+                    );
+                  }}
+                  className="swal2-confirm swal2-styled btn-primary"
+                >
+                  submit
+                </button>
+              </div>
+            </div>
+          ),
+          onClose: () => reject(),
+          onCancel: () => Swal.close(),
+          showConfirmButton: false,
+          showCancelButton: false,
+          confirmButtonColor: "#01AFEF",
+        });
+      })
+      .catch((er) => {});
+  };
 
   const showFormModal = (values) => {
     return new Promise((resolve, reject) => {
@@ -220,14 +187,12 @@ function ModalFire() {
               validationSchema={ValidationSchema}
               isInitialValid={ValidationSchema.isValidSync(values)}
               onSubmit={(values) => {
-                // console.log("Values Are:", values);
+                console.log("Values Are:", otp1);
                 BankAccountServices.accountByPhone(values.phoneNumber)
                   .then((res) => {
                     console.log(res[0]);
                     if (res[0] == 200) {
-                      const sendOtp = BankAccountServices.sendOtp(
-                        values.phoneNumber
-                      )
+                      BankAccountServices.sendOtp(values.phoneNumber)
                         .then((resp) => {
                           console.log(resp);
                         })
@@ -235,108 +200,19 @@ function ModalFire() {
                           console.log("Otp Service is Down");
                         });
 
-                      const value = {
-                        first: "",
-                        second: "",
-                        third: "",
-                        fourth: "",
-                        fifth: "",
-                        sixth: "",
-                      };
-
                       MySwal.fire({
                         title: "",
                         html: (
-                          <Otp
-                            values={value}
-                            onSubmit={(values1) => {
-                              console.log("Hello from the second swal");
-                              resolve(values);
-                              console.log(values.first);
-                              const otp =
-                                values1.first +
-                                values1.second +
-                                values1.third +
-                                values1.fourth +
-                                values1.fifth +
-                                values1.sixth;
-                              const confirmedOtp =
-                                BankAccountServices.confirmOtp(
-                                  values.phoneNumber,
-                                  otp
-                                )
-                                  .then((re) => {
-                                    let accNo = "";
-                                    let custName = "";
-                                    const renderList = res[1].map(
-                                      (item, index) => (
-                                        <div className="flex items-center mb-4">
-                                          <input
-                                            type="radio"
-                                            name="radio-2"
-                                            className="radio radio-primary"
-                                            value={item.accountNumber}
-                                            onChange={(e) => {
-                                              accNo = e.target.value;
-                                              custName = item.accountTitle;
-                                              // setAccountNumber(e.target.value)
-                                              // setcustomerName(item.accountTitle)
-                                              // console.log(e.target.value)
-                                            }}
-                                          />
-                                          <label
-                                            for="default-checkbox"
-                                            className="ml-2 text-sm font-medium text-gray-900"
-                                          >
-                                            {item.accountNumber}
-                                          </label>
-                                          {/* <p>{item.accountTitle}</p> */}
-                                        </div>
-                                      )
-                                    );
-                                    MySwal.fire({
-                                      title: "Choose Account",
-                                      html: (
-                                        <div className="">
-                                          {renderList}
-                                          {/* <button type="button" onClick={createAccount}>submit</button> */}
-                                          <div className="col-span-2 mt-5">
-                                            <button
-                                              type="button"
-                                              onClick={() => {
-                                                console.log("Heloo");
-                                                console.log(
-                                                  "Acoount Number",
-                                                  accNo,
-                                                  custName
-                                                );
-                                                dispatch(
-                                                  createTutorial({
-                                                    current: custName,
-                                                    accountNumber: accNo,
-                                                    bankName: "CBO",
-                                                    id: user_id,
-                                                    interpretResponse,
-                                                  })
-                                                );
-                                              }}
-                                              className="swal2-confirm swal2-styled btn-primary"
-                                            >
-                                              submit
-                                            </button>
-                                          </div>
-                                        </div>
-                                      ),
-                                      onClose: () => reject(),
-                                      onCancel: () => Swal.close(),
-                                      showConfirmButton: false,
-                                      showCancelButton: false,
-                                      confirmButtonColor: "#01AFEF",
-                                    });
-                                  })
-                                  .catch((er) => {});
+                          <OTP
+                            dispatch={dispatch}
+                            setOpt1={setOpt1}
+                            otp2={otp2}
+                            onSubmit={(e) => {
+                              e.preventDefault();
+                              console.log("otp1: ", otp2.current);
+                              handleOtpSubmit(values, res, reject, readState);
                             }}
-                          ></Otp>
+                          ></OTP>
                         ),
                         onClose: () => reject(),
                         showConfirmButton: false,

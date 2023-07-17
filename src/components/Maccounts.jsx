@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createTutorial } from "../store/actions/bank_accountAction";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import Input from "./Input";
 import Selectinput from "./Selectinput";
-import UserService from "../services/user.service";
-import AuthService from "../services/auth.service";
+import jwtDecode from "jwt-decode";
 
 const dropdown = [
   { label: "CBO", value: "CBO" },
@@ -17,16 +16,12 @@ const dropdown = [
 function Maccounts(props) {
   const [successful, setSuccessful] = useState(false);
   const [message, setMessage] = useState("");
-  const [currentUser, setCurrentUser] = useState({});
   const dispatch = useDispatch();
-  useEffect(() => {
-    const user = AuthService.getCurrentUser();
-    if (user) {
-      setCurrentUser(user);
-      // setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
-      // setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
-    }
-  }, []);
+  const userData = useSelector((state) => state.userProfile);
+  const { token } = userData;
+  const user_token = token && jwtDecode(token);
+  const merchant_id = user_token?.merchant_id;
+
   // console.log(currentUser.id);
   const validationSchema = Yup.object().shape({
     accountHolder: Yup.string().required("Account Holder Name is required"),
@@ -54,7 +49,7 @@ function Maccounts(props) {
                     values.accountHolder,
                     values.accountNumber,
                     values.bankName,
-                    currentUser.id
+                    merchant_id
                   )
                 )
                   .then((res) => {

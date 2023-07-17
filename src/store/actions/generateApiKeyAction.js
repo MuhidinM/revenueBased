@@ -6,13 +6,11 @@ import {
 } from "../types";
 import AuthService from "../../services/auth.service";
 // import BankAccountServices from "../../services/bank-account.services";
-export const getGeneratedApiKey = () => async (dispatch) => {
+export const getGeneratedApiKey = (merchant_id) => async (dispatch) => {
   try {
-    const user = AuthService.getCurrentUser();
-    console.log("The User is:", user.user.user_id);
-    if (user) {
+    if (merchant_id) {
       const generatedApiKey = await AuthService.getGeneratedApiKey(
-        user.user.user_id
+        merchant_id
       );
       console.log(generatedApiKey);
       //   dispatch(getAccounts());
@@ -29,14 +27,13 @@ export const getGeneratedApiKey = () => async (dispatch) => {
   }
 };
 export const generateApiKey =
-  ({ email, expiryDate, interpretResponse }) =>
+  ({ merchant_id, expiryDate, interpretResponse }) =>
   async (dispatch) => {
-    console.log(email);
+    console.log(merchant_id);
     try {
-      const user = AuthService.getCurrentUser();
-      if (user) {
+      if (merchant_id) {
         const generateNewApiKey = await AuthService.generateApiKey(
-          email,
+          merchant_id,
           expiryDate
         );
         if (generateNewApiKey[1] === 200) {

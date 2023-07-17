@@ -4,25 +4,25 @@ const adminTransactionFetchUrl = "http://10.1.177.130:8081/payment/v1/";
 
 const getAllTransactions = async () => {
   // console.log(adminTransactionFetchUrl);
-  return await NODE_API.get("fetchAllTransaction").then(
+  return await NODE_API.get("transaction/fetchAllTransaction").then(
     (response) => response.data
   );
 };
 const getPaypalTransactionById = async (id) => {
   // console.log(adminTransactionFetchUrl);
-  return await NODE_API.get(`paypalTransaction?user_id=${id}`).then(
-    (response) => response.data
-  );
+  return await NODE_API.get(
+    `transaction/paypalTransaction?merchant_id=${id}`
+  ).then((response) => response.data);
 };
 const getPaypalTransactions = async () => {
   // console.log(adminTransactionFetchUrl);
-  return await NODE_API.get(`allpaypalTransaction`).then(
+  return await NODE_API.get(`transaction/allpaypalTransaction`).then(
     (response) => response.data
   );
 };
 const getStripeandBankTransactionById = async (id, url) => {
   // console.log(adminTransactionFetchUrl);
-  return await NODE_API.get(`${url}?user_id=${id}`).then(
+  return await NODE_API.get(`${url}?merchant_id=${id}`).then(
     (response) => response.data
   );
 };
@@ -33,13 +33,13 @@ const getStripeandBankTransaction = async (id, url) => {
 };
 const getEbirrTransactionsById = async (id) => {
   // console.log(adminTransactionFetchUrl);
-  return await NODE_API.get(`ebirrTransactionById?user_id=${id}`).then(
-    (response) => response.data
-  );
+  return await NODE_API.get(
+    `transaction/ebirrTransactionById?merchant_id=${id}`
+  ).then((response) => response.data);
 };
 const getEbirrTransactions = async (id) => {
   // console.log(adminTransactionFetchUrl);
-  return await NODE_API.get(`allEbirrTransactions`).then(
+  return await NODE_API.get(`transaction/allEbirrTransactions`).then(
     (response) => response.data
   );
 };
@@ -57,13 +57,13 @@ const getTransactionByTransactionId = async (clientId) => {
 
 const getChappaTransactionsById = async (id) => {
   // console.log(adminTransactionFetchUrl);
-  return await NODE_API.get(`chappaTransactionById?user_id=${id}`).then(
-    (response) => response.data
-  );
+  return await NODE_API.get(
+    `transaction/chappaTransactionById?merchant_id=${id}`
+  ).then((response) => response.data);
 };
 const getChappaTransactions = async (id) => {
   // console.log(adminTransactionFetchUrl);
-  return await NODE_API.get(`allChappaTransactions`).then(
+  return await NODE_API.get(`transaction/allChappaTransactions`).then(
     (response) => response.data
   );
 };

@@ -6,6 +6,7 @@ import {
   NAME_ENQ_BY_ACCNO,
   NAME_ENQ_BY_ACCNO_ERROR,
   GET_ACCOUNTS_BY_PHONE,
+  SET_OTP,
   // GET_ACCOUNTS_BY_PHONE_ERROR,
 } from "../types";
 
@@ -15,6 +16,7 @@ const initialState = {
   message: "",
   accountMessage: "",
   criteriaValue: "",
+  otpValue: "",
   loading: true,
 };
 
@@ -66,6 +68,12 @@ export default function (state = initialState, action) {
         ...state,
         loading: false,
         error: action.payload,
+      };
+    case SET_OTP:
+      return {
+        ...state,
+        loading: false,
+        otpValue: action.payload,
       };
     default:
       return state;
