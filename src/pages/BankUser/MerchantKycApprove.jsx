@@ -19,7 +19,7 @@ function MerchantKycApprove({ merchant, dispatch, userID }) {
     },
     {
       value: "2",
-      label: "Payment Process",
+      label: "Payment Processor",
     },
   ];
 

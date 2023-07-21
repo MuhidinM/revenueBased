@@ -41,14 +41,14 @@ function Users() {
               {service_name?.includes("BNPL") ? (
                 <Route index element={<BNPLHome />}></Route>
               ) : (
-                service_name?.includes("PaymentProcess") && (
+                service_name?.includes("Payment Processor") && (
                   <Route index element={<PaymentPHome />}></Route>
                 )
               )}
               {service_name?.includes("BNPL") ? (
                 <Route path="transactions" element={<Transactions />}></Route>
               ) : (
-                service_name?.includes("PaymentProcess") && (
+                service_name?.includes("Payment Processor") && (
                   <Route
                     path="transactions"
                     element={<TransactionList />}
