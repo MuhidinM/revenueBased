@@ -12,6 +12,7 @@ import AuthService from "./services/auth.service";
 import Sales from "./Sales";
 import Gateway from "./components/Gateway";
 import RequireAuth from "./pages/auth/RequireAuth";
+import DataTable from "./components/DataTable";
 // import RequireAuth from "./pages/auth/RequireAuth";
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
         <Route path="/auth/*" element={<Auth />}></Route>
         <Route path="/otp" element={<OTP />}></Route>
         <Route path="/sandbox/*" element={<Sandbox />}></Route>
+        <Route path="/table/*" element={<DataTable />}></Route>
         <Route element={<RequireAuth allowedRoles={"merchant"} />}>
           <Route path="/users/*" element={<Users />}></Route>
         </Route>
