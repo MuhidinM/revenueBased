@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, ErrorMessage } from "formik";
 import * as Yup from "yup";
 // import Input from "../../components/Input";
@@ -6,6 +6,7 @@ import * as Yup from "yup";
 import Addressproof from "../../components/Addressproof";
 
 function AddInventory({ onSubmit, values, onCancel }) {
+  const [bnpl, setBnpl] = useState(false);
   const FILE_SIZE = 1600 * 1024;
   const SUPPORTED_FORMATS = [
     "image/jpg",
@@ -31,6 +32,15 @@ function AddInventory({ onSubmit, values, onCancel }) {
     item_name: Yup.string().required("Name is required"),
     item_type: Yup.string().required("Type is required"),
     loan_limit: Yup.string().required("Loan Limit is required"),
+    totalQuantity: Yup.string().required("Total Quantity is required"),
+    totalBuyPrice: Yup.string().required("Total Buy Price is required"),
+    onStock: Yup.string().required("On Stock is required"),
+    unitPrice: Yup.string().required("Unit Price is required"),
+    reorderPointUnit: Yup.string().required("Reorder Point Unit is required"),
+    purchaseDate: Yup.string().required("Purchase Date is required"),
+    supplier: Yup.string().required("Supplier is required"),
+    location: Yup.string().required("Location is required"),
+    description: Yup.string().required("Description is required"),
   });
   // console.log("value From the Parent:", values);
   return (
@@ -43,11 +53,11 @@ function AddInventory({ onSubmit, values, onCancel }) {
       >
         {(formik) => (
           <form onSubmit={formik.handleSubmit}>
-            <div className="grid gap-4 mb-4 grid-cols-2 sm:gap-6 sm:mb-5">
+            <div className="grid grid-cols-3 gap-4 mb-4 sm:gap-6 sm:mb-5">
               <div className="w-full">
                 <label
                   htmlFor="item_name"
-                  className="mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  className="mb-2 text-sm font-medium text-gray-900"
                 >
                   Item Name
                 </label>
@@ -67,7 +77,7 @@ function AddInventory({ onSubmit, values, onCancel }) {
               <div className="w-full">
                 <label
                   htmlFor="item_price"
-                  className="mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  className="mb-2 text-sm font-medium text-gray-900"
                 >
                   Item Price
                 </label>
@@ -87,7 +97,7 @@ function AddInventory({ onSubmit, values, onCancel }) {
               <div className="w-full">
                 <label
                   htmlFor="item_type"
-                  className="mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  className="mb-2 text-sm font-medium text-gray-900"
                 >
                   Item Type
                 </label>
@@ -107,7 +117,7 @@ function AddInventory({ onSubmit, values, onCancel }) {
               <div className="w-full">
                 <label
                   htmlFor="item_code"
-                  className="mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  className="mb-2 text-sm font-medium text-gray-900"
                 >
                   Item Code
                 </label>
@@ -124,43 +134,229 @@ function AddInventory({ onSubmit, values, onCancel }) {
                   onChange={formik.handleChange}
                 />
               </div>
-              <div className="col-span-2">
+              {bnpl ? (
+                <div className="w-full">
+                  <label
+                    htmlFor="loan_limit"
+                    className="mb-2 text-sm font-medium text-gray-900"
+                  >
+                    Max Loan Limit(%)
+                  </label>
+                  <span className="text-sm link-error">
+                    <ErrorMessage name="loan_limit"></ErrorMessage>
+                  </span>
+                  <input
+                    type="text"
+                    name="loan_limit"
+                    id="loan_limit"
+                    min={0}
+                    max={100}
+                    placeholder="loan_limit"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    value={formik.values.loan_limit}
+                    onChange={formik.handleChange}
+                  />
+                </div>
+              ) : (
+                ""
+              )}
+
+              <div className="w-full">
                 <label
-                  htmlFor="loan_limit"
-                  className="mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  htmlFor="totalQuantity"
+                  className="mb-2 text-sm font-medium text-gray-900"
                 >
-                  Max Loan Limit(%)
+                  Total Quantity
                 </label>
                 <span className="text-sm link-error">
-                  <ErrorMessage name="loan_limit"></ErrorMessage>
+                  <ErrorMessage name="totalQuantity"></ErrorMessage>
                 </span>
                 <input
                   type="text"
-                  name="loan_limit"
-                  id="loan_limit"
+                  name="totalQuantity"
+                  id="totalQuantity"
                   min={0}
                   max={100}
-                  placeholder="Code"
+                  placeholder="Total Quantity"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  value={formik.values.loan_limit}
+                  value={formik.values.totalQuantity}
                   onChange={formik.handleChange}
                 />
               </div>
-              {/* <div className="col-span-2">
-                <Fileinput title="test" />
-              </div> */}
-              <div className="sm:col-span-2">
+              <div className="w-full">
+                <label
+                  htmlFor="totalBuyPrice"
+                  className="mb-2 text-sm font-medium text-gray-900"
+                >
+                  Total Buy Price
+                </label>
+                <span className="text-sm link-error">
+                  <ErrorMessage name="totalBuyPrice"></ErrorMessage>
+                </span>
+                <input
+                  type="text"
+                  name="totalBuyPrice"
+                  id="totalBuyPrice"
+                  min={0}
+                  max={100}
+                  placeholder="Total Buy Price"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  value={formik.values.totalBuyPrice}
+                  onChange={formik.handleChange}
+                />
+              </div>
+              <div className="w-full">
+                <label
+                  htmlFor="onStock"
+                  className="mb-2 text-sm font-medium text-gray-900"
+                >
+                  On Stock
+                </label>
+                <span className="text-sm link-error">
+                  <ErrorMessage name="onStock"></ErrorMessage>
+                </span>
+                <input
+                  type="text"
+                  name="onStock"
+                  id="onStock"
+                  min={0}
+                  max={100}
+                  placeholder="On Stock"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  value={formik.values.onStock}
+                  onChange={formik.handleChange}
+                />
+              </div>
+              <div className="w-full">
+                <label
+                  htmlFor="unitPrice"
+                  className="mb-2 text-sm font-medium text-gray-900"
+                >
+                  Unit Price
+                </label>
+                <span className="text-sm link-error">
+                  <ErrorMessage name="unitPrice"></ErrorMessage>
+                </span>
+                <input
+                  type="text"
+                  name="unitPrice"
+                  id="unitPrice"
+                  min={0}
+                  max={100}
+                  placeholder="Unit Price"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  value={formik.values.unitPrice}
+                  onChange={formik.handleChange}
+                />
+              </div>
+              <div className="w-full">
+                <label
+                  htmlFor="reorderPointUnit"
+                  className="mb-2 text-sm font-medium text-gray-900"
+                >
+                  Reorder Point Unit
+                </label>
+                <span className="text-sm link-error">
+                  <ErrorMessage name="reorderPointUnit"></ErrorMessage>
+                </span>
+                <input
+                  type="text"
+                  name="reorderPointUnit"
+                  id="reorderPointUnit"
+                  min={0}
+                  max={100}
+                  placeholder="Reorder Point Unit"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  value={formik.values.reorderPointUnit}
+                  onChange={formik.handleChange}
+                />
+              </div>
+              <div className="w-full">
+                <label
+                  htmlFor="purchaseDate"
+                  className="mb-2 text-sm font-medium text-gray-900"
+                >
+                  Purchase Date
+                </label>
+                <span className="text-sm link-error">
+                  <ErrorMessage name="purchaseDate"></ErrorMessage>
+                </span>
+                <input
+                  type="date"
+                  name="purchaseDate"
+                  id="purchaseDate"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  value={formik.values.purchaseDate}
+                  onChange={formik.handleChange}
+                />
+              </div>
+              <div className="w-full">
+                <label
+                  htmlFor="supplier"
+                  className="mb-2 text-sm font-medium text-gray-900"
+                >
+                  Supplier
+                </label>
+                <span className="text-sm link-error">
+                  <ErrorMessage name="supplier"></ErrorMessage>
+                </span>
+                <input
+                  type="text"
+                  name="supplier"
+                  id="supplier"
+                  placeholder="Supplier"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  value={formik.values.supplier}
+                  onChange={formik.handleChange}
+                />
+              </div>
+              <div className={bnpl ? "col-span-3" : "w-full"}>
+                <label
+                  htmlFor="location"
+                  className="mb-2 text-sm font-medium text-gray-900"
+                >
+                  Location
+                </label>
+                <span className="text-sm link-error">
+                  <ErrorMessage name="location"></ErrorMessage>
+                </span>
+                <input
+                  type="text"
+                  name="location"
+                  id="location"
+                  placeholder="Location"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  value={formik.values.location}
+                  onChange={formik.handleChange}
+                />
+              </div>
+              <div className="col-span-3">
+                <label
+                  htmlFor="description"
+                  className="mb-2 text-sm font-medium text-gray-900"
+                >
+                  Description
+                </label>
+                <span className="text-sm link-error">
+                  <ErrorMessage name="description"></ErrorMessage>
+                </span>
+                <textarea
+                  name="description"
+                  id="description"
+                  value={formik.values.description}
+                  onChange={formik.handleChange}
+                  rows="8"
+                  className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary focus:border-primary dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
+                  placeholder="Your description here"
+                ></textarea>
+              </div>
+              <div className="sm:col-span-3">
                 <Addressproof
                   lable="picture"
                   id="picture"
                   title="Item Image"
                   name="picture"
                   fileInput={(e) => {
-                    // console.log(e.currentTarget.id);
-                    // settradeLicenseImage(e.target.files[0]);
-                    // settradeLicenseImageName(e.target.files[0].name);
-                    // console.log(e.target.files);
-
                     formik.setTouched({
                       picture: true,
                     });
