@@ -9,7 +9,7 @@ import { getLoanConfigDetail } from "../../store/actions/getLoanConfigAction";
 import Swal from "sweetalert2";
 
 function Configuration() {
-  const [bnpl, setBnpl] = useState(true);
+  const [bnpl, setBnpl] = useState(false);
   const [activeTab, setActiveTab] = useState("category");
   const [updated, setUpdated] = useState();
   const userData = useSelector((state) => state.userProfile);
