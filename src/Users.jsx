@@ -18,9 +18,10 @@ import Uapi from "./pages/user/Uapi";
 import PaymentPHome from "./pages/user/PaymentPHome";
 import jwtDecode from "jwt-decode";
 import { useSelector } from "react-redux";
-import BNPLHome from "./pages/user/BNPLHome";
+// import BNPLHome from "./pages/user/BNPLHome";
 import TransactionList from "./pages/user/PPTransactions";
 import Home from "./pages/user/Home";
+import RBFHome from "./pages/user/RBFHome";
 function Users() {
   const tokenInfo = useSelector((state) => state.userProfile);
   const { token } = tokenInfo;
@@ -39,7 +40,7 @@ function Users() {
             <Routes>
               {!service_name && <Route index element={<Home />}></Route>}
               {service_name?.includes("BNPL") ? (
-                <Route index element={<BNPLHome />}></Route>
+                <Route index element={<RBFHome />}></Route>
               ) : (
                 service_name?.includes("Payment Processor") && (
                   <Route index element={<PaymentPHome />}></Route>
