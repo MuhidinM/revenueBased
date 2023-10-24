@@ -9,7 +9,8 @@ import { getLoanConfigDetail } from "../../store/actions/getLoanConfigAction";
 import Swal from "sweetalert2";
 
 function Configuration() {
-  const [activeTab, setActiveTab] = useState("loan");
+  const [bnpl, setBnpl] = useState(false);
+  const [activeTab, setActiveTab] = useState("category");
   const [updated, setUpdated] = useState();
   const userData = useSelector((state) => state.userProfile);
   // console.log(userData);
@@ -35,7 +36,6 @@ function Configuration() {
   });
   const [categorydata, setCategoryData] = useState({
     item_type: "",
-    item_code: "",
     merchant_id: userID,
   });
 
@@ -177,26 +177,31 @@ function Configuration() {
   return (
     <div>
       <div className="my-4">
-        <div className="flex-wrap">
-          <button
-            className={`px-6 py-2 rounded-tl-lg ${
-              activeTab === "loan" ? "bg-cyan-500 text-white" : "bg-gray-200"
-            }`}
-            onClick={() => setActiveTab("loan")}
-          >
-            Loan Config
-          </button>
-          <button
-            className={`px-6 py-2 ${
-              activeTab === "category"
-                ? "bg-cyan-500 text-white"
-                : "bg-gray-200"
-            }`}
-            onClick={() => setActiveTab("category")}
-          >
-            Item Category
-          </button>
-        </div>
+        {bnpl ? (
+          <div className="flex-wrap">
+            <button
+              className={`px-6 py-2 rounded-tl-lg ${
+                activeTab === "category"
+                  ? "bg-cyan-500 text-white"
+                  : "bg-gray-200"
+              }`}
+              onClick={() => setActiveTab("category")}
+            >
+              Item Category
+            </button>
+            <button
+              className={`px-6 py-2 ${
+                activeTab === "loan" ? "bg-cyan-500 text-white" : "bg-gray-200"
+              }`}
+              onClick={() => setActiveTab("loan")}
+            >
+              Loan Config
+            </button>
+          </div>
+        ) : (
+          ""
+        )}
+
         <div className="bg-white rounded-b-lg shadow p-4">
           {activeTab === "loan" ? (
             <div className="">
@@ -276,7 +281,7 @@ function Configuration() {
                   className="md:flex md:space-x-4 mb-4 items-center"
                 >
                   <div className="grid flex-grow gap-6 mb-4 grid-cols-4 sm:mb-5">
-                    <div className="w-full col-span-2">
+                    <div className="w-full col-span-4">
                       <label
                         htmlFor="interest_rate"
                         className="mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -293,27 +298,6 @@ function Configuration() {
                         placeholder="Mobile"
                         className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         value={categorydata.item_type}
-                        onChange={handleCategoryChange}
-                        required
-                      />
-                    </div>
-                    <div className="w-full col-span-2">
-                      <label
-                        htmlFor="duration"
-                        className="mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                      >
-                        Item Code
-                      </label>
-                      <span className="text-sm link-error">
-                        {/* <ErrorMessage name="duration"></ErrorMessage> */}
-                      </span>
-                      <input
-                        type="number"
-                        name="item_code"
-                        id="item_code"
-                        placeholder="2234"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        value={categorydata.item_code}
                         onChange={handleCategoryChange}
                         required
                       />
