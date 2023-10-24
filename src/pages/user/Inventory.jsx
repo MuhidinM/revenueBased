@@ -129,6 +129,7 @@ function Inventory() {
     return new Promise((resolve, reject) => {
       MySwal.fire({
         title: "Register Item",
+        width:1000,
         html: (
           <AddInventory
             values={values}
@@ -141,7 +142,15 @@ function Inventory() {
               formData.append("item_price", values.item_price);
               formData.append("item_code", values.item_code);
               formData.append("picture", values.picture);
-              formData.append("loan_limit", values.loan_limit);
+              formData.append("location", values.location);
+              formData.append("description", values.description);
+              formData.append("supplier", values.supplier);
+              formData.append("purchaseDate", values.purchaseDate);
+              formData.append("reorderPointUnit", values.reorderPointUnit);
+              formData.append("unitPrice", values.unitPrice);
+              formData.append("onStock", values.onStock);
+              formData.append("totalBuyPrice", values.totalBuyPrice);
+              formData.append("totalQuantity", values.totalQuantity);
               formData.append("merchant_id", userID);
               resetForm({ values: "" });
 
