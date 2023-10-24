@@ -75,13 +75,13 @@ function RBFHome() {
       <div className="">
         {!kyc && <Banner />}
         <RBFStats items={inventoryDetail} />
-        <div className="grid gap-4 mt-2 md:grid-cols-12 justify-self-auto">
-          <div className="col-span-8 p-5 rounded-xl bg-white">
+        <div className="grid gap-2 mt-2 md:grid-cols-12 justify-self-auto">
+          <div className="col-span-6 p-2 rounded shadow bg-white">
             <div className="flex items-center justify-between mb-2">
               <h3 className="text-xl font-semibold text-cyan-500 pb-2">
-                Money Flow
+                Revenue
               </h3>
-              <select className="select select-bordered select-sm max-w-xs">
+              <select className="select select-sm max-w-xs">
                 <option disabled selected>
                   Filter
                 </option>
@@ -92,13 +92,58 @@ function RBFHome() {
             </div>
             <RNFChart />
           </div>
-          <div className="col-span-4 p-5 rounded-xl bg-white">
-            <h2 className="text-xl font-semibold pb-2">Top Sales</h2>
+          <div className="col-span-3 p-2 rounded shadow bg-white">
+            <h2 className=" font-semibold pb-2 flex items-center justify-center">
+              Profitability
+            </h2>
+            <div className="flex items-center justify-center my-2">
+              <select className="select select-sm max-w-xs">
+                <option disabled selected>
+                  Time
+                </option>
+                <option>Today</option>
+                <option>This Week</option>
+                <option>This Month</option>
+              </select>
+            </div>
+            <div className="flex items-center justify-between border-b">
+              <span className="text-gray-500">Metric</span>
+              <span className="text-gray-500">amount</span>
+            </div>
+            <div className="flex items-center py-2 justify-between border-b mx-1">
+              <span className="text-gray-600">Income</span>
+              <span className="font-semibold">1690</span>
+            </div>
+            <div className="flex items-center py-2 justify-between border-b mx-1">
+              <span className="text-gray-600">Net Profit</span>
+              <span className="font-semibold">690</span>
+            </div>
+            <div className="flex items-center py-2 justify-between border-b mx-1">
+              <span className="text-gray-600">Gross Profit</span>
+              <span className="font-semibold">453</span>
+            </div>
+            <div className="flex items-center py-2 justify-between border-b mx-1">
+              <span className="text-gray-600">Expense</span>
+              <span className="font-semibold">2583</span>
+            </div>
+            <div className="flex items-center py-2 justify-between border-b mx-1">
+              <span className="text-gray-600">Profit</span>
+              <span className="font-semibold">12045</span>
+            </div>
+          </div>
+          <div className="col-span-3 p-2 rounded shadow bg-white">
+            <h2 className=" font-semibold pb-2 flex items-center justify-center">
+              Top Sales
+            </h2>
+            <div className="flex items-center justify-between border-b">
+              <span className="text-gray-500">Item</span>
+              <span className="text-gray-500">Total amount</span>
+            </div>
             <div className="flex flex-col">
-              <div className="flex items-center justify-between p-2 rounded w-full border my-1">
-                <div className="flex">
+              <div className="flex items-center justify-between p-1 rounded w-full border-y pt-2 my-1">
+                <div className="flex items-center">
                   <div className="avatar mr-2">
-                    <div className="w-8 rounded">
+                    <div className="w-7 h-7 rounded">
                       <img
                         src="https://pictures-ethiopia.jijistatic.com/504477_NjIwLTcyNi01ZjY2MWIwMjk2LTE.webp"
                         alt="galaxy"
@@ -106,16 +151,20 @@ function RBFHome() {
                     </div>
                   </div>
                   <div className="flex flex-col item-start justify-center">
-                    <h3 className="font-bold whitespace-nowrap">Galaxy A32</h3>
-                    <div className="text-xs">10 Items are sold this month</div>
+                    <h3 className="font-semibold text-sm whitespace-nowrap">
+                      Galaxy A32
+                    </h3>
+                    <div className="text-xs text-gray-500">
+                      10 Items are sold
+                    </div>
                   </div>
                 </div>
-                <span>100$</span>
+                <span className="font-semibold">100$</span>
               </div>
-              <div className="flex items-center justify-between p-2 rounded w-full border my-1">
-                <div className="flex">
+              <div className="flex items-center justify-between p-1 rounded w-full border-b my-1">
+                <div className="flex items-center">
                   <div className="avatar mr-2">
-                    <div className="w-8 rounded">
+                    <div className="w-7 h-7 rounded">
                       <img
                         src="https://pictures-ethiopia.jijistatic.com/504477_NjIwLTcyNi01ZjY2MWIwMjk2LTE.webp"
                         alt="galaxy"
@@ -123,16 +172,20 @@ function RBFHome() {
                     </div>
                   </div>
                   <div className="flex flex-col item-start justify-center">
-                    <h3 className="font-bold whitespace-nowrap">Galaxy A32</h3>
-                    <div className="text-xs">10 Items are sold this month</div>
+                    <h3 className="font-semibold text-sm whitespace-nowrap">
+                      Galaxy A32
+                    </h3>
+                    <div className="text-xs text-gray-500">
+                      10 Items are sold
+                    </div>
                   </div>
                 </div>
-                <span>100$</span>
+                <span className="font-semibold">100$</span>
               </div>
-              <div className="flex items-center justify-between p-2 rounded w-full border my-1">
-                <div className="flex">
+              <div className="flex items-center justify-between p-1 rounded w-full border-b my-1">
+                <div className="flex items-center">
                   <div className="avatar mr-2">
-                    <div className="w-8 rounded">
+                    <div className="w-7 h-7 rounded">
                       <img
                         src="https://pictures-ethiopia.jijistatic.com/504477_NjIwLTcyNi01ZjY2MWIwMjk2LTE.webp"
                         alt="galaxy"
@@ -140,16 +193,20 @@ function RBFHome() {
                     </div>
                   </div>
                   <div className="flex flex-col item-start justify-center">
-                    <h3 className="font-bold whitespace-nowrap">Galaxy A32</h3>
-                    <div className="text-xs">10 Items are sold this month</div>
+                    <h3 className="font-semibold text-sm whitespace-nowrap">
+                      Galaxy A32
+                    </h3>
+                    <div className="text-xs text-gray-500">
+                      10 Items are sold
+                    </div>
                   </div>
                 </div>
-                <span>100$</span>
+                <span className="font-semibold">100$</span>
               </div>
-              <div className="flex items-center justify-between p-2 rounded w-full border my-1">
-                <div className="flex">
+              <div className="flex items-center justify-between p-1 rounded w-full border-b my-1">
+                <div className="flex items-center">
                   <div className="avatar mr-2">
-                    <div className="w-8 rounded">
+                    <div className="w-7 h-7 rounded">
                       <img
                         src="https://pictures-ethiopia.jijistatic.com/504477_NjIwLTcyNi01ZjY2MWIwMjk2LTE.webp"
                         alt="galaxy"
@@ -157,16 +214,20 @@ function RBFHome() {
                     </div>
                   </div>
                   <div className="flex flex-col item-start justify-center">
-                    <h3 className="font-bold whitespace-nowrap">Galaxy A32</h3>
-                    <div className="text-xs">10 Items are sold this month</div>
+                    <h3 className="font-semibold text-sm whitespace-nowrap">
+                      Galaxy A32
+                    </h3>
+                    <div className="text-xs text-gray-500">
+                      10 Items are sold
+                    </div>
                   </div>
                 </div>
-                <span>100$</span>
+                <span className="font-semibold">100$</span>
               </div>
-              <div className="flex items-center justify-between p-2 rounded w-full border my-1">
-                <div className="flex">
+              <div className="flex items-center justify-between p-1 rounded w-full border-b my-1">
+                <div className="flex items-center">
                   <div className="avatar mr-2">
-                    <div className="w-8 rounded">
+                    <div className="w-7 h-7 rounded">
                       <img
                         src="https://pictures-ethiopia.jijistatic.com/504477_NjIwLTcyNi01ZjY2MWIwMjk2LTE.webp"
                         alt="galaxy"
@@ -174,11 +235,15 @@ function RBFHome() {
                     </div>
                   </div>
                   <div className="flex flex-col item-start justify-center">
-                    <h3 className="font-bold whitespace-nowrap">Galaxy A32</h3>
-                    <div className="text-xs">10 Items are sold this month</div>
+                    <h3 className="font-semibold text-sm whitespace-nowrap">
+                      Galaxy A32
+                    </h3>
+                    <div className="text-xs text-gray-500">
+                      10 Items are sold
+                    </div>
                   </div>
                 </div>
-                <span>100$</span>
+                <span className="font-semibold">100$</span>
               </div>
             </div>
           </div>
