@@ -21,6 +21,7 @@ import { useSelector } from "react-redux";
 import BNPLHome from "./pages/user/BNPLHome";
 import TransactionList from "./pages/user/PPTransactions";
 import Home from "./pages/user/Home";
+import Expense from "./pages/user/Expense";
 function Users() {
   const tokenInfo = useSelector((state) => state.userProfile);
   const { token } = tokenInfo;
@@ -58,6 +59,7 @@ function Users() {
               <Route path="transactions" element={<Transactions />}></Route>
               <Route path="accounts" element={<Accounts />}></Route>
               <Route path="sales" element={<Sales />}></Route>
+              <Route path="expense" element={<Expense />}></Route>
               <Route path="inventory" element={<Inventory />}></Route>
               <Route path="loan" element={<Loan />}></Route>
               <Route path="configuration" element={<Configuration />}></Route>
