@@ -111,6 +111,30 @@ function Sidebar() {
               )}
               {service_name?.includes("BNPL") && (
                 <li className="mb-1">
+                  <Link to="expense">
+                    <svg
+                      className="h-6 w-6 text-primary"
+                      width="24"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      strokeWidth="2"
+                      stroke="currentColor"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      {" "}
+                      <path stroke="none" d="M0 0h24v24H0z" />{" "}
+                      <rect x="7" y="9" width="14" height="10" rx="2" />{" "}
+                      <circle cx="14" cy="14" r="2" />{" "}
+                      <path d="M17 9v-2a2 2 0 0 0 -2 -2h-10a2 2 0 0 0 -2 2v6a2 2 0 0 0 2 2h2" />
+                    </svg>
+                    Expense
+                  </Link>
+                </li>
+              )}
+              {service_name?.includes("BNPL") && (
+                <li className="mb-1">
                   <Link to="configuration">
                     <svg
                       class="h-6 w-6 text-primary"
