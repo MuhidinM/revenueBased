@@ -26,8 +26,16 @@ const CreateKYC = async (formData, setUpdated, updated) => {
 //   );
 // };
 
+const ToggleRbf = async () => {
+  return await NODE_API.put("/eky/service-switch").then((response) => {
+    window.location.reload();
+    return response;
+  });
+};
+
 const KYCService = {
   CreateKYC,
+  ToggleRbf,
 };
 
 export default KYCService;

@@ -9,12 +9,12 @@ import { getLoanConfigDetail } from "../../store/actions/getLoanConfigAction";
 import Swal from "sweetalert2";
 
 function Configuration() {
-  const [bnpl, setBnpl] = useState(false);
+  const [bnpl, setBnpl] = useState(true);
   const [activeTab, setActiveTab] = useState("category");
   const [updated, setUpdated] = useState();
   const userData = useSelector((state) => state.userProfile);
   // console.log(userData);
-  const { userID } = userData;
+  const { userID, kyc } = userData;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -176,8 +176,9 @@ function Configuration() {
 
   return (
     <div>
+      <span className="text-xl p-2 font-bold my-5">Configurations</span>
       <div className="my-4">
-        {bnpl ? (
+        {!kyc.rbf ? (
           <div className="flex-wrap">
             <button
               className={`px-6 py-2 rounded-tl-lg ${
@@ -284,9 +285,9 @@ function Configuration() {
                     <div className="w-full col-span-4">
                       <label
                         htmlFor="interest_rate"
-                        className="mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        className="mb-3 text-sm font-medium text-gray-900 dark:text-white"
                       >
-                        Item Type
+                        Category Name:
                       </label>
                       <span className="text-sm link-error">
                         {/* <ErrorMessage name="interest_rate"></ErrorMessage> */}

@@ -6,9 +6,7 @@ import Mapi from "./Mapi";
 // import Msite from "./Msite";
 
 function Modal({ handleClose, show, children, page }) {
-  // console.log(props.page);
   const showHideClassName = show ? "my-modal-4" : "";
-  // console.log(page);
   return (
     <>
       <input type="checkbox" id={showHideClassName} className="modal-toggle" />

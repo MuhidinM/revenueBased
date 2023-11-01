@@ -16,19 +16,14 @@ function PayPal(props) {
   const clientId = searchParams.get("clientId");
   const secratekey = searchParams.get("secretKey");
   const key = searchParams.get("key");
-  console.log(callBackUrl);
   // useEffect(() => {
-  //   console.log("Credentials To be Sent Is: ", clientId, secratekey);
-  //   console.log("Key:", key);
   //   PaymentServices.checkCredentials(clientId, secratekey, key)
   //     .then((response) => {
   //       if (response[0] == 200) {
   //         setVerified(true);
-  //         console.log("Response Status is:", response[1]);
   //       }
   //     })
   //     .catch((err) => {
-  //       console.log("Error Is:", err);
   //     });
   //   if (success) {
   //     const paymentData = {
@@ -43,7 +38,6 @@ function PayPal(props) {
 
   //   }
   // }, [success]);
-  // console.log(data1);
 
   const createOrder = (data, actions) => {
     return actions.order
@@ -64,18 +58,11 @@ function PayPal(props) {
       })
       .then((orderID) => {
         setOrderID(orderID);
-        console.log("momo" + orderID);
         return orderID;
       });
   };
-  // console.log("The order payment" + createOrder);
   const onApprove = (data, actions) => {
     return actions.order.capture().then(function (details) {
-      const { payer } = details;
-      console.log("Details: " + JSON.stringify(details));
-      console.log(
-        "Purchase Units" + JSON.stringify(details.purchase_units[0].payments)
-      );
       const orderId = details.id;
       const status = details.status;
       const amountValue =

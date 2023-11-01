@@ -21,7 +21,6 @@ function Gateway() {
   const location = useLocation();
   const path = location.pathname;
   const data = path.substring(path.lastIndexOf("gateway/") + 8);
-  console.log("dfdfdfdfdfdfdfdfdfd", data);
   const encodedUri = encodeURIComponent(data);
   useEffect(() => {
     PaymentServices.getPendingPaymentInfo(encodedUri)
@@ -37,8 +36,6 @@ function Gateway() {
       .catch((error) => {
         console.log(error);
       });
-    console.log("currency", currency);
-    // console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", paymentService);
     if (paymentService == "CBOA") {
       setSelect("CBOA");
     } else if (paymentService == "stripe") {

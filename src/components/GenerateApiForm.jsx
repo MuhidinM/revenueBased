@@ -22,7 +22,6 @@ const ValidationSchema = Yup.object().shape({
 export const ModalForm = ({ values, onSubmit, onCancel }) => {
   let accountNumber = values.accountNumber;
   const dropdown = [{ label: `${accountNumber}`, value: `${accountNumber}` }];
-  console.log(values);
   return (
     <Formik
       initialValues={values}

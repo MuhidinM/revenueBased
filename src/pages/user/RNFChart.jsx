@@ -13,51 +13,51 @@ import {
 
 const data = [
   {
-    name: "Page A",
-    uv: 4000,
-    pv: 2400,
+    name: "Jan",
+    profit: 4000,
+    revenue: 8400,
     amt: 2400,
   },
   {
-    name: "Page B",
-    uv: 3000,
-    pv: 1398,
+    name: "Feb",
+    profit: 3000,
+    revenue: 5398,
     amt: 2210,
   },
   {
-    name: "Page C",
-    uv: 2000,
-    pv: 9800,
+    name: "Mar",
+    profit: 2000,
+    revenue: 9800,
     amt: 2290,
   },
   {
-    name: "Page D",
-    uv: 2780,
-    pv: 3908,
+    name: "Apr",
+    profit: 2780,
+    revenue: 7908,
     amt: 2000,
   },
   {
-    name: "Page E",
-    uv: 1890,
-    pv: 4800,
+    name: "May",
+    profit: 1890,
+    revenue: 4800,
     amt: 2181,
   },
   {
-    name: "Page F",
-    uv: 2390,
-    pv: 3800,
+    name: "Jun",
+    profit: 2390,
+    revenue: 5800,
     amt: 2500,
   },
   {
-    name: "Page G",
-    uv: 3490,
-    pv: 4300,
+    name: "Jul",
+    profit: 3490,
+    revenue: 4300,
     amt: 2100,
   },
   {
-    name: "Page h",
-    uv: 3490,
-    pv: 4300,
+    name: "Aug",
+    profit: 3490,
+    revenue: 4300,
     amt: 2100,
   },
 ];
@@ -85,12 +85,12 @@ export default class Example extends PureComponent {
           <Tooltip />
           <Legend />
           <Bar
-            dataKey="pv"
-            fill="#8884d8"
+            dataKey="revenue"
+            fill="#26ABE2"
             activeBar={<Rectangle fill="pink" stroke="blue" />}
           />
           <Bar
-            dataKey="uv"
+            dataKey="profit"
             fill="#82ca9d"
             activeBar={<Rectangle fill="gold" stroke="purple" />}
           />

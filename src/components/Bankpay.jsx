@@ -26,8 +26,6 @@ function Bankpay(props) {
   const key = searchParams.get("key");
   const amount = searchParams.get("amount");
   const callBackUrl = searchParams.get("callBackUrl");
-  console.log(clientid, secretKey, amount);
-  console.log(props);
   useEffect(() => {}, []);
   const validationSchema = Yup.object().shape({
     accountHolder: Yup.string().required("Account Holder Name is required"),
@@ -74,7 +72,6 @@ function Bankpay(props) {
   return (
     <>
       {verified === 0 ? (
-        // console.log("rendering first Condition")
         <>
           <Formik
             initialValues={{
@@ -88,12 +85,8 @@ function Bankpay(props) {
               //   alert(JSON.stringify(values, null, 2));
               //   setSubmitting(false);
               // }, 400);
-              console.log("hello");
-              console.log(values);
               PaymentServices.verifyPin(props.phoneNumber, values.pin)
                 .then((resp) => {
-                  console.log("fdfffffffffffffffffffffffffff", resp);
-                  console.log(resp);
                   // setSuccessful(true);
                   if (resp[0] == "200") {
                     setphoneNumber(props.phoneNumber);
@@ -104,7 +97,6 @@ function Bankpay(props) {
                   }
                 })
                 .catch((error) => {
-                  console.log("fdfffffffffffffffffffffffffff");
                   setMessage(error);
                 });
             }}
@@ -204,7 +196,6 @@ function Bankpay(props) {
             debitAccount: "",
           }}
           onSubmit={(val) => {
-            console.log("hello", props.amount);
             setLoadingOtp(true);
             const value = {
               first: "",
@@ -224,7 +215,6 @@ function Bankpay(props) {
                     <Otp
                       values={value}
                       onSubmit={(values) => {
-                        console.log("Hello from the second swal");
                         // resolve(values);
                         const otp =
                           values.first +
@@ -238,8 +228,6 @@ function Bankpay(props) {
                           otp
                         ).then((res) => {
                           // dispatch(setPrimaryAccount(e.target.value));
-                          console.log(primaryAccount);
-                          console.log(props.paymentId);
                           res === "ok" &&
                             PaymentServices.pay(
                               primaryAccount,

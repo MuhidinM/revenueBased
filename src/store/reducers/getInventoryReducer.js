@@ -1,7 +1,8 @@
-import { SET_INVENTORY } from "../types";
+import { SET_INVENTORY, SET_PRODUCTS } from "../types";
 
 const initialState = {
   inventoryDetail: [],
+  productsDetail: [],
   loading: true,
 };
 
@@ -14,6 +15,13 @@ export default function (state = initialState, action) {
       return {
         ...state,
         inventoryDetail: action.payload,
+        loading: false,
+      };
+    case SET_PRODUCTS:
+      //   console.log(action.payload);
+      return {
+        ...state,
+        productsDetail: action.payload,
         loading: false,
       };
     default:

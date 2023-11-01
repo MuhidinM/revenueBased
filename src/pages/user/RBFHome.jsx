@@ -1,80 +1,29 @@
 import React, { useEffect } from "react";
-import DataTable from "react-data-table-component";
 import { useDispatch, useSelector } from "react-redux";
-import { getInventoryDetail } from "../../store/actions/getInventoryAction";
 import Banner from "./Banner";
 import RBFStats from "./RBFStat";
 import RNFChart from "./RNFChart";
-
-const columns = [
-  {
-    name: "Image",
-    cell: (row) => {
-      return (
-        <div className="p-2">
-          <img
-            src={`http://10.1.177.130:5004/image/${row.item_pic}`}
-            style={{ width: "40px", height: "40px" }}
-            alt=""
-          />
-        </div>
-      );
-    },
-  },
-  {
-    name: "Name",
-    selector: (row) => row.item_name,
-    sortable: true,
-  },
-  {
-    name: "Type",
-    selector: (row) => row.item_type,
-    sortable: true,
-  },
-  {
-    name: "Code",
-    selector: (row) => row.item_code,
-    sortable: true,
-  },
-  {
-    name: "Price",
-    selector: (row) => row.item_price,
-    sortable: true,
-  },
-  {
-    name: "Created At",
-    selector: (row) => new Date(row.createdAt).toISOString().split("T")[0],
-    sortable: true,
-  },
-];
+import { getDashboardCardDetail } from "../../store/actions/reportActions";
 
 function RBFHome() {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.userProfile);
   // console.log(userData);
-  const { userID, kyc } = userData;
+  const { kyc } = userData;
 
   useEffect(() => {
-    if (userID) {
-      dispatch(getInventoryDetail(userID));
-    }
-  }, [userID, dispatch]);
+    dispatch(getDashboardCardDetail());
+  }, []);
 
-  const inventoryInfo = useSelector((state) => state.inventoryInfo);
+  const reportData = useSelector((state) => state.reportInfo);
   // console.log(userData);
-  const { inventoryDetail } = inventoryInfo;
-
-  const filteredInventory = inventoryDetail.filter(
-    (item) =>
-      new Date(item.createdAt).toISOString().split[0] ===
-      new Date().toISOString().split[0]
-  );
+  const { dashboardCardReport } = reportData;
 
   return (
     <>
       <div className="">
         {!kyc && <Banner />}
-        <RBFStats items={inventoryDetail} />
+        <RBFStats items={dashboardCardReport} />
         <div className="grid gap-2 mt-2 md:grid-cols-12 justify-self-auto">
           <div className="col-span-6 p-2 rounded shadow bg-white">
             <div className="flex items-center justify-between mb-2">
@@ -111,24 +60,35 @@ function RBFHome() {
               <span className="text-gray-500">amount</span>
             </div>
             <div className="flex items-center py-2 justify-between border-b mx-1">
-              <span className="text-gray-600">Income</span>
-              <span className="font-semibold">1690</span>
-            </div>
-            <div className="flex items-center py-2 justify-between border-b mx-1">
-              <span className="text-gray-600">Net Profit</span>
-              <span className="font-semibold">690</span>
-            </div>
-            <div className="flex items-center py-2 justify-between border-b mx-1">
-              <span className="text-gray-600">Gross Profit</span>
-              <span className="font-semibold">453</span>
+              <span className="text-gray-600">Buy Price</span>
+              <span className="font-semibold">
+                {dashboardCardReport?.totalBuy?.toLocaleString()}
+              </span>
             </div>
             <div className="flex items-center py-2 justify-between border-b mx-1">
               <span className="text-gray-600">Expense</span>
-              <span className="font-semibold">2583</span>
+              <span className="font-semibold">
+                {(
+                  dashboardCardReport?.totalexpence +
+                  dashboardCardReport?.totalBuy
+                ).toLocaleString()}
+              </span>
             </div>
             <div className="flex items-center py-2 justify-between border-b mx-1">
-              <span className="text-gray-600">Profit</span>
-              <span className="font-semibold">12045</span>
+              <span className="text-gray-600">Gross Revenue</span>
+              <span className="font-semibold">
+                {dashboardCardReport?.revenue?.toLocaleString()}
+              </span>
+            </div>
+            <div className="flex items-center py-2 justify-between border-b mx-1">
+              <span className="text-gray-600">Net Revenue</span>
+              <span className="font-semibold">
+                {(
+                  dashboardCardReport?.revenue -
+                  (dashboardCardReport?.totalexpence +
+                    dashboardCardReport?.totalBuy)
+                ).toLocaleString()}
+              </span>
             </div>
           </div>
           <div className="col-span-3 p-2 rounded shadow bg-white">
@@ -155,70 +115,70 @@ function RBFHome() {
                       Galaxy A32
                     </h3>
                     <div className="text-xs text-gray-500">
-                      10 Items are sold
+                      8 Items are sold
                     </div>
                   </div>
                 </div>
-                <span className="font-semibold">100$</span>
+                <span className="font-semibold">180000$</span>
               </div>
               <div className="flex items-center justify-between p-1 rounded w-full border-b my-1">
                 <div className="flex items-center">
                   <div className="avatar mr-2">
                     <div className="w-7 h-7 rounded">
                       <img
-                        src="https://pictures-ethiopia.jijistatic.com/504477_NjIwLTcyNi01ZjY2MWIwMjk2LTE.webp"
+                        src="https://m.media-amazon.com/images/I/41sT-ej9Q-L.jpg"
                         alt="galaxy"
                       />
                     </div>
                   </div>
                   <div className="flex flex-col item-start justify-center">
                     <h3 className="font-semibold text-sm whitespace-nowrap">
-                      Galaxy A32
+                      HP Laptop
                     </h3>
                     <div className="text-xs text-gray-500">
-                      10 Items are sold
+                      8 Items are sold
                     </div>
                   </div>
                 </div>
-                <span className="font-semibold">100$</span>
+                <span className="font-semibold">173000$</span>
               </div>
               <div className="flex items-center justify-between p-1 rounded w-full border-b my-1">
                 <div className="flex items-center">
                   <div className="avatar mr-2">
                     <div className="w-7 h-7 rounded">
                       <img
-                        src="https://pictures-ethiopia.jijistatic.com/504477_NjIwLTcyNi01ZjY2MWIwMjk2LTE.webp"
+                        src="https://images.macrumors.com/t/Xli73M4hhPje3C5CeyhH1Z_c2Ro=/800x0/smart/article-new/2018/02/airpods-3.jpg?lossy"
                         alt="galaxy"
                       />
                     </div>
                   </div>
                   <div className="flex flex-col item-start justify-center">
                     <h3 className="font-semibold text-sm whitespace-nowrap">
-                      Galaxy A32
+                      Airpod Pro 3
                     </h3>
                     <div className="text-xs text-gray-500">
-                      10 Items are sold
+                      12 Items are sold
                     </div>
                   </div>
                 </div>
-                <span className="font-semibold">100$</span>
+                <span className="font-semibold">102000$</span>
               </div>
               <div className="flex items-center justify-between p-1 rounded w-full border-b my-1">
                 <div className="flex items-center">
                   <div className="avatar mr-2">
                     <div className="w-7 h-7 rounded">
                       <img
-                        src="https://pictures-ethiopia.jijistatic.com/504477_NjIwLTcyNi01ZjY2MWIwMjk2LTE.webp"
+                        src="https://shop.yourdoor.co.za/wp-content/uploads/2019/12/airphone-1.jpg"
                         alt="galaxy"
                       />
                     </div>
                   </div>
                   <div className="flex flex-col item-start justify-center">
                     <h3 className="font-semibold text-sm whitespace-nowrap">
-                      Galaxy A32
+                      Headset
                     </h3>
                     <div className="text-xs text-gray-500">
-                      10 Items are sold
+                      4 Items are sold
                     </div>
                   </div>
                 </div>

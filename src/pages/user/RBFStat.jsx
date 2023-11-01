@@ -21,8 +21,13 @@ function RBFStats({ items }) {
                 />
               </svg>
             </div>
-            <div className="stat-title">Profit</div>
-            <div className="stat-value text-primary">-</div>
+            <div className="stat-title">Total Net Revenue</div>
+            <div className="stat-value text-primary">
+              {(
+                items?.revenue -
+                (items?.totalexpence + items?.totalBuy)
+              ).toLocaleString()}
+            </div>
           </div>
 
           <div className="stat">
@@ -41,8 +46,10 @@ function RBFStats({ items }) {
                 <polyline points="17 6 23 6 23 12" />
               </svg>
             </div>
-            <div className="stat-title">Revenue</div>
-            <div className="stat-value text-secondary">-</div>
+            <div className="stat-title">Total Gross Revenue</div>
+            <div className="stat-value text-secondary">
+              {items?.revenue?.toLocaleString()}
+            </div>
             {/* <div className="stat-desc">11% less than yesterday</div> */}
           </div>
 
@@ -62,8 +69,10 @@ function RBFStats({ items }) {
                 ></path>
               </svg>
             </div>
-            <div className="stat-title">Expense</div>
-            <div className="stat-value text-primary">-</div>
+            <div className="stat-title">Total Expense</div>
+            <div className="stat-value text-primary">
+              {(items?.totalexpence + items?.totalBuy).toLocaleString()}
+            </div>
           </div>
 
           <div className="stat">
@@ -84,8 +93,10 @@ function RBFStats({ items }) {
                 <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
               </svg>
             </div>
-            <div className="stat-title">Sales</div>
-            <div className="stat-value text-accent">-</div>
+            <div className="stat-title">Total Buy Price</div>
+            <div className="stat-value text-accent">
+              {items?.totalBuy?.toLocaleString()}
+            </div>
           </div>
         </div>
       </div>

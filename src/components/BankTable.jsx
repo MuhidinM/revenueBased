@@ -110,9 +110,7 @@ const Export = ({ onExport }) => (
 
 function BankTable() {
   const bankListData = useSelector((state) => state.bankInfo);
-  // console.log("Bank List Data" + bankListData);
   let { bank, banks, response, message, loading } = bankListData;
-  // console.log("Add Bank", bank, "Get Bank", banks);
   // const [backendResponse, setbackendResponse] = useState("");
   const dispatch = useDispatch();
 
@@ -122,8 +120,6 @@ function BankTable() {
     // setbackendResponse(response);
   }, []);
 
-  // console.log("Add Bank", bank);
-  // console.log("Get Banks", banks);
 
   const [filterText, setFilterText] = React.useState("");
   const actionsMemo = useMemo(
@@ -156,15 +152,8 @@ function BankTable() {
 
   const interpretResponse = (response) => {
     // let actionResponse = JSON.stringify(response);
-    // console.log("Action Response Is" + actionResponse.response);
-    // console.log(
-    //   " Response Is" + response.response,
-    //   response.message + "",
-    //   response.responseCode
-    // );
+
     if (response.response === "success" || response.responseCode === 200) {
-      // console.log(response);
-      // console.log("Rsponse from useEffect is here" + response);
       Swal.fire({
         icon: "success",
         title: "Bank Created",
@@ -172,7 +161,6 @@ function BankTable() {
         timer: 3000,
       });
     } else if (response.responseCode === 403 && response.respone === "error") {
-      // console.log("Un Authorised User ");
       Swal.fire({
         icon: "error",
         title: response.message,
@@ -196,9 +184,7 @@ function BankTable() {
           <BankModal
             values={values}
             onSubmit={(values) => {
-              // console.log("Hello from the second swal");
-              // console.log(values.bankName);
-              // console.log(values.bankCode);
+
               dispatch(
                 addBank({
                   bankName: values.bankName,
@@ -206,7 +192,6 @@ function BankTable() {
                   interpretResponse,
                 })
               );
-              // console.log("Bank Response" + response);
             }}
             onCancel={() => MySwal.close()}
           ></BankModal>
@@ -216,7 +201,6 @@ function BankTable() {
       });
     });
   };
-  // console.log(bank, "heloo");
 
   const showModal = () => {
     fireSwal({

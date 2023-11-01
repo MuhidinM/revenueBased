@@ -21,15 +21,7 @@ function GenerateApiModal(props) {
 
   const interpretResponse = (response) => {
     let actionResponse = JSON.stringify(response);
-    console.log("Action Response Is" + actionResponse.response);
-    console.log(
-      " Response Is" + response.response,
-      response.message + "",
-      response.responseCode
-    );
     if (response.response === "success" && response.responseCode == 200) {
-      console.log(response);
-      console.log("Response from useEffect is here" + response);
       Swal.fire({
         icon: "success",
         title: "Your Key Is Generated",
@@ -37,7 +29,6 @@ function GenerateApiModal(props) {
         timer: 3000,
       });
     } else if (response.responseCode == 403 || response.respone === "error") {
-      console.log("Un Authorised User ");
       Swal.fire({
         icon: "error",
         title: response.message,
@@ -61,9 +52,6 @@ function GenerateApiModal(props) {
           <ModalForm
             values={values}
             onSubmit={(values) => {
-              console.log("Your button is got Clicked");
-              console.log(values);
-              console.log(currentUser);
               dispatch(
                 generateApiKey({
                   merchant_id: merchant_id,

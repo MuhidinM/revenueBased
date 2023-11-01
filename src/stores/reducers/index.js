@@ -13,6 +13,7 @@ import deviceManagementReducer from "./deviceManagementReducer";
 import domainReducer from "./domainReducer";
 import bussinessReducer from "./bussinessReducer";
 import agentReducer from "./agentReducer";
+import reportReducer from "./reportReducer";
 
 const persistConfig = {
   key: "root",
@@ -28,6 +29,7 @@ const rootReducer = combineReducers({
   inventoryInfo: getInventoryReducer,
 
   apiKey: generate_api_key_reducer,
+  reportInfo: reportReducer,
   deviceDetail: deviceManagementReducer,
   registerDevice: deviceManagementReducer,
   bankInfo: bankReducer,

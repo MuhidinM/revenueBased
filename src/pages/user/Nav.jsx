@@ -5,7 +5,7 @@ import AuthService from "../../services/auth.service";
 import { useEffect } from "react";
 import { useState } from "react";
 import { getEkyInfo, setlogOut } from "../../store/actions/userProfileAction";
-import UserService from "../../services/user.service";
+import KYCService from "../../services/kyc.service";
 
 function Nav() {
   // const [currentUser, setCurrentUser] = useState({});
@@ -16,6 +16,10 @@ function Nav() {
 
   const logOut = () => {
     setlogOut();
+  };
+
+  const handleToggleEdit = async () => {
+    dispatch(KYCService.ToggleRbf());
   };
   // console.log(userData);
   const { userID } = userData;
@@ -55,6 +59,18 @@ function Nav() {
                 clipRule="evenodd"
               ></path>
             </svg>
+          </label>
+        </div>
+        <div className="form-control mx-3">
+          <label className="cursor-pointer label border rounded-xl">
+            <span className="label-text mx-2 font-bold">BNPL</span>
+            <input
+              type="checkbox"
+              className="toggle toggle-accent"
+              checked={kyc?.rbf}
+              onClick={() => handleToggleEdit()}
+            />
+            <span className="label-text mx-2 font-bold">RBF</span>
           </label>
         </div>
         <div className="flex-none">

@@ -15,6 +15,8 @@ import CustomizedMenus from "./OptionDropdown";
 import EditInventory from "./EditInventory";
 import { useState } from "react";
 import { useMemo } from "react";
+import AddExpense from "./AddExpense";
+import ExpenseService from "../../services/expense.service";
 const MySwal = withReactContent(Swal);
 
 function Inventory() {
@@ -22,10 +24,11 @@ function Inventory() {
     {
       name: "Image",
       cell: (row) => {
+        console.log(row.item_pic);
         return (
           <div className="p-2">
             <img
-              src={`http://10.1.177.130:5004/image/${row.item_pic}`}
+              src={`${row.item_pic}`}
               style={{ width: "40px", height: "40px" }}
               alt=""
             />
@@ -74,9 +77,11 @@ function Inventory() {
       cell: (row) => (
         <CustomizedMenus
           data={row}
+          kyc={kyc}
           showEditModal={showEditModal}
           showDetailModal={showDetailModal}
           showAssignLoan={showAssignLoan}
+          showAddExpense={showAddExpense}
         />
       ),
       sortable: true,
@@ -89,7 +94,7 @@ function Inventory() {
   const [updated, setUpdated] = useState(true);
   const [toggleInput, setToggleInput] = useState(true);
   // console.log(userData);
-  const { userID } = userData;
+  const { userID, kyc } = userData;
 
   useEffect(() => {
     if (userID) {
@@ -129,28 +134,65 @@ function Inventory() {
     return new Promise((resolve, reject) => {
       MySwal.fire({
         title: "Register Item",
-        width:1000,
+        width: 1000,
         html: (
           <AddInventory
             values={values}
+            kyc={kyc}
             // onSubmit={(values) => {
             //   console.log("Value From The Child:", values);
 
             onSubmit={(values, { resetForm }) => {
-              formData.append("item_name", values.item_name);
-              formData.append("item_type", values.item_type);
-              formData.append("item_price", values.item_price);
-              formData.append("item_code", values.item_code);
-              formData.append("picture", values.picture);
-              formData.append("location", values.location);
-              formData.append("description", values.description);
-              formData.append("supplier", values.supplier);
-              formData.append("purchaseDate", values.purchaseDate);
-              formData.append("reorderPointUnit", values.reorderPointUnit);
-              formData.append("unitPrice", values.unitPrice);
-              formData.append("onStock", values.onStock);
-              formData.append("totalBuyPrice", values.totalBuyPrice);
-              formData.append("totalQuantity", values.totalQuantity);
+              formData.append(
+                "item_name",
+                values.item_name ? values.item_name : ""
+              );
+              formData.append(
+                "item_type",
+                values.item_type ? values.item_type : ""
+              );
+              formData.append(
+                "item_price",
+                values.item_price ? values.item_price : ""
+              );
+              formData.append(
+                "item_code",
+                values.item_code ? values.item_code : ""
+              );
+              formData.append("picture", values.picture ? values.picture : "");
+              formData.append(
+                "location",
+                values.location ? values.location : ""
+              );
+              formData.append(
+                "description",
+                values.description ? values.description : ""
+              );
+              formData.append(
+                "supplier",
+                values.supplier ? values.supplier : ""
+              );
+              formData.append(
+                "purchaseDate",
+                values.purchaseDate ? values.purchaseDate : ""
+              );
+              formData.append(
+                "reorderPointUnit",
+                values.reorderPointUnit ? values.reorderPointUnit : ""
+              );
+              formData.append(
+                "unitPrice",
+                values.unitPrice ? values.unitPrice : ""
+              );
+              formData.append("onStock", values.onStock ? values.onStock : "");
+              formData.append(
+                "totalBuyPrice",
+                values.totalBuyPrice ? values.totalBuyPrice : ""
+              );
+              formData.append(
+                "totalQuantity",
+                values.totalQuantity ? values.totalQuantity : ""
+              );
               formData.append("merchant_id", userID);
               resetForm({ values: "" });
 
@@ -362,6 +404,69 @@ function Inventory() {
       });
     });
   };
+  const showAddExpenseForm = (values) => {
+    return new Promise((resolve, reject) => {
+      MySwal.fire({
+        title: "Add Expense",
+        html: (
+          <AddExpense
+            inventoryDetail={inventoryDetail}
+            values={values}
+            general={false}
+            product={false}
+            onSubmit={(values) => {
+              console.log(values);
+              dispatch(
+                ExpenseService.registerExpense(
+                  {
+                    expense_name: values.expense_name,
+                    expense_amount: values.expense_amount,
+                    expense_date: values.expense_date,
+                    expense_category: values.expense_category,
+                    paymentMethod: values.paymentMethod,
+                    expense_receipURL: ["coffee", "banana"],
+                    description: values.description,
+                    status: "unpaid",
+                    item_id: values.item_id,
+                  },
+                  setUpdated,
+                  updated
+                )
+                  .then((response) => {
+                    setUpdated(!updated);
+                    return (
+                      response &&
+                      Swal.fire({
+                        icon: "success",
+                        title: "Expense added successfully",
+                        showConfirmButton: false,
+                        timer: 3000,
+                      })
+                    );
+                  })
+                  .catch(
+                    (error) =>
+                      error &&
+                      Swal.fire({
+                        icon: "error",
+                        title: `Something went wrong`,
+                        showConfirmButton: false,
+                        timer: 3000,
+                      })
+                  )
+              );
+            }}
+            onCancel={() => MySwal.close()}
+          />
+        ),
+        onClose: () => reject(),
+        onCancel: () => Swal.close(),
+        showConfirmButton: false,
+        showCancelButton: false,
+        confirmButtonColor: "#01AFEF",
+      });
+    });
+  };
 
   const showModal = () => {
     showFormModal({
@@ -408,6 +513,22 @@ function Inventory() {
       item_id: data.item_id ? data?.item_id : "",
       loan_conf_id: "",
       merchant_id: userID,
+    })
+      .then((values) => console.log(values))
+      .catch(() => console.log("Modal closed"));
+  };
+
+  const showAddExpense = (data) => {
+    showAddExpenseForm({
+      item_id: data.item_id ? data?.item_id : "",
+      expense_name: "",
+      expense_amount: "",
+      expense_date: "",
+      expense_category: "",
+      paymentMethod: "",
+      expense_receipURL: [],
+      description: "",
+      status: "",
     })
       .then((values) => console.log(values))
       .catch(() => console.log("Modal closed"));
@@ -486,13 +607,23 @@ function Inventory() {
       >
         Assign Sales
       </button> */}
-      <button
-        type="button"
-        className="mb-4 ml-2 btn btn-outline btn-primary"
-        onClick={showAssignLoan}
-      >
-        Assign Loan
-      </button>
+      {kyc?.rbf === false ? (
+        <button
+          type="button"
+          className="mb-4 ml-2 btn btn-outline btn-primary"
+          onClick={showAssignLoan}
+        >
+          Assign Loan
+        </button>
+      ) : (
+        <button
+          type="button"
+          className="mb-4 ml-2 btn btn-outline btn-primary"
+          onClick={showAddExpense}
+        >
+          Add Expense
+        </button>
+      )}
       <DataTable
         columns={columns}
         data={sortedData}
@@ -500,7 +631,7 @@ function Inventory() {
         persistTableHeadstriped
         highlightOnHover
         dense
-        expandableRows
+        expandableRows={kyc?.rbf === false ? true : false}
         expandableRowDisabled={(row) =>
           row?.loanConfs?.length > 0 ? false : true
         }
