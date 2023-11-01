@@ -17,6 +17,7 @@ import getLoanConfigReducer from "./getLoanConfigReducer";
 import tokenReducer from "./token.reducer";
 import reportReducer from "./reportReducer";
 import expenseReducer from "./expenseReducer";
+import confReducer from "./confReducer";
 const persistConfig = {
   key: "root",
   storage,
@@ -41,5 +42,6 @@ const rootReducer = combineReducers({
   tokenInfo: tokenReducer,
   reportInfo: reportReducer,
   expenseInfo: expenseReducer,
+  confInfo: confReducer,
 });
 export default persistReducer(persistConfig, rootReducer);

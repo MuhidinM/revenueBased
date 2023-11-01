@@ -158,7 +158,7 @@ const AddExpense = ({
                   name="expense_category"
                   value={formik.values.expense_category}
                   handleChange={formik.handleChange}
-                  title="Select Item"
+                  title="Expense Category"
                 />
               </div>
               <div className="w-full">

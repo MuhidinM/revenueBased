@@ -17,6 +17,7 @@ import { useState } from "react";
 import { useMemo } from "react";
 import AddExpense from "./AddExpense";
 import ExpenseService from "../../services/expense.service";
+import { getAllCategoryData } from "../../store/actions/conf.action";
 const MySwal = withReactContent(Swal);
 
 function Inventory() {
@@ -41,11 +42,11 @@ function Inventory() {
       selector: (row) => row.item_name,
       sortable: true,
     },
-    {
-      name: "Type",
-      selector: (row) => row.item_type,
-      sortable: true,
-    },
+    // {
+    //   name: "Type",
+    //   selector: (row) => row.item_type,
+    //   sortable: true,
+    // },
     {
       name: "Code",
       selector: (row) => row.item_code,
@@ -121,14 +122,17 @@ function Inventory() {
   const { loanConfigDetail } = loanConfigData;
 
   useEffect(() => {
-    if (userID) {
-      dispatch(getSalesDetail(userID));
-    }
+    dispatch(getSalesDetail(userID));
+    dispatch(getAllCategoryData());
   }, [userID, toggeled, dispatch]);
 
   const salesData = useSelector((state) => state.salesInfo);
   // console.log(userData);
   const { salesDetail } = salesData;
+
+  const categoryData = useSelector((state) => state.confInfo);
+  // console.log(userData);
+  const { categories } = categoryData;
 
   const showFormModal = (values) => {
     return new Promise((resolve, reject) => {
@@ -139,10 +143,12 @@ function Inventory() {
           <AddInventory
             values={values}
             kyc={kyc}
+            categories={categories}
             // onSubmit={(values) => {
             //   console.log("Value From The Child:", values);
 
             onSubmit={(values, { resetForm }) => {
+              console.log("item values", values);
               formData.append(
                 "item_name",
                 values.item_name ? values.item_name : ""
@@ -193,7 +199,10 @@ function Inventory() {
                 "totalQuantity",
                 values.totalQuantity ? values.totalQuantity : ""
               );
-              formData.append("merchant_id", userID);
+              formData.append(
+                "item_category_id",
+                values.item_category_id ? values.item_category_id : ""
+              );
               resetForm({ values: "" });
 
               dispatch(
@@ -477,6 +486,7 @@ function Inventory() {
       item_name: "",
       loan_limit: "",
       merchant_id: userID,
+      item_category_id: "",
     })
       .then((values) => console.log(values))
       .catch(() => console.log("Modal closed"));

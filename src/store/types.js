@@ -72,3 +72,4 @@ export const SET_OTP = "SET_OTP";
 export const SET_DASHBOARD_CARD_REPORT = "SET_DASHBOARD_CARD_REPORT";
 export const SET_EXPENSES = "SET_EXPENSES";
 export const SET_PRODUCTS = "SET_PRODUCTS";
+export const SET_CATEGORY = "SET_CATEGORY";
