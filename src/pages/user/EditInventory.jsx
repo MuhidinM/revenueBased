@@ -20,7 +20,6 @@ function EditInventory({ onSubmit, values, onCancel, data }) {
     item_type: Yup.string().required("Type is required"),
     loan_limit: Yup.string().required("Loan Limit is required"),
   });
-  // console.log("value From the Parent:", values);
   return (
     <>
       <Formik
@@ -145,11 +144,6 @@ function EditInventory({ onSubmit, values, onCancel, data }) {
                   name="picture"
                   picture={data.item_pic}
                   fileInput={(e) => {
-                    // console.log(e.currentTarget.id);
-                    // settradeLicenseImage(e.target.files[0]);
-                    // settradeLicenseImageName(e.target.files[0].name);
-                    // console.log(e.target.files);
-
                     formik.setTouched({
                       picture: true,
                     });

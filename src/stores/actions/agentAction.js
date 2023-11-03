@@ -31,8 +31,6 @@ export const addAgent =
   ({ firstName, lastName, email, phoneNumber,manager_id,user_id ,station_id, role,interpretResponse }) =>
   async (dispatch) => {
     try {
-      // const user = AuthService.getCurrentUser();
-      console.log("running");
       const addedAgent = await AgentServices.addAgents(
         firstName,
         lastName,
@@ -45,8 +43,6 @@ export const addAgent =
       );
 
       if (addedAgent[1] == "200") {
-        // dispatch(satResponse("success"));
-        console.log("Credentials Are ", addedAgent[0].password, addedAgent[0].email)
         interpretResponse({
           password: addedAgent[0].password,
           email:addedAgent[0].email,
@@ -63,7 +59,6 @@ export const addAgent =
         // dispatch(satResponse("error"));
         interpretResponse({ response: "error" });
       }
-      console.log("User Role IS", role)
       dispatch(getAgent(manager_id, role));
       dispatch({
         type: ADD_AGENT,
@@ -80,8 +75,6 @@ export const addManager =
   ({ firstName, lastName, email, phoneNumber,manager_id,user_id, interpretResponse }) =>
   async (dispatch) => {
     try {
-      // const user = AuthService.getCurrentUser();
-      console.log("running");
       const addedManager = await AgentServices.addManager(
         firstName,
         lastName,
@@ -129,8 +122,6 @@ export const createNewEntries =
   ({ nedaj_type, amount_in_litre, prices,id }) =>
   async (dispatch) => {
     try {
-      // const user = AuthService.getCurrentUser();
-      console.log("running");
       const new_entries = await AgentServices.createNedajEntries(
         nedaj_type,
         amount_in_litre,
@@ -154,8 +145,6 @@ export const createNedajPrices =
   ({ nedaj_type, prices,id }) =>
   async (dispatch) => {
     try {
-      // const user = AuthService.getCurrentUser();
-      console.log("running");
       const new_prices = await AgentServices.createNedajPrices(
         nedaj_type,
         prices,
@@ -177,11 +166,9 @@ export const getNedajPrices =
   (id ) =>
   async (dispatch) => {
     try {  
-      console.log("Nedaj Prices By Id:",id)
       const new_prices = await AgentServices.getNedajPrices(
         id
       );
-      // dispatch(getAgent(id));
       dispatch({
         type: GET_NEDAJ_PRICES,
         payload: new_prices,
@@ -196,10 +183,7 @@ export const getNedajPrices =
 
 export const getAgent = (id, role) => async (dispatch) => {
   try {
-    // const user = AuthService.getCurrentUser();
-    console.log("running");
     const agents = await AgentServices.getAllAgents(id, role);
-    console.log(agents);
     dispatch({
       type: GET_AGENT,
       payload: agents,
@@ -214,8 +198,6 @@ export const getAgent = (id, role) => async (dispatch) => {
 
 export const getManager = (id) => async (dispatch) => {
   try {
-    // const user = AuthService.getCurrentUser();
-    console.log("running");
     const managers = await AgentServices.getAllManager(id);
     dispatch({
       type: GET_MANAGER,
@@ -275,9 +257,6 @@ export const getDailyTotalAmount =
   (station_name, location,manager_id, role, id ) =>
   async (dispatch) => {
     try {
-      // const user = AuthService.getCurrentUser();
-      // console.log("running");
-      console.log("agent Create Parametre", station_name,location, id)
       const nedaj_station = await AgentServices.createNedajStation(
         station_name,
         location,
@@ -301,12 +280,9 @@ export const getDailyTotalAmount =
   ( id,role ) =>
   async (dispatch) => {
     try {
-      // const user = AuthService.getCurrentUser();
-      // console.log("running");
       const nedaj_stations = await AgentServices.getNedajStation(
         id,role
       );
-      // dispatch(getNedajPrices(id));
       dispatch({
         type: GET_NEDAJ_STATION,
         payload: nedaj_stations[0],

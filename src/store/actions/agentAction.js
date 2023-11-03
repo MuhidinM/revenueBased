@@ -12,7 +12,6 @@ export const addAgent =
   async (dispatch) => {
     try {
       // const user = AuthService.getCurrentUser();
-      console.log("running");
       const addedAgent = await AgentServices.addAgents(
         firstName,
         lastName,
@@ -52,10 +51,7 @@ export const addAgent =
 
 export const getAgent = () => async (dispatch) => {
   try {
-    // const user = AuthService.getCurrentUser();
-    console.log("running");
     const agents = await AgentServices.getAllAgents();
-    console.log(agents);
     dispatch({
       type: GET_AGENT,
       payload: agents,

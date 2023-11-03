@@ -8,7 +8,6 @@ import { getDashboardCardDetail } from "../../store/actions/reportActions";
 function RBFHome() {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.userProfile);
-  // console.log(userData);
   const { kyc } = userData;
 
   useEffect(() => {
@@ -16,7 +15,6 @@ function RBFHome() {
   }, []);
 
   const reportData = useSelector((state) => state.reportInfo);
-  // console.log(userData);
   const { dashboardCardReport } = reportData;
 
   return (

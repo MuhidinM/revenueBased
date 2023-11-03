@@ -4,31 +4,25 @@ import { SET_LOAN_CONFIG, SET_LOAN_PDF, SET_LOAN_REQUEST } from "../types";
 import LoanConfigService from "../../services/loanConfig.service";
 export const getLoanConfigDetail = (userID) => async (dispatch) => {
   try {
-    // const user = AuthService.getCurrentUser();
-    console.log("running");
     const loanDetail = await LoanConfigService.getLoanConfig(userID);
-    console.log(loanDetail);
     dispatch({
       type: SET_LOAN_CONFIG,
       payload: loanDetail,
     });
   } catch (error) {
-    console.log(error);
+    return error;
   }
 };
 
 export const getLoanRequestDetail = (userID) => async (dispatch) => {
   try {
-    // const user = AuthService.getCurrentUser();
-    // console.log("running");
     const loanRequest = await LoanConfigService.getLoanRequest(userID);
-    console.log(loanRequest);
     dispatch({
       type: SET_LOAN_REQUEST,
       payload: loanRequest,
     });
   } catch (error) {
-    console.log(error);
+    return error;
   }
 };
 export const generateLoanDetailPdf =
@@ -44,8 +38,6 @@ export const generateLoanDetailPdf =
   ) =>
   async (dispatch) => {
     try {
-      // const user = AuthService.getCurrentUser();
-      // console.log("running");
       const loanPdf = await LoanConfigService.generateLoanPdf(
         sales_id,
         loan_req_id,
@@ -56,12 +48,11 @@ export const generateLoanDetailPdf =
         amount,
         setLoanPdf
       );
-      console.log(loanPdf);
       dispatch({
         type: SET_LOAN_PDF,
         payload: loanPdf,
       });
     } catch (error) {
-      console.log(error);
+      return error;
     }
   };

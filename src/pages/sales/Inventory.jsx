@@ -14,13 +14,11 @@ function Inventory() {
   }, [dispatch]);
 
   const inventoryInfo = useSelector((state) => state.inventoryInfo);
-  // console.log(userData);
   const { inventoryDetail } = inventoryInfo;
   const columns = [
     {
       name: "Image",
       cell: (row) => {
-        console.log(row.item_pic);
         return (
           <div className="p-2">
             <img

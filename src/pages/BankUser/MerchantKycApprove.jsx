@@ -6,8 +6,6 @@ import Swal from "sweetalert2";
 // import LoanService from "../../services/loan.service";
 
 function MerchantKycApprove({ merchant, dispatch, userID }) {
-  // console.log("marchu", merchant);
-  //   const dispatch = useDispatch();
   const [service, setService] = useState({
     service_id: "",
   });
@@ -25,7 +23,6 @@ function MerchantKycApprove({ merchant, dispatch, userID }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(name, value);
     setService({
       ...service,
       service_id: value,
@@ -288,7 +285,6 @@ function MerchantKycApprove({ merchant, dispatch, userID }) {
           type="submit"
           // onSubmit={onSubmit}
           onClick={() => {
-            console.log(service.service_id);
             return dispatch(
               UserService.approveMerchant(
                 merchant.merchant_id,

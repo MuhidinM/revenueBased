@@ -34,7 +34,7 @@ function Gateway() {
         setPaypalPaymentStatus(res[1].status);
       })
       .catch((error) => {
-        console.log(error);
+        return error;
       });
     if (paymentService == "CBOA") {
       setSelect("CBOA");

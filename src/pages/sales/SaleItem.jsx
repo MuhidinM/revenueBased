@@ -25,15 +25,12 @@ const SaleItem = () => {
   }, [dispatch]);
 
   const inventoryInfo = useSelector((state) => state.inventoryInfo);
-  // console.log(userData);
   const { inventoryDetail } = inventoryInfo;
 
   const item_option = inventoryDetail.map((item) => ({
     value: item?.item_id,
     label: item?.item_name,
   }));
-
-  //   console.log("first", params.id);
 
   const ValidationSchema = Yup.object().shape({
     item_id: Yup.string().required("Item Id is required"),

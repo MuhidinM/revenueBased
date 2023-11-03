@@ -64,7 +64,6 @@ function Product() {
   const userData = useSelector((state) => state.userProfile);
   const [toggeled, setToggeled] = useState(false);
   const [updated, setUpdated] = useState(true);
-  // console.log(userData);
   const { userID, kyc } = userData;
 
   useEffect(() => {
@@ -74,7 +73,6 @@ function Product() {
   }, [userID, toggeled, updated, dispatch]);
 
   const inventoryInfo = useSelector((state) => state.inventoryInfo);
-  // console.log(userData);
   const { productsDetail } = inventoryInfo;
 
   useEffect(() => {
@@ -102,9 +100,6 @@ function Product() {
           <AddProduct
             values={values}
             kyc={kyc}
-            // onSubmit={(values) => {
-            //   console.log("Value From The Child:", values);
-
             onSubmit={(values) => {
               dispatch(
                 InventoryService.CreateProduct(values, setUpdated, updated)
@@ -150,9 +145,6 @@ function Product() {
           <EditInventory
             values={values}
             data={data}
-            // onSubmit={(values) => {
-            //   console.log("Value From The Child:", values);
-
             onSubmit={(values, { resetForm }) => {
               formData.append("item_name", values.item_name);
               formData.append("item_type", values.item_type);
@@ -213,7 +205,6 @@ function Product() {
             general={false}
             product={true}
             onSubmit={(values) => {
-              console.log(values);
               dispatch(
                 ExpenseService.registerExpense(
                   {
@@ -275,7 +266,7 @@ function Product() {
       product_availablity: "",
       product_description: "",
     })
-      .then((values) => console.log(values))
+      .then((values) => values)
       .catch(() => console.log("Modal closed"));
   };
 
@@ -292,7 +283,7 @@ function Product() {
       },
       data
     )
-      .then((values) => console.log(values))
+      .then((values) => values)
       .catch(() => console.log("Modal closed"));
   };
 
@@ -309,7 +300,7 @@ function Product() {
       description: "",
       status: "",
     })
-      .then((values) => console.log(values))
+      .then((values) => values)
       .catch(() => console.log("Modal closed"));
   };
 

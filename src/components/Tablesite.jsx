@@ -16,21 +16,11 @@ const MySwal = withReactContent(Swal);
 
 function Tablesite(props) {
   const bussinesResponse = useSelector((state) => state.bussinessInfo);
-  // console.log(bussinesResponse);
   const { loading, error, response, pendingBussiness } = bussinesResponse;
   const dispatch = useDispatch();
   const tableData = props.request;
   const interpretResponse = (response) => {
-    // let actionResponse = JSON.stringify(response);
-    // console.log("Action Response Is" + actionResponse.response);
-    // console.log(
-    //   " Response Is" + response.response,
-    //   response.message + "",
-    //   response.responseCode
-    // );
     if (response.response === "success" && response.responseCode === "200") {
-      // console.log(response);
-      // console.log("Rsponse from useEffect is here" + response);
       Swal.fire({
         icon: "success",
         title: "Bussiness Approved",
@@ -38,7 +28,6 @@ function Tablesite(props) {
         timer: 3000,
       });
     } else if (response.responseCode === 403 && response.respone === "error") {
-      // console.log("Un Authorised User ");
       Swal.fire({
         icon: "error",
         title: response.message,
@@ -64,8 +53,6 @@ function Tablesite(props) {
             modal_data={values}
             // title="View Unactivated Account"
             onSubmit={(value) => {
-              // console.log(value);
-              // console.log("Your Button is got Clicked");
               dispatch(
                 approvePendingBussiness({ id: value, interpretResponse })
               );
@@ -84,18 +71,12 @@ function Tablesite(props) {
   };
 
   const showSecondModal = (index) => {
-    // console.log(index);
     showFormModal(index)
-      .then((values) => console.log(values))
+      .then((values) => values)
       .catch(() => console.log("Modal closed"));
   };
 
   const columns = [
-    // {
-    //   name: "Id",
-    //   selector: (row) => row.bussiness_id,
-    //   sortable: true,
-    // },
     {
       name: "Legal Name",
       selector: (row) => row.legalName,
@@ -141,9 +122,8 @@ function Tablesite(props) {
 
   if (tableData) {
     const showModal = (index) => {
-      // console.log(index);
       showFormModal(tableData[index])
-        .then((values) => console.log(values))
+        .then((values) => values)
         .catch(() => console.log("Modal closed"));
     };
 

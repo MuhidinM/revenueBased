@@ -16,11 +16,8 @@ const initialState = {
 };
 
 export default function (state = initialState, action) {
-  //   console.log(state);
-  console.log(action.payload);
   switch (action.type) {
     case GET_UN_ACTIVE_BUSSINESS:
-      //   console.log(action.payload);
       return {
         ...state,
         pendingBussiness: action.payload,
@@ -34,7 +31,6 @@ export default function (state = initialState, action) {
       };
 
     case ACTIVATE_BUSSINESS:
-      //   console.log(action.payload);
       return {
         ...state,
         approvedBussiness: action.payload,
@@ -42,7 +38,6 @@ export default function (state = initialState, action) {
       };
 
     case SUCCESS_RESPONSE_SETTER:
-      //   console.log(action.payload);
       return {
         ...state,
         response: action.payload,
@@ -50,7 +45,6 @@ export default function (state = initialState, action) {
       };
 
     case ERROR_RESPONSE_SETTER:
-      //   console.log(action.payload);
       return {
         ...state,
         response: action.payload,

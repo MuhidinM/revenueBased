@@ -69,11 +69,9 @@ const Expense = () => {
   }, [updated, dispatch]);
 
   const inventoryInfo = useSelector((state) => state.inventoryInfo);
-  // console.log(userData);
   const { inventoryDetail } = inventoryInfo;
 
   const expenseData = useSelector((state) => state.expenseInfo);
-  // console.log(userData);
   const { expenses } = expenseData;
 
   const showAddExpenseForm = (values) => {
@@ -86,7 +84,6 @@ const Expense = () => {
             values={values}
             general={true}
             onSubmit={(values) => {
-              console.log(values);
               dispatch(
                 ExpenseService.registerExpense(
                   {
@@ -151,7 +148,7 @@ const Expense = () => {
       status: "",
       item_id: "",
     })
-      .then((values) => console.log(values))
+      .then((values) => values)
       .catch(() => console.log("Modal closed"));
   };
 

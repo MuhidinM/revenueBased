@@ -30,9 +30,6 @@ const SellItem = async (values, setUpdated, updated) => {
 };
 
 const EditInventory = async (formData, setUpdated, updated) => {
-  // formData.forEach((element) => {
-  //   console.log(element);
-  // });
   return await NODE_API.put("/items/editItem", formData, headers).then(
     (response) => {
       setUpdated(!updated);

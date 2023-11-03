@@ -48,7 +48,6 @@ function AddInventory({ onSubmit, values, onCancel, kyc, categories }) {
     description: Yup.string().optional(),
     item_category_id: Yup.string().optional(),
   });
-  // console.log("value From the Parent:", values);
   return (
     <>
       <Formik

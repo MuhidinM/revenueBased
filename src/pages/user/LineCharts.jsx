@@ -50,9 +50,6 @@ export default function LineCahrts({
     return previousMonths;
   };
   const currentDate = new Date().toISOString().split("T")[0];
-
-  console.log(getPreviousMonths(currentDate));
-
   const data = [
     {
       name: getPreviousMonths(currentDate)[0],

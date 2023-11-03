@@ -120,7 +120,6 @@ function BankTable() {
     // setbackendResponse(response);
   }, []);
 
-
   const [filterText, setFilterText] = React.useState("");
   const actionsMemo = useMemo(
     () => <Export onExport={() => downloadCSV(data)} />,
@@ -184,7 +183,6 @@ function BankTable() {
           <BankModal
             values={values}
             onSubmit={(values) => {
-
               dispatch(
                 addBank({
                   bankName: values.bankName,
@@ -207,7 +205,7 @@ function BankTable() {
       bankName: "",
       bankCode: "",
     })
-      .then((values) => console.log(values))
+      .then((values) => values)
       .catch(() => console.log("Modal closed"));
   };
 

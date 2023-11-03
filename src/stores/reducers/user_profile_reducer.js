@@ -19,18 +19,14 @@ const initialState = {
 };
 
 export default function (state = initialState, action) {
-  //   console.log(state);
-  // console.log(action.payload);
   switch (action.type) {
     case CREATE_USER_PROFILE:
-      //   console.log(action.payload);
       return {
         ...state,
         userProfile: action.payload,
         loading: false,
       };
     case LOGGED_IN_USER_DETAIL:
-      //   console.log(action.payload);
       return {
         ...state,
         userDetail: action.payload,

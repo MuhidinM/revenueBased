@@ -10,6 +10,6 @@ export const getAllMerchantExpenses = () => async (dispatch) => {
       payload: expenseData,
     });
   } catch (error) {
-    console.log(error);
+    return error;
   }
 };

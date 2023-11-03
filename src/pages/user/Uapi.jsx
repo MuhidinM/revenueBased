@@ -18,23 +18,14 @@ function Uapi() {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    // setCurrentUser(user.user);
     dispatch(getGeneratedApiKey(merchant_id));
-    // const generatedApiKey = AuthService.getGeneratedApiKey(1);
-    // console.log(generatedApiKey);
     dispatch(getAccounts(merchant_id));
-
-    console.log("Bank Accounts:" + bankAccounts);
-
-    // setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
-    // setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
   }, []);
   
 
   // if (bankAccounts) {
   for (let index = 0; index < bankAccounts?.length; index++) {
     const element = bankAccounts[index];
-    console.log(element.primaryAccount);
     if (element.account_level === "Primary") {
       primaryAccount.push(element.account_number);
     }

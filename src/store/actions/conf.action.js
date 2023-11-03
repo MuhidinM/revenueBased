@@ -10,6 +10,6 @@ export const getAllCategoryData = () => async (dispatch) => {
       payload: categoryData,
     });
   } catch (error) {
-    console.log(error);
+    return error;
   }
 };

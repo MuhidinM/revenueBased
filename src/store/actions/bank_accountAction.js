@@ -16,7 +16,6 @@ export const getAccounts = (user_id) => async (dispatch) => {
     const bankAccountByID = await BankAccountServices.getBankAccountById(
       user_id
     );
-    console.log(bankAccountByID);
     dispatch({
       type: GET_ACCOUNTS,
       payload: bankAccountByID,
@@ -31,12 +30,10 @@ export const getAccounts = (user_id) => async (dispatch) => {
 
 export const nameEnquiryByAccountNumber =
   (criteriaValue) => async (dispatch) => {
-    console.log(criteriaValue);
     try {
       const nameResponse = await BankAccountServices.nameEnquiryByAccountNumber(
         criteriaValue
       );
-      console.log(nameResponse);
       dispatch({
         type: NAME_ENQ_BY_ACCNO,
         payload: nameResponse,
@@ -52,15 +49,12 @@ export const nameEnquiryByAccountNumber =
 export const setPrimaryAccount =
   ({ merchant_id, value, interpretResponse }) =>
   async (dispatch) => {
-    // console.log(account_id);
     try {
       const setPrimaryAccount = await BankAccountServices.setPrimaryAccount(
         merchant_id,
         value
       );
-      console.log(setPrimaryAccount);
       if (setPrimaryAccount[1] == "201") {
-        // dispatch(satResponse("success"));
         interpretResponse({
           message: "Updated",
           response: "success",
@@ -99,14 +93,6 @@ export const createTutorial =
     interpretResponse,
   }) =>
   async (dispatch) => {
-    console.log("in redux");
-    console.log(
-      "redux " + current,
-      accountNumber,
-      bankName,
-      merchant_id,
-      phone_number
-    );
     try {
       const res = await BankAccountServices.CreateBankAccount(
         current,
@@ -115,9 +101,7 @@ export const createTutorial =
         merchant_id,
         phone_number
       );
-      console.log(res);
       if (res[1] == "201") {
-        // dispatch(satResponse("success"));
         interpretResponse({
           message: res[0].message,
           response: "success",
@@ -136,7 +120,6 @@ export const createTutorial =
           responseCode: res[1],
         });
       } else {
-        // dispatch(satResponse("error"));
         interpretResponse({ response: "error" });
       }
       dispatch(getAccounts(merchant_id));
@@ -153,13 +136,9 @@ export const createTutorial =
 export const getAccountByPhone =
   ({ phoneNumber, interpretResponse }) =>
   async (dispatch) => {
-    console.log("in redux");
-    console.log("redux " + phoneNumber);
     try {
       const res = await BankAccountServices.getBankAccountByPhone(phoneNumber);
-      console.log(res);
       if (res[1] == "200") {
-        // dispatch(satResponse("success"));
         interpretResponse({
           message: res[0].message,
           response: "success",

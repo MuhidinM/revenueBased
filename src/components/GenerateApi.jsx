@@ -89,7 +89,7 @@ function GenerateApiModal(props) {
       accountNumber: props.accountNumber[0],
       expiryDate: "",
     })
-      .then((values) => console.log(values))
+      .then((values) => values)
       .catch(() => console.log("Modal closed"));
   };
   return (

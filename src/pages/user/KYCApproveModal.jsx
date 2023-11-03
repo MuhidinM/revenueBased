@@ -1,12 +1,7 @@
 import React from "react";
 import UserService from "../../services/user.service";
 import Swal from "sweetalert2";
-// import { useDispatch } from "react-redux";
-// import LoanService from "../../services/loan.service";
-
 function SalesKycApprove({ sales, dispatch, userID, setUpdated, updated }) {
-  //   console.log("loan", loan);
-  //   const dispatch = useDispatch();
   return (
     <div>
       <div className="grid grid-cols-1 gap-4">

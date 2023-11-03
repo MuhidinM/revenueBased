@@ -21,7 +21,6 @@ function Nav() {
   const handleToggleEdit = async () => {
     dispatch(KYCService.ToggleRbf());
   };
-  // console.log(userData);
   const { userID } = userData;
   const dispatch = useDispatch();
 
@@ -31,9 +30,7 @@ function Nav() {
     }
   }, [userID, dispatch]);
 
-  // console.log(userData);
   const { kyc } = userData;
-
   useEffect(() => {
     kyc &&
       setFirstChar(

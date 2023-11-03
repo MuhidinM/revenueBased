@@ -19,7 +19,6 @@ const AddExpense = ({
   general,
   product,
 }) => {
-  console.log("yared", values);
   const FILE_SIZE = 1600 * 1024;
   const SUPPORTED_FORMATS = [
     "image/jpg",

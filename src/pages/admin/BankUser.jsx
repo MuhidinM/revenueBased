@@ -178,11 +178,9 @@ function BankUser() {
   }, [dataUpdated, dispatch]);
 
   const roleData = useSelector((state) => state.rolesInfo);
-  // console.log(userData);
   const { roles } = roleData;
 
   const userData = useSelector((state) => state.userProfile);
-  // console.log(userData);
   const { users } = userData;
 
   const actionsMemo = useMemo(
@@ -222,8 +220,6 @@ function BankUser() {
             values={values}
             roles={roles}
             onSubmit={(values) => {
-              console.log("Value From The Child:", values);
-
               dispatch(
                 UserService.CreateBankUser(
                   values.fullName,
@@ -275,7 +271,7 @@ function BankUser() {
       password: row ? row.password : "",
       roleName: row ? row.roleName : "",
     })
-      .then((values) => console.log(values))
+      .then((values) => values)
       .catch(() => console.log("Modal closed"));
   };
 

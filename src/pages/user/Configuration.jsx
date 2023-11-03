@@ -14,7 +14,6 @@ function Configuration() {
   const [activeTab, setActiveTab] = useState("category");
   const [updated, setUpdated] = useState();
   const userData = useSelector((state) => state.userProfile);
-  // console.log(userData);
   const { userID, kyc } = userData;
   const dispatch = useDispatch();
 
@@ -24,11 +23,9 @@ function Configuration() {
   }, [userID, updated, dispatch]);
 
   const loanConfigData = useSelector((state) => state.loanConfigInfo);
-  // console.log(userData);
   const { loanConfigDetail } = loanConfigData;
 
   const categoryData = useSelector((state) => state.confInfo);
-  // console.log(userData);
   const { categories } = categoryData;
 
   const [isEdit, setIsEdit] = useState(false);
@@ -187,7 +184,7 @@ function Configuration() {
               )
           );
     } catch (error) {
-      console.log(error);
+      return error;
     }
   };
   const handleCategorySubmit = (e) => {
@@ -217,7 +214,7 @@ function Configuration() {
           )
       );
     } catch (error) {
-      console.log(error);
+      return error;
     }
   };
 

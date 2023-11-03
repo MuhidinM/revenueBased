@@ -169,10 +169,10 @@ function ModalFire() {
                     if (res[0] == 200) {
                       BankAccountServices.sendOtp(values.phoneNumber)
                         .then((resp) => {
-                          console.log(resp);
+                          return resp;
                         })
                         .catch((err) => {
-                          console.log("Otp Service is Down");
+                          return err;
                         });
 
                       MySwal.fire({
@@ -201,7 +201,7 @@ function ModalFire() {
                     }
                   })
                   .catch((err) => {
-                    console.log(err);
+                    return err;
                   });
               }}
             >
@@ -272,7 +272,7 @@ function ModalFire() {
       name: "",
       url: "",
     })
-      .then((values) => console.log(values))
+      .then((values) => values)
       .catch(() => console.log("Modal closed"));
   };
 

@@ -222,8 +222,6 @@ const Loans = () => {
         sortable: true,
       },
     ];
-    // Render the additional table component here
-    // console.log("DFD", data);
     return (
       <div className="bg-gray-50">
         <span className="py-1 ml-2 text-xl font-semibold text-cyan-500">

@@ -4,10 +4,7 @@ import { GET_TRANSACTION, GET_TRANSACTION_ERROR } from "../types";
 import FetchTransactionServices from "../../services/fetchTransaction";
 export const getTransactionDetail = () => async (dispatch) => {
   try {
-    // const user = AuthService.getCurrentUser();
-    console.log("running");
     const transactioDetail = await FetchTransactionServices.getTransaction();
-    console.log(transactioDetail);
     dispatch({
       type: GET_TRANSACTION,
       payload: transactioDetail,

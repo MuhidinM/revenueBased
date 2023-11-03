@@ -47,7 +47,6 @@ const columns = [
 function Sales() {
   const userData = useSelector((state) => state.userProfile);
   const [updated, setUpdated] = useState(true);
-  // console.log(userData);
   const { userID } = userData;
   const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState("registered");
@@ -120,9 +119,7 @@ function Sales() {
   }, [userID, updated, dispatch]);
 
   const salesData = useSelector((state) => state.salesInfo);
-  // console.log(userData);
   const { salesDetail, salesKyc } = salesData;
-  // console.log(salesDetail);
   useEffect(() => {
     const filterData =
       salesKyc &&
@@ -139,23 +136,6 @@ function Sales() {
     setFilteredData(filterData);
   }, [activeTab, salesKyc, salesDetail]);
 
-  // const showFormModal = (values) => {
-  //   return new Promise((resolve, reject) => {
-  //     MySwal.fire({
-  //       title: "Create Sales",
-  //       html: <AddSales values={values} onCancel={() => MySwal.close()} />,
-  //       onClose: () => reject(),
-  //       onCancel: () => Swal.close(),
-  //       showConfirmButton: false,
-  //     });
-  //   });
-  // };
-  // const showModal = () => {
-  //   showFormModal({})
-  //     .then((values) => console.log(values))
-  //     .catch(() => console.log("Modal closed"));
-  // };
-
   const showFormModalSales = (values) => {
     return new Promise((resolve, reject) => {
       MySwal.fire({
@@ -164,8 +144,6 @@ function Sales() {
           <AddSales
             values={values}
             onSubmit={(values) => {
-              console.log("Value From The Child:", values.username);
-
               dispatch(
                 UserService.CreateSales(
                   values.username,
@@ -216,7 +194,7 @@ function Sales() {
       lastName: "",
       merchant_id: userID,
     })
-      .then((values) => console.log(values))
+      .then((values) => values)
       .catch(() => console.log("Modal closed"));
   };
 
@@ -248,7 +226,7 @@ function Sales() {
 
   const showKYCApproveModal = (row) => {
     showKycApproveModal(row)
-      .then((values) => console.log(values))
+      .then((values) => values)
       .catch(() => console.log("Modal closed"));
   };
 

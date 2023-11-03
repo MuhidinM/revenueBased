@@ -6,7 +6,6 @@ const initialState = {
 };
 
 export default function (state = initialState, action) {
-  console.log("state", action.payload);
   switch (action.type) {
     case GET_TOKEN:
       return {

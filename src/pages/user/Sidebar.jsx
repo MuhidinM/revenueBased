@@ -9,7 +9,6 @@ function Sidebar() {
   const { kyc, token } = userData;
   const user_token = token && jwtDecode(token);
   const service_name = user_token?.service_name;
-  console.log("User Detail is: ", service_name);
 
   return (
     <>

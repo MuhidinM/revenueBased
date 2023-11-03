@@ -25,7 +25,6 @@ function Inventory() {
     {
       name: "Image",
       cell: (row) => {
-        console.log(row.item_pic);
         return (
           <div className="p-2">
             <img
@@ -94,7 +93,6 @@ function Inventory() {
   const [toggeled, setToggeled] = useState(false);
   const [updated, setUpdated] = useState(true);
   const [toggleInput, setToggleInput] = useState(true);
-  // console.log(userData);
   const { userID, kyc } = userData;
 
   useEffect(() => {
@@ -104,7 +102,6 @@ function Inventory() {
   }, [userID, toggeled, updated, dispatch]);
 
   const inventoryInfo = useSelector((state) => state.inventoryInfo);
-  // console.log(userData);
   const { inventoryDetail } = inventoryInfo;
 
   useEffect(() => {
@@ -118,7 +115,6 @@ function Inventory() {
   };
 
   const loanConfigData = useSelector((state) => state.loanConfigInfo);
-  // console.log(userData);
   const { loanConfigDetail } = loanConfigData;
 
   useEffect(() => {
@@ -127,11 +123,9 @@ function Inventory() {
   }, [userID, toggeled, dispatch]);
 
   const salesData = useSelector((state) => state.salesInfo);
-  // console.log(userData);
   const { salesDetail } = salesData;
 
   const categoryData = useSelector((state) => state.confInfo);
-  // console.log(userData);
   const { categories } = categoryData;
 
   const showFormModal = (values) => {
@@ -144,11 +138,7 @@ function Inventory() {
             values={values}
             kyc={kyc}
             categories={categories}
-            // onSubmit={(values) => {
-            //   console.log("Value From The Child:", values);
-
             onSubmit={(values, { resetForm }) => {
-              console.log("item values", values);
               formData.append(
                 "item_name",
                 values.item_name ? values.item_name : ""
@@ -249,9 +239,6 @@ function Inventory() {
           <EditInventory
             values={values}
             data={data}
-            // onSubmit={(values) => {
-            //   console.log("Value From The Child:", values);
-
             onSubmit={(values, { resetForm }) => {
               formData.append("item_name", values.item_name);
               formData.append("item_type", values.item_type);
@@ -305,7 +292,6 @@ function Inventory() {
   };
 
   const showSingleItemDetail = (values) => {
-    console.log(values);
     return new Promise((resolve, reject) => {
       MySwal.fire({
         title: "Item Details",
@@ -314,11 +300,7 @@ function Inventory() {
             values={values}
             inventoryDetail={inventoryDetail}
             salesDetail={salesDetail}
-            // onSubmit={(values) => {
-            //   console.log("Value From The Child:", values);
-
             onSubmit={(values) => {
-              console.log("running");
               dispatch(
                 InventoryService.AssignInventory(
                   values.item_id,
@@ -424,7 +406,6 @@ function Inventory() {
             general={false}
             product={false}
             onSubmit={(values) => {
-              console.log(values);
               dispatch(
                 ExpenseService.registerExpense(
                   {
@@ -488,7 +469,7 @@ function Inventory() {
       merchant_id: userID,
       item_category_id: "",
     })
-      .then((values) => console.log(values))
+      .then((values) => values)
       .catch(() => console.log("Modal closed"));
   };
 
@@ -505,7 +486,7 @@ function Inventory() {
       },
       data
     )
-      .then((values) => console.log(values))
+      .then((values) => values)
       .catch(() => console.log("Modal closed"));
   };
 
@@ -515,7 +496,7 @@ function Inventory() {
       sales_id: "",
       merchant_id: userID,
     })
-      .then((values) => console.log(values))
+      .then((values) => values)
       .catch(() => console.log("Modal closed"));
   };
   const showAssignLoan = (data) => {
@@ -524,7 +505,7 @@ function Inventory() {
       loan_conf_id: "",
       merchant_id: userID,
     })
-      .then((values) => console.log(values))
+      .then((values) => values)
       .catch(() => console.log("Modal closed"));
   };
 
@@ -540,7 +521,7 @@ function Inventory() {
       description: "",
       status: "",
     })
-      .then((values) => console.log(values))
+      .then((values) => values)
       .catch(() => console.log("Modal closed"));
   };
 
@@ -582,19 +563,15 @@ function Inventory() {
       },
     ];
     // Render the additional table component here
-    console.log("DFD", data);
     return (
       <div className="bg-gray-50">
         <div className="m-2 mx-12 border-x-2 border-cyan-500">
           <DataTable
             columns={loanColumns}
             data={data?.loanConfs}
-            // pagination
             dense
             persistTableHeadstriped
             highlightOnHover
-            // expandableRows
-            // expandableRowsComponent={ExpandableTableComponent}
           />
         </div>
       </div>

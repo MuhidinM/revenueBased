@@ -10,7 +10,6 @@ const createCategory = async (data, setUpdated, updated) => {
 };
 
 const getAllCategory = async () => {
-  // console.log(adminTransactionFetchUrl);
   return await NODE_API.get("/items/getAllCategories").then(
     (response) => response?.data?.category
   );

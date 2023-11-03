@@ -15,7 +15,6 @@ import UserService from "../../services/user.service";
 export const CreateOrUpdate = (formData) => async (dispatch) => {
   try {
     const createdOrUpdated = await UserService.CreateUserProfile(formData);
-    console.log(createdOrUpdated);
     dispatch({
       type: CREATE_USER_PROFILE,
       payload: createdOrUpdated,
@@ -28,22 +27,6 @@ export const CreateOrUpdate = (formData) => async (dispatch) => {
   }
 };
 
-// export const retrieveLoggedInUser = () => async (dispatch, token) => {
-//   try {
-//     const userDetail = await AuthService.getLoggedInUser(token);
-//     // console.log("Responded User Detail", userDetail);
-//     dispatch({
-//       type: LOGGED_IN_USER_DETAIL,
-//       payload: userDetail,
-//     });
-//   } catch (error) {
-//     dispatch({
-//       type: LOGGED_IN_USER_DETAIL_ERROR,
-//       payload: error,
-//     });
-//   }
-// };
-
 export const getEkyInfo = (user) => async (dispatch) => {
   try {
     dispatch({
@@ -51,7 +34,6 @@ export const getEkyInfo = (user) => async (dispatch) => {
       payload: true,
     });
     const ekyDetail = await UserService.getEkyDetail(user);
-    // console.log("Responded User Detail", ekyDetail);
     dispatch({
       type: GET_EKY_DETAIL,
       payload: ekyDetail,

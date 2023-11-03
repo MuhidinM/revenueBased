@@ -50,7 +50,6 @@ const columns = [
 function BNPLHome() {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.userProfile);
-  // console.log(userData);
   const { userID, kyc } = userData;
 
   useEffect(() => {
@@ -60,7 +59,6 @@ function BNPLHome() {
   }, [userID, dispatch]);
 
   const inventoryInfo = useSelector((state) => state.inventoryInfo);
-  // console.log(userData);
   const { inventoryDetail } = inventoryInfo;
 
   const filteredInventory = inventoryDetail.filter(

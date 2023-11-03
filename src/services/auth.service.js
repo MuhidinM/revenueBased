@@ -15,7 +15,6 @@ const register = async (username, password) => {
     username,
     password,
   });
-  // console.log(response.data.message);
   if (response.data.token) {
     localStorage.setItem("user", JSON.stringify(response.data));
   }
@@ -39,11 +38,9 @@ const login = async (
       }
       // { withCredentials: true }
     ).then((res) => {
-      console.log("res", res);
       if (res.data.token) {
         dispatch(setToken(res?.data?.token));
         const decoded = jwtDecode(res.data.token);
-        console.log("this if from decoded", decoded);
         const user = jwt(res.data.token);
         if (decoded?.role === "sales") {
           dispatch(setUsername(decoded?.email_address));
@@ -67,19 +64,17 @@ const login = async (
     });
   } catch (error) {
     try {
-      console.log(error?.response?.data?.message);
       setMessage(error?.response?.data?.message);
+      setLoading(false);
       error?.response?.data?.message === "In active Account"
         ? setMessage(error?.response?.data?.message)
         : await LOGIN_NODE_API.post("/sales/login", {
             username,
             password,
           }).then((res) => {
-            console.log("res", res);
             if (res.data.token) {
               dispatch(setToken(res?.data?.token));
               const decoded = jwtDecode(res.data.token);
-              console.log("this if from decoded", decoded);
               const user = jwt(res.data.token);
               if (decoded?.role === "sales") {
                 // dispatch(setUsername(decoded?.email_address));
@@ -102,10 +97,8 @@ const login = async (
             }
           });
     } catch (error) {
-      console.log(error);
-      console.log(error?.response?.data?.message);
       setLoading(false);
-      setMessage(error?.response?.data?.message);
+      setMessage(error?.message);
     }
   }
 };
@@ -117,7 +110,6 @@ const getLoggedInUser = async (token) => {
     { headers: { "Content-Type": "application/json" }, "Bearer Token": token }
     // { withCredentials: true }
   );
-  console.log(response);
   return response.data.user;
 };
 
@@ -125,21 +117,7 @@ const logout = () => {
   localStorage.removeItem("user");
 };
 
-// const logout = () => {
-//   return axios
-//     .post(
-//       API_URL + "signout"
-
-//       // { withCredentials: true }
-//     )
-//     .then((response) => {
-//       console.log(response);
-//       return response.data;
-//     });
-// };
-
 const resetPasswordRequest = async (email) => {
-  console.log(email);
   const response = await axios.post(
     process.env.REACT_APP_API_NODE_URLS + "api/auth/resetpasswordRequest",
     {
@@ -150,34 +128,27 @@ const resetPasswordRequest = async (email) => {
 };
 
 const generateApiKey = async (merchant_id, expiryDate) => {
-  console.log(merchant_id, expiryDate);
   try {
     const response = await NODE_API.post("/apiKey/generate", {
       merchant_id,
       expiryDate,
     });
-    console.log("Reponse", response.data);
     return [response.data, response.status];
   } catch (err) {
     if (err.response) {
-      console.log(err.response.data);
+      return err.response;
     } else if (err.request) {
-      console.log(err.request);
-    } else {
-      console.log("Error", err.message);
+      return err.request;
     }
-    console.log(err.config);
   }
 };
 
 const getGeneratedApiKey = async (merchant_id) => {
-  console.log(merchant_id);
   const response = await NODE_API.get(`apiKey/get?id=${merchant_id}`);
   return response.data;
 };
 
 const resetPassword = async (password, token, id) => {
-  console.log(password, token, id);
   const response = await axios.post(
     process.env.REACT_APP_API_NODE_URLS + `api/auth/resetpassword`,
     {

@@ -16,28 +16,6 @@ function PayPal(props) {
   const clientId = searchParams.get("clientId");
   const secratekey = searchParams.get("secretKey");
   const key = searchParams.get("key");
-  // useEffect(() => {
-  //   PaymentServices.checkCredentials(clientId, secratekey, key)
-  //     .then((response) => {
-  //       if (response[0] == 200) {
-  //         setVerified(true);
-  //       }
-  //     })
-  //     .catch((err) => {
-  //     });
-  //   if (success) {
-  //     const paymentData = {
-  //       paymentStatus: 'success',
-  //       transactionDetails: {
-  //         // Replace with any relevant transaction details
-  //       },
-  //     };
-  //     // PaymentServices.sendPaymentResponse("http://localhost:6000", paymentData).then((response=>{console.log(response.status)})).catch((err)=>{})
-  //     window.opener.postMessage(JSON.stringify(responseData), "*");
-  //     window.opener.focus();
-
-  //   }
-  // }, [success]);
 
   const createOrder = (data, actions) => {
     return actions.order
@@ -103,7 +81,6 @@ function PayPal(props) {
         linksHref: linksHref,
       };
       setresponseData(response_to_Client);
-      console.log("Response to Jiggi", response_to_Client);
 
       PaymentServices.logPayPalResponse(
         paymentId,

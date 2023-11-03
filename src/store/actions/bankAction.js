@@ -14,10 +14,7 @@ export const addBank =
   async (dispatch) => {
     try {
       const addedBank = await BankServices.addBank(bankName, bankCode);
-      console.log(addedBank[0]);
-      // eslint-disable-next-line eqeqeq
       if (addedBank[1] === "200") {
-        // dispatch(satResponse("success"));
         interpretResponse({
           message: addedBank[0].message,
           response: "error",
@@ -49,8 +46,6 @@ export const addBank =
 export const gateBanks = () => async (dispatch) => {
   try {
     const getBank = await BankServices.getBank();
-    console.log("Getting Banks", getBank);
-    // dispatch(getGeneratedApiKey());
     dispatch({
       type: GET_BANK,
       payload: getBank,

@@ -55,7 +55,7 @@ function Maccounts(props) {
                     setMessage(res.message);
                     setSuccessful(true);
                   })
-                  .catch((e) => console.log(e));
+                  .catch((e) => e);
               }}
             >
               {(props) => (

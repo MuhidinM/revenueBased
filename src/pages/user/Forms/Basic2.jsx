@@ -55,7 +55,6 @@ function Basic2() {
         // formData.append("tradeLicenseImage", tradeLicenseImage);
 
         const data = { ...formData, ...values };
-        console.log(data);
         setFormData(data);
         setActiveStepIndex(activeStepIndex + 1);
       }}
@@ -98,8 +97,6 @@ function Basic2() {
                   name="file"
                   // handleChange={props.handleChange}
                   fileInputTOForm={(e) => {
-                    console.log(e.currentTarget.id);
-                    console.log(e.target.files);
                     props.setTouched({
                       file: true,
                     });

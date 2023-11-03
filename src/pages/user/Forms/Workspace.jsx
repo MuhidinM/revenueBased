@@ -96,7 +96,6 @@ function Workspace() {
       validationSchema={validationSchema}
       onSubmit={(values) => {
         const data = { ...formData, ...values };
-        console.log(data);
         setFormData(data);
         setActiveStepIndex(activeStepIndex + 1);
       }}
@@ -238,11 +237,6 @@ function Workspace() {
                   title="Proof of Address"
                   name="addressProof"
                   fileInput={(e) => {
-                    // console.log(e.currentTarget.id);
-                    // settradeLicenseImage(e.target.files[0]);
-                    // settradeLicenseImageName(e.target.files[0].name);
-                    console.log(e.target.files);
-
                     props.setTouched({
                       addressProof: true,
                     });

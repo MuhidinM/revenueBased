@@ -16,18 +16,14 @@ const initialState = {
 };
 
 export default function (state = initialState, action) {
-  //   console.log(state);
-  console.log(action.payload);
   switch (action.type) {
     case ADD_DOMAIN:
-      //   console.log(action.payload);
       return {
         ...state,
         domain: action.payload,
         loading: false,
       };
     case GET_DOMAIN:
-      //   console.log(action.payload);
       return {
         ...state,
         domains: action.payload,
@@ -35,7 +31,6 @@ export default function (state = initialState, action) {
       };
 
     case SUCCESS_RESPONSE_SETTER:
-      //   console.log(action.payload);
       return {
         ...state,
         response: action.payload,
@@ -43,7 +38,6 @@ export default function (state = initialState, action) {
       };
 
     case ERROR_RESPONSE_SETTER:
-      //   console.log(action.payload);
       return {
         ...state,
         response: action.payload,

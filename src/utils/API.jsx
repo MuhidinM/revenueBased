@@ -3,11 +3,11 @@ import store from "./../store/store";
 
 // Create a new instance of axios with the token in the header
 // export const LOGIN_NODE_API = axios.create({
-//   baseURL: "http://10.1.177.130:5000/api",
+//   baseURL: "http://10.1.177.130:8040/api",
 // });
 
 // export const NODE_API = axios.create({
-//   baseURL: "http://10.1.177.130:5000/api",
+//   baseURL: "http://10.1.177.130:8040/api",
 // });
 
 export const LOGIN_NODE_API = axios.create({
@@ -26,8 +26,5 @@ NODE_API.interceptors.request.use((config) => {
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
-
-  // console.log("log", token);
-
   return config;
 });

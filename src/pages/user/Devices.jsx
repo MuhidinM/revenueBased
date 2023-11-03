@@ -109,7 +109,6 @@ const Export = ({ onExport }) => (
 
 function Devices() {
   const addedDevices = useSelector((state) => state.deviceDetail);
-  console.log("Devices list" + addedDevices);
   const { loading, error, deviceDetail } = addedDevices;
   const dispatch = useDispatch();
   const tokenInfo = useSelector((state) => state.userProfile);
@@ -187,7 +186,7 @@ function Devices() {
   };
   const showModal = () => {
     showFormModal({})
-      .then((values) => console.log(values))
+      .then((values) => values)
       .catch(() => console.log("Modal closed"));
   };
 

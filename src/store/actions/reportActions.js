@@ -11,6 +11,6 @@ export const getDashboardCardDetail = () => async (dispatch) => {
       payload: dashboardCardDetails,
     });
   } catch (error) {
-    console.log(error);
+    return error;
   }
 };

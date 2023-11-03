@@ -76,7 +76,6 @@ function Basic() {
       validationSchema={validationSchema}
       onSubmit={(values) => {
         const data = { ...formData, ...values };
-        console.log(data);
         setFormData(data);
         setActiveStepIndex(activeStepIndex + 1);
       }}

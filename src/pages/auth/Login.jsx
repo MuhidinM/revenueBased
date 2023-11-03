@@ -63,16 +63,9 @@ function Login() {
                       initialValues={{
                         username: "",
                         password: "",
-                        // confirmPassword: "",
-                        // acceptTerms: false,
                       }}
                       validationSchema={validationSchema}
                       onSubmit={(values) => {
-                        // setTimeout(() => {
-                        //   alert(JSON.stringify(values, null, 2));
-                        //   setSubmitting(false);
-                        // }, 400);
-                        // console.log(values.email);
                         setLoading(true);
                         AuthService.login(
                           values.username,
