@@ -58,9 +58,11 @@ const StyledMenu = styled((props) => (
 
 export default function CustomizedMenus({
   data,
+  kyc,
   showDetailModal,
   showAssignLoan,
   showEditModal,
+  showAddExpense,
 }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -94,7 +96,7 @@ export default function CustomizedMenus({
         open={open}
         onClose={handleClose}
       >
-        <MenuItem
+        {/* <MenuItem
           onClick={() => {
             showEditModal(data);
             handleClose();
@@ -103,7 +105,7 @@ export default function CustomizedMenus({
         >
           <EditIcon />
           Edit
-        </MenuItem>
+        </MenuItem> */}
         {/* <MenuItem
           onClick={() => {
             showDetailModal(data);
@@ -115,16 +117,29 @@ export default function CustomizedMenus({
           Details
         </MenuItem> */}
         {/* <Divider sx={{ my: 0.5 }} /> */}
-        <MenuItem
-          onClick={() => {
-            showAssignLoan(data);
-            handleClose();
-          }}
-          disableRipple
-        >
-          <CreditScoreIcon />
-          Assign Loan
-        </MenuItem>
+        {kyc?.rbf === false ? (
+          <MenuItem
+            onClick={() => {
+              showAssignLoan(data);
+              handleClose();
+            }}
+            disableRipple
+          >
+            <CreditScoreIcon />
+            Assign Loan
+          </MenuItem>
+        ) : (
+          <MenuItem
+            onClick={() => {
+              showAddExpense(data);
+              handleClose();
+            }}
+            disableRipple
+          >
+            <CreditScoreIcon />
+            Add Expense
+          </MenuItem>
+        )}
         {/* <MenuItem onClick={handleClose} disableRipple>
           <MoreHorizIcon />
           More

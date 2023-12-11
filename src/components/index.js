@@ -22,7 +22,6 @@ function ModalFire() {
   // const [phoneNumber, setPhoneNumber] = useState();
   const [accountNumber, setAccountNumber] = useState();
   const loggedInuser = useSelector((state) => state.userProfile);
-  console.log("Logged In User", loggedInuser);
   const customerName2 = useRef("");
   const [dependency, setdependency] = useState(false);
   const AccountListData = useSelector((state) => state.accountsList);
@@ -44,21 +43,11 @@ function ModalFire() {
   const user_token = jwtDecode(token);
   const merchant_id = user_token?.merchant_id;
 
-  console.log("Criteria Value from index" + criteriaValue);
-  console.log("Customer Name " + customerName);
   customerName2.current = criteriaValue;
 
   const interpretResponse = (response) => {
     let actionResponse = JSON.stringify(response);
-    console.log("Action Response Is" + actionResponse.response);
-    console.log(
-      " Response Is" + response.response,
-      response.message + "",
-      response.responseCode
-    );
     if (response.response === "success" || response.responseCode == 200) {
-      console.log(response);
-      console.log("Rsponse from useEffect is here" + response);
       Swal.fire({
         icon: "success",
         title: "Account Created",
@@ -66,7 +55,6 @@ function ModalFire() {
         timer: 3000,
       });
     } else if (response.responseCode === 403 && response.respone === "error") {
-      console.log("Un Authorised User ");
       Swal.fire({
         icon: "error",
         title: response.message,
@@ -90,20 +78,12 @@ function ModalFire() {
     }
   };
   useEffect(() => {
-    console.log("try_this", otp1);
     otp1.length === 6 && setOpt1(otp1);
   }, [otp1, trys]);
   const readState = () => {
     return otp1;
   };
   const handleOtpSubmit = (values, res, reject, readState) => {
-    console.log(
-      otp2.current,
-      dependency,
-      values.phoneNumber,
-      values,
-      readState
-    );
     BankAccountServices.confirmOtp(values.phoneNumber, otp2.current)
       .then((re) => {
         let accNo = "";
@@ -121,7 +101,6 @@ function ModalFire() {
                 custName = item.accountTitle;
                 // setAccountNumber(e.target.value)
                 // setcustomerName(item.accountTitle)
-                // console.log(e.target.value)
               }}
             />
             <label
@@ -143,8 +122,6 @@ function ModalFire() {
                 <button
                   type="button"
                   onClick={() => {
-                    console.log("Heloo");
-                    console.log("Acoount Number", accNo, custName);
                     dispatch(
                       createTutorial({
                         current: custName,
@@ -187,17 +164,15 @@ function ModalFire() {
               validationSchema={ValidationSchema}
               isInitialValid={ValidationSchema.isValidSync(values)}
               onSubmit={(values) => {
-                console.log("Values Are:", otp1);
                 BankAccountServices.accountByPhone(values.phoneNumber)
                   .then((res) => {
-                    console.log(res[0]);
                     if (res[0] == 200) {
                       BankAccountServices.sendOtp(values.phoneNumber)
                         .then((resp) => {
-                          console.log(resp);
+                          return resp;
                         })
                         .catch((err) => {
-                          console.log("Otp Service is Down");
+                          return err;
                         });
 
                       MySwal.fire({
@@ -209,7 +184,6 @@ function ModalFire() {
                             otp2={otp2}
                             onSubmit={(e) => {
                               e.preventDefault();
-                              console.log("otp1: ", otp2.current);
                               handleOtpSubmit(values, res, reject, readState);
                             }}
                           ></OTP>
@@ -227,7 +201,7 @@ function ModalFire() {
                     }
                   })
                   .catch((err) => {
-                    console.log(err);
+                    return err;
                   });
               }}
             >
@@ -298,7 +272,7 @@ function ModalFire() {
       name: "",
       url: "",
     })
-      .then((values) => console.log(values))
+      .then((values) => values)
       .catch(() => console.log("Modal closed"));
   };
 

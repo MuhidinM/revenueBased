@@ -4,9 +4,9 @@ import * as Yup from "yup";
 // import Input from "../../components/Input";
 // import Fileinput from "../../components/Fileinput";
 import Addressproof from "../../components/Addressproof";
+import Selectinput from "../../components/Selectinput";
 
-function AddInventory({ onSubmit, values, onCancel }) {
-  const [bnpl, setBnpl] = useState(false);
+function AddInventory({ onSubmit, values, onCancel, kyc, categories }) {
   const FILE_SIZE = 1600 * 1024;
   const SUPPORTED_FORMATS = [
     "image/jpg",
@@ -14,6 +14,12 @@ function AddInventory({ onSubmit, values, onCancel }) {
     "image/gif",
     "image/png",
   ];
+
+  const item_option = categories.map((item) => ({
+    value: item?.item_category_id,
+    label: item?.type,
+  }));
+
   const ValidationSchema = Yup.object().shape({
     picture: Yup.mixed()
       .required("A file is required")
@@ -27,22 +33,21 @@ function AddInventory({ onSubmit, values, onCancel }) {
         "Unsupported Format",
         (value) => value && SUPPORTED_FORMATS.includes(value.type)
       ),
-    item_code: Yup.string().required("Item Code is required"),
+    item_code: Yup.string().optional(),
     item_price: Yup.string().required("Price is required"),
     item_name: Yup.string().required("Name is required"),
-    item_type: Yup.string().required("Type is required"),
-    loan_limit: Yup.string().required("Loan Limit is required"),
+    // item_type: Yup.string().required("Type is required"),
+    loan_limit: Yup.string().optional(),
     totalQuantity: Yup.string().required("Total Quantity is required"),
     totalBuyPrice: Yup.string().required("Total Buy Price is required"),
-    onStock: Yup.string().required("On Stock is required"),
-    unitPrice: Yup.string().required("Unit Price is required"),
+    unitPrice: Yup.string().optional(),
     reorderPointUnit: Yup.string().required("Reorder Point Unit is required"),
     purchaseDate: Yup.string().required("Purchase Date is required"),
-    supplier: Yup.string().required("Supplier is required"),
-    location: Yup.string().required("Location is required"),
-    description: Yup.string().required("Description is required"),
+    supplier: Yup.string().optional(),
+    location: Yup.string().optional(),
+    description: Yup.string().optional(),
+    item_category_id: Yup.string().optional(),
   });
-  // console.log("value From the Parent:", values);
   return (
     <>
       <Formik
@@ -94,24 +99,34 @@ function AddInventory({ onSubmit, values, onCancel }) {
                   onChange={formik.handleChange}
                 />
               </div>
-              <div className="w-full">
+              {/* <div className="w-full">
                 <label
-                  htmlFor="item_type"
+                  htmlFor="item_category_id"
                   className="mb-2 text-sm font-medium text-gray-900"
                 >
-                  Item Type
+                  Item Category
                 </label>
                 <span className="text-sm link-error">
-                  <ErrorMessage name="item_type"></ErrorMessage>
+                  <ErrorMessage name="item_category_id"></ErrorMessage>
                 </span>
                 <input
                   type="text"
-                  name="item_type"
-                  id="item_type"
+                  name="item_category_id"
+                  id="item_category_id"
                   placeholder="Type"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  value={formik.values.item_type}
+                  value={formik.values.item_category_id}
                   onChange={formik.handleChange}
+                />
+              </div> */}
+              <div className="w-full">
+                <Selectinput
+                  arr={item_option}
+                  id="item_category_id"
+                  name="item_category_id"
+                  value={formik.values.item_category_id}
+                  handleChange={formik.handleChange}
+                  title="Select Category"
                 />
               </div>
               <div className="w-full">
@@ -134,7 +149,7 @@ function AddInventory({ onSubmit, values, onCancel }) {
                   onChange={formik.handleChange}
                 />
               </div>
-              {bnpl ? (
+              {kyc.rbf == false ? (
                 <div className="w-full">
                   <label
                     htmlFor="loan_limit"
@@ -205,7 +220,7 @@ function AddInventory({ onSubmit, values, onCancel }) {
                   onChange={formik.handleChange}
                 />
               </div>
-              <div className="w-full">
+              {/* <div className="w-full">
                 <label
                   htmlFor="onStock"
                   className="mb-2 text-sm font-medium text-gray-900"
@@ -226,8 +241,8 @@ function AddInventory({ onSubmit, values, onCancel }) {
                   value={formik.values.onStock}
                   onChange={formik.handleChange}
                 />
-              </div>
-              <div className="w-full">
+              </div> */}
+              {/* <div className="w-full">
                 <label
                   htmlFor="unitPrice"
                   className="mb-2 text-sm font-medium text-gray-900"
@@ -248,7 +263,7 @@ function AddInventory({ onSubmit, values, onCancel }) {
                   value={formik.values.unitPrice}
                   onChange={formik.handleChange}
                 />
-              </div>
+              </div> */}
               <div className="w-full">
                 <label
                   htmlFor="reorderPointUnit"
@@ -310,7 +325,7 @@ function AddInventory({ onSubmit, values, onCancel }) {
                   onChange={formik.handleChange}
                 />
               </div>
-              <div className={bnpl ? "col-span-3" : "w-full"}>
+              <div className={kyc.rbf === false ? "col-span-3" : "w-full"}>
                 <label
                   htmlFor="location"
                   className="mb-2 text-sm font-medium text-gray-900"

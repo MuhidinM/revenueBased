@@ -13,10 +13,23 @@ const CreateInventory = async (formData, setUpdated, updated) => {
   );
 };
 
+const CreateProduct = async (values, setUpdated, updated) => {
+  return await NODE_API.post("/rb/product/register", values).then(
+    (response) => {
+      setUpdated(!updated);
+      return response;
+    }
+  );
+};
+
+const SellItem = async (values, setUpdated, updated) => {
+  return await NODE_API.post("/items/saleItem", values).then((response) => {
+    setUpdated(!updated);
+    return response;
+  });
+};
+
 const EditInventory = async (formData, setUpdated, updated) => {
-  // formData.forEach((element) => {
-  //   console.log(element);
-  // });
   return await NODE_API.put("/items/editItem", formData, headers).then(
     (response) => {
       setUpdated(!updated);
@@ -48,6 +61,11 @@ const getAllInventory = async (sales_id) => {
     (response) => response.data
   );
 };
+const getAllProducts = async () => {
+  return await NODE_API.get(`/rb/product/getProduct`).then(
+    (response) => response.data
+  );
+};
 
 const InventoryService = {
   CreateInventory,
@@ -55,6 +73,9 @@ const InventoryService = {
   AssignInventory,
   EditInventory,
   ToggleStatus,
+  getAllProducts,
+  CreateProduct,
+  SellItem,
 };
 
 export default InventoryService;

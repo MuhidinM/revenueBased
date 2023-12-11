@@ -12,11 +12,8 @@ const initialState = {
 };
 
 export default function (state = initialState, action) {
-  //   console.log(state);
-  console.log(action.payload);
   switch (action.type) {
     case GENERATE_API_KEY:
-      console.log(action.payload);
       return {
         ...state,
         apiKey: action.payload,
@@ -24,7 +21,6 @@ export default function (state = initialState, action) {
       };
 
     case GET_GENERATED_API_KEY:
-      console.log(action.payload);
       return {
         ...state,
         generatedApiKey: action.payload,

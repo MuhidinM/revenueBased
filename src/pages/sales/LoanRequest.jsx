@@ -148,7 +148,6 @@ const columns = [
 function LoanRequest() {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.userProfile);
-  // console.log(userData);
   const { userID } = userData;
 
   useEffect(() => {
@@ -158,7 +157,6 @@ function LoanRequest() {
   }, [userID, dispatch]);
 
   const loanData = useSelector((state) => state.loanConfigInfo);
-  // console.log(userData);
   const { loanRequest } = loanData;
 
   const filteredLoan = loanRequest?.filter(

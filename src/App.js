@@ -19,7 +19,6 @@ function App() {
   const user = AuthService.getCurrentUser();
   const [refresh, setRefresh] = useState(false);
   const onIdle = () => {
-    // console.log("timeout");
     localStorage.clear();
     setRefresh(true);
   };
@@ -31,9 +30,7 @@ function App() {
   const idleTimer = useIdleTimer({
     onIdle,
     timeout: 1000 * 60 * 30,
-    // timeout: 1000 * 5, test
   });
-  console.log(idleTimer);
 
   return (
     <>

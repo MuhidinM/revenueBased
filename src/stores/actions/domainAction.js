@@ -15,12 +15,8 @@ export const addDomain =
   async (dispatch) => {
     try {
       const addedUrls = await DomainServices.addUrls(user_id, name, url);
-      console.log(addedUrls);
       if (addedUrls[1] == 201) {
-        // dispatch(satResponse("success"));
-        console.log("Your Endpoint is created ");
         interpretResponse({
-          // message: addedUrls[0].message,
           response: "success",
           responseCode: addedUrls[1],
         });
@@ -37,8 +33,6 @@ export const addDomain =
           responseCode: addedUrls[1],
         });
       } else {
-        // dispatch(satResponse("error"));
-        console.log("It is Not Checking Your Credentials");
         interpretResponse({ response: "error" });
       }
       dispatch(getDomain(user_id));
@@ -56,8 +50,6 @@ export const addDomain =
 export const getDomain = (id) => async (dispatch) => {
   try {
     const getBank = await DomainServices.getDomain(id);
-    console.log("s", getBank);
-    // dispatch(getGeneratedApiKey());
     dispatch({
       type: GET_DOMAIN,
       payload: getBank,

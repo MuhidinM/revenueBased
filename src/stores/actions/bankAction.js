@@ -15,10 +15,7 @@ export const addBank =
   async (dispatch) => {
     try {
       const addedBank = await BankServices.addBank(bankName, bankCode);
-      console.log(addedBank[0]);
-      // eslint-disable-next-line eqeqeq
       if (addedBank[1] == "201") {
-        // dispatch(satResponse("success"));
         interpretResponse({
           message: addedBank[0].message,
           response: "error",
@@ -53,10 +50,7 @@ export const addPaymentService =
   async (dispatch) => {
     try {
       const addedBank = await BankServices.addPaymentService(serviceName);
-      console.log(addedBank[0]);
-      // eslint-disable-next-line eqeqeq
       if (addedBank[1] == "201") {
-        // dispatch(satResponse("success"));
         interpretResponse({
           message: addedBank[0].message,
           response: "error",
@@ -79,50 +73,42 @@ export const addPaymentService =
         payload: addedBank[0],
       });
     } catch (error) {
-      console.log(error);
+      return error;
     }
   };
 export const updatePaymentService =
   (serviceName, interpretResponse) => async (dispatch) => {
     try {
       const addedBank = await BankServices.updatePaymentService(serviceName);
-      console.log(addedBank[0]);
-      // eslint-disable-next-line eqeqeq
       const getBank = await BankServices.getService();
-      // console.log("Getting Banks", getBank);
-      // dispatch(getGeneratedApiKey());
       dispatch({
         type: GET_PAYMENT_SERVICE,
         payload: getBank,
       });
     } catch (error) {
-      console.log(error);
+      return error;
     }
   };
 
 export const gateBanks = () => async (dispatch) => {
   try {
     const getBank = await BankServices.getBank();
-    console.log("Getting Banks", getBank);
-    // dispatch(getGeneratedApiKey());
     dispatch({
       type: GET_BANK,
       payload: getBank,
     });
   } catch (error) {
-    console.log(error);
+    return error;
   }
 };
 export const getPaymentService = () => async (dispatch) => {
   try {
     const getBank = await BankServices.getService();
-    // console.log("Getting Banks", getBank);
-    // dispatch(getGeneratedApiKey());
     dispatch({
       type: GET_PAYMENT_SERVICE,
       payload: getBank,
     });
   } catch (error) {
-    console.log(error);
+    return error;
   }
 };

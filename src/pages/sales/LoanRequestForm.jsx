@@ -15,18 +15,7 @@ import Swal from "sweetalert2";
 function LoanRequestForm() {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.userProfile);
-  // console.log(userData);
   const { userID } = userData;
-
-  // useEffect(() => {
-  //   if (userID) {
-  //     dispatch(getLoanRequestDetail(userID));
-  //   }
-  // }, [userID, dispatch]);
-
-  // const loanData = useSelector((state) => state.loanConfigInfo);
-  // // console.log(userData);
-  // const { loanPdf } = loanData;
   const [loanPdf, setLoanPdf] = useState("");
 
   const handleDownload = () => {
@@ -74,7 +63,6 @@ function LoanRequestForm() {
     loan_purpose: "",
     agreement_form: "",
   });
-  // console.log("DFDFDFD", loanPdf);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setData({
@@ -91,7 +79,6 @@ function LoanRequestForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log("submitted");
     formData.append("sales_id", data.sales_id);
     formData.append("merchant_id", 1);
     formData.append("loan_req_id", data.loan_req_id);

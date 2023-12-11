@@ -60,7 +60,6 @@ function EpassRegistration() {
                   //   alert(JSON.stringify(values, null, 2));
                   //   setSubmitting(false);
                   // }, 400);
-                  // console.log(values);
                   setOpen(true);
                   AuthService.register(
                     values.firstName,
@@ -70,7 +69,6 @@ function EpassRegistration() {
                     values.password.toString()
                   ).then(
                     (resp) => {
-                      // console.log(resp.message);
                       setMessage(resp.message);
                       setSuccessful(true);
                       Swal.fire({
@@ -81,7 +79,6 @@ function EpassRegistration() {
                       });
                       navigate("/auth");
                       window.location.reload();
-                      // console.log(successful);
                     },
                     (error) => {
                       const resMessage =

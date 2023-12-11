@@ -12,8 +12,6 @@ export const getGeneratedApiKey = (merchant_id) => async (dispatch) => {
       const generatedApiKey = await AuthService.getGeneratedApiKey(
         merchant_id
       );
-      console.log(generatedApiKey);
-      //   dispatch(getAccounts());
       dispatch({
         type: GET_GENERATED_API_KEY,
         payload: generatedApiKey,
@@ -29,7 +27,6 @@ export const getGeneratedApiKey = (merchant_id) => async (dispatch) => {
 export const generateApiKey =
   ({ merchant_id, expiryDate, interpretResponse }) =>
   async (dispatch) => {
-    console.log(merchant_id);
     try {
       if (merchant_id) {
         const generateNewApiKey = await AuthService.generateApiKey(
@@ -37,10 +34,7 @@ export const generateApiKey =
           expiryDate
         );
         if (generateNewApiKey[1] === 200) {
-          // dispatch(satResponse("success"));
-          console.log("Your Endpoint is created ");
           interpretResponse({
-            // message: addedUrls[0].message,
             response: "success",
             responseCode: generateNewApiKey[1],
           });
@@ -51,8 +45,6 @@ export const generateApiKey =
             responseCode: generateNewApiKey[1],
           });
         } else {
-          // dispatch(satResponse("error"));
-          console.log("It is Not Checking Your Credentials");
           interpretResponse({ response: "error" });
         }
         dispatch(getGeneratedApiKey());

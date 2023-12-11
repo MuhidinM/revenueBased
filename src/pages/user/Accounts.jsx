@@ -89,9 +89,7 @@ const MySwal = withReactContent(Swal);
 function Accounts() {
   const AccountListData = useSelector((state) => state.accountsList);
   const [phoneNumber, setPhoneNumber] = useState("");
-  console.log(AccountListData);
   const { loading, error, bankAccounts } = AccountListData;
-  console.log("Account Numbers:", bankAccounts);
   const dispatch = useDispatch();
 
   const otp2 = useRef("");
@@ -106,19 +104,9 @@ function Accounts() {
     dispatch(getAccounts(merchant_id));
   }, [dispatch]);
 
-  console.log(bankAccounts);
-
   const interpretResponse = (response) => {
     let actionResponse = JSON.stringify(response);
-    console.log("Action Response Is" + actionResponse.response);
-    console.log(
-      " Response Is" + response.response,
-      response.message + "",
-      response.responseCode
-    );
     if (response.response === "success" || response.responseCode == 200) {
-      console.log(response);
-      console.log("Rsponse from useEffect is here" + response);
       Swal.fire({
         icon: "success",
         title: "Account Updated",
@@ -126,7 +114,6 @@ function Accounts() {
         timer: 3000,
       });
     } else if (response.responseCode === 403 && response.respone === "error") {
-      console.log("Un Authorised User ");
       Swal.fire({
         icon: "error",
         title: response.message,
@@ -162,13 +149,6 @@ function Accounts() {
 
   const handleChange = (e) => {
     e.preventDefault();
-    console.log("bank_account_id", e.target.value);
-    console.log(
-      "phone_number",
-      e.target.options[e.target.selectedIndex].getAttribute("data-phone-number")
-    );
-    console.log("target", e.target);
-
     return new Promise((resolve, reject) => {
       MySwal.fire({
         title: "Are you sure?",
@@ -180,7 +160,6 @@ function Accounts() {
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes!",
       }).then((result) => {
-        console.log(result);
         if (result.isConfirmed === true) {
           BankAccountServices.sendOtp(
             e.target.options[e.target.selectedIndex].getAttribute(
@@ -205,23 +184,6 @@ function Accounts() {
                 otp2={otp2}
                 onSubmit={(values) => {
                   values.preventDefault();
-                  console.log("Hello from the second swal");
-                  console.log("otp1: ", otp2.current);
-                  // resolve(values);
-                  // BankAccountServices.confirmOtp(
-                  //   e.target.options[e.target.selectedIndex].getAttribute(
-                  //     "data-phone-number"
-                  //   ),
-                  //   otp2
-                  // ).then((res) => {
-                  //   dispatch(
-                  //     setPrimaryAccount({
-                  //       merchant_id,
-                  //       value: e.target.value,
-                  //       interpretResponse,
-                  //     })
-                  //   );
-                  // });
                   handleOtpSubmit(e);
                 }}
                 onCancel={() => MySwal.close()}

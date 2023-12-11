@@ -119,10 +119,7 @@ function DomainList() {
   const [tableData, setTableData] = useState([]);
   const addedDomain = useSelector((state) => state.domain);
   const userData = useSelector((state) => state.userProfile);
-  console.log(userData);
-  const { bankAccounts, userDetail,token } = userData;
-  // const addedDomain = useSelector((state) => console.log(state));
-  // console.log(addedDomain);
+  const { bankAccounts, userDetail, token } = userData;
   const { loading, error, domain, response, domains } = addedDomain;
   const dispatch = useDispatch();
 
@@ -166,15 +163,7 @@ function DomainList() {
 
   const interpretResponse = (response) => {
     let actionResponse = JSON.stringify(response);
-    console.log("Action Response Is" + actionResponse.response);
-    console.log(
-      " Response Is" + response.response,
-      response.message + "",
-      response.responseCode
-    );
     if (response.response === "success" && response.responseCode == 201) {
-      console.log(response);
-      console.log("Response from useEffect is here" + response);
       Swal.fire({
         icon: "success",
         title: "Domain Created",
@@ -182,7 +171,6 @@ function DomainList() {
         timer: 3000,
       });
     } else if (response.responseCode == 403 && response.respone === "error") {
-      console.log("Un Authorised User ");
       Swal.fire({
         icon: "error",
         title: response.message,
@@ -190,7 +178,6 @@ function DomainList() {
         timer: 3000,
       });
     } else if (response.responseCode === 401 || response.respone === "error") {
-      console.log("Un Authorised User ");
       Swal.fire({
         icon: "error",
         title: response.message,
@@ -215,9 +202,6 @@ function DomainList() {
           <DomainComponent
             values={values}
             onSubmit={(values) => {
-              console.log(values);
-              console.log("Your Current User is" + JSON.stringify(userDetail));
-
               dispatch(
                 addDomain({
                   user_id: user_id,
@@ -226,11 +210,9 @@ function DomainList() {
                   interpretResponse,
                 })
               );
-              console.log("The button is got Clicked");
               MySwal.close();
             }}
             onCancel={() => {
-              console.log("Cancel Is Called:");
               MySwal.close();
             }}
           ></DomainComponent>
@@ -248,7 +230,7 @@ function DomainList() {
       name: "",
       url: "",
     })
-      .then((values) => console.log(values))
+      .then((values) => values)
       .catch(() => console.log("Modal closed"));
   };
 

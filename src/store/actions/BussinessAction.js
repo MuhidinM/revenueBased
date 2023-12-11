@@ -10,12 +10,8 @@ import {
 
 import UserService from "../../services/user.service";
 export const getAllPendingBussiness = () => async (dispatch) => {
-  console.log("heloo");
   try {
-    // const user = AuthService.getCurrentUser();
-    console.log("running");
     const pendingBussiness = await UserService.getAllPendingBussiness();
-    console.log(pendingBussiness);
     dispatch({
       type: GET_UN_ACTIVE_BUSSINESS,
       payload: pendingBussiness,
@@ -31,16 +27,11 @@ export const getAllPendingBussiness = () => async (dispatch) => {
 export const approvePendingBussiness =
   ({ id, interpretResponse }) =>
   async (dispatch) => {
-    console.log("heloo");
     try {
-      // const user = AuthService.getCurrentUser();
-      console.log("running", id);
       const approvedBussiness = await UserService.approvePendingBussinessById(
         id
       );
-      console.log(approvedBussiness);
       if (approvedBussiness[1] === "200") {
-        // dispatch(satResponse("success"));
         interpretResponse({
           message: approvedBussiness[0].message,
           response: "success",

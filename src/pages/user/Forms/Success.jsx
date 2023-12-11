@@ -3,29 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { FormContext } from "../MultiStepForm";
 import Swal from "sweetalert2";
 import UserService from "../../../services/user.service";
-// import AuthService from "../../../services/auth.service";
 import { useSelector } from "react-redux";
-// import { retrieveLoggedInUser } from "../../../store/actions/userProfileAction";
 function Success() {
   const { formData } = useContext(FormContext);
-  // const [currentUser, setCurrentUser] = useState({});
   const userData = useSelector((state) => state.userProfile);
-  console.log(userData);
   const { userDetail } = userData;
-  // const dispatch = useDispatch();
   let navigate = useNavigate();
-  console.log(userDetail);
-  // useEffect(() => {
-  //   // const user = AuthService.getCurrentUser();
-
-  //   // setCurrentUser(user);
-  //   dispatch(retrieveLoggedInUser());
-  //   // setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
-  //   // setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
-  // }, []);
   const sendDataToBackend = () => {
-    console.log("your Button is got Clicked");
-    console.log(typeof formData);
     let fd = new FormData();
     fd.append("lgname", formData.lgname);
     fd.append("incorporation", formData.incorporation);
@@ -49,7 +33,6 @@ function Success() {
     fd.append("proofOfAddress", formData.file);
     UserService.BussinessInfoRequest(fd).then(
       (resp) => {
-        console.log(resp.message);
         if (resp[1] === "200") {
           Swal.fire({
             icon: "success",

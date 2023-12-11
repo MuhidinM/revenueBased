@@ -13,8 +13,6 @@ export default function CheckoutForm(props) {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  console.log("paymentId", props.paymentId);
-  console.log("paymentId", props.returnUrl);
   useEffect(() => {
     if (!stripe) {
       return;
@@ -37,8 +35,6 @@ export default function CheckoutForm(props) {
     stripe
       .retrievePaymentIntent(clientSecret)
       .then(({ paymentIntent }) => {
-        // console.log(paymentIntent)
-        console.log("intent", paymentIntent);
         localStorage.setItem("Intent", JSON.parse(paymentIntent));
         switch (paymentIntent.status) {
           case "succeeded":
@@ -76,7 +72,6 @@ export default function CheckoutForm(props) {
     }
 
     setIsLoading(true);
-    console.log("elements", elements);
     const { error, paymentIntent } = await stripe.confirmPayment({
       elements,
       confirmParams: {
@@ -86,7 +81,6 @@ export default function CheckoutForm(props) {
       },
       redirect: "if_required",
     });
-    console.log("payment Intent Is", paymentIntent);
     if (paymentIntent.status == "succeeded") {
       fetch("https://10.1.151.51:5000/api/verify-stripe-payment", {
         method: "POST",

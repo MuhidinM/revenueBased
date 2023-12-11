@@ -10,11 +10,8 @@ const initialState = {
   loading: true,
 };
 export default function (state = initialState, action) {
-  //   console.log(state);
-  console.log("heloo" + action.payload);
   switch (action.type) {
     case GET_ADMIN_ALL_DEVICES:
-      //   console.log(action.payload);
       return {
         ...state,
         deviceDetail: action.payload,

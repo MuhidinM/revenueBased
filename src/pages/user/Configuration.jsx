@@ -7,25 +7,26 @@ import { useState } from "react";
 import LoanConfigService from "../../services/loanConfig.service";
 import { getLoanConfigDetail } from "../../store/actions/getLoanConfigAction";
 import Swal from "sweetalert2";
+import { getAllCategoryData } from "../../store/actions/conf.action";
+import ConfigService from "../../services/conf.service";
 
 function Configuration() {
-  const [bnpl, setBnpl] = useState(false);
   const [activeTab, setActiveTab] = useState("category");
   const [updated, setUpdated] = useState();
   const userData = useSelector((state) => state.userProfile);
-  // console.log(userData);
-  const { userID } = userData;
+  const { userID, kyc } = userData;
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (userID) {
-      dispatch(getLoanConfigDetail(userID));
-    }
+    dispatch(getLoanConfigDetail(userID));
+    dispatch(getAllCategoryData());
   }, [userID, updated, dispatch]);
 
   const loanConfigData = useSelector((state) => state.loanConfigInfo);
-  // console.log(userData);
   const { loanConfigDetail } = loanConfigData;
+
+  const categoryData = useSelector((state) => state.confInfo);
+  const { categories } = categoryData;
 
   const [isEdit, setIsEdit] = useState(false);
 
@@ -35,7 +36,7 @@ function Configuration() {
     merchant_id: userID,
   });
   const [categorydata, setCategoryData] = useState({
-    item_type: "",
+    type: "",
     merchant_id: userID,
   });
 
@@ -59,6 +60,19 @@ function Configuration() {
   //   });
   //   setIsEdit(true);
   // };
+
+  const categoryColumn = [
+    {
+      name: "Type",
+      selector: (row) => row.type,
+      sortable: true,
+    },
+    {
+      name: "Created At",
+      selector: (row) => new Date(row.createdAt)?.toISOString().split("T")[0],
+      sortable: true,
+    },
+  ];
 
   const columns = [
     {
@@ -170,14 +184,45 @@ function Configuration() {
               )
           );
     } catch (error) {
-      console.log(error);
+      return error;
+    }
+  };
+  const handleCategorySubmit = (e) => {
+    e.preventDefault();
+    try {
+      dispatch(
+        ConfigService.createCategory(categorydata, setUpdated, updated)
+          .then(
+            (response) =>
+              response &&
+              Swal.fire({
+                icon: "success",
+                title: "Created Successfully",
+                showConfirmButton: false,
+                timer: 3000,
+              })
+          )
+          .catch(
+            (error) =>
+              error &&
+              Swal.fire({
+                icon: "error",
+                title: `Something went wrong`,
+                showConfirmButton: false,
+                timer: 3000,
+              })
+          )
+      );
+    } catch (error) {
+      return error;
     }
   };
 
   return (
     <div>
+      <span className="text-xl p-2 font-bold my-5">Configurations</span>
       <div className="my-4">
-        {bnpl ? (
+        {!kyc.rbf ? (
           <div className="flex-wrap">
             <button
               className={`px-6 py-2 rounded-tl-lg ${
@@ -277,27 +322,27 @@ function Configuration() {
             <div className="">
               <div>
                 <form
-                  onSubmit={handleSubmit}
+                  onSubmit={handleCategorySubmit}
                   className="md:flex md:space-x-4 mb-4 items-center"
                 >
                   <div className="grid flex-grow gap-6 mb-4 grid-cols-4 sm:mb-5">
                     <div className="w-full col-span-4">
                       <label
                         htmlFor="interest_rate"
-                        className="mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        className="mb-3 text-sm font-medium text-gray-900 dark:text-white"
                       >
-                        Item Type
+                        Category Name:
                       </label>
                       <span className="text-sm link-error">
                         {/* <ErrorMessage name="interest_rate"></ErrorMessage> */}
                       </span>
                       <input
-                        type="number"
-                        name="item_type"
-                        id="item_type"
+                        type="text"
+                        name="type"
+                        id="type"
                         placeholder="Mobile"
                         className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        value={categorydata.item_type}
+                        value={categorydata.type}
                         onChange={handleCategoryChange}
                         required
                       />
@@ -314,13 +359,15 @@ function Configuration() {
                   </div>
                 </form>
               </div>
-              <DataTable
-                columns={columns}
-                // data={loanConfigDetail}
-                pagination
-                persistTableHeadstriped
-                highlightOnHover
-              />
+              {kyc.rbf === true && (
+                <DataTable
+                  columns={categoryColumn}
+                  data={categories}
+                  pagination
+                  persistTableHeadstriped
+                  highlightOnHover
+                />
+              )}
             </div>
           )}
         </div>

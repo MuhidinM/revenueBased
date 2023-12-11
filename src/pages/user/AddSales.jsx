@@ -8,7 +8,6 @@ function AddSales({ onSubmit, values, onCancel }) {
     lastName: Yup.string().required("lastName is required"),
     username: Yup.string().required("username is required"),
   });
-  // console.log("value From the Parent:", values);
   return (
     <>
       <Formik

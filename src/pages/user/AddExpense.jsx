@@ -5,15 +5,20 @@ import Addressproof from "../../components/Addressproof";
 import Selectinput from "../../components/Selectinput";
 
 const category = [
-  { label: "A", value: "A" },
-  { label: "B", value: "B" },
+  { label: "Housing", value: "housing" },
+  { label: "Utilities", value: "utilities" },
+  { label: "Transportation", value: "transportation" },
+  { label: "Other", value: "other" },
 ];
 
-const status = [
-  { label: "Paid", value: "Paid" },
-  { label: "Un Paid", value: "Un Paid" },
-];
-const AddExpense = ({ onSubmit, values, onCancel }) => {
+const AddExpense = ({
+  onSubmit,
+  values,
+  inventoryDetail,
+  onCancel,
+  general,
+  product,
+}) => {
   const FILE_SIZE = 1600 * 1024;
   const SUPPORTED_FORMATS = [
     "image/jpg",
@@ -21,7 +26,15 @@ const AddExpense = ({ onSubmit, values, onCancel }) => {
     "image/gif",
     "image/png",
   ];
+
+  const item_option = inventoryDetail.map((item) => ({
+    value: item?.item_id || item?.product_id,
+    label: item?.item_name || item?.product_name,
+  }));
+
   const ValidationSchema = Yup.object().shape({
+    item_id: Yup.string().optional(),
+    product_id: Yup.string().optional(),
     picture: Yup.mixed()
       .required("A file is required")
       .test(
@@ -38,9 +51,10 @@ const AddExpense = ({ onSubmit, values, onCancel }) => {
     expense_amount: Yup.string().required("Amount is required"),
     expense_date: Yup.string().required("Date is required"),
     expense_category: Yup.string().required("Category is required"),
+    paymentMethod: Yup.string().required("payment method is required"),
     description: Yup.string().required("Discription is required"),
-    status: Yup.string().required("Status is required"),
   });
+
   return (
     <>
       <Formik
@@ -52,6 +66,31 @@ const AddExpense = ({ onSubmit, values, onCancel }) => {
         {(formik) => (
           <form onSubmit={formik.handleSubmit}>
             <div className="grid gap-4 mb-4 grid-cols-2 sm:gap-6 sm:mb-5">
+              {general ? (
+                ""
+              ) : product === false ? (
+                <div className="w-full">
+                  <Selectinput
+                    arr={item_option}
+                    id="item_id"
+                    name="item_id"
+                    value={formik.values.item_id}
+                    handleChange={formik.handleChange}
+                    title="Select Item"
+                  />
+                </div>
+              ) : (
+                <div className="w-full">
+                  <Selectinput
+                    arr={item_option}
+                    id="product_id"
+                    name="product_id"
+                    value={formik.values.product_id}
+                    handleChange={formik.handleChange}
+                    title="Select Product"
+                  />
+                </div>
+              )}
               <div className="w-full">
                 <label
                   htmlFor="expense_name"
@@ -112,29 +151,13 @@ const AddExpense = ({ onSubmit, values, onCancel }) => {
                 />
               </div>
               <div className="w-full">
-                <span className="text-sm link-error">
-                  <ErrorMessage name="expense_category"></ErrorMessage>
-                </span>
                 <Selectinput
                   arr={category}
                   id="expense_category"
                   name="expense_category"
                   value={formik.values.expense_category}
-                  onChange={formik.handleChange}
-                  title="Category"
-                />
-              </div>
-              <div className="w-full">
-                <span className="text-sm link-error">
-                  <ErrorMessage name="status"></ErrorMessage>
-                </span>
-                <Selectinput
-                  arr={status}
-                  id="status"
-                  name="status"
-                  value={formik.values.status}
-                  onChange={formik.handleChange}
-                  title="Status"
+                  handleChange={formik.handleChange}
+                  title="Expense Category"
                 />
               </div>
               <div className="w-full">
@@ -154,6 +177,26 @@ const AddExpense = ({ onSubmit, values, onCancel }) => {
                   placeholder="Some description here..."
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   value={formik.values.description}
+                  onChange={formik.handleChange}
+                />
+              </div>
+              <div className="w-full">
+                <label
+                  htmlFor="paymentMethod"
+                  className="mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  Payment Method
+                </label>
+                <span className="text-sm link-error">
+                  <ErrorMessage name="paymentMethod"></ErrorMessage>
+                </span>
+                <input
+                  type="text"
+                  name="paymentMethod"
+                  id="paymentMethod"
+                  placeholder="payment-method"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  value={formik.values.paymentMethod}
                   onChange={formik.handleChange}
                 />
               </div>

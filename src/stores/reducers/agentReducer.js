@@ -40,60 +40,50 @@ const initialState = {
 };
 
 export default function (state = initialState, action) {
-  //   console.log(state);
-  console.log(action.payload);
   switch (action.type) {
     case ADD_AGENT:
-      //   console.log(action.payload);
       return {
         ...state,
         addedagent: action.payload,
         loading: false,
       };
     case GET_AGENT:
-      //   console.log(action.payload);
       return {
         ...state,
         agents: action.payload,
         loading: false,
       };
     case GET_MANAGER:
-      //   console.log(action.payload);
       return {
         ...state,
         managers: action.payload,
         loading: false,
       };
     case CREATE_NEDAJ_ENTRIES:
-      //   console.log(action.payload);
       return {
         ...state,
         entry: action.payload,
         loading: false,
       };
     case CREATE_NEDAJ_PRICES:
-      //   console.log(action.payload);
       return {
         ...state,
         latestPrices: action.payload,
         loading: false,
       };
     case CREATE_NEDAJ_STATION:
-      //   console.log(action.payload);
       return {
         ...state,
         nedaj_station: action.payload,
         loading: false,
       };
     case CREATE_NEDAJ_STATION_ERROR:
-      //   console.log(action.payload);
       return {
         ...state,
         error: action.payload,
         loading: false,
       };
     case CREATE_NEDAJ_PRICES_ERROR:
-      //   console.log(action.payload);
       return {
         ...state,
         error: action.payload,
@@ -112,49 +102,42 @@ export default function (state = initialState, action) {
         loading: false,
       };
     case GET_NEDAJ_PRICES:
-      //   console.log(action.payload);
       return {
         ...state,
         prices: action.payload,
         loading: false,
       };
     case GET_NEDAJ_STATION:
-      //   console.log(action.payload);
       return {
         ...state,
         nedaj_stations: action.payload,
         loading: false,
       };
     case GET_NEDAJ_STATION_ERROR:
-      //   console.log(action.payload);
       return {
         ...state,
         error: action.payload,
         loading: false,
       };
     case GET_TOTAL_AMOUNT:
-      //   console.log(action.payload);
       return {
         ...state,
         totalAmount: action.payload,
         loading: false,
       };
     case GET_DAILY_TOTAL_AMOUNT:
-      //   console.log(action.payload);
       return {
         ...state,
         dailyTotalAmount: action.payload,
         loading: false,
       };
     case GET_NEDAJ_PRICES_ERROR:
-      //   console.log(action.payload);
       return {
         ...state,
         error: action.payload,
         loading: false,
       };
     case ADD_AGENT_ERROR:
-      //   console.log(action.payload);
       return {
         ...state,
         loading: false,

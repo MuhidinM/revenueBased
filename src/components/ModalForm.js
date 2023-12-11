@@ -21,9 +21,7 @@ export const ModalForm = ({ values, onSubmit, onCancel }) => {
   const [currentBank, setCurrentUser] = useState({});
   // const [currentName, setCurrentName] = useState({});
   const dispatch = useDispatch();
-  // console.log(AccountListData);
   const {  criteriaValue } = AccountListData;
-  // console.log("The criterial value is:" + criteriaValue);
 
   const dropdown = [];
   dropdown[0] = { label: "Select Bank", value: "Bank Name" };
@@ -38,17 +36,14 @@ export const ModalForm = ({ values, onSubmit, onCancel }) => {
       setCurrentUser(res);
     });
 
-    // console.log("our", bank);
   }, []);
 
-  // console.log(currentBank);
   const queryCustomerName = (e) => {
     if (e.target.value.length === 13) {
       dispatch(nameEnquiryByAccountNumber(e.target.value));
       // const customerName = BankAccountServices.nameEnquiryByAccountNumber(
       //   e.target.value
       // ).then((res) => {
-      //   console.log(typeof res);
       //   setCurrentName(res);
       // });
     }

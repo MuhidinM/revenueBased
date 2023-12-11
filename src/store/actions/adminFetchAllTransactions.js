@@ -16,10 +16,8 @@ import FetchTransactionServices from "../../services/fetchTransaction";
 export const getTransactionDetailAll = () => async (dispatch) => {
   try {
     // const user = AuthService.getCurrentUser();
-    console.log("running");
     const transactioDetailAll =
       await FetchTransactionServices.getAllTransactions();
-    console.log(transactioDetailAll);
     dispatch({
       type: GET_ADMIN_TRANSACTION_ALL,
       payload: transactioDetailAll,
@@ -35,13 +33,10 @@ export const getTransactionDetailAll = () => async (dispatch) => {
 export const getTransactionByTransactionId =
   (transactionId) => async (dispatch) => {
     try {
-      // const user = AuthService.getCurrentUser();
-      console.log("running");
       const transactioByTransactionId =
         await FetchTransactionServices.getTransactionByTransactionId(
           transactionId
         );
-      console.log(transactioByTransactionId);
       dispatch({
         type: GET_TRANSACTION_BY_TRANSACTION_ID,
         payload: transactioByTransactionId,
@@ -63,7 +58,7 @@ export const getAllPaypalTransactionById = (id) => async (dispatch) => {
       payload: paypalTransactions,
     });
   } catch (error) {
-    console.log("this is an error", error);
+    return error;
   }
 };
 export const getAllPaypalTransactions = (id) => async (dispatch) => {
@@ -75,7 +70,7 @@ export const getAllPaypalTransactions = (id) => async (dispatch) => {
       payload: paypalTransactions,
     });
   } catch (error) {
-    console.log("this is an error", error);
+    return error;
   }
 };
 
@@ -89,7 +84,7 @@ export const getStripePaymentById = (id) => async (dispatch) => {
       payload: bankAndStripeTransaction,
     });
   } catch (error) {
-    console.log("this is an error", error);
+    return error;
   }
 };
 
@@ -103,7 +98,7 @@ export const getCoopassPaymentById = (id) => async (dispatch) => {
       payload: bankAndStripeTransaction,
     });
   } catch (error) {
-    console.log("this is an error", error);
+    return error;
   }
 };
 
@@ -117,7 +112,7 @@ export const getCoopassPayment = (id) => async (dispatch) => {
       payload: coopassTransaction,
     });
   } catch (error) {
-    console.log("this is an error", error);
+    return error;
   }
 };
 export const getStripePayment = (id) => async (dispatch) => {
@@ -130,7 +125,7 @@ export const getStripePayment = (id) => async (dispatch) => {
       payload: stripeTransaction,
     });
   } catch (error) {
-    console.log("this is an error", error);
+    return error;
   }
 };
 
@@ -143,7 +138,7 @@ export const getEbirrTransactionById = (id) => async (dispatch) => {
       payload: ebirrTransaction,
     });
   } catch (error) {
-    console.log("this is an error", error);
+    return error;
   }
 };
 export const getEbirrTransaction = (id) => async (dispatch) => {
@@ -155,7 +150,7 @@ export const getEbirrTransaction = (id) => async (dispatch) => {
       payload: ebirrTransaction,
     });
   } catch (error) {
-    console.log("this is an error", error);
+    return error;
   }
 };
 
@@ -168,7 +163,7 @@ export const getChappaTransactionById = (id) => async (dispatch) => {
       payload: ebirrTransaction,
     });
   } catch (error) {
-    console.log("this is an error", error);
+    return error;
   }
 };
 export const getChappaTransactions = (id) => async (dispatch) => {
@@ -180,6 +175,6 @@ export const getChappaTransactions = (id) => async (dispatch) => {
       payload: ebirrTransaction,
     });
   } catch (error) {
-    console.log("this is an error", error);
+    return error;
   }
 };

@@ -8,11 +8,9 @@ function ActivatePrimaryAccount() {
   const [searchParams] = useSearchParams();
   const id = searchParams.get("id");
   const acId = searchParams.get("acId");
-  // console.log(id, acId);
   const ActivatePrimaryAccount = () => {
     BankAccountServices.activateAccount(id, acId)
       .then((res) => {
-        // console.log(res);
       })
       .catch((error) => {
         MySwal.fire({

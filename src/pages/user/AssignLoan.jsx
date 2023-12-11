@@ -14,7 +14,6 @@ const AssignLoan = ({
     item_id: Yup.string().required("Item is required"),
     loan_conf_id: Yup.string().required("Loan Config is required"),
   });
-  console.log();
 
   const item_option = inventoryDetail.map((item) => ({
     value: item.item_id,

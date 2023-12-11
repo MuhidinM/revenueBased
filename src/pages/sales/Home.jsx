@@ -148,7 +148,6 @@ const columns = [
 function Home() {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.userProfile);
-  // console.log(userData);
   const { userID } = userData;
 
   useEffect(() => {
@@ -159,11 +158,9 @@ function Home() {
   }, [userID, dispatch]);
 
   const invertoryData = useSelector((state) => state.inventoryInfo);
-  // console.log(userData);
   const { inventoryDetail } = invertoryData;
 
   const loanData = useSelector((state) => state.loanConfigInfo);
-  // console.log(userData);
   const { loanRequest } = loanData;
 
   const filteredLoan = loanRequest?.filter(
@@ -171,8 +168,6 @@ function Home() {
       new Date(item.createdAt).toISOString().split[0] ===
       new Date().toISOString().split[0]
   );
-
-  console.log(filteredLoan);
 
   return (
     <>

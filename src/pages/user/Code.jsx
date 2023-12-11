@@ -1,7 +1,6 @@
 import React from "react";
 
 function Code(props) {
-  console.log(props);
   return (
     <>
       <div className="my-4 text-left ">

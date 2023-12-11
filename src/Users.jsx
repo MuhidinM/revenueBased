@@ -22,9 +22,11 @@ import BNPLHome from "./pages/user/BNPLHome";
 import TransactionList from "./pages/user/PPTransactions";
 import Home from "./pages/user/Home";
 import Expense from "./pages/user/Expense";
+import RBFHome from "./pages/user/RBFHome";
+import Product from "./pages/user/Product";
 function Users() {
   const tokenInfo = useSelector((state) => state.userProfile);
-  const { token } = tokenInfo;
+  const { token, kyc } = tokenInfo;
   const user_token = jwtDecode(token);
   const service_name = user_token?.service_name;
 
@@ -40,7 +42,11 @@ function Users() {
             <Routes>
               {!service_name && <Route index element={<Home />}></Route>}
               {service_name?.includes("BNPL") ? (
-                <Route index element={<BNPLHome />}></Route>
+                kyc?.rbf === true ? (
+                  <Route index element={<RBFHome />}></Route>
+                ) : (
+                  <Route index element={<BNPLHome />}></Route>
+                )
               ) : (
                 service_name?.includes("Payment Processor") && (
                   <Route index element={<PaymentPHome />}></Route>
@@ -61,6 +67,7 @@ function Users() {
               <Route path="sales" element={<Sales />}></Route>
               <Route path="expense" element={<Expense />}></Route>
               <Route path="inventory" element={<Inventory />}></Route>
+              <Route path="products" element={<Product />}></Route>
               <Route path="loan" element={<Loan />}></Route>
               <Route path="configuration" element={<Configuration />}></Route>
               <Route path="domains" element={<DomainList />}></Route>

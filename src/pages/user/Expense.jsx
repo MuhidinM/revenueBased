@@ -2,38 +2,59 @@ import React from "react";
 import DataTable from "react-data-table-component";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import { useDispatch } from "react-redux";
-import UserService from "../../services/user.service";
 import { useState } from "react";
 import AddExpense from "./AddExpense";
+import { useDispatch, useSelector } from "react-redux";
+import ExpenseService from "../../services/expense.service";
+import { getAllMerchantExpenses } from "../../store/actions/expense.action";
+import { useEffect } from "react";
 
 const MySwal = withReactContent(Swal);
 
 const columns = [
   {
-    name: "Sales Id",
-    selector: (row) => row.sales_id,
+    name: "Item Id",
+    selector: (row) => row.item_id,
     sortable: true,
   },
   {
-    name: "First Name",
-    selector: "firstName",
+    name: "Item Name",
+    selector: (row) => row.item_name,
     sortable: true,
   },
   {
-    name: "Last Name",
-    selector: "lastName",
+    name: "Expense Name",
+    selector: "expense_name",
     sortable: true,
   },
   {
-    name: "Username",
-    selector: (row) =>
-      row.phone_number ? row.phone_number : row.email_address,
+    name: "Expense Amount",
+    selector: "expense_amount",
     sortable: true,
   },
   {
-    name: "Status",
-    selector: (row) => row.emailStatus,
+    name: "Total Expense",
+    selector: "totalexpense",
+    sortable: true,
+  },
+  {
+    name: "Total Buy Price",
+    selector: "totalBuy",
+    sortable: true,
+  },
+  {
+    name: "Total Quantity",
+    selector: "totalQuantity",
+    sortable: true,
+  },
+  {
+    name: "On Stock",
+    selector: "onStock",
+    sortable: true,
+  },
+  {
+    name: "Description",
+    selector: "description",
     sortable: true,
   },
 ];
@@ -41,29 +62,56 @@ const columns = [
 const Expense = () => {
   const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState("registered");
+  const [updated, setUpdated] = useState(false);
 
-  const showFormModalSales = (values) => {
+  useEffect(() => {
+    dispatch(getAllMerchantExpenses());
+  }, [updated, dispatch]);
+
+  const inventoryInfo = useSelector((state) => state.inventoryInfo);
+  const { inventoryDetail } = inventoryInfo;
+
+  const expenseData = useSelector((state) => state.expenseInfo);
+  const { expenses } = expenseData;
+
+  const showAddExpenseForm = (values) => {
     return new Promise((resolve, reject) => {
       MySwal.fire({
-        title: "Expense Detail",
+        title: "Add Expense",
         html: (
           <AddExpense
+            inventoryDetail={inventoryDetail}
             values={values}
+            general={true}
             onSubmit={(values) => {
               dispatch(
-                UserService.CreateSales(
-                  
+                ExpenseService.registerExpense(
+                  {
+                    expense_name: values.expense_name,
+                    expense_amount: values.expense_amount,
+                    expense_date: values.expense_date,
+                    expense_category: values.expense_category,
+                    paymentMethod: values.paymentMethod,
+                    expense_receipURL: ["coffee", "banana"],
+                    description: values.description,
+                    status: "unpaid",
+                    // item_id: values.item_id,
+                  },
+                  setUpdated,
+                  updated
                 )
-                  .then(
-                    (response) =>
+                  .then((response) => {
+                    setUpdated(!updated);
+                    return (
                       response &&
                       Swal.fire({
                         icon: "success",
-                        title: "Expense Created Successfully",
+                        title: "Expense added successfully",
                         showConfirmButton: false,
                         timer: 3000,
                       })
-                  )
+                    );
+                  })
                   .catch(
                     (error) =>
                       error &&
@@ -89,7 +137,7 @@ const Expense = () => {
   };
 
   const showModalSales = () => {
-    showFormModalSales({
+    showAddExpenseForm({
       expense_name: "",
       expense_amount: "",
       expense_date: "",
@@ -100,7 +148,7 @@ const Expense = () => {
       status: "",
       item_id: "",
     })
-      .then((values) => console.log(values))
+      .then((values) => values)
       .catch(() => console.log("Modal closed"));
   };
 
@@ -127,8 +175,9 @@ const Expense = () => {
       </div>
       <DataTable
         columns={columns}
-        // data={}
+        data={expenses}
         pagination
+        dense
         persistTableHeadstriped
         highlightOnHover
       />

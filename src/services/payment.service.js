@@ -30,7 +30,6 @@ const verifyStripePayment = async ({ paymentId, data }) => {
 };
 
 const checkCredentials = async (clientId, secretKey, key) => {
-  console.log("Service credentials: ", clientId, secretKey, key);
   return await axios
     .post(
       process.env.REACT_APP_API_NODE_URLS + "api/checkCredential",
@@ -57,7 +56,6 @@ const verifyPin = async (phoneNumber, passcode) => {
     .catch((error) => error?.response?.data?.message);
 };
 const getPendingPaymentInfo = async (data) => {
-  console.log(data);
   return await NODE_API.get(`/getPaymentStatus`, {
     params: {
       data: data,
@@ -66,7 +64,7 @@ const getPendingPaymentInfo = async (data) => {
     .then((response) => {
       return [response.status, response.data];
     })
-    .catch((error) => console.log(error));
+    .catch((error) => error);
 };
 
 const logPayPalResponse = async (
@@ -122,26 +120,12 @@ const sendPaymentResponse = async (endpoint, paymentData) => {
     });
 
     return response;
-
-    // // Handle the response from the commerce site appropriately
-    // if (response.status === 200) {
-    //   console.log('Payment response sent successfully');
-    //   // Display a success message to the user, etc.
-    // } else {
-    //   console.log(`Unexpected response status code: ${response.status}`);
-    //   // Display an error message to the user, etc.
-    // }
   } catch (error) {
     console.error("Error sending payment response:", error);
 
     return error;
-    // Display an error message to the user, etc.
   }
 };
-
-// Example usage:
-
-// sendPaymentResponse(paymentData);
 
 const PaymentServices = {
   pay,

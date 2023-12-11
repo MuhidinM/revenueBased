@@ -22,7 +22,6 @@ function Maccounts(props) {
   const user_token = token && jwtDecode(token);
   const merchant_id = user_token?.merchant_id;
 
-  // console.log(currentUser.id);
   const validationSchema = Yup.object().shape({
     accountHolder: Yup.string().required("Account Holder Name is required"),
     accountNumber: Yup.string().required("Account Number is required"),
@@ -53,11 +52,10 @@ function Maccounts(props) {
                   )
                 )
                   .then((res) => {
-                    // console.log(res.message);
                     setMessage(res.message);
                     setSuccessful(true);
                   })
-                  .catch((e) => console.log(e));
+                  .catch((e) => e);
               }}
             >
               {(props) => (

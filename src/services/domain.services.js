@@ -15,18 +15,14 @@ const addUrls = async (user_id, name, url) => {
     { withCredentials: true, credentials: "include" }
   )
     .then((response) => {
-      console.log(response.data);
       return [response.data, response.status];
     })
     .catch((err) => {
       if (err.response) {
         return [err.response.data, err.response.status];
       } else if (err.request) {
-        console.log(err.request);
-      } else {
-        console.log("Error", err.message);
+        return err.request;
       }
-      console.log(err.config);
     });
 };
 const getDomain = async (id) => {
@@ -38,8 +34,6 @@ const getDomain = async (id) => {
       credentials: "include",
     }
   ).then((response) => {
-    console.log(response.data);
-    console.log(response.data.bankDetail);
     return response.data.url;
   });
 };
