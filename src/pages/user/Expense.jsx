@@ -13,18 +13,13 @@ const MySwal = withReactContent(Swal);
 
 const columns = [
   {
-    name: "Item Id",
-    selector: (row) => row.item_id,
-    sortable: true,
-  },
-  {
-    name: "Item Name",
-    selector: (row) => row.item_name,
+    name: "Expense Id",
+    selector: (row) => row.expense_id,
     sortable: true,
   },
   {
     name: "Expense Name",
-    selector: "expense_name",
+    selector: (row) => row.expense_name,
     sortable: true,
   },
   {
@@ -33,28 +28,18 @@ const columns = [
     sortable: true,
   },
   {
-    name: "Total Expense",
-    selector: "totalexpense",
+    name: "Expense Category",
+    selector: "expense_category",
     sortable: true,
   },
   {
-    name: "Total Buy Price",
-    selector: "totalBuy",
+    name: "Payment Method",
+    selector: "paymentMethod",
     sortable: true,
   },
   {
-    name: "Total Quantity",
-    selector: "totalQuantity",
-    sortable: true,
-  },
-  {
-    name: "On Stock",
-    selector: "onStock",
-    sortable: true,
-  },
-  {
-    name: "Description",
-    selector: "description",
+    name: "Status",
+    selector: "status",
     sortable: true,
   },
 ];

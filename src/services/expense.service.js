@@ -8,7 +8,7 @@ const registerExpense = async (data, setUpdated, updated) => {
 };
 
 const getAllExpenses = async () => {
-  return await NODE_API.get("/rb/expense/getExpense").then(
+  return await NODE_API.get("/rb/expense/getExpenses").then(
     (response) => response.data
   );
 };

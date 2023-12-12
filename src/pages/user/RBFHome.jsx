@@ -21,12 +21,18 @@ function RBFHome() {
     <>
       <div className="">
         {!kyc && <Banner />}
+        <div className="flex items-center justify-between">
+          <div className="font-semibold text-2xl text-gray-600">Dashboard</div>
+          <button className="btn btn-outline btn-info mb-2">
+            Request For Loan
+          </button>
+        </div>
         <RBFStats items={dashboardCardReport} />
         <div className="grid gap-2 mt-2 md:grid-cols-12 justify-self-auto">
           <div className="col-span-6 p-2 rounded shadow bg-white">
             <div className="flex items-center justify-between mb-2">
               <h3 className="text-xl font-semibold text-cyan-500 pb-2">
-                Revenue
+                Revenue Vs Profit
               </h3>
               <select className="select select-sm max-w-xs">
                 <option disabled selected>
@@ -58,7 +64,7 @@ function RBFHome() {
               <span className="text-gray-500">amount</span>
             </div>
             <div className="flex items-center py-2 justify-between border-b mx-1">
-              <span className="text-gray-600">Buy Price</span>
+              <span className="text-gray-600">Cost of goods and services</span>
               <span className="font-semibold">
                 {dashboardCardReport?.totalBuy?.toLocaleString()}
               </span>
@@ -73,14 +79,14 @@ function RBFHome() {
               </span>
             </div>
             <div className="flex items-center py-2 justify-between border-b mx-1">
-              <span className="text-gray-600">Gross Revenue</span>
+              <span className="text-gray-600">Revenue</span>
               <span className="font-semibold">
                 {dashboardCardReport?.revenue?.toLocaleString()}
               </span>
             </div>
             <div className="flex items-center py-2 justify-between border-b mx-1">
-              <span className="text-gray-600">Net Revenue</span>
-              <span className="font-semibold">
+              <span className="text-cyan-600 font-bold text-xl">Profit</span>
+              <span className="text-cyan-600 font-bold text-xl">
                 {(
                   dashboardCardReport?.revenue -
                   (dashboardCardReport?.totalexpence +
@@ -91,13 +97,13 @@ function RBFHome() {
           </div>
           <div className="col-span-3 p-2 rounded shadow bg-white">
             <h2 className=" font-semibold pb-2 flex items-center justify-center">
-              Top Sales
+              Top Sailing Items/Services
             </h2>
             <div className="flex items-center justify-between border-b">
               <span className="text-gray-500">Item</span>
               <span className="text-gray-500">Total amount</span>
             </div>
-            <div className="flex flex-col">
+            {/* <div className="flex flex-col">
               <div className="flex items-center justify-between p-1 rounded w-full border-y pt-2 my-1">
                 <div className="flex items-center">
                   <div className="avatar mr-2">
@@ -203,7 +209,7 @@ function RBFHome() {
                 </div>
                 <span className="font-semibold">100$</span>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

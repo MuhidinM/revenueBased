@@ -98,7 +98,7 @@ function Profile() {
                 formData.append("website_url", values.website_url);
                 formData.append("tin_number", values.tin_number);
                 formData.append("business_address", values.business_address);
-                formData.append("legal_entity_type", values.legal_entity_type);
+                formData.append("legal_entity_type", "moti");
                 formData.append(
                   "date_of_establishment",
                   values.date_of_establishment

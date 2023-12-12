@@ -21,7 +21,7 @@ function RBFStats({ items }) {
                 />
               </svg>
             </div>
-            <div className="stat-title">Total Net Revenue</div>
+            <div className="stat-title">Net Profit</div>
             <div className="stat-value text-primary">
               {(
                 items?.revenue -
@@ -46,7 +46,7 @@ function RBFStats({ items }) {
                 <polyline points="17 6 23 6 23 12" />
               </svg>
             </div>
-            <div className="stat-title">Total Gross Revenue</div>
+            <div className="stat-title">Revenue</div>
             <div className="stat-value text-secondary">
               {items?.revenue?.toLocaleString()}
             </div>
@@ -69,7 +69,7 @@ function RBFStats({ items }) {
                 ></path>
               </svg>
             </div>
-            <div className="stat-title">Total Expense</div>
+            <div className="stat-title">Expense</div>
             <div className="stat-value text-primary">
               {(items?.totalexpence + items?.totalBuy).toLocaleString()}
             </div>
@@ -93,7 +93,7 @@ function RBFStats({ items }) {
                 <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
               </svg>
             </div>
-            <div className="stat-title">Total Buy Price</div>
+            <div className="stat-title">Cost of Goods $ Services</div>
             <div className="stat-value text-accent">
               {items?.totalBuy?.toLocaleString()}
             </div>

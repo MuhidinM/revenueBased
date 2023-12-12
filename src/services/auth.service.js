@@ -56,6 +56,9 @@ const login = async (
           setLoading(false);
           navigate("/users");
           // window.location.reload();
+        } else if (decoded?.role === "Admin") {
+          alert("not authorized");
+          // window.location.reload();
         }
         // document.cookie = "token=" + response.data.token;
         localStorage.setItem("user", JSON.stringify(user));

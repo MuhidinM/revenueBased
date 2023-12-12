@@ -216,8 +216,8 @@ function Product() {
                     expense_receipURL: ["coffee", "banana"],
                     description: values.description,
                     status: "unpaid",
-                    item_id: values.item_id,
-                    product_id: values.product_id,
+                    // item_id: values.item_id,
+                    product_id: values.product_id * 1,
                   },
                   setUpdated,
                   updated
